@@ -45,24 +45,77 @@ router.post("/wallet-purchase", auth, async (req,res)=>{
 router.get("/content", auth, async (req,res)=>{
   try {
     const user=await User.findById(req.user.id).select("bookPurchase.status bookPurchase.access").lean();
-    if(!user || user.bookPurchase?.status!=="approved" || user.bookPurchase?.access===false) return res.status(403).json({success:false,message:"Book access is currently disabled by admin."});
-
-    // Google Drive public-file media endpoint. No alternate/local book fallback exists.
-    const driveUrl=`https://drive.usercontent.google.com/download?id=${encodeURIComponent(BOOK_DRIVE_FILE_ID)}&export=download&confirm=t`;
-    const headers={Accept:"application/pdf"};
-    if(req.headers.range) headers.Range=req.headers.range;
-    const upstream=await fetch(driveUrl,{headers,redirect:"follow",signal:AbortSignal.timeout(55000)});
-    const contentType=(upstream.headers.get("content-type")||"").toLowerCase();
-    if(!upstream.ok || (!contentType.includes("application/pdf") && !contentType.includes("application/octet-stream"))){
-      console.error("Book source is not a PDF:",upstream.status,contentType);
-      return res.status(502).json({success:false,message:"The configured Google Drive file did not return a PDF. Check that the selected Drive file is the intended book and is shared as Anyone with the link → Viewer."});
+    if(!user || user.bookPurchase?.status!=="approved" || user.bookPurchase?.access===false) {
+      return res.status(403).json({success:false,message:"Book access is currently disabled by admin."});
     }
+
+    // Only this one Google Drive file is allowed. Try Google's public download
+    // endpoints in a safe order because Drive can return an HTML confirmation
+    // page instead of the PDF for some files/browsers.
+    const baseId = encodeURIComponent(BOOK_DRIVE_FILE_ID);
+    const candidates = [
+      `https://drive.usercontent.google.com/download?id=${baseId}&export=download&confirm=t`,
+      `https://drive.google.com/uc?export=download&id=${baseId}&confirm=t`,
+      `https://drive.google.com/uc?export=download&id=${baseId}`
+    ];
+
+    async function fetchDrivePdf(url) {
+      const headers={Accept:"application/pdf,application/octet-stream;q=0.9,*/*;q=0.1"};
+      if(req.headers.range) headers.Range=req.headers.range;
+      const upstream=await fetch(url,{headers,redirect:"follow",signal:AbortSignal.timeout(55000)});
+      if(!upstream.ok || !upstream.body) return null;
+
+      const reader=upstream.body.getReader();
+      const first=await reader.read();
+      const firstBuf=first.value ? Buffer.from(first.value) : Buffer.alloc(0);
+      const contentType=(upstream.headers.get("content-type")||"").toLowerCase();
+      const looksPdf=firstBuf.subarray(0,5).toString()==="%PDF-" || contentType.includes("application/pdf");
+      if(!looksPdf) {
+        try { await reader.cancel(); } catch(e) {}
+        return null;
+      }
+      return {upstream,reader,firstBuf};
+    }
+
+    let result=null;
+    for(const url of candidates){
+      try {
+        result=await fetchDrivePdf(url);
+        if(result) break;
+      } catch(e) {
+        console.warn("Book source attempt failed:", e.message);
+      }
+    }
+
+    if(!result){
+      console.error("Book source did not return a PDF from Google Drive", BOOK_DRIVE_FILE_ID);
+      return res.status(502).json({success:false,message:"Book PDF could not be loaded from Google Drive. Please make sure this exact Drive file is set to Anyone with the link → Viewer."});
+    }
+
+    const {upstream,reader,firstBuf}=result;
     res.status(upstream.status);
-    res.set({"Content-Type":"application/pdf","Content-Disposition":"inline","Cache-Control":"private, no-store, no-cache, must-revalidate, max-age=0","Pragma":"no-cache","Expires":"0","X-Content-Type-Options":"nosniff","Referrer-Policy":"no-referrer","Accept-Ranges":upstream.headers.get("accept-ranges")||"bytes"});
-    for(const name of ["content-length","content-range","accept-ranges"]){const value=upstream.headers.get(name);if(value)res.set(name,value);}
-    if(!upstream.body) return res.end();
-    const reader=upstream.body.getReader();
-    try{while(true){const {value,done}=await reader.read();if(done)break;if(value)res.write(Buffer.from(value));}}finally{reader.releaseLock();}
+    res.set({
+      "Content-Type":"application/pdf",
+      "Content-Disposition":"inline; filename=aducate-english-book.pdf",
+      "Cache-Control":"private, no-store, no-cache, must-revalidate, max-age=0",
+      "Pragma":"no-cache",
+      "Expires":"0",
+      "X-Content-Type-Options":"nosniff",
+      "Referrer-Policy":"no-referrer",
+      "Accept-Ranges":upstream.headers.get("accept-ranges")||"bytes"
+    });
+    for(const name of ["content-length","content-range","accept-ranges"]){
+      const value=upstream.headers.get(name); if(value) res.set(name,value);
+    }
+
+    if(firstBuf.length) res.write(firstBuf);
+    try {
+      while(true){
+        const {value,done}=await reader.read();
+        if(done) break;
+        if(value) res.write(Buffer.from(value));
+      }
+    } finally { try { reader.releaseLock(); } catch(e) {} }
     res.end();
   } catch(err){
     console.error("Book content error:",err);

@@ -2312,6 +2312,7 @@ body{background:linear-gradient(135deg,#eef2ff 0%,#fff1f7 48%,#ecfeff 100%)!impo
 
         let quizData = [];
         let currentQuizQuestion = null;
+        let lastAnsweredQuizQuestionId = null;
         let lifelines = { fiftyFifty: true, audiencePoll: true, askExpert: true, skipQuestion: true };
         let lifelineBusy = false;
 
@@ -2988,7 +2989,9 @@ body{background:linear-gradient(135deg,#eef2ff 0%,#fff1f7 48%,#ecfeff 100%)!impo
                 // Prevent an old async request from replacing a newer question.
                 if (requestId !== quizQuestionRequest) return;
 
-                const q = quizData[Math.floor(Math.random() * quizData.length)];
+                const candidates = quizData.filter(item => String(item?._id || item?.id || "") !== String(lastAnsweredQuizQuestionId || ""));
+                const pool = candidates.length ? candidates : quizData;
+                const q = pool[Math.floor(Math.random() * pool.length)];
                 if (!q || !Array.isArray(q.options) || q.options.length < 2) {
                     throw new Error("Invalid question received.");
                 }
@@ -3056,9 +3059,10 @@ body{background:linear-gradient(135deg,#eef2ff 0%,#fff1f7 48%,#ecfeff 100%)!impo
                         const isCorrect = i === Number(q.correct);
                         window.__quizSelectedIndex = i;
                         window.__quizSelectedAnswer = String(q.options[i] ?? "");
-                        // Remove the answered question immediately so the next render
-                        // can never select this same question again.
-                        quizData = quizData.filter(item => String(item?._id) !== String(q._id));
+                        // Remove the answered question immediately and remember its id
+                        // so even a fresh API batch cannot render it as the next question.
+                        lastAnsweredQuizQuestionId = String(q._id || q.id || "");
+                        quizData = quizData.filter(item => String(item?._id || item?.id || "") !== lastAnsweredQuizQuestionId);
 
                         const buttons = optDiv.querySelectorAll(".option-btn");
                         buttons.forEach(btn => btn.disabled = true);
@@ -3115,7 +3119,7 @@ body{background:linear-gradient(135deg,#eef2ff 0%,#fff1f7 48%,#ecfeff 100%)!impo
                             }
                         };
 
-                        setTimeout(nextQuestion, 700);
+                        setTimeout(nextQuestion, 1500);
                     };
                     optDiv.appendChild(b);
                 });
