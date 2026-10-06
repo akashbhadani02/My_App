@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const Question = require("../models/Question");
+const mongoose = require("mongoose");
 const User = require("../models/User");
 const auth = require("../middleware/subscriptionAuth");
 const adminAuth = require("../middleware/adminAuth");
@@ -62,8 +63,17 @@ router.get("/random", auth, async (req, res) => {
         const count = Math.min(20, Math.max(1, Number(req.query.count) || 10));
         await ensureQuestionsSeeded();
         const user = await User.findById(req.user.id).select("answeredQuestionIds").lean();
+        // Keep answered question IDs as MongoDB ObjectIds. Converting them to
+        // strings makes the aggregation $nin filter fail because Question._id
+        // is an ObjectId, which can cause an already-answered question to return.
         const answeredIds = Array.isArray(user?.answeredQuestionIds)
-            ? user.answeredQuestionIds.map(String)
+            ? user.answeredQuestionIds
+                .map(id => {
+                    if (id instanceof mongoose.Types.ObjectId) return id;
+                    const value = String(id || "").trim();
+                    return mongoose.Types.ObjectId.isValid(value) ? new mongoose.Types.ObjectId(value) : null;
+                })
+                .filter(Boolean)
             : [];
 
         const baseMatch = {
