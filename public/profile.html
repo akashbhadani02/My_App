@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#506ef0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="/icon-192.png">
+
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Profile</title>
+
+    <style>
+
+        /* =========================
+           GLOBAL
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #667eea,
+                    #764ba2,
+                    #f093fb
+                );
+
+            padding: 30px 15px;
+
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+
+        /* =========================
+           PROFILE BOX
+        ========================= */
+
+        .box {
+
+            width: 100%;
+            max-width: 520px;
+
+            margin: 20px auto;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            padding: 30px;
+
+            border-radius: 25px;
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.25);
+
+            overflow: hidden;
+        }
+
+
+        /* =========================
+           TITLE
+        ========================= */
+
+        h2 {
+
+            text-align: center;
+
+            color: #5b21b6;
+
+            font-size: 30px;
+
+            margin-bottom: 25px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           USER INFO
+        ========================= */
+
+        .info {
+
+            display: grid;
+
+            grid-template-columns: 1fr;
+
+            gap: 15px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .info-card {
+
+            padding: 18px;
+
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f3e8ff,
+                    #ede9fe
+                );
+
+            border-left:
+                5px solid #7c3aed;
+
+            box-shadow:
+                0 5px 15px
+                rgba(124, 58, 237, 0.12);
+
+            overflow: hidden;
+        }
+
+
+        .info-card p {
+
+            color: #555;
+
+            font-size: 14px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .info-card span {
+
+            display: block;
+
+            color: #111827;
+
+            font-size: 19px;
+
+            font-weight: bold;
+
+            word-break: break-word;
+        }
+
+
+        /* =========================
+           MONEY CARDS
+        ========================= */
+
+        .money-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =========================
+           WALLET
+        ========================= */
+
+        .wallet-card {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #11998e,
+                    #38ef7d
+                );
+
+            color: white;
+
+            padding: 22px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 10px 25px
+                rgba(17, 153, 142, 0.3);
+
+            min-width: 0;
+        }
+
+
+        .wallet-card p {
+
+            font-size: 14px;
+
+            opacity: 0.9;
+
+            margin-bottom: 8px;
+        }
+
+
+        .wallet-card span {
+
+            display: block;
+
+            font-size: 27px;
+
+            font-weight: bold;
+
+            word-break: break-word;
+        }
+
+
+        /* =========================
+           TOTAL EARN
+        ========================= */
+
+        .earn-card {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff9966,
+                    #ff5e62
+                );
+
+            color: white;
+
+            padding: 22px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 10px 25px
+                rgba(255, 94, 98, 0.3);
+
+            min-width: 0;
+        }
+
+
+        .earn-card p {
+
+            font-size: 14px;
+
+            opacity: 0.9;
+
+            margin-bottom: 8px;
+        }
+
+
+        .earn-card span {
+
+            display: block;
+
+            font-size: 27px;
+
+            font-weight: bold;
+
+            word-break: break-word;
+        }
+
+
+        /* =========================
+           WITHDRAW HISTORY TITLE
+        ========================= */
+
+        h3 {
+
+            color: #4c1d95;
+
+            margin-bottom: 15px;
+
+            font-size: 21px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           HISTORY
+        ========================= */
+
+        #history {
+
+            max-height: 320px;
+
+            overflow-y: auto;
+
+            padding-right: 4px;
+        }
+
+
+        /* Scrollbar */
+
+        #history::-webkit-scrollbar {
+
+            width: 6px;
+        }
+
+
+        #history::-webkit-scrollbar-thumb {
+
+            background: #7c3aed;
+
+            border-radius: 10px;
+        }
+
+
+        #history::-webkit-scrollbar-track {
+
+            background: #eee;
+        }
+
+
+        /* =========================
+           HISTORY ITEM
+        ========================= */
+
+        .history-item {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 15px;
+
+            margin-bottom: 10px;
+
+            background: #f8f7ff;
+
+            border-radius: 12px;
+
+            border: 1px solid #e5e7eb;
+
+            transition: 0.2s;
+        }
+
+
+        .history-item:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 5px 15px
+                rgba(0, 0, 0, 0.08);
+        }
+
+
+        .amount {
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            color: #7c3aed;
+
+            word-break: break-word;
+        }
+
+
+        .status {
+
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            text-transform: capitalize;
+
+            white-space: nowrap;
+        }
+
+
+        /* STATUS */
+
+        .status.pending {
+
+            background: #fff3cd;
+
+            color: #856404;
+        }
+
+
+        .status.approved {
+
+            background: #d1fae5;
+
+            color: #047857;
+        }
+
+
+        .status.rejected {
+
+            background: #fee2e2;
+
+            color: #dc2626;
+        }
+
+
+        /* =========================
+           EMPTY HISTORY
+        ========================= */
+
+        .empty {
+
+            text-align: center;
+
+            padding: 20px;
+
+            color: #777;
+
+            background: #f9fafb;
+
+            border-radius: 12px;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            margin-top: 20px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #ec4899
+                );
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        button:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 20px
+                rgba(124, 58, 237, 0.3);
+        }
+
+
+        button:active {
+
+            transform: scale(0.97);
+        }
+
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            body {
+
+                padding: 15px 10px;
+            }
+
+
+            .box {
+
+                margin: 10px auto;
+
+                padding: 22px 18px;
+
+                border-radius: 20px;
+            }
+
+
+            h2 {
+
+                font-size: 26px;
+
+                margin-bottom: 20px;
+            }
+
+
+            .money-grid {
+
+                gap: 10px;
+            }
+
+
+            .wallet-card,
+            .earn-card {
+
+                padding: 18px 15px;
+
+                border-radius: 15px;
+            }
+
+
+            .wallet-card span,
+            .earn-card span {
+
+                font-size: 23px;
+            }
+
+
+            h3 {
+
+                font-size: 19px;
+            }
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 420px) {
+
+            body {
+
+                padding: 8px;
+            }
+
+
+            .box {
+
+                width: 100%;
+
+                margin: 5px auto;
+
+                padding: 20px 14px;
+
+                border-radius: 18px;
+            }
+
+
+            h2 {
+
+                font-size: 23px;
+
+                margin-bottom: 18px;
+            }
+
+
+            .info {
+
+                gap: 10px;
+            }
+
+
+            .info-card {
+
+                padding: 14px;
+
+                border-radius: 12px;
+            }
+
+
+            .info-card p {
+
+                font-size: 13px;
+            }
+
+
+            .info-card span {
+
+                font-size: 17px;
+            }
+
+
+            /* Money cards one below another */
+
+            .money-grid {
+
+                grid-template-columns: 1fr;
+
+                gap: 10px;
+
+                margin-bottom: 22px;
+            }
+
+
+            .wallet-card,
+            .earn-card {
+
+                padding: 18px;
+            }
+
+
+            .wallet-card span,
+            .earn-card span {
+
+                font-size: 25px;
+            }
+
+
+            h3 {
+
+                font-size: 18px;
+
+                margin-bottom: 12px;
+            }
+
+
+            .history-item {
+
+                padding: 12px;
+
+                gap: 8px;
+            }
+
+
+            .amount {
+
+                font-size: 16px;
+            }
+
+
+            .status {
+
+                padding: 5px 9px;
+
+                font-size: 11px;
+            }
+
+
+            button {
+
+                padding: 13px;
+
+                font-size: 15px;
+
+                margin-top: 15px;
+            }
+
+        }
+
+
+        /* =========================
+           VERY SMALL MOBILE
+        ========================= */
+
+        @media (max-width: 320px) {
+
+            .box {
+
+                padding: 16px 10px;
+            }
+
+
+            h2 {
+
+                font-size: 21px;
+            }
+
+
+            .wallet-card span,
+            .earn-card span {
+
+                font-size: 22px;
+            }
+
+
+            .history-item {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+
+            .status {
+
+                align-self: flex-start;
+            }
+
+        }
+
+
+        .password-section { margin: 10px 0 25px; padding: 20px; border-radius: 18px; background: linear-gradient(135deg,#eef2ff,#f5f3ff); border: 1px solid #c4b5fd; }
+        .password-section h3 { margin: 0 0 14px; color:#5b21b6; }
+        .password-section input { width:100%; padding:13px 14px; margin:7px 0; border:1px solid #c4b5fd; border-radius:10px; font-size:15px; outline:none; }
+        .password-section button { width:100%; margin-top:8px; background:linear-gradient(135deg,#7c3aed,#5b21b6); color:#fff; border:none; border-radius:10px; padding:13px; font-weight:bold; cursor:pointer; }
+        .password-msg { margin-top:10px; font-size:14px; font-weight:bold; text-align:center; }
+
+    <style id="aducate-profile-logo-style">
+.profile-brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}.profile-brand img{width:52px;height:52px;border-radius:14px;object-fit:cover;background:#fff;padding:2px;box-shadow:0 8px 20px rgba(79,70,229,.18)}.profile-brand h2{margin:0}
+</style>
+
+</head>
+
+
+<body>
+
+
+    <div class="box">
+
+        <div class="profile-brand"><img src="/icon-192.png" alt="Aducate Logo"><h2>👤 User Profile</h2></div>
+
+
+        <!-- USER INFORMATION -->
+
+        <div class="info">
+
+            <div class="info-card">
+
+                <p>Name</p>
+
+                <span id="name">Loading...</span>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <p>Mobile</p>
+
+                <span id="mobile">Loading...</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- WALLET + TOTAL EARN -->
+
+        <div class="money-grid">
+
+
+            <div class="wallet-card">
+
+                <p>💰 Wallet Balance</p>
+
+                <span>
+                    ₹<span id="wallet">0.00</span>
+                </span>
+
+            </div>
+
+
+            <!-- <div class="earn-card">
+
+                <p>📈 Total Earn</p>
+
+                <span>
+                    ₹<span id="earn">0.00</span>
+                </span>
+
+            </div> -->
+
+
+        </div>
+
+
+
+        <!-- CHANGE PASSWORD -->
+        <div class="password-section">
+            <h3>🔐 Change Password</h3>
+            <input id="currentPassword" type="password" autocomplete="current-password" placeholder="Current password">
+            <input id="newPassword" type="password" autocomplete="new-password" placeholder="New password (minimum 4 characters)">
+            <input id="confirmPassword" type="password" autocomplete="new-password" placeholder="Confirm new password">
+            <button type="button" onclick="changePassword()">🔑 Change Password</button>
+            <div id="passwordMsg" class="password-msg"></div>
+        </div>
+
+        <!-- WITHDRAW HISTORY -->
+
+        <h3>💸 Withdraw History</h3>
+
+
+        <div id="history">
+
+            <div class="empty">
+
+                Loading history...
+
+            </div>
+
+        </div>
+
+
+        <!-- BACK -->
+
+        <button type="button" onclick="goBack()">
+
+            ← Back
+
+        </button>
+
+
+    </div>
+
+
+    <script>
+
+
+        // =========================
+        // TOKEN
+        // =========================
+
+        const token = localStorage.getItem("token");
+
+
+        // જો token ના હોય તો login page પર મોકલો
+
+        if (!token) {
+
+            location.href = "login.html";
+
+        }
+
+
+        // =========================
+        // LOAD PROFILE
+        // =========================
+
+        async function loadProfile() {
+
+            try {
+
+
+                const res = await fetch(
+
+                    "/api/profile",
+
+                    {
+
+                        headers: {
+
+                            Authorization:
+                                "Bearer " + token
+
+                        }
+
+                    }
+
+                );
+
+
+                const data = await res.json();
+
+
+                if (!data.success) {
+
+                    alert(
+                        data.message ||
+                        "Profile load failed"
+                    );
+
+                    return;
+
+                }
+
+
+                const u = data.user;
+
+
+                // =========================
+                // USER DATA
+                // =========================
+
+                document.getElementById(
+                    "name"
+                ).innerText = u.name || "-";
+
+
+                document.getElementById(
+                    "mobile"
+                ).innerText = u.mobile || "-";
+
+
+                // =========================
+                // WALLET
+                // =========================
+
+                document.getElementById(
+                    "wallet"
+                ).innerText =
+                    Number(u.wallet || 0)
+                        .toFixed(2);
+
+
+                // =========================
+                // TOTAL EARN
+                // =========================
+
+                document.getElementById(
+                    "earn"
+                ).innerText =
+                    Number(u.totalEarn || 0)
+                        .toFixed(2);
+
+
+                // =========================
+                // WITHDRAW HISTORY
+                // =========================
+
+                let html = "";
+
+
+                if (
+                    !u.withdrawRequests ||
+                    u.withdrawRequests.length === 0
+                ) {
+
+                    html = `
+
+                        <div class="empty">
+
+                            No Withdraw History Found
+
+                        </div>
+
+                    `;
+
+                } else {
+
+
+                    u.withdrawRequests
+                        .slice()
+                        .reverse()
+                        .forEach(w => {
+
+
+                            const status =
+                                (
+                                    w.status ||
+                                    "pending"
+                                ).toLowerCase();
+
+
+                            html += `
+
+                                <div class="history-item">
+
+                                    <div class="amount">
+
+                                        ₹${Number(
+                                            w.amount || 0
+                                        ).toFixed(2)}
+
+                                    </div>
+
+
+                                    <div class="status ${status}">
+
+                                        ${status}
+
+                                    </div>
+
+                                </div>
+
+                            `;
+
+                        });
+
+                }
+
+
+                document.getElementById(
+                    "history"
+                ).innerHTML = html;
+
+
+            } catch (error) {
+
+
+                console.error(
+                    "Profile Error:",
+                    error
+                );
+
+
+                document.getElementById(
+                    "history"
+                ).innerHTML = `
+
+                    <div class="empty">
+
+                        Unable to load profile
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+
+        async function changePassword() {
+            const currentPassword = document.getElementById("currentPassword").value;
+            const newPassword = document.getElementById("newPassword").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            const msg = document.getElementById("passwordMsg");
+            msg.textContent = "";
+            msg.style.color = "#b91c1c";
+
+            if (!currentPassword || !newPassword || !confirmPassword) { msg.textContent = "Please fill all password fields."; return; }
+            if (newPassword !== confirmPassword) { msg.textContent = "New password and confirm password do not match."; return; }
+
+            try {
+                const res = await fetch("/api/profile/password", {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
+                    body: JSON.stringify({ currentPassword, newPassword })
+                });
+                const data = await res.json();
+                msg.textContent = data.message || (data.success ? "Password changed successfully." : "Password change failed.");
+                msg.style.color = data.success ? "#15803d" : "#b91c1c";
+                if (data.success) {
+                    document.getElementById("currentPassword").value = "";
+                    document.getElementById("newPassword").value = "";
+                    document.getElementById("confirmPassword").value = "";
+                }
+            } catch (error) {
+                msg.textContent = "Unable to change password. Please try again.";
+            }
+        }
+
+        // =========================
+        // BACK
+        // =========================
+
+        function goBack() {
+
+            if (document.referrer) {
+
+                history.back();
+
+            } else {
+
+                location.href = "earn.html";
+
+            }
+
+        }
+
+
+        // =========================
+        // LOAD PROFILE
+        // =========================
+
+        loadProfile();
+
+
+    </script>
+</body>
+
+</html>
+
+

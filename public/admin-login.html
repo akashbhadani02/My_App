@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#506ef0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="/icon-192.png">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#0f172a,#1e293b,#2563eb);
+overflow:hidden;
+}
+
+body::before{
+content:"";
+position:absolute;
+width:450px;
+height:450px;
+background:rgba(255,255,255,.08);
+border-radius:50%;
+top:-150px;
+left:-120px;
+filter:blur(20px);
+}
+
+body::after{
+content:"";
+position:absolute;
+width:350px;
+height:350px;
+background:rgba(255,255,255,.06);
+border-radius:50%;
+bottom:-120px;
+right:-100px;
+filter:blur(20px);
+}
+
+.login-box{
+position:relative;
+width:380px;
+padding:40px;
+background:rgba(255,255,255,.12);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.2);
+border-radius:20px;
+box-shadow:0 20px 45px rgba(0,0,0,.35);
+z-index:2;
+animation:fadeIn .8s ease;
+}
+
+@keyframes fadeIn{
+
+from{
+opacity:0;
+transform:translateY(30px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+.logo{
+font-size:65px;
+text-align:center;
+margin-bottom:10px;
+}
+
+h2{
+text-align:center;
+color:#fff;
+margin-bottom:30px;
+font-size:30px;
+letter-spacing:1px;
+}
+
+input{
+width:100%;
+padding:15px;
+margin-bottom:18px;
+border:none;
+outline:none;
+border-radius:12px;
+background:rgba(255,255,255,.15);
+color:#fff;
+font-size:16px;
+transition:.3s;
+}
+
+input::placeholder{
+color:#ddd;
+}
+
+input:focus{
+background:rgba(255,255,255,.22);
+box-shadow:0 0 12px #60a5fa;
+}
+
+button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:linear-gradient(90deg,#2563eb,#3b82f6);
+color:white;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+transform:translateY(-2px);
+background:linear-gradient(90deg,#1d4ed8,#2563eb);
+box-shadow:0 10px 25px rgba(37,99,235,.45);
+}
+
+.login-btn{
+width:100%;
+background:linear-gradient(90deg,#2563eb,#3b82f6)!important;
+color:#fff!important;
+}
+.install-btn{
+width:100%;
+margin-top:12px;
+padding:14px 15px;
+border:1px solid rgba(34,197,94,.45)!important;
+border-radius:12px;
+background:linear-gradient(90deg,#16a34a,#22c55e)!important;
+color:#fff!important;
+font-size:16px;
+font-weight:800;
+cursor:pointer;
+box-shadow:0 8px 20px rgba(22,163,74,.25);
+}
+.install-btn:hover{
+background:linear-gradient(90deg,#15803d,#16a34a)!important;
+box-shadow:0 10px 24px rgba(22,163,74,.4);
+}
+.install-btn:active{transform:scale(.98)}
+
+.footer{
+margin-top:20px;
+text-align:center;
+color:#ddd;
+font-size:14px;
+}
+
+@media(max-width:450px){
+
+.login-box{
+width:90%;
+padding:30px 20px;
+}
+
+h2{
+font-size:25px;
+}
+
+.logo{
+font-size:55px;
+}
+
+}
+
+<style id="aducate-admin-login-logo-style">
+.logo{width:92px!important;height:92px!important;border-radius:24px!important;background:#fff!important;padding:5px!important;overflow:hidden!important;display:grid!important;place-items:center!important;box-shadow:0 12px 30px rgba(79,70,229,.22)}
+.logo img{width:100%;height:100%;object-fit:cover;border-radius:18px;display:block}
+</style>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+<div class="logo"><img src="/icon-192.png" alt="Aducate Logo"></div>
+
+<h2>Admin Login</h2>
+
+<input id="username" placeholder="Username">
+
+<input id="password" type="password" placeholder="Password">
+
+<button class="login-btn" onclick="login()">Login</button>
+
+<button id="aducate-install-app" class="install-btn" type="button">📲 Install Aducate App</button>
+
+<div class="footer">
+Secure Admin Panel
+</div>
+
+</div>
+
+<script>
+
+async function login(){
+
+const res = await fetch("/api/admin/login",{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify({
+
+username:username.value,
+
+password:password.value
+
+})
+
+});
+
+const data = await res.json();
+
+if(data.success){
+
+localStorage.setItem("adminToken",data.token);
+
+location.href="admin.html";
+
+}else{
+
+alert(data.message);
+
+}
+
+}
+
+</script>
+
+
+<script>
+(function(){
+  let deferredPrompt=null;
+  const btn=document.getElementById('aducate-install-app');
+  if(!btn) return;
+
+  window.addEventListener('beforeinstallprompt',function(e){
+    e.preventDefault();
+    deferredPrompt=e;
+    btn.style.display='block';
+  });
+
+  btn.addEventListener('click',async function(){
+    if(deferredPrompt){
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt=null;
+    }else{
+      alert('જો Install popup ન આવે તો Chrome/Edge ના menu (⋮) માંથી “Install Aducate English App” પસંદ કરો.');
+    }
+  });
+
+  window.addEventListener('appinstalled',()=>{
+    deferredPrompt=null;
+    btn.style.display='none';
+  });
+
+  window.addEventListener('load',()=>{
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.register('/sw.js',{scope:'/'}).catch(console.error);
+    }
+    if(window.matchMedia('(display-mode: standalone)').matches){
+      btn.style.display='none';
+    }
+  });
+})();
+</script>
+</body>
+
+</html>

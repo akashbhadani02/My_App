@@ -1,0 +1,4137 @@
+<!DOCTYPE html>
+<html lang="gu">
+
+<head>
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#506ef0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="/icon-192.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aducate.app</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* =====================================
+   RESET
+===================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+
+            /* Colorful Background */
+            background:
+                radial-gradient(circle at 10% 20%, #ff9ff3 0%, transparent 25%),
+                radial-gradient(circle at 90% 10%, #54a0ff 0%, transparent 25%),
+                radial-gradient(circle at 20% 90%, #1dd1a1 0%, transparent 25%),
+                radial-gradient(circle at 90% 90%, #feca57 0%, transparent 25%),
+                linear-gradient(135deg, #667eea, #764ba2);
+
+            background-attachment: fixed;
+
+            color: #2d3436;
+
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+
+        /* =====================================
+   MAIN CARD
+===================================== */
+
+        .card {
+            width: 100%;
+            max-width: 440px;
+
+            padding: 28px 22px;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            border-radius: 32px;
+
+            border: 4px solid rgba(255, 255, 255, 0.7);
+
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.25),
+                0 0 40px rgba(255, 255, 255, 0.15);
+
+            animation: cardShow 0.6s ease;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        @keyframes cardShow {
+
+            0% {
+                opacity: 0;
+                transform: translateY(40px) scale(0.9);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+        }
+
+
+        /* =====================================
+   DASHBOARD TITLE
+===================================== */
+
+        #dashboard h2 {
+
+            text-align: center;
+
+            font-size: 27px;
+
+            font-weight: 700;
+
+            margin-bottom: 22px;
+
+            background:
+                linear-gradient(90deg,
+                    #ff0080,
+                    #7928ca,
+                    #00c6ff,
+                    #00b894);
+
+            background-size: 300%;
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+            animation: gradientText 5s infinite;
+
+        }
+
+        @keyframes gradientText {
+
+            0% {
+                background-position: 0%;
+            }
+
+            50% {
+                background-position: 100%;
+            }
+
+            100% {
+                background-position: 0%;
+            }
+
+        }
+
+
+        /* =====================================
+   WALLET
+===================================== */
+
+        .wallet-box {
+
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 25px 22px;
+
+            border-radius: 25px;
+
+            color: white;
+
+            margin-bottom: 22px;
+
+            background:
+                linear-gradient(135deg,
+                    #ff0080,
+                    #7928ca,
+                    #2f80ed);
+
+            box-shadow:
+                0 12px 30px rgba(121, 40, 202, 0.4);
+
+        }
+
+
+        /* Wallet Shine */
+
+        .wallet-box::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 200px;
+            height: 200px;
+
+            background: rgba(255, 255, 255, 0.15);
+
+            border-radius: 50%;
+
+            right: -80px;
+            top: -90px;
+
+        }
+
+        .wallet-box::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 100px;
+            height: 100px;
+
+            background: rgba(255, 255, 255, 0.1);
+
+            border-radius: 50%;
+
+            left: -40px;
+            bottom: -50px;
+
+        }
+
+        .wallet-box small {
+
+            position: relative;
+
+            z-index: 2;
+
+            font-size: 14px;
+
+            opacity: 0.9;
+
+        }
+
+        .wallet-val {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: block;
+
+            margin-top: 5px;
+
+            font-size: 36px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        /* =====================================
+   BUTTON GRID
+===================================== */
+
+        .grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 13px;
+
+        }
+
+
+        /* =====================================
+   ALL BUTTON
+===================================== */
+
+        .btn {
+
+            border: none;
+
+            width: 100%;
+
+            min-height: 60px;
+
+            padding: 13px 10px;
+
+            border-radius: 20px;
+
+            color: white;
+
+            font-family: 'Poppins', sans-serif;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: all 0.25s ease;
+
+            box-shadow:
+                0 8px 18px rgba(0, 0, 0, 0.15);
+
+            position: relative;
+
+            overflow: hidden;
+
+            margin-top: 10px;
+
+        }
+
+
+        /* Button Shine */
+
+        .btn::after {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            left: -100%;
+
+            width: 70%;
+
+            height: 100%;
+
+            background:
+                linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.35),
+                    transparent);
+
+            transform: skewX(-20deg);
+
+            transition: 0.5s;
+
+        }
+
+        .btn:hover::after {
+
+            left: 130%;
+
+        }
+
+        .btn:hover {
+
+            transform: translateY(-5px) scale(1.02);
+
+            box-shadow:
+                0 15px 28px rgba(0, 0, 0, 0.2);
+
+        }
+
+        .btn:active {
+
+            transform: scale(0.94);
+
+        }
+
+
+        /* =====================================
+   QUIZ BUTTON
+===================================== */
+
+        .btn-quiz {
+
+            background:
+                linear-gradient(135deg,
+                    #ff416c,
+                    #ff4b2b);
+
+        }
+
+
+        /* =====================================
+   SPIN BUTTON
+===================================== */
+
+        .btn-spin {
+
+            background:
+                linear-gradient(135deg,
+                    #f7971e,
+                    #ffd200);
+
+            color: #5c3d00;
+
+        }
+
+
+        /* =====================================
+   PROFILE
+===================================== */
+
+        .btn-profile {
+
+            background:
+                linear-gradient(135deg,
+                    #00c6ff,
+                    #0072ff);
+
+        }
+
+
+        /* =====================================
+   ADMIN & TELEGRAM
+===================================== */
+
+        .btn-Admin,
+        .telegram-btn {
+
+            border: none;
+
+            width: 100%;
+
+            min-height: 60px;
+
+            padding: 13px 10px;
+
+            border-radius: 20px;
+
+            color: white;
+
+            font-family: 'Poppins', sans-serif;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: all 0.25s ease;
+
+            box-shadow:
+                0 8px 18px rgba(0, 0, 0, 0.15);
+
+            position: relative;
+
+            overflow: hidden;
+
+            margin-top: 10px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            text-decoration: none;
+
+        }
+
+        .btn-Admin {
+
+            background:
+                linear-gradient(135deg,
+                    #11998e,
+                    #38ef7d);
+
+        }
+
+        .telegram-btn {
+
+            background:
+                linear-gradient(135deg,
+                    #0088cc,
+                    #229ed9);
+
+        }
+
+        .telegram-btn:hover,
+        .btn-Admin:hover {
+
+            transform: translateY(-5px) scale(1.02);
+
+            box-shadow:
+                0 15px 28px rgba(0, 0, 0, 0.2);
+
+        }
+
+        .telegram-btn:active,
+        .btn-Admin:active {
+
+            transform: scale(0.94);
+
+        }
+
+        .telegram-icon {
+
+            width: 20px;
+
+            height: 20px;
+
+            fill: white;
+
+        }
+
+
+        /* =====================================
+   DAILY REWARD
+===================================== */
+
+        .btn-reward {
+
+            background:
+                linear-gradient(135deg,
+                    #f857a6,
+                    #ff5858);
+
+            margin-top: 18px;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =====================================
+   WITHDRAW
+===================================== */
+
+        .btn-withdraw {
+
+            background:
+                linear-gradient(135deg,
+                    #8e2de2,
+                    #4a00e0);
+
+            margin-top: 12px;
+
+            font-size: 14px;
+
+        }
+
+
+        .btn-withdraw:disabled {
+
+            background:
+                linear-gradient(135deg,
+                    #bdc3c7,
+                    #7f8c8d);
+
+            opacity: 0.6;
+
+            cursor: not-allowed;
+
+            box-shadow: none;
+
+            transform: none;
+
+        }
+
+
+        /* =====================================
+   QUIZ SCREEN
+===================================== */
+
+        #quiz {
+
+            text-align: center;
+        }
+
+        #quiz h3 {
+
+            font-size: 20px;
+
+            line-height: 1.6;
+
+            margin-bottom: 22px;
+
+            color: #5f27cd;
+
+        }
+
+
+        /* =====================================
+   QUIZ OPTIONS
+===================================== */
+
+        .option-btn {
+
+            width: 100%;
+
+            padding: 16px;
+
+            margin: 9px 0;
+
+            border-radius: 18px;
+
+            border: 3px solid #eee;
+
+            background:
+                linear-gradient(135deg,
+                    #ffffff,
+                    #f3f0ff);
+
+            color: #2d3436;
+
+            font-family: 'Poppins', sans-serif;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: all 0.25s ease;
+
+        }
+
+        .option-btn:hover {
+
+            color: white;
+
+            border-color: transparent;
+
+            background:
+                linear-gradient(135deg,
+                    #ff0080,
+                    #7928ca);
+
+            transform:
+                translateX(6px) scale(1.02);
+
+            box-shadow:
+                0 10px 22px rgba(121, 40, 202, 0.3);
+
+        }
+
+        .option-btn:active {
+
+            transform: scale(0.95);
+
+        }
+
+
+        /* =====================================
+   BACK BUTTON
+===================================== */
+
+        #quiz .btn {
+
+            background:
+                linear-gradient(135deg,
+                    #636e72,
+                    #2d3436);
+
+            margin-top: 20px;
+
+        }
+
+
+        /* =====================================
+   HIDDEN
+===================================== */
+
+        .hidden {
+
+            display: none !important;
+
+        }
+
+
+        /* =====================================
+   MOBILE
+===================================== */
+
+        @media (max-width: 480px) {
+
+            body {
+
+                padding: 12px;
+
+                align-items: center;
+                justify-content: center;
+
+            }
+
+            .card {
+
+                margin-top: 10px;
+
+                padding: 24px 16px;
+
+                border-radius: 28px;
+
+            }
+
+            #dashboard h2 {
+
+                font-size: 23px;
+
+            }
+
+            .wallet-box {
+
+                padding: 22px 18px;
+
+                border-radius: 22px;
+
+            }
+
+            .wallet-val {
+
+                font-size: 31px;
+
+            }
+
+            .grid {
+
+                gap: 10px;
+
+            }
+
+            .btn,
+            .btn-Admin,
+            .telegram-btn {
+
+                min-height: 58px;
+
+                font-size: 11.5px;
+
+                border-radius: 17px;
+
+            }
+
+            .btn-reward,
+            .btn-withdraw {
+
+                font-size: 13px;
+
+            }
+
+            .option-btn {
+
+                padding: 14px 10px;
+
+                font-size: 13px;
+
+            }
+
+        }
+
+
+        /* =====================================
+   SMALL PHONES
+===================================== */
+
+        @media (max-width: 350px) {
+
+            body {
+
+                padding: 8px;
+
+            }
+
+            .card {
+
+                padding: 20px 12px;
+
+            }
+
+            #dashboard h2 {
+
+                font-size: 20px;
+
+            }
+
+            .wallet-val {
+
+                font-size: 27px;
+
+            }
+
+            .btn,
+            .btn-Admin,
+            .telegram-btn {
+
+                min-height: 54px;
+
+                font-size: 10px;
+
+            }
+
+        }
+
+        /* ===========================
+   Withdraw Popup
+=========================== */
+
+        .withdraw-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+        }
+
+        .withdraw-box {
+            width: 420px;
+            max-width: 95%;
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        }
+
+        .withdraw-box h2 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .withdraw-box p {
+            text-align: center;
+            font-weight: bold;
+            color: #0a8f08;
+            margin-bottom: 20px;
+        }
+
+        .withdraw-box label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .withdraw-box select,
+        .withdraw-box input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .withdraw-box input:focus,
+        .withdraw-box select:focus {
+            border-color: #007bff;
+        }
+
+        .withdraw-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .withdraw-buttons button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 15px;
+        }
+
+        .withdraw-buttons button:first-child {
+            background: #28a745;
+        }
+
+        .withdraw-buttons button:last-child {
+            background: #dc3545;
+        }
+
+        .withdraw-buttons button:hover {
+            opacity: .9;
+        }
+
+        body.dark {
+            background: #111 !important;
+        }
+
+        body.dark .card {
+            background: #1e1e1e;
+            color: #fff;
+        }
+
+        body.dark #question,
+        body.dark #message {
+            color: #fff !important;
+        }
+
+        body.dark .option-btn {
+            background: #333;
+            color: #fff;
+            border: 2px solid #555;
+        }
+    
+/* Interactive English earning activities */
+.activity-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.activity-btn{border:0;border-radius:18px;padding:16px 10px;color:#fff;font-family:Poppins,sans-serif;font-weight:700;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,.15);transition:.2s}.activity-btn:hover{transform:translateY(-3px)}.activity-btn small{display:block;font-size:11px;opacity:.9;margin-top:4px}.a1{background:linear-gradient(135deg,#7c3aed,#4f46e5)}.a2{background:linear-gradient(135deg,#0891b2,#2563eb)}.a3{background:linear-gradient(135deg,#f97316,#ef4444)}.a4{background:linear-gradient(135deg,#16a34a,#059669)}.a5{background:linear-gradient(135deg,#db2777,#9333ea)}.a6{background:linear-gradient(135deg,#ca8a04,#ea580c)}.a7{background:linear-gradient(135deg,#0f766e,#0d9488)}.a8{background:linear-gradient(135deg,#0284c7,#4f46e5)}.activity-screen{text-align:center}.activity-title{font-size:22px;font-weight:800;color:#5f27cd}.activity-reward{display:inline-block;margin:8px 0;padding:7px 12px;border-radius:20px;background:#ecfdf5;color:#047857;font-weight:700}.activity-question{font-size:19px;line-height:1.6;margin:18px 0;color:#222}.activity-input{width:100%;padding:14px;border:2px solid #ddd;border-radius:14px;font:600 14px Poppins,sans-serif;margin:8px 0}.activity-action{width:100%;border:0;border-radius:14px;padding:14px;margin:8px 0;background:linear-gradient(135deg,#6366f1,#7c3aed);color:#fff;font-weight:800;cursor:pointer}.word-bank{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0}.word-chip{border:0;border-radius:12px;padding:10px 12px;background:#f1f5f9;font-weight:700;cursor:pointer}.answer-box{min-height:52px;padding:12px;border:2px dashed #a78bfa;border-radius:14px;background:#faf5ff;margin:10px 0;line-height:1.8}.activity-option{width:100%;padding:13px;margin:6px 0;border:2px solid #e5e7eb;border-radius:13px;background:#fff;font-weight:700;cursor:pointer;text-align:left}.activity-feedback{min-height:26px;font-weight:800;margin:8px 0}.passage{background:#f8fafc;padding:15px;border-radius:14px;text-align:left;line-height:1.7;font-size:14px}.mic-status{font-size:13px;color:#64748b;margin:8px}
+@media(max-width:480px){.activity-grid{grid-template-columns:1fr 1fr}.activity-btn{padding:14px 7px;font-size:13px}}
+
+        .activity-wallet-bar{
+            position:sticky;
+            top:0;
+            z-index:20;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:12px;
+            margin-bottom:16px;
+            padding:12px 16px;
+            border-radius:12px;
+            background:#ffffff;
+            box-shadow:0 3px 14px rgba(0,0,0,.08);
+            font-weight:700;
+        }
+        .activity-wallet-bar strong{
+            font-size:18px;
+        }
+        @media(max-width:600px){
+            .activity-wallet-bar{
+                padding:11px 13px;
+                margin-bottom:12px;
+            }
+        }
+
+        [data-activity="fill"], [data-activity="reading"]{
+            cursor:pointer !important;
+            pointer-events:auto !important;
+            touch-action:manipulation;
+        }
+
+        .submit-answer{
+            display:block;width:100%;margin-top:12px;padding:12px 16px;
+            border:0;border-radius:10px;cursor:pointer;font-weight:700;
+        }
+        #activityContent input,#activityContent textarea{
+            pointer-events:auto !important;user-select:text !important;
+        }
+
+#activityContent .activity-option{
+    position:relative;
+    z-index:30;
+    pointer-events:auto !important;
+    touch-action:manipulation;
+}
+
+/* =========================================================
+   KBC-STYLE FULLSCREEN QUIZ EXPERIENCE
+   ========================================================= */
+#quiz.kbc-quiz-screen{
+    width:100vw;
+    max-width:none;
+    min-height:100vh;
+    height:100vh;
+    margin:0;
+    padding:clamp(14px,2.2vw,30px);
+    border:0;
+    border-radius:0;
+    overflow-y:auto;
+    overflow-x:hidden;
+    color:#fff;
+    background:
+      radial-gradient(circle at 50% 38%, rgba(61,112,255,.55) 0%, rgba(22,44,130,.30) 24%, transparent 45%),
+      radial-gradient(circle at 15% 90%, rgba(0,204,255,.22), transparent 32%),
+      radial-gradient(circle at 88% 8%, rgba(113,46,255,.24), transparent 30%),
+      linear-gradient(145deg,#050b2e 0%,#0a1452 42%,#030722 100%);
+    box-shadow:none;
+    animation:kbcFade .45s ease;
+}
+@keyframes kbcFade{from{opacity:0}to{opacity:1}}
+#quiz.kbc-quiz-screen::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:
+      repeating-radial-gradient(circle at center, transparent 0 58px, rgba(255,255,255,.025) 59px 60px);
+    opacity:.55;
+}
+.kbc-shell{
+    position:relative;
+    z-index:2;
+    width:min(1120px,100%);
+    min-height:100%;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+.kbc-topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:14px;
+}
+.kbc-brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:900;
+    letter-spacing:.8px;
+    text-transform:uppercase;
+    font-size:clamp(15px,2vw,22px);
+}
+.kbc-orb{
+    width:42px;height:42px;border-radius:50%;
+    display:grid;place-items:center;
+    background:radial-gradient(circle at 35% 30%,#fff 0 8%,#55a4ff 9% 26%,#183bd2 48%,#050b2e 72%);
+    border:2px solid rgba(255,255,255,.75);
+    box-shadow:0 0 18px rgba(69,133,255,.8);
+}
+.kbc-balance{
+    padding:9px 15px;
+    border:1px solid rgba(255,255,255,.28);
+    border-radius:999px;
+    background:rgba(0,0,0,.25);
+    backdrop-filter:blur(8px);
+    font-size:13px;
+    font-weight:800;
+    white-space:nowrap;
+}
+.kbc-progress{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    margin:2px auto 14px;
+    font-size:12px;
+    font-weight:800;
+    color:#bcd2ff;
+}
+.kbc-dot{width:7px;height:7px;border-radius:50%;background:#46d7ff;box-shadow:0 0 10px #46d7ff}
+.kbc-question-wrap{
+    width:min(940px,100%);
+    margin:0 auto;
+}
+.kbc-question-no{
+    text-align:center;
+    font-size:14px;
+    font-weight:900;
+    letter-spacing:1.2px;
+    color:#f5c542;
+    margin-bottom:3px;
+    text-transform:uppercase;
+}
+.kbc-question-title{
+    text-align:center;
+    font-size:10px;
+    line-height:1.45;
+    color:#9db8ee;
+    font-weight:700;
+    margin:0 auto 10px;
+}
+#quiz.kbc-quiz-screen #question{
+    position:relative;
+    margin:0 auto 22px;
+    width:100%;
+    min-height:105px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:25px clamp(18px,4vw,50px);
+    color:#fff;
+    font-size:clamp(18px,2.35vw,28px);
+    line-height:1.45;
+    font-weight:800;
+    background:linear-gradient(180deg,rgba(18,43,117,.96),rgba(6,18,65,.98));
+    border:2px solid #4c8dff;
+    border-radius:24px;
+    box-shadow:0 0 0 3px rgba(25,74,190,.25),0 15px 45px rgba(0,0,0,.35),inset 0 0 35px rgba(70,125,255,.12);
+}
+#quiz.kbc-quiz-screen #question::before,
+#quiz.kbc-quiz-screen #question::after{
+    content:"";
+    position:absolute;
+    top:50%;
+    width:30px;height:30px;
+    border:2px solid #6aa6ff;
+    border-radius:50%;
+    background:#07133f;
+    transform:translateY(-50%);
+}
+#quiz.kbc-quiz-screen #question::before{left:-17px}
+#quiz.kbc-quiz-screen #question::after{right:-17px}
+#quiz.kbc-quiz-screen #options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px 18px;
+}
+#quiz.kbc-quiz-screen .option-btn{
+    position:relative;
+    min-height:68px;
+    margin:0;
+    padding:13px 18px 13px 55px;
+    border:2px solid #4a82ec;
+    border-radius:18px;
+    background:linear-gradient(180deg,#112b76,#081743);
+    color:#fff;
+    text-align:left;
+    font-size:clamp(13px,1.5vw,17px);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 8px 20px rgba(0,0,0,.25);
+    transition:.2s ease;
+}
+#quiz.kbc-quiz-screen .option-btn::before{
+    content:attr(data-option);
+    position:absolute;
+    left:13px;top:50%;
+    transform:translateY(-50%);
+    width:31px;height:31px;
+    border:1px solid #6ba8ff;
+    border-radius:50%;
+    display:grid;place-items:center;
+    color:#9ed0ff;
+    font-weight:900;
+    background:#07123a;
+}
+#quiz.kbc-quiz-screen .option-btn:hover{
+    transform:translateY(-2px);
+    border-color:#f5c542;
+    background:linear-gradient(180deg,#173d9a,#0a1e58);
+    box-shadow:0 0 22px rgba(61,139,255,.35);
+}
+#quiz.kbc-quiz-screen .option-btn:disabled{opacity:.95;cursor:default}
+.kbc-footer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:18px;
+}
+.kbc-tip{
+    color:#9db8ee;
+    font-size:11px;
+    line-height:1.5;
+}
+#quiz.kbc-quiz-screen .kbc-back{
+    width:auto;
+    min-height:42px;
+    margin:0;
+    padding:8px 15px;
+    border-radius:999px;
+    background:rgba(255,255,255,.09);
+    border:1px solid rgba(255,255,255,.25);
+    color:#fff;
+    box-shadow:none;
+    font-size:12px;
+}
+#quiz.kbc-quiz-screen .kbc-back:hover{transform:none;background:rgba(255,255,255,.16)}
+body.kbc-fullscreen-active{padding:0!important}
+body.kbc-fullscreen-active #quiz.kbc-quiz-screen{border-radius:0!important}
+/* ===== KBC Lifelines + Aducate English Quiz watermark ===== */
+#quiz.kbc-quiz-screen::after{
+    content:"Aducate English Quiz";
+    position:fixed;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%) rotate(-18deg);
+    z-index:9999;
+    pointer-events:none;
+    white-space:nowrap;
+    font-size:clamp(42px,8vw,112px);
+    font-weight:900;
+    letter-spacing:4px;
+    color:rgba(255,255,255,.075);
+    text-transform:none;
+}
+.kbc-lifelines{
+    width:min(940px,100%);
+    margin:0 auto 18px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    position:relative;
+    z-index:3;
+}
+.kbc-lifeline{
+    min-height:58px;
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:16px;
+    background:linear-gradient(180deg,rgba(25,67,150,.96),rgba(5,20,68,.98));
+    color:#fff;
+    font-weight:900;
+    font-size:12px;
+    cursor:pointer;
+    box-shadow:0 8px 22px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.12);
+    transition:.2s ease;
+}
+.kbc-lifeline span{display:block;font-size:10px;color:#a9d7ff;margin-top:3px;font-weight:700}
+.kbc-lifeline:hover{transform:translateY(-2px);border-color:#f5c542;box-shadow:0 0 20px rgba(61,139,255,.35)}
+.kbc-lifeline.used,.kbc-lifeline:disabled{
+    opacity:.38;
+    cursor:not-allowed;
+    transform:none;
+    filter:grayscale(.8);
+}
+.kbc-cycle-note{
+    text-align:center;
+    color:#9db8ee;
+    font-size:10px;
+    font-weight:800;
+    margin:-6px auto 12px;
+}
+.kbc-poll{
+    margin:12px auto 0;
+    padding:12px;
+    width:min(720px,100%);
+    border:1px solid rgba(255,255,255,.22);
+    border-radius:16px;
+    background:rgba(0,0,0,.25);
+}
+.kbc-poll-row{display:grid;grid-template-columns:34px 1fr 46px;gap:8px;align-items:center;margin:6px 0;font-size:11px;font-weight:800}
+.kbc-poll-bar{height:9px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden}
+.kbc-poll-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#39d8ff,#f5c542)}
+@media(max-width:700px){
+    .kbc-lifelines{grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+    .kbc-lifeline{min-height:52px;font-size:11px;border-radius:14px}
+    .kbc-cycle-note{font-size:9px}
+    .kbc-question-no{font-size:12px;letter-spacing:.8px}
+    .kbc-question-title{font-size:9px;margin-bottom:8px}
+}
+@media(max-width:700px){
+    #quiz.kbc-quiz-screen{padding:12px 10px 14px}
+    .kbc-shell{min-height:calc(100vh - 26px)}
+    .kbc-topbar{margin-bottom:10px}
+    .kbc-orb{width:36px;height:36px}
+    .kbc-balance{font-size:11px;padding:8px 11px}
+    #quiz.kbc-quiz-screen #question{
+        min-height:125px;
+        margin-bottom:15px;
+        padding:20px 17px;
+        font-size:18px;
+        border-radius:20px;
+    }
+    #quiz.kbc-quiz-screen #question::before,
+    #quiz.kbc-quiz-screen #question::after{width:22px;height:22px}
+    #quiz.kbc-quiz-screen #question::before{left:-12px}
+    #quiz.kbc-quiz-screen #question::after{right:-12px}
+    #quiz.kbc-quiz-screen #options{grid-template-columns:1fr;gap:10px}
+    #quiz.kbc-quiz-screen .option-btn{min-height:58px;border-radius:15px;padding:11px 14px 11px 52px}
+    .kbc-footer{margin-top:12px;align-items:flex-end}
+    .kbc-tip{font-size:10px}
+}
+@media(max-width:380px){
+    #quiz.kbc-quiz-screen #question{font-size:16px;min-height:112px}
+    #quiz.kbc-quiz-screen .option-btn{font-size:12px;min-height:54px}
+    .kbc-brand{font-size:13px}
+    .kbc-progress{font-size:10px}
+}
+
+
+/* ₹499 Book purchase */
+.book-btn{background:linear-gradient(135deg,#7c3aed,#2563eb)!important}.book-modal{position:fixed;inset:0;background:rgba(0,0,0,.68);display:none;align-items:center;justify-content:center;padding:18px;z-index:99999}.book-modal.show{display:flex}.book-box{width:min(440px,100%);background:#fff;color:#172033;border-radius:22px;padding:24px;box-shadow:0 25px 70px rgba(0,0,0,.4);text-align:center}.book-box h3{margin:0 0 8px}.book-price{font-size:28px;font-weight:900;color:#6d28d9;margin:12px 0}.book-box input{width:100%;box-sizing:border-box;padding:13px;border:2px solid #ddd;border-radius:12px;margin:10px 0;font:inherit}.book-row{display:flex;gap:10px;margin-top:10px}.book-row button{flex:1;padding:12px;border:0;border-radius:12px;font-weight:800;cursor:pointer}.book-primary{background:#6d28d9;color:#fff}.book-secondary{background:#e5e7eb}.book-status{margin-top:12px;font-weight:700}.book-reader{width:min(1000px,100%);max-width:1000px;text-align:left;max-height:92vh;overflow:hidden;padding:18px;position:relative}.book-close-x{position:absolute;top:12px;right:12px;width:42px;height:42px;border:0;border-radius:50%;background:#fee2e2;color:#991b1b;font-size:24px;font-weight:900;line-height:42px;cursor:pointer;z-index:5;box-shadow:0 4px 12px rgba(0,0,0,.12)}.book-close-x:hover{background:#fecaca;transform:scale(1.04)}.book-reader-content{line-height:1.8;background:#f8fafc;padding:12px;border-radius:14px;overflow:hidden}.book-toolbar{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:10px 0}.book-toolbar button{border:0;border-radius:10px;padding:9px 13px;background:#eef2ff;color:#312e81;font-weight:800;cursor:pointer}.book-toolbar button:disabled{opacity:.45;cursor:not-allowed}.book-page-info{font-weight:800;min-width:110px;text-align:center}.book-page-jump{display:flex;align-items:center;gap:5px}.book-page-jump input{width:72px;box-sizing:border-box;padding:9px 7px;border:1px solid #cbd5e1;border-radius:10px;text-align:center;font-weight:800;font:inherit;background:#fff;color:#172033}.book-page-jump button{padding:9px 12px}.book-page-jump input::-webkit-inner-spin-button,.book-page-jump input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.book-page-jump input[type=number]{-moz-appearance:textfield}.book-canvas-wrap{height:calc(92vh - 155px);min-height:420px;overflow:auto;background:#dfe4ea;border-radius:12px;padding:14px;text-align:center;overscroll-behavior:contain}.book-canvas-wrap canvas{display:block;margin:0 auto;background:#fff;box-shadow:0 5px 18px rgba(0,0,0,.18);user-select:none;-webkit-user-select:none;max-width:none} .book-protection-note{font-size:12px;color:#64748b;text-align:center;margin:7px 0 0}.book-reader *{user-select:none;-webkit-user-select:none}
+@media (max-width:700px){
+  .book-modal{padding:5px;align-items:center;}
+  .book-reader{width:100%;max-width:none;height:96vh;max-height:96vh;padding:12px 8px 8px;border-radius:16px;}
+  .book-reader h3{font-size:18px;margin-right:48px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .book-close-x{top:8px;right:8px;width:38px;height:38px;line-height:38px;font-size:22px;}
+  .book-toolbar{gap:6px;margin:8px 0;display:grid;grid-template-columns:1fr 1fr;align-items:center;}
+  .book-toolbar button{padding:8px 7px;font-size:12px;min-height:38px;}
+  .book-page-info{min-width:0;font-size:12px;grid-column:1 / -1;grid-row:1;}
+  .book-page-jump{grid-column:1 / -1;grid-row:2;justify-content:center;}
+  .book-page-jump input{width:82px;padding:8px 6px;}
+  .book-page-jump button{padding:8px 12px;}
+  #bookPrevBtn{grid-column:1;grid-row:3;}
+  #bookNextBtn{grid-column:2;grid-row:3;}
+  .book-toolbar button[onclick="bookZoomOut()"]{grid-column:1;grid-row:4;}
+  .book-toolbar button[onclick="bookZoomIn()"]{grid-column:2;grid-row:4;}
+  .book-reader-content{padding:6px;border-radius:10px;}
+  .book-canvas-wrap{height:calc(96vh - 250px);min-height:300px;padding:6px;overflow:auto;-webkit-overflow-scrolling:touch;}
+  .book-canvas-wrap canvas{margin:0 auto;}
+  .book-protection-note{font-size:10px;margin:5px 0 0;}
+  .book-reader>.book-row{margin-top:6px;}
+  .book-reader>.book-row button{padding:9px;font-size:13px;}
+}
+@media (max-width:380px){
+  .book-reader{height:97vh;max-height:97vh;padding:10px 6px 6px;}
+  .book-canvas-wrap{height:calc(97vh - 245px);}
+  .book-toolbar button{font-size:11px;}
+}
+
+</style>
+
+<style id="earn-dashboard-view-style">
+/* ===== Earn dashboard: compact reference design ===== */
+body{
+    min-height:100vh;
+    padding:28px 18px;
+    background:linear-gradient(135deg,#36e88b 0%,#06c7e8 100%) !important;
+    align-items:center;
+    justify-content:center;
+}
+
+.card{
+    max-width:520px;
+    padding:28px 26px 26px;
+    border:0;
+    border-radius:30px;
+    background:rgba(250,255,255,.96);
+    box-shadow:0 20px 55px rgba(0,0,0,.18);
+}
+
+#dashboard{
+    overflow:visible;
+}
+
+.dashboard-topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:12px;
+}
+
+.topbar-right{
+    display:flex;
+    gap:10px;
+}
+
+.icon-btn{
+    width:52px;
+    height:52px;
+    border:0;
+    border-radius:16px;
+    background:#f8fbfb;
+    box-shadow:0 7px 18px rgba(0,0,0,.09);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+    cursor:pointer;
+    transition:transform .2s ease,box-shadow .2s ease;
+}
+
+.icon-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 22px rgba(0,0,0,.13);
+}
+
+#dashboard h2{
+    margin:4px 0 24px;
+    font-size:29px;
+    line-height:1.2;
+    font-weight:800;
+    text-align:center;
+    background:linear-gradient(90deg,#00a98f 0%,#e00082 70%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:none;
+}
+
+.wallet-box{
+    margin:0 0 20px;
+    padding:25px 24px 26px;
+    border-radius:24px;
+    text-align:center;
+    background:linear-gradient(135deg,#ff0750 0%,#ff9b87 100%);
+    box-shadow:0 12px 28px rgba(255,61,101,.22);
+}
+
+.wallet-box small{
+    display:block;
+    font-size:15px;
+    line-height:1.2;
+    font-weight:800;
+    letter-spacing:.4px;
+    text-transform:uppercase;
+}
+
+.wallet-val{
+    margin-top:8px;
+    font-size:40px;
+    line-height:1;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.dashboard-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.dashboard-actions .btn,
+.dashboard-actions .telegram-btn{
+    min-height:57px;
+    margin:0;
+    border-radius:17px;
+    font-size:15px;
+    font-weight:800;
+    box-shadow:0 7px 16px rgba(0,0,0,.12);
+}
+
+.dashboard-actions .btn::after,
+.dashboard-actions .telegram-btn::after{
+    display:none;
+}
+
+.btn-quiz{
+    background:linear-gradient(135deg,#ff0b45,#ff3157);
+}
+
+.btn-learning{
+    color:#fff;
+    background:linear-gradient(135deg,#08a98e,#2fe67b);
+}
+
+.btn-spin{
+    grid-column:1 / -1;
+    background:linear-gradient(135deg,#cfd5d7,#aeb8ba);
+    color:#fff;
+    opacity:1;
+}
+
+.btn-spin:disabled{
+    background:linear-gradient(135deg,#cfd5d7,#aeb8ba);
+    color:#fff;
+    opacity:1;
+    box-shadow:none;
+}
+
+.btn-reward{
+    margin-top:0;
+    background:linear-gradient(135deg,#ed008c,#7c2bc7);
+}
+
+.btn-bonus{
+    margin:0;
+    background:linear-gradient(135deg,#fa3d85,#ff5c61) !important;
+    color:#fff;
+}
+
+.btn-withdraw{
+    grid-column:1 / -1;
+    margin:0;
+    background:linear-gradient(135deg,#9d2b8e,#ff6b1b);
+}
+
+.telegram-btn{
+    grid-column:1 / -1;
+    background:linear-gradient(135deg,#1294cb,#08b3d5);
+}
+
+.telegram-icon{
+    width:20px;
+    height:20px;
+}
+
+.notification-card-hidden,
+.legacy-admin-btn{
+    display:none !important;
+}
+
+@media(max-width:560px){
+    body{
+        padding:14px 10px;
+    }
+    .card{
+        width:100%;
+        max-width:520px;
+        padding:22px 16px 20px;
+        border-radius:27px;
+    }
+    #dashboard h2{
+        font-size:25px;
+        margin-bottom:20px;
+    }
+    .icon-btn{
+        width:48px;
+        height:48px;
+        border-radius:14px;
+        font-size:23px;
+    }
+    .wallet-box{
+        padding:22px 16px 24px;
+        border-radius:21px;
+    }
+    .wallet-val{
+        font-size:34px;
+    }
+    .dashboard-actions{
+        gap:10px;
+    }
+    .dashboard-actions .btn,
+    .dashboard-actions .telegram-btn{
+        min-height:55px;
+        border-radius:16px;
+        font-size:13px;
+    }
+}
+
+@media(max-width:350px){
+    .dashboard-actions{
+        grid-template-columns:1fr;
+    }
+    .dashboard-actions .btn,
+    .dashboard-actions .telegram-btn{
+        grid-column:1 / -1;
+    }
+}
+
+body.dark{
+    background:linear-gradient(135deg,#111827 0%,#172554 100%) !important;
+}
+body.dark #dashboard .icon-btn{
+    background:#252525;
+    color:#fff;
+}
+body.dark #dashboard{
+    background:rgba(30,30,30,.97);
+}
+body.dark #dashboard h2{
+    background:linear-gradient(90deg,#36e0bd,#ff4db1);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+</style>
+
+<style id="notification-required-style">
+#notificationRequiredOverlay{
+    position:fixed;
+    inset:0;
+    z-index:999999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(5px);
+}
+#notificationRequiredBox{
+    width:min(430px,100%);
+    background:#fff;
+    color:#1f2937;
+    border-radius:22px;
+    padding:28px 22px;
+    text-align:center;
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+#notificationRequiredBox .nr-icon{
+    font-size:52px;
+    margin-bottom:8px;
+}
+#notificationRequiredBox h2{
+    margin:0 0 10px;
+    font-size:24px;
+}
+#notificationRequiredBox p{
+    margin:8px 0;
+    line-height:1.55;
+    color:#4b5563;
+}
+#requiredNotificationBtn{
+    width:100%;
+    border:0;
+    border-radius:13px;
+    padding:14px 18px;
+    margin-top:16px;
+    font-size:16px;
+    font-weight:700;
+    color:#fff;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    cursor:pointer;
+}
+#requiredNotificationBtn:disabled{
+    opacity:.7;
+    cursor:wait;
+}
+#notificationRequiredStatus{
+    min-height:22px;
+    margin-top:12px;
+    font-size:14px;
+    font-weight:600;
+}
+#notificationRequiredHelp{
+    display:none;
+    margin-top:12px;
+    padding:10px;
+    border-radius:10px;
+    background:#fff7ed;
+    color:#9a3412;
+    font-size:13px;
+}
+body.notification-locked{
+    overflow:hidden;
+    pointer-events:none;
+}
+body.notification-locked #notificationRequiredOverlay{
+    pointer-events:auto;
+}
+body.notification-locked #notificationRequiredOverlay button{
+    pointer-events:auto;
+}
+
+.tc-note {
+    width: 100%;
+    margin-top: 12px;
+    padding: 8px 12px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    color: #64748b;
+    font-size: 9px;
+    font-weight: 400;
+    line-height: 1.4;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.tc-note strong {
+    font-weight: 600;
+    color: #475569;
+}
+</style>
+
+
+<style id="block-rules-style">
+#blockRulesModal{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(4px)}
+#blockRulesModal.show{display:flex}.block-rules-box{width:min(620px,100%);max-height:88vh;overflow:auto;background:var(--card,#fff);color:var(--text,#111);border:1px solid var(--border,#ddd);border-radius:20px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.block-rules-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.block-rules-head h2{margin:0;font-size:22px}.block-rules-close{border:0;border-radius:10px;padding:8px 12px;cursor:pointer;font-size:18px;background:#ef4444;color:#fff}.block-rules-intro{line-height:1.6;margin:8px 0 14px}.block-rules-list{display:grid;gap:9px;padding:0;margin:0;list-style:none}.block-rules-list li{padding:11px 12px;border-radius:12px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.18);line-height:1.45}.block-rules-warning{margin-top:16px;padding:14px;border-radius:12px;background:rgba(245,158,11,.12);line-height:1.6}.block-rules-ok{margin-top:14px;text-align:center}.block-rules-ok .btn{min-width:160px}@media(max-width:520px){.block-rules-box{padding:17px;border-radius:16px}.block-rules-head h2{font-size:19px}}
+</style>
+
+<style id="aducate-modern-dashboard">
+:root{--ad-bg:#f5f7ff;--ad-surface:#fff;--ad-text:#111827;--ad-muted:#6b7280;--ad-primary:#5b5cf0;--ad-primary2:#7c3aed;--ad-border:#e7e9f2;--ad-shadow:0 18px 50px rgba(31,41,55,.10)}
+body{background:radial-gradient(circle at 10% 0%,#dfe7ff 0,transparent 30%),radial-gradient(circle at 100% 100%,#e9dcff 0,transparent 28%),#f5f7ff!important;color:var(--ad-text)}
+#dashboard.card{max-width:1120px;width:100%;padding:0;background:rgba(255,255,255,.96);border:1px solid rgba(255,255,255,.9);border-radius:28px;box-shadow:var(--ad-shadow);overflow:hidden}
+#dashboard .dashboard-topbar{padding:18px 24px 8px;display:flex;justify-content:space-between;align-items:center}
+#dashboard h2{margin:0;padding:0 24px 4px;text-align:left;font-size:30px;background:none;-webkit-text-fill-color:initial;color:#111827;animation:none}
+#dashboard .dashboard-actions{display:none}
+#dashboard .wallet-box{margin:18px 24px;padding:26px 28px;border-radius:24px;background:linear-gradient(135deg,#171a4a,#5b5cf0 58%,#8b5cf6);box-shadow:0 18px 35px rgba(91,92,240,.25);min-height:150px}
+#dashboard .wallet-box small{opacity:.8;font-size:13px}#dashboard .wallet-val{display:block;font-size:42px;font-weight:700;letter-spacing:-1px;margin-top:6px}
+.ad-welcome{padding:0 24px;color:var(--ad-muted);font-size:14px}.ad-main{padding:20px 24px 28px}.ad-section-title{display:flex;justify-content:space-between;align-items:center;margin:0 0 12px}.ad-section-title h3{font-size:18px}.ad-section-title span{font-size:12px;color:var(--ad-muted)}
+.ad-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:16px}.ad-card{background:#fff;border:1px solid var(--ad-border);border-radius:20px;padding:18px;box-shadow:0 8px 25px rgba(31,41,55,.05)}
+.ad-progress{height:9px;background:#eef0f7;border-radius:99px;overflow:hidden;margin:12px 0}.ad-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ad-primary),var(--ad-primary2));border-radius:99px;transition:width .4s}
+.ad-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.ad-stat{padding:14px;background:#f8f9ff;border-radius:16px}.ad-stat b{display:block;font-size:20px}.ad-stat small{color:var(--ad-muted);font-size:11px}
+.ad-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.ad-action{border:0;border-radius:16px;padding:15px 10px;background:#f6f7ff;color:#25283d;font-weight:600;cursor:pointer;transition:.2s}.ad-action:hover{transform:translateY(-2px);background:#eef0ff}.ad-action .ico{display:block;font-size:24px;margin-bottom:5px}
+.ad-course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.ad-course{border:1px solid var(--ad-border);border-radius:18px;padding:16px;cursor:pointer;background:linear-gradient(145deg,#fff,#f8f9ff)}.ad-course strong{display:block;margin-bottom:5px}.ad-course p{font-size:12px;color:var(--ad-muted);margin-bottom:12px}.ad-course button{border:0;border-radius:10px;padding:8px 11px;background:#111827;color:#fff;font-size:12px}
+.ad-challenge{display:flex;align-items:center;gap:16px}.ad-ring{width:78px;height:78px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--ad-primary) 0deg,#eceef7 0deg);flex:0 0 auto}.ad-ring:after{content:attr(data-label);width:58px;height:58px;border-radius:50%;background:white;display:grid;place-items:center;font-weight:700;font-size:13px}.ad-challenge h4{font-size:16px;margin-bottom:4px}.ad-challenge p{font-size:12px;color:var(--ad-muted)}
+.ad-days{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin-top:14px}.ad-day{height:28px;border-radius:8px;background:#f0f1f6;display:grid;place-items:center;font-size:10px;color:#777}.ad-day.done{background:#5b5cf0;color:#fff}.ad-day.today{outline:2px solid #8b5cf6;outline-offset:1px}
+.ad-bottom{display:none}.legacy-admin-btn,.tc-note{display:none!important}
+@media(max-width:780px){body{padding:0!important;align-items:flex-start!important}#dashboard.card{min-height:100vh;border-radius:0;max-width:none}.ad-grid{grid-template-columns:1fr}.ad-course-grid{grid-template-columns:1fr}.ad-actions{grid-template-columns:repeat(2,1fr)}.ad-stats{grid-template-columns:repeat(3,1fr)}#dashboard h2{font-size:25px}.ad-days{grid-template-columns:repeat(10,1fr)}#dashboard .wallet-val{font-size:36px}}
+@media(max-width:420px){#dashboard .dashboard-topbar,#dashboard h2,#dashboard .wallet-box,.ad-welcome,.ad-main{margin-left:0;margin-right:0}#dashboard .dashboard-topbar{padding-left:16px;padding-right:16px}#dashboard h2{padding-left:16px}.ad-welcome{padding:0 16px}.ad-main{padding:18px 16px 24px}.ad-actions{gap:8px}.ad-action{padding:13px 7px}.ad-days{gap:4px}.ad-day{height:25px;font-size:9px}}
+</style>
+
+<style id="aducate-book-dashboard-style">
+.ad-book-card{background:linear-gradient(135deg,#ffffff,#f5f3ff)!important;border:1px solid #e9ddff!important}.ad-book-cover{width:72px;height:98px;border-radius:7px;background:linear-gradient(160deg,#fff,#eef2ff);box-shadow:0 10px 22px rgba(76,29,149,.16);display:grid;place-items:center;text-align:center;padding:7px;color:#312e81;font-weight:900;font-size:10px;line-height:1.2;flex:0 0 auto}.ad-book-price{font-size:22px;font-weight:900;color:#6d28d9}.ad-book-buy{border:0;border-radius:12px;padding:11px 16px;background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;font-weight:800;cursor:pointer;box-shadow:0 8px 18px rgba(109,40,217,.2)}.ad-book-buy:hover{transform:translateY(-1px)}
+</style>
+
+<style id="aducate-logo-dashboard-style">
+.ad-topbar-brand{display:flex;align-items:center;gap:9px;color:#fff;font-weight:900;font-size:17px;letter-spacing:.3px}
+.ad-topbar-brand img{width:42px;height:42px;border-radius:12px;object-fit:cover;background:#fff;padding:2px;box-shadow:0 5px 15px rgba(0,0,0,.18)}
+.kbc-orb{overflow:hidden!important;background:#fff!important;padding:2px!important}
+.kbc-orb img{width:100%;height:100%;display:block;object-fit:cover;border-radius:50%}
+@media(max-width:420px){.ad-topbar-brand span{display:none}.ad-topbar-brand img{width:40px;height:40px}}
+</style>
+<style id="aducate-colorful-dashboard">
+:root{--ad-primary:#5b5cf0;--ad-primary2:#ec4899;--ad-border:#e9e7f4}
+body{background:linear-gradient(135deg,#eef2ff 0%,#fff1f7 48%,#ecfeff 100%)!important}
+#dashboard.card{background:rgba(255,255,255,.97);box-shadow:0 24px 70px rgba(76,29,149,.16)}
+#dashboard .dashboard-topbar{background:linear-gradient(90deg,#5b5cf0,#7c3aed,#ec4899);padding-top:18px;padding-bottom:14px}
+#dashboard .dashboard-topbar .icon-btn{background:rgba(255,255,255,.18)!important;color:#fff!important;border-color:rgba(255,255,255,.3)!important;backdrop-filter:blur(8px)}
+#dashboard h2{padding-top:18px;font-weight:900;background:linear-gradient(90deg,#4338ca,#db2777);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.ad-welcome{font-weight:600}
+#dashboard .wallet-box{background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 45%,#ec4899 100%);box-shadow:0 20px 40px rgba(124,58,237,.28)}
+.ad-card{border:0;box-shadow:0 10px 30px rgba(76,29,149,.08);background:linear-gradient(145deg,#fff,#faf8ff)}
+.ad-section-title h3{font-weight:900}
+.ad-progress{background:#ece9ff}.ad-progress i{background:linear-gradient(90deg,#06b6d4,#6366f1,#ec4899)}
+.ad-stat{border:0;box-shadow:inset 0 0 0 1px rgba(99,102,241,.08)}
+.ad-stat:nth-child(1){background:linear-gradient(145deg,#ecfeff,#cffafe)}
+.ad-stat:nth-child(2){background:linear-gradient(145deg,#fff7ed,#ffedd5)}
+.ad-stat:nth-child(3){background:linear-gradient(145deg,#fdf4ff,#fae8ff)}
+.ad-action{color:#fff;box-shadow:0 9px 20px rgba(0,0,0,.08);border:0}
+.ad-action:nth-child(1){background:linear-gradient(135deg,#06b6d4,#2563eb)}
+.ad-action:nth-child(2){background:linear-gradient(135deg,#8b5cf6,#ec4899)}
+.ad-action:nth-child(3){background:linear-gradient(135deg,#f97316,#ef4444)}
+.ad-action:nth-child(4){background:linear-gradient(135deg,#10b981,#059669)}
+.ad-action:hover{filter:brightness(1.05);transform:translateY(-3px);color:#fff}
+.ad-course{border:0;box-shadow:0 10px 24px rgba(31,41,55,.07);color:#fff;overflow:hidden;position:relative}
+.ad-course:nth-child(1){background:linear-gradient(135deg,#14b8a6,#0ea5e9)}
+.ad-course:nth-child(2){background:linear-gradient(135deg,#6366f1,#8b5cf6)}
+.ad-course:nth-child(3){background:linear-gradient(135deg,#f59e0b,#ec4899)}
+.ad-course p{color:rgba(255,255,255,.88)}.ad-course button{background:rgba(255,255,255,.95);color:#312e81}
+.ad-challenge{background:linear-gradient(135deg,#fff7ed,#fdf2f8);border-radius:18px;padding:14px}
+.ad-ring{background:conic-gradient(#f97316 0deg,#fce7f3 0deg)}
+.ad-addon-grid .ad-addon-card{border:0;color:#fff;box-shadow:0 10px 24px rgba(31,41,55,.09)}
+.ad-addon-grid .ad-addon-card:nth-child(1){background:linear-gradient(135deg,#f59e0b,#f97316)}
+.ad-addon-grid .ad-addon-card:nth-child(2){background:linear-gradient(135deg,#10b981,#06b6d4)}
+.ad-addon-grid .ad-addon-card:nth-child(3){background:linear-gradient(135deg,#6366f1,#8b5cf6)}
+.ad-addon-grid .ad-addon-card:nth-child(4){background:linear-gradient(135deg,#ef4444,#ec4899)}
+.ad-addon-card small{color:rgba(255,255,255,.88)!important}.ad-addon-card>b{color:#fff!important}.ad-addon-icon{background:rgba(255,255,255,.2);color:#fff}
+.ad-book-card{background:linear-gradient(135deg,#fff,#f0f9ff,#faf5ff)!important;border:0!important;box-shadow:0 12px 30px rgba(37,99,235,.10)!important}
+.ad-book-price{background:linear-gradient(90deg,#2563eb,#db2777);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.ad-days .ad-day{background:#ede9fe;color:#6d28d9}.ad-days .ad-day.done{background:linear-gradient(135deg,#6366f1,#ec4899)}.ad-days .ad-day.today{outline-color:#f97316}
+@media(max-width:780px){#dashboard .dashboard-topbar{padding:14px 16px}.ad-action{min-height:82px}.ad-course{min-height:125px}}
+</style>
+
+</head>
+
+<body>
+
+<!-- Mandatory notification gate: no dashboard option can be used until notifications are enabled -->
+<div id="notificationRequiredOverlay" role="dialog" aria-modal="true" aria-labelledby="notificationGateTitle">
+  <div id="notificationRequiredBox">
+    <div class="nr-icon">🔔</div>
+    <h2 id="notificationGateTitle">App Notifications Enable કરો</h2>
+    <p>Admin તરફથી notification મેળવવા અને Dashboard ના કોઈપણ option નો ઉપયોગ કરવા માટે પહેલા Notifications <b>Allow</b> કરવી જરૂરી છે.</p>
+    <button id="requiredNotificationBtn" type="button" onclick="enableRequiredNotifications()">🔔 Enable App Notifications</button>
+    <div id="notificationRequiredStatus"></div>
+    <div id="notificationRequiredHelp">
+      Browser માં notifications Block છે. Site settings ખોલીને <b>Notifications → Allow</b> કરો અને પછી page reload કરો.
+    </div>
+  </div>
+</div>
+
+
+
+
+
+    <div id="dashboard" class="card" aria-hidden="true" style="visibility:hidden;">
+        <div class="dashboard-topbar">
+            <div class="ad-topbar-brand"><img src="/icon-192.png" alt="Aducate Logo"><span>Aducate</span></div>
+            <div class="topbar-right">
+                <button id="themeBtn" class="icon-btn" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle theme">🌙</button>
+                <button class="icon-btn" onclick="location.href='profile.html'" aria-label="Profile" title="Profile">👤</button>
+                <button class="icon-btn" onclick="location.href='admin.html'" aria-label="Admin" title="Admin">⚙️</button>
+            </div>
+        </div>
+
+        <h2>Welcome back 👋</h2>
+        <div class="ad-welcome" id="adWelcome">ચાલો આજે થોડું English practice કરીએ અને તમારું learning streak વધારીએ.</div>
+
+        <div class="wallet-box">
+            <small>Total Balance</small>
+            <span class="wallet-val">₹<span id="wallet">0.00</span></span>
+        </div>
+
+        <div class="ad-main">
+            <div class="ad-section-title"><h3>📈 Your Learning</h3><span id="adLevelText">Level 1</span></div>
+            <div class="ad-card" style="margin-bottom:16px">
+                <div style="display:flex;justify-content:space-between;gap:10px"><strong>English progress</strong><strong id="adProgressText">0%</strong></div>
+                <div class="ad-progress"><i id="adProgressBar"></i></div>
+                <div class="ad-stats">
+                    <div class="ad-stat"><b id="adQuestions">0</b><small>Questions</small></div>
+                    <div class="ad-stat"><b id="adStreak">0</b><small>Day streak</small></div>
+                    <div class="ad-stat"><b id="adXp">0</b><small>XP</small></div>
+                </div>
+            </div>
+
+            <div class="ad-section-title"><h3>⚡ Quick Practice</h3><span>Choose an activity</span></div>
+            <div class="ad-actions" style="margin-bottom:18px">
+                <button class="ad-action" onclick="showScreen('quiz')"><span class="ico">📝</span>Quiz</button>
+                <button class="ad-action" onclick="showScreen('activities')"><span class="ico">🎮</span>Practice</button>
+                <button class="ad-action" onclick="openAddonsCenter()"><span class="ico">🔥</span>Challenge</button>
+                <button class="ad-action" onclick="location.href='profile.html'"><span class="ico">👤</span>Profile</button>
+            </div>
+
+            <div class="ad-section-title"><h3>🚀 Add-ons</h3><span>Extra rewards & support</span></div>
+            <div class="ad-addon-grid" style="margin-bottom:18px">
+                <button class="ad-addon-card" type="button" onclick="openAducateAddons()"><span class="ad-addon-icon">🎁</span><span><strong>Rewards & Coupons</strong><small>Redeem coupons, check rewards</small></span><b>›</b></button>
+                <button class="ad-addon-card" type="button" onclick="openAducateAddons('referral')"><span class="ad-addon-icon">👥</span><span><strong>Refer & Earn</strong><small>Share your referral code</small></span><b>›</b></button>
+                <button class="ad-addon-card" type="button" onclick="openAducateAddons('support')"><span class="ad-addon-icon">💬</span><span><strong>Help & Support</strong><small>Create a support ticket</small></span><b>›</b></button>
+                <button class="ad-addon-card" type="button" onclick="openAducateAddons('challenge')"><span class="ad-addon-icon">🔥</span><span><strong>Daily Challenge</strong><small>Complete 10 activities & claim ₹1</small></span><b>›</b></button>
+            </div>
+
+            <div class="ad-card ad-book-card" style="margin-bottom:18px;position:relative;overflow:hidden;">
+                <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                    <div class="ad-book-cover">COMPLETE<br>ENGLISH<br>ALL-IN-ONE</div>
+                    <div style="flex:1;min-width:210px;">
+                        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
+                            <h3 style="margin:0">📖 Aducate English Book</h3><span class="ad-book-price">₹499</span>
+                        </div>
+                        <p style="color:var(--ad-muted);font-size:12px;margin:6px 0 12px;line-height:1.6">Grammar, vocabulary, speaking practice and everyday English in one complete book.</p>
+                        <button type="button" class="ad-book-buy" onclick="openBookPurchase()">🛒 Purchase Book</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ad-grid">
+                <div>
+                    <div class="ad-section-title"><h3>📚 Learning Paths</h3><span>Learn at your level</span></div>
+                    <div class="ad-course-grid">
+                        <div class="ad-course" onclick="showScreen('activities')"><strong>🌱 Beginner</strong><p>Basic sentences, vocabulary & everyday English.</p><button>Start learning</button></div>
+                        <div class="ad-course" onclick="showScreen('activities')"><strong>🚀 Intermediate</strong><p>Grammar, sentence building & confidence.</p><button>Continue</button></div>
+                        <div class="ad-course" onclick="showScreen('quiz')"><strong>🏆 Advanced</strong><p>Challenge yourself with quiz & mixed practice.</p><button>Take challenge</button></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="ad-section-title"><h3>🔥 30-Day Challenge</h3><span id="adChallengeLabel">Day 1</span></div>
+                    <div class="ad-card">
+                        <div class="ad-challenge"><div class="ad-ring" id="adRing" data-label="0/10"></div><div><h4>Today's English mission</h4><p id="adChallengeText">Answer 10 quiz questions to finish today's mission.</p></div></div>
+                        <div class="ad-challenge" style="margin-top:10px;background:linear-gradient(135deg,#eff6ff,#ecfeff)"><div class="ad-ring" id="adActivityRing" data-label="0"></div><div><h4>Today's Activities</h4><p id="adActivityText">0 activities completed today.</p></div></div>
+                        <div class="ad-days" id="adDays"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-actions">
+            <button class="btn btn-quiz" onclick="showScreen('quiz')">📚 Quiz</button>
+            <button class="btn btn-learning" type="button" onclick="showScreen('activities')">🎮 Learning</button>
+
+            <button id="spinBtn" class="btn btn-spin" onclick="spinWheel()" disabled>🔒 Spin Wheel — Complete 100 Questions</button>
+
+            <button class="btn btn-reward" onclick="claimDailyReward()">🎁 Reward</button>
+            <button class="btn btn-bonus" onclick="claimBonus()">⚡ ₹500 Bonus</button>
+            <button class="btn btn-learning" type="button" onclick="openBlockRules()">ℹ️ Student Guidelines</button>
+
+            <button id="withdrawBtn" class="btn btn-withdraw" onclick="openWithdrawPopup()" disabled>💰 Withdraw<span>(Min ₹1000)</span></button>
+
+            
+
+            <a href="https://t.me/+blPfoyArs0U1NmI1" target="_blank" rel="noopener noreferrer" class="telegram-btn">
+                <svg class="telegram-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M21.5 3.5L18.3 20c-.24 1.17-.88 1.46-1.79.91l-4.91-3.62-2.37 2.28c-.26.26-.48.48-.99.48l.35-5.01 9.12-8.24c.4-.35-.09-.55-.62-.2L6.04 13.72l-4.82-1.51c-1.05-.33-1.07-1.05.22-1.55L20.27 3.02c.89-.33 1.67.21 1.23.48z"/>
+                </svg>
+                Join Telegram
+            </a>
+
+            <!-- Small T&C Note -->
+            
+            
+            <a href="https://englishlabsurat.vercel.app/"
+            style="display:inline-block;width:5px;height:5px;color:transparent;text-decoration:none;">
+            •
+        </a>
+    </span>
+    
+    <!-- Kept in the DOM so existing notification functionality continues to work. -->
+    <div id="studentNotificationCard" class="notification-card-hidden">
+        <div id="studentNotificationText">Admin તરફથી આવતા important messages તમને મળી શકે તે માટે Notifications ચાલુ કરો.</div>
+        <button id="studentEnableNotificationBtn" type="button" onclick="enableStudentNotifications()">🔔 Enable App Notifications</button>
+    </div>
+    
+    <!-- Existing admin/profile functionality is now available from the top-right icons. -->
+    <button class="btn btn-Admin legacy-admin-btn" onclick="location.href='admin.html'">👤 Admin</button>
+</div>
+<div class="tc-note">
+    <strong>Note:</strong>
+    This app is only for educational purposes. All rights reserved to the respective owners.
+</div>
+
+    </div>
+
+<div id="blockRulesModal" role="dialog" aria-modal="true" aria-labelledby="blockRulesTitle">
+  <div class="block-rules-box">
+    <div class="block-rules-head"><h2 id="blockRulesTitle">ℹ️ Student Guidelines</h2><button class="block-rules-close" type="button" onclick="closeBlockRules()">✕</button></div>
+    <p class="block-rules-intro">વિદ્યાર્થી માટે સામાન્ય ઉપયોગની માર્ગદર્શિકા. Automatic cheating block system હવે લાગુ નથી.</p>
+    <ul class="block-rules-list">
+      <li>❌ Quiz અથવા Activity દરમિયાન બીજી Tab/Website પર જવું નહીં.</li>
+      <li>❌ Google અથવા અન્ય Website પરથી Answer શોધવાનો પ્રયત્ન નહીં.</li>
+      <li>❌ બીજા source માંથી Answer Copy-Paste નહીં.</li>
+      <li>❌ પ્રશ્ન, જવાબ અથવા App system સાથે ગેરરીતે ચેડાં નહીં.</li>
+      <li>❌ Wallet માં ખોટી રીતે પૈસા/points વધારવાનો પ્રયત્ન નહીં.</li>
+      <li>❌ વારંવાર Try Again અથવા system નો misuse કરીને cheating નહીં.</li>
+      <li>❌ App ની Security bypass કરવાનો પ્રયત્ન નહીં.</li>
+      <li>❌ વારંવાર Warning મળ્યા પછી પણ નિયમો તોડવા નહીં.</li>
+    </ul>
+    <div class="block-rules-warning"><b>⚠️ મહત્વપૂર્ણ:</b><br>આ app માં automatic cheating block/penalty system હવે લાગુ નથી.</div>
+    <div class="block-rules-ok"><button class="btn" type="button" onclick="closeBlockRules()">સમજાયું ✓</button></div>
+  </div>
+</div>
+
+    <div id="activities" class="card hidden" aria-hidden="true" style="visibility:hidden;">
+<div id="activityWalletBar" class="activity-wallet-bar">
+    <span>💰 Wallet Balance</span>
+    <strong id="activityWalletBalance">₹0.00</strong>
+</div>
+
+<h2 class="activity-title">🎮 English Earning Zone</h2>
+<p style="text-align:center;color:#64748b;margin-bottom:8px">Learn English, complete tasks and earn points.</p>
+<div class="activity-grid">
+<button type="button" class="activity-btn a1" onclick="openActivity('arrange')">🔀 Arrange Sentence<small>+10 points</small></button>
+<button type="button" class="activity-btn a2" onclick="openActivity('fill')">🧩 Fill Blank<small>+10 points</small></button>
+<button type="button" class="activity-btn a3" onclick="openActivity('correction')">🛠️ Fix Sentence<small>+15 points</small></button>
+<button type="button" class="activity-btn a4" onclick="openActivity('translate')">🔄 Translate<small>+15 points</small></button>
+<button type="button" class="activity-btn a5" onclick="openActivity('word')">🔤 Word Builder<small>+5 points</small></button>
+<button type="button" class="activity-btn a6" onclick="openActivity('listening')">🎧 Listen & Type<small>+15 points</small></button>
+<button type="button" class="activity-btn a7" onclick="openActivity('speaking')">🎤 Speak & Earn<small>+20 points</small></button>
+<button type="button" class="activity-btn a8" onclick="openActivity('reading')">📖 Reading<small>+15 points</small></button>
+</div>
+<button class="btn" style="background:#374151;margin-top:16px" onclick="showScreen('dashboard')">Back to Dashboard</button>
+</div>
+
+<div id="activityPlay" class="card hidden activity-screen" aria-hidden="true" style="visibility:hidden;">
+<div id="activityWalletBar" class="activity-wallet-bar">
+    <span>💰 Wallet Balance</span>
+    <strong id="activityWalletBalance">₹0.00</strong>
+</div>
+
+<div class="activity-title" id="activityName">Activity</div>
+<div class="activity-reward" id="activityMeta">Earn points</div>
+<div id="activityContent"></div>
+<div class="activity-feedback" id="activityFeedback"></div>
+<button class="btn" style="background:#374151" type="button" onclick="showScreen('activities')">Back to Activities</button>
+</div>
+
+<div id="quiz" class="card hidden kbc-quiz-screen" aria-hidden="true" style="visibility:hidden;">
+    <div class="kbc-shell">
+        <div>
+            <div class="kbc-topbar">
+                <div class="kbc-brand"><span class="kbc-orb"><img src="/icon-192.png" alt="Aducate Logo"></span><span>Aducate Quiz Master</span></div>
+                <div class="kbc-balance">Wallet ₹<span id="quizWallet">0.00</span></div>
+            </div>
+
+            <div class="kbc-progress">
+                <span class="kbc-dot"></span>
+                <span>QUESTION JOURNEY</span> 
+                <span>•</span>
+                <span><b id="remainingQuestions">100</b> QUESTIONS LEFT</span>
+            </div>
+
+            <div class="kbc-lifelines" aria-label="Quiz Lifelines">
+                <button id="lifeline5050" class="kbc-lifeline" type="button" onclick="useLifeline('fiftyFifty')">50:50<span>બે ખોટા જવાબ દૂર</span></button>
+                <button id="lifelineAudience" class="kbc-lifeline" type="button" onclick="useLifeline('audiencePoll')">AUDIENCE<span>Audience Poll</span></button>
+                <button id="lifelineExpert" class="kbc-lifeline" type="button" onclick="useLifeline('askExpert')">EXPERT<span>Ask Expert</span></button>
+                <button id="lifelineSkip" class="kbc-lifeline" type="button" onclick="useLifeline('skipQuestion')">SKIP<span>Question બદલો</span></button>
+            </div>
+            <div id="lifelineCycleNote" class="kbc-cycle-note">4 Lifelines • 500 questions પછી ફરી reset</div>
+
+            <div class="kbc-question-wrap">
+                <div class="kbc-question-no" id="questionCycleLabel">Q COUNT • 1 / 500</div>
+                <div class="kbc-question-title">Q COUNT એટલે આ 500-question cycle માં હાલના પ્રશ્નનો નંબર.</div>
+                <h3 id="question">Loading...</h3>
+                <div id="options"></div>
+            </div>
+        </div>
+
+        <div class="kbc-footer">
+            <div class="kbc-tip">💡 સવાલ ધ્યાનથી વાંચો અને પછી જવાબ પસંદ કરો.</div>
+            <button class="btn kbc-back" onclick="showScreen('dashboard')">← Dashboard</button>
+        </div>
+        <p id="message" style="display:none;">Quiz</p>
+    </div>
+</div>
+
+    <script>
+        // ==========================================
+        // MOBILE PUSH NOTIFICATIONS
+        // ==========================================
+        function urlBase64ToUint8Array(base64String) {
+            const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+            const base64 = (base64String + padding)
+                .replace(/-/g, "+")
+                .replace(/_/g, "/");
+            const rawData = window.atob(base64);
+            return Uint8Array.from([...rawData].map(char => char.charCodeAt(0)));
+        }
+
+
+        async function enableNotifications() {
+            return setupNotifications(true);
+        }
+
+        async function setupNotifications(fromUserClick = false) {
+            const button = document.getElementById("notificationBtn");
+            const requiredButton = document.getElementById("requiredNotificationBtn");
+            const status = document.getElementById("notificationRequiredStatus");
+            const help = document.getElementById("notificationRequiredHelp");
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                location.href = "login.html";
+                return false;
+            }
+
+            if (
+                !("Notification" in window) ||
+                !("serviceWorker" in navigator) ||
+                !("PushManager" in window)
+            ) {
+                status.innerText = "❌ આ browser Web Push support કરતું નથી.";
+                return false;
+            }
+
+            if (!window.isSecureContext) {
+                status.innerText = "❌ App Notifications માટે HTTPS જરૂરી છે.";
+                return false;
+            }
+
+            try {
+                if (button) {
+                    button.disabled = true;
+                    button.innerText = "⏳ Enabling...";
+                }
+                if (requiredButton) {
+                    requiredButton.disabled = true;
+                    requiredButton.innerText = "⏳ Enabling...";
+                }
+                if (status) status.innerText = "App Notification permission ચેક થઈ રહ્યું છે...";
+                if (help) help.style.display = "none";
+
+                let permission = Notification.permission;
+
+                // Browser permission prompt must be triggered by a user gesture.
+                if (permission !== "granted") {
+                    if (permission === "denied") {
+                        throw new Error("NOTIFICATION_BLOCKED");
+                    }
+                    permission = await Notification.requestPermission();
+                }
+
+                if (permission !== "granted") {
+                    throw new Error("NOTIFICATION_NOT_ALLOWED");
+                }
+
+                const registration = await navigator.serviceWorker.register("/sw.js", {
+                    scope: "/"
+                });
+                await navigator.serviceWorker.ready;
+
+                const keyResponse = await fetch("/api/notifications/vapid-public-key", {
+                    headers: { Authorization: "Bearer " + token }
+                });
+                const keyData = await keyResponse.json();
+
+                if (!keyResponse.ok || !keyData.success || !keyData.publicKey) {
+                    throw new Error(keyData.message || "VAPID public key not available");
+                }
+
+                let subscription = await registration.pushManager.getSubscription();
+
+                if (!subscription) {
+                    subscription = await registration.pushManager.subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey: urlBase64ToUint8Array(keyData.publicKey)
+                    });
+                }
+
+                const saveResponse = await fetch("/api/notifications/subscribe", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer " + token
+                    },
+                    body: JSON.stringify(subscription.toJSON())
+                });
+
+                const saveData = await saveResponse.json();
+
+                if (!saveResponse.ok || !saveData.success) {
+                    throw new Error(saveData.message || "Subscription save failed");
+                }
+
+                if (button) {
+                    button.disabled = false;
+                    button.innerText = "✅ App Notifications Enabled";
+                    button.style.background = "linear-gradient(135deg,#16a34a,#059669)";
+                }
+
+                hideNotificationRequired();
+
+                if (status) status.innerText = "✅ App Notifications Enabled";
+                return true;
+
+            } catch (error) {
+                console.error("Notification setup error:", error);
+
+                if (button) {
+                    button.disabled = false;
+                    button.innerText = "🔔 Enable App Notifications";
+                }
+                if (requiredButton) {
+                    requiredButton.disabled = false;
+                    requiredButton.innerText = "🔔 Enable App Notifications";
+                }
+
+                if (error.message === "NOTIFICATION_BLOCKED") {
+                    if (status) status.innerText = "❌ Notifications browserમાં Block છે.";
+                    if (help) help.style.display = "block";
+                } else if (error.message === "NOTIFICATION_NOT_ALLOWED") {
+                    if (status) status.innerText = "⚠️ Allow દબાવવું જરૂરી છે.";
+                } else {
+                    if (status) status.innerText = "❌ " + error.message;
+                }
+
+                return false;
+            }
+        }
+
+        function showNotificationRequired() {
+            const overlay = document.getElementById("notificationRequiredOverlay");
+            const dashboard = document.getElementById("dashboard");
+            const quiz = document.getElementById("quiz");
+            if (overlay) overlay.style.display = "flex";
+            if (dashboard) { dashboard.style.visibility = "hidden"; dashboard.setAttribute("aria-hidden", "true"); }
+            if (quiz) { quiz.style.visibility = "hidden"; quiz.setAttribute("aria-hidden", "true"); }
+            document.body.classList.add("notification-locked");
+        }
+
+        function hideNotificationRequired() {
+            const overlay = document.getElementById("notificationRequiredOverlay");
+            const dashboard = document.getElementById("dashboard");
+            const quiz = document.getElementById("quiz");
+            if (overlay) overlay.style.display = "none";
+            if (dashboard) { dashboard.style.visibility = "visible"; dashboard.setAttribute("aria-hidden", "false"); }
+            if (quiz) { quiz.style.visibility = "visible"; quiz.setAttribute("aria-hidden", "false"); }
+            document.body.classList.remove("notification-locked");
+        }
+
+        async function enableRequiredNotifications() {
+            const ok = await setupNotifications(true);
+            if (ok) hideNotificationRequired();
+        }
+
+        async function checkNotificationStatus() {
+            const button = document.getElementById("notificationBtn");
+
+            if (
+                !("Notification" in window) ||
+                !("serviceWorker" in navigator) ||
+                !("PushManager" in window)
+            ) {
+                showNotificationRequired();
+                return false;
+            }
+
+            try {
+                const registration = await navigator.serviceWorker.getRegistration("/");
+                const subscription = registration
+                    ? await registration.pushManager.getSubscription()
+                    : null;
+
+                if (subscription && Notification.permission === "granted") {
+                    if (button) {
+                        button.innerText = "✅ App Notifications Enabled";
+                        button.style.background = "linear-gradient(135deg,#16a34a,#059669)";
+                    }
+                    hideNotificationRequired();
+                    return true;
+                }
+
+                // If permission was granted but subscription is missing, repair it.
+                if (Notification.permission === "granted") {
+                    return await setupNotifications(false);
+                }
+
+                showNotificationRequired();
+                return false;
+
+            } catch (error) {
+                console.log("Notification status check:", error);
+                showNotificationRequired();
+                return false;
+            }
+        }
+
+        // Student must enable notifications before using the dashboard.
+        window.addEventListener("DOMContentLoaded", function () {
+            showNotificationRequired();
+        });
+
+        window.addEventListener("load", function () {
+            checkNotificationStatus();
+        });
+
+        // =====================
+        // SECURITY TRACKING
+        // =====================
+        function getSecurityDeviceId() {
+            let id = localStorage.getItem("securityDeviceId");
+            if (!id) {
+                id = "dev-" + (crypto.randomUUID ? crypto.randomUUID() : Date.now() + "-" + Math.random().toString(36).slice(2));
+                localStorage.setItem("securityDeviceId", id);
+            }
+            return id;
+        }
+
+        async function recordSecurityEvent(type) {
+            try {
+                await fetch("/api/auth/security-event", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer " + localStorage.getItem("token")
+                    },
+                    body: JSON.stringify({ type, deviceId: getSecurityDeviceId() })
+                });
+            } catch (e) {
+                console.warn("Security event was not recorded:", e);
+            }
+        }
+
+        // Register this browser/device once after login.
+        if (localStorage.getItem("token")) recordSecurityEvent("device");
+
+        // =====================
+        // Anti Cheating
+        // =====================
+        // Automatic warning/block enforcement has been removed.
+        // Security event logging remains available for diagnostics/admin reporting.
+        let alreadyBlocked = false;
+        let warningMode = false;
+
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            window.location.href = "login.html";
+        }
+
+        // ===============================
+        // STUDENT ONLINE PRESENCE
+        // Active tab = Online. Hidden tab = Offline.
+        // Heartbeat about every 1 second; server timeout = 7 seconds.
+        // ===============================
+
+        let presenceTimer = null;
+        let presenceInFlight = false;
+        let presenceAbort = null;
+        let lastHeartbeatAt = 0;
+        // sessionStorage gives every browser tab its own stable presence id.
+        const presenceId = sessionStorage.getItem("presenceTabId") || (
+            (crypto.randomUUID ? crypto.randomUUID() : (Date.now() + "-" + Math.random()))
+        );
+        sessionStorage.setItem("presenceTabId", presenceId);
+
+        async function sendPresenceHeartbeat() {
+            if (!token || document.hidden || presenceInFlight) return;
+            const cachedUser = JSON.parse(localStorage.getItem("user") || "{}");
+            // Permanent-block sessions are only for the ₹200 subscription gate.
+            // Do not heartbeat them because normal student presence APIs reject
+            // permanently blocked accounts.
+            if (cachedUser && cachedUser.permanentBlocked === true) return;
+
+            presenceInFlight = true;
+            presenceAbort = new AbortController();
+            // Allow normal Mongo/network/serverless latency. Keep the request alive
+            // long enough so normal Vercel/Render cold starts do not cause
+            // false Offline states.
+            const timeout = setTimeout(() => presenceAbort.abort(), 5000);
+
+            try {
+                const res = await fetch("/api/auth/heartbeat", {
+                    method: "POST",
+                    headers: { "Authorization": "Bearer " + token, "X-Presence-Id": presenceId },
+                    cache: "no-store",
+                    signal: presenceAbort.signal
+                });
+
+                if (res.ok) {
+                    lastHeartbeatAt = Date.now();
+                }
+
+                if (res.status === 401) {
+                    const data = await res.json().catch(() => ({}));
+                    const cachedUser = JSON.parse(localStorage.getItem("user") || "{}");
+                    if (cachedUser && cachedUser.permanentBlocked === true) return;
+                    stopPresence();
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("user");
+                    alert(data.message || "Your session was ended. Please login again.");
+                    window.location.replace("login.html");
+                    return;
+                }
+            } catch (error) {
+                // A single missed heartbeat is okay. The next 1-second heartbeat retries.
+            } finally {
+                clearTimeout(timeout);
+                presenceAbort = null;
+                presenceInFlight = false;
+            }
+        }
+
+        function stopPresence() {
+            if (presenceTimer) {
+                clearInterval(presenceTimer);
+                presenceTimer = null;
+            }
+            if (presenceAbort) {
+                try { presenceAbort.abort(); } catch (_) {}
+                presenceAbort = null;
+            }
+        }
+
+        function startPresence() {
+            if (!token || document.hidden) return;
+            stopPresence();
+            sendPresenceHeartbeat();
+            presenceTimer = setInterval(sendPresenceHeartbeat, 1000);
+        }
+
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+                // Stop heartbeats. Do NOT force an immediate DB offline write here.
+                // The server's 7-second lastSeen timeout is the single source of truth.
+                stopPresence();
+            } else {
+                // Coming back to this tab: send heartbeat immediately.
+                startPresence();
+            }
+        });
+
+        window.addEventListener("pagehide", () => {
+            // Do not mark offline immediately. The admin/server decides Offline
+            // only after 7 seconds without a heartbeat. This prevents a real
+            // active student from being shown Offline during tab/page changes.
+            stopPresence();
+        });
+
+        // Initial state
+        if (!document.hidden) startPresence();
+
+        let wallet = 0;
+
+        let totalEarn = 0;
+
+        let quizReward = 0;
+
+        let dailyReward = 0;
+
+        let spinReward = 0;
+
+        // Daily quiz progress: 100 answered questions are required for Spin.
+        let dailyQuestionsAnswered = 0;
+        let dailyQuestionsDate = "";
+        let totalQuestionsAnswered = 0;
+
+        let lastClaim = "";
+
+        let lastSpin = "";
+
+        // let spinCount = Number(localStorage.getItem("spinCount")) || 0;
+        // let lastSpinDate = localStorage.getItem("lastSpinDate") || "";
+
+        let quizData = [];
+        let currentQuizQuestion = null;
+        let lifelines = { fiftyFifty: true, audiencePoll: true, askExpert: true, skipQuestion: true };
+        let lifelineBusy = false;
+
+        async function syncLifelines(data) {
+            if (data && data.lifelines) {
+                lifelines = {
+                    fiftyFifty: data.lifelines.fiftyFifty !== false,
+                    audiencePoll: data.lifelines.audiencePoll !== false,
+                    askExpert: data.lifelines.askExpert !== false,
+                    skipQuestion: data.lifelines.skipQuestion !== false
+                };
+            }
+            updateLifelineUI();
+        }
+
+        function updateLifelineUI() {
+            const map = {
+                fiftyFifty: 'lifeline5050',
+                audiencePoll: 'lifelineAudience',
+                askExpert: 'lifelineExpert',
+                skipQuestion: 'lifelineSkip'
+            };
+            Object.keys(map).forEach(k => {
+                const el = document.getElementById(map[k]);
+                if (!el) return;
+                const available = lifelines[k] !== false;
+                el.disabled = !available || lifelineBusy;
+                el.classList.toggle('used', !available);
+            });
+            const note = document.getElementById('lifelineCycleNote');
+            if (note) note.textContent = `4 Lifelines • 500 questions પછી ફરી reset • Used: ${Object.values(lifelines).filter(v => !v).length}/4`;
+        }
+
+        function qIdForLifeline() {
+            return currentQuizQuestion?._id || currentQuizQuestion?.id || null;
+        }
+
+        async function useLifeline(type) {
+            if (lifelineBusy || !currentQuizQuestion || lifelines[type] === false) return;
+            lifelineBusy = true;
+            updateLifelineUI();
+            try {
+                const res = await fetch('/api/wallet/lifeline', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: 'Bearer ' + (localStorage.getItem('token') || '')
+                    },
+                    body: JSON.stringify({ type, questionId: qIdForLifeline() })
+                });
+                const data = await res.json();
+                if (!res.ok || !data.success) {
+                    alert(data.message || 'Lifeline use કરવામાં error આવ્યો.');
+                    return;
+                }
+                await syncLifelines(data);
+                const q = currentQuizQuestion;
+                const buttons = Array.from(document.querySelectorAll('#options .option-btn'));
+
+                if (type === 'fiftyFifty') {
+                    const wrong = buttons.filter((_, i) => i !== Number(q.correct));
+                    wrong.sort(() => Math.random() - 0.5).slice(0, 2).forEach(btn => {
+                        btn.disabled = true;
+                        btn.style.visibility = 'hidden';
+                        btn.style.opacity = '0';
+                        btn.dataset.lifelineHidden = '1';
+                    });
+                } else if (type === 'audiencePoll') {
+                    const n = q.options.length;
+                    const weights = q.options.map((_, i) => i === Number(q.correct) ? 55 + Math.floor(Math.random()*16) : 1 + Math.floor(Math.random()*15));
+                    const total = weights.reduce((a,b)=>a+b,0);
+                    const poll = document.createElement('div');
+                    poll.className = 'kbc-poll';
+                    poll.innerHTML = '<b>Audience Poll</b>' + weights.map((w,i)=>{
+                        const pct = Math.max(1, Math.round(w/total*100));
+                        return `<div class="kbc-poll-row"><span>${String.fromCharCode(65+i)}</span><div class="kbc-poll-bar"><div class="kbc-poll-fill" style="width:${pct}%"></div></div><span>${pct}%</span></div>`;
+                    }).join('');
+                    const old = document.querySelector('.kbc-poll'); if (old) old.remove();
+                    document.getElementById('options').appendChild(poll);
+                } else if (type === 'askExpert') {
+                    const expert = document.createElement('div');
+                    expert.className = 'kbc-poll';
+                    expert.innerHTML = `<b>Expert says:</b> My strongest choice is <strong>Option ${String.fromCharCode(65 + Number(q.correct))}</strong>.`;
+                    const old = document.querySelector('.kbc-poll'); if (old) old.remove();
+                    document.getElementById('options').appendChild(expert);
+                } else if (type === 'skipQuestion') {
+                    quizData = quizData.filter(item => String(item?._id) !== String(q._id));
+                    currentQuizQuestion = null;
+                    const old = document.querySelector('.kbc-poll'); if (old) old.remove();
+                    setTimeout(() => { if (!document.getElementById('quiz')?.classList.contains('hidden')) loadQuiz(); }, 120);
+                }
+            } catch (err) {
+                console.error('Lifeline Error:', err);
+                alert('Server સાથે connect થવામાં error આવ્યો.');
+            } finally {
+                lifelineBusy = false;
+                updateLifelineUI();
+            }
+        }
+
+        async function loadQuestionBank() {
+            try {
+                const currentToken = localStorage.getItem("token") || "";
+                if (!currentToken) {
+                    window.location.replace("login.html");
+                    return [];
+                }
+
+                // Do not download the complete 100k+ question bank in the browser.
+                // Fetch a small random batch so Start Quiz renders immediately.
+                let list = [];
+                try {
+                    const res = await fetch("/api/questions/random?count=20", {
+                        method: "GET",
+                        cache: "no-store",
+                        headers: {
+                            "Authorization": "Bearer " + currentToken,
+                            "Accept": "application/json"
+                        }
+                    });
+                    const data = await res.json().catch(() => null);
+                    if (res.ok && data && data.success) {
+                        if (data.completed) {
+                            quizData = [];
+                            const qEl = document.getElementById("question");
+                            const optEl = document.getElementById("options");
+                            if (qEl) qEl.innerText = "🎉 બધા questions પૂરા થઈ ગયા છે!";
+                            if (optEl) optEl.innerHTML = '<div style="padding:14px;text-align:center;color:#16a34a;font-weight:800;">આ student માટે Question Bankના બધા questions complete થઈ ગયા છે. Repeat question નહીં આવે.</div>';
+                            return [];
+                        }
+                        if (Array.isArray(data.questions)) list = data.questions;
+                    }
+                } catch (apiErr) {
+                    console.warn("Random question API unavailable.", apiErr);
+                }
+
+                quizData = list.filter(q => {
+                    const correct = Number(q?.correct);
+                    return q && typeof q.q === "string" && q.q.trim() &&
+                        Array.isArray(q.options) && q.options.length >= 2 &&
+                        Number.isInteger(correct) && correct >= 0 && correct < q.options.length;
+                }).map(q => ({
+                    _id: q._id,
+                    q: String(q.q).trim(),
+                    options: q.options.map(String),
+                    correct: Number(q.correct)
+                }));
+
+                if (!quizData.length) throw new Error("Question bank is empty or invalid.");
+                console.log("Quiz question bank loaded:", quizData.length);
+                return quizData;
+            } catch (err) {
+                console.error("Question Bank Error:", err);
+                quizData = [];
+                const qEl = document.getElementById("question");
+                const optEl = document.getElementById("options");
+                if (qEl) qEl.innerText = "⚠️ Question load failed";
+                if (optEl) optEl.innerHTML =
+                    '<button type="button" class="btn" onclick="quizData=[];loadQuiz()">↻ Retry Questions</button>';
+                return [];
+            }
+        }
+
+        async function loadWallet(retry = 0) {
+
+            // Always load the wallet from MongoDB using the current login token.
+            // Do not depend on the cached localStorage user object for balance.
+            const currentToken = localStorage.getItem("token");
+            if (!currentToken) {
+                window.location.replace("login.html");
+                return false;
+            }
+
+            try {
+                const res = await fetch("/api/wallet", {
+                    method: "GET",
+                    cache: "no-store",
+                    headers: {
+                        "Authorization": "Bearer " + currentToken,
+                        "Accept": "application/json"
+                    }
+                });
+
+                if (res.status === 401) {
+                    const cachedUser = JSON.parse(localStorage.getItem("user") || "{}");
+                    if (cachedUser && cachedUser.permanentBlocked === true) return false;
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("user");
+                    window.location.replace("login.html");
+                    return false;
+                }
+
+                const data = await res.json();
+
+                if (!res.ok || !data.success) {
+                    throw new Error(data.message || "Wallet could not be loaded");
+                }
+
+                wallet = Number(data.wallet || 0);
+                lastClaim = data.lastClaim || "";
+                lastSpin = data.lastSpin || "";
+                totalEarn = Number(data.totalEarn || 0);
+                quizReward = Number(data.quizScore || 0);
+                dailyReward = Number(data.dailyReward || 0);
+                spinReward = Number(data.spinReward || 0);
+                dailyQuestionsAnswered = Number(data.dailyQuestionsAnswered || 0);
+                spinCycleQuestionsAnswered = Number(data.spinCycleQuestionsAnswered ?? data.dailyQuestionsAnswered ?? 0);
+                totalQuestionsAnswered = Number(data.totalQuestionsAnswered || 0);
+                window.totalQuestionsAnswered = totalQuestionsAnswered;
+                dailyQuestionsDate = data.dailyQuestionsDate || "";
+                await syncLifelines(data);
+
+                // Update every wallet display immediately.
+                const walletEl = document.getElementById("wallet");
+                if (walletEl) walletEl.textContent = wallet.toFixed(2);
+
+                const quizWallet = document.getElementById("quizWallet");
+                if (quizWallet) quizWallet.textContent = wallet.toFixed(2);
+
+                checkWithdrawStatus();
+                updateQuestionProgress();
+                return true;
+
+            } catch (err) {
+                console.error("Wallet Load Error:", err);
+
+                // A newly deployed Vercel function can take a moment to respond.
+                // Retry a couple of times instead of leaving the student at ₹0.00.
+                if (retry < 2) {
+                    await new Promise(resolve => setTimeout(resolve, 700 * (retry + 1)));
+                    return loadWallet(retry + 1);
+                }
+                return false;
+            }
+        }
+
+        function applyWalletData(data) {
+            wallet = Number(data.wallet || 0);
+            totalEarn = Number(data.totalEarn || 0);
+            quizReward = Number(data.quizScore || 0);
+            dailyReward = Number(data.dailyReward || 0);
+            spinReward = Number(data.spinReward || 0);
+            dailyQuestionsAnswered = Number(data.dailyQuestionsAnswered || 0);
+            spinCycleQuestionsAnswered = Number(data.spinCycleQuestionsAnswered ?? data.dailyQuestionsAnswered ?? 0);
+            totalQuestionsAnswered = Number(data.totalQuestionsAnswered || 0);
+            window.totalQuestionsAnswered = totalQuestionsAnswered;
+            dailyQuestionsDate = data.dailyQuestionsDate || "";
+            lastClaim = data.lastClaim || "";
+            lastSpin = data.lastSpin || "";
+            syncLifelines(data);
+
+            document.getElementById("wallet").innerText = wallet.toFixed(2);
+
+            // Quiz Wallet પણ Update કરો
+            const quizWallet = document.getElementById("quizWallet");
+            if (quizWallet) {
+                quizWallet.innerText = wallet.toFixed(2);
+            }
+
+            document.querySelectorAll("#activityWalletBalance").forEach(el => {
+                el.innerText = "₹" + wallet.toFixed(2);
+            });
+
+            checkWithdrawStatus();
+            updateQuestionProgress();
+        }
+
+        async function claimDailyReward() {
+            try {
+                const res = await fetch("/api/wallet/daily-reward", {
+                    method: "POST",
+                    headers: { Authorization: "Bearer " + token }
+                });
+
+                const data = await res.json();
+
+                if (!data.success) {
+                    alert(data.message || "Daily Reward failed");
+                    return;
+                }
+
+                applyWalletData(data);
+                alert("🎁 Daily Reward મળ્યું! +₹" + Number(data.reward).toFixed(2));
+            } catch (err) {
+                console.error("Daily Reward Error:", err);
+                alert("Server સાથે connect થવામાં error આવ્યો.");
+            }
+        }
+
+        async function updateWallet(correct, questionId) {
+            try {
+                const res = await fetch("/api/wallet/quiz", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer " + token
+                    },
+                    body: JSON.stringify({ correct: Boolean(correct), questionId, selectedIndex: window.__quizSelectedIndex ?? null, selectedAnswer: window.__quizSelectedAnswer ?? "" })
+                });
+
+                const data = await res.json();
+
+                if (!data.success) {
+                    if (data.repeated || res.status === 409 || /already answered|cannot be repeated|repeat/i.test(String(data.message || ""))) {
+                        // Do not show the technical duplicate message to students.
+                        return false;
+                    }
+                    alert(data.message || "Quiz reward failed");
+                    return false;
+                }
+
+                applyWalletData(data);
+                return true;
+            } catch (err) {
+                console.error("Quiz Reward Error:", err);
+                alert("Server સાથે connect થવામાં error આવ્યો.");
+                return false;
+            }
+        }
+
+        function updateQuestionProgress() {
+            // Today's total answer count never resets after Spin.
+            const todayCount = Number(dailyQuestionsAnswered || 0);
+            const count = Math.min(100, Number(spinCycleQuestionsAnswered || 0));
+
+            // Lifelines use a separate 500-question lifetime cycle.
+            // The number shown above the question is the NEXT question's
+            // position inside the current 500-question lifeline cycle.
+            const totalAnswered = Math.max(0, Number(totalQuestionsAnswered || 0));
+            const cycleQuestionNumber = (totalAnswered % 500) + 1;
+            const cycleLabel = document.getElementById("questionCycleLabel");
+            if (cycleLabel) {
+                cycleLabel.textContent = `Q COUNT • ${cycleQuestionNumber} / 500`;
+            }
+            const remaining = 100 - count;
+
+            const remainBox = document.getElementById("remainingQuestions");
+
+            if (remainBox) {
+                remainBox.innerText = remaining;
+            }
+            const progress = document.getElementById("questionProgress");
+            const spinBtn = document.getElementById("spinBtn");
+
+            if (progress) {
+                progress.innerText = `Today's Questions: ${todayCount}` + (todayCount >= 100 ? ` | Spin Cycle: ${count} / 100` : ` / 100`);
+            }
+
+            if (spinBtn) {
+                const unlocked = count >= 100;
+
+                spinBtn.disabled = !unlocked;
+
+                if (unlocked) {
+                    spinBtn.innerText = "🎡 Spin Wheel — UNLOCKED";
+                    spinBtn.style.opacity = "1";
+                    spinBtn.style.cursor = "pointer";
+                } else {
+                    spinBtn.innerText =
+                        `🔒 Spin Wheel — ${100 - count} Questions Left`;
+                    spinBtn.style.opacity = "0.65";
+                    spinBtn.style.cursor = "not-allowed";
+                }
+            }
+        }
+
+        function checkWithdrawStatus() {
+            document.getElementById("withdrawBtn").disabled = (wallet < 1000);
+            updateQuestionProgress();
+        }
+
+        // Screen navigation with browser/mobile back support
+        let currentScreen = 'dashboard';
+        let navigatingBack = false;
+
+        function setScreenVisibility(id) {
+            ['dashboard', 'quiz', 'activities', 'activityPlay'].forEach(screenId => {
+                const el = document.getElementById(screenId);
+                if (!el) return;
+                const active = screenId === id;
+                el.classList.toggle('hidden', !active);
+                el.style.display = active ? '' : 'none';
+                el.style.visibility = active ? 'visible' : 'hidden';
+                el.setAttribute('aria-hidden', active ? 'false' : 'true');
+            });
+        }
+
+        function enterQuizFullscreen() {
+            const el = document.getElementById("quiz");
+            if (!el) return;
+            document.body.classList.add("kbc-fullscreen-active");
+            if (document.fullscreenElement) return;
+            try {
+                const request = el.requestFullscreen || el.webkitRequestFullscreen;
+                if (request) {
+                    const result = request.call(el);
+                    if (result && typeof result.catch === "function") result.catch(() => {});
+                }
+            } catch (_) {}
+        }
+
+        function exitQuizFullscreen() {
+            document.body.classList.remove("kbc-fullscreen-active");
+            try {
+                if (document.fullscreenElement && document.exitFullscreen) {
+                    const result = document.exitFullscreen();
+                    if (result && typeof result.catch === "function") result.catch(() => {});
+                }
+            } catch (_) {}
+        }
+
+        document.addEventListener("fullscreenchange", () => {
+            if (!document.fullscreenElement && currentScreen === "quiz") {
+                document.body.classList.add("kbc-fullscreen-active");
+            }
+        });
+
+        function showScreen(id, pushHistory = true) {
+            if (!document.getElementById(id) && id !== 'activityPlay') {
+                return;
+            }
+
+            if (pushHistory && !navigatingBack && currentScreen !== id) {
+                history.pushState({ appScreen: id }, '', '#'+id);
+            }
+
+            currentScreen = id;
+            setScreenVisibility(id);
+            if (id === 'quiz') enterQuizFullscreen();
+            else exitQuizFullscreen();
+
+            if (id === 'quiz') {
+                const qw = document.getElementById("quizWallet");
+                if (qw) qw.innerText = wallet.toFixed(2);
+                loadQuiz();
+            }
+
+            if (id === 'activities') {
+                if (typeof renderActivities === 'function') renderActivities();
+                updateActivityWallet();
+            }
+
+            if (id === 'activityPlay') {
+                if (typeof renderCurrentActivity === 'function') renderCurrentActivity();
+                updateActivityWallet();
+            }
+        }
+
+        function updateActivityWallet() {
+            const amount = Number(typeof wallet !== 'undefined' ? wallet : 0);
+            document.querySelectorAll('#activityWalletBalance').forEach(el => {
+                el.textContent = '₹' + amount.toFixed(2);
+            });
+        }
+
+        // Browser/mobile system Back button
+        window.addEventListener('popstate', function () {
+            navigatingBack = true;
+            const hash = (location.hash || '#dashboard').replace('#', '');
+            const target = hash || 'dashboard';
+
+            // Activity play -> activity list -> dashboard
+            if (target === 'dashboard' || target === 'activities' || target === 'quiz') {
+                showScreen(target, false);
+            } else {
+                history.replaceState({ appScreen: 'dashboard' }, '', '#dashboard');
+                showScreen('dashboard', false);
+            }
+
+            navigatingBack = false;
+        });
+
+        // Start with dashboard without creating an extra history entry.
+        window.addEventListener('DOMContentLoaded', function () {
+            const initial = (location.hash || '#dashboard').replace('#', '');
+            showScreen(
+                ['dashboard','quiz','activities','activityPlay'].includes(initial) ? initial : 'dashboard',
+                false
+            );
+        });
+
+        // ==========================================
+        // RELOAD QUESTION WHEN STUDENT CHANGES TAB
+        // ==========================================
+        let tabWasChanged = false;
+        let tabChangedScreen = null;
+
+        document.addEventListener("visibilitychange", async () => {
+            if (document.hidden) {
+                const quizOpen = !document.getElementById("quiz")?.classList.contains("hidden");
+                const activityOpen = !document.getElementById("activityPlay")?.classList.contains("hidden");
+                if (quizOpen || activityOpen) {
+                    tabWasChanged = true;
+                    tabChangedScreen = activityOpen ? "activity" : "quiz";
+                    recordSecurityEvent("tab_change");
+                    if (activityOpen && typeof activityType !== "undefined" && activityType) {
+                        if (!warningRequestRunning && !alreadyBlocked) {
+                            warningRequestRunning = true;
+                            fetch("/api/activities/"+encodeURIComponent(activityType)+"/tab-change", {
+                                method:"POST",
+                                headers:{Authorization:"Bearer "+localStorage.getItem("token")}
+                            })
+                            .then(r => r.json())
+                            .then(data => handleAntiCheatResult(data, "Activity tab was switched or hidden"))
+                            .catch(err => console.error("Activity anti-cheat error:", err))
+                            .finally(() => { warningRequestRunning = false; });
+                        }
+                    }
+                }
+                return;
+            }
+
+            if (!tabWasChanged) return;
+            tabWasChanged = false;
+
+            if (tabChangedScreen === "quiz" && !document.getElementById("quiz")?.classList.contains("hidden")) {
+                document.getElementById("question").innerText = "Loading new question...";
+                document.getElementById("options").innerHTML = "";
+                await loadQuiz();
+            }
+
+            if (tabChangedScreen === "activity" && !document.getElementById("activityPlay")?.classList.contains("hidden")) {
+                const oldId = activityQuestions?.[activityIndex]?.id;
+                const res = await fetch("/api/activities/"+encodeURIComponent(activityType), {
+                    headers:{Authorization:"Bearer "+localStorage.getItem("token")}
+                }).catch(()=>null);
+                if (res && res.ok) {
+                    const data = await res.json();
+                    if (data.success && Array.isArray(data.questions) && data.questions.length) {
+                        activityQuestions = data.questions;
+                        const candidates = activityQuestions.filter(q => q.id !== oldId);
+                        activityIndex = Math.floor(Math.random() * (candidates.length ? candidates.length : activityQuestions.length));
+                        if (candidates.length) {
+                            const selected = candidates[activityIndex];
+                            const realIndex = activityQuestions.findIndex(q => q.id === selected.id);
+                            activityIndex = realIndex >= 0 ? realIndex : 0;
+                        }
+                        arrangeWords=[];
+                        renderActivity();
+                        updateActivityWallet();
+                    }
+                }
+            }
+            tabChangedScreen = null;
+        });
+
+
+        async function spinWheel() {
+            try {
+                const res = await fetch("/api/wallet/spin", {
+                    method: "POST",
+                    headers: { Authorization: "Bearer " + token }
+                });
+
+                const data = await res.json();
+
+                if (!data.success) {
+                    alert(data.message || "Spin failed");
+                    applyWalletData(data);
+                    return;
+                }
+
+                applyWalletData(data);
+
+                alert(
+                    "Congratulations! 🎉\n\n" +
+                    "Spin પર તમને ₹" + Number(data.prize).toFixed(2) + " મળ્યા!\n\n" +
+                    "Spin #" + Number(data.spinCount || 0) + " complete.\n" +
+                    "હવે ફરી 100 પ્રશ્નો પૂરા કરો અને ફરી Spin કરો."
+                );
+            } catch (err) {
+                console.error("Spin Error:", err);
+                alert("Server સાથે connect થવામાં error આવ્યો.");
+            }
+        }
+
+        async function submitWithdraw() {
+
+            const paymentMethod = document.getElementById("paymentMethod").value;
+
+            const upiId = document.getElementById("upiId").value;
+
+            const bankName = document.getElementById("bankName").value;
+
+            const accountHolderName =
+                document.getElementById("accountHolderName").value;
+
+            const accountNumber =
+                document.getElementById("accountNumber").value;
+
+            const ifscCode =
+                document.getElementById("ifscCode").value;
+
+            try {
+
+                const res = await fetch("/api/wallet/withdraw", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer " + token
+                    },
+
+                    body: JSON.stringify({
+
+                        amount: wallet,
+
+                        paymentMethod,
+
+                        upiId,
+
+                        bankName,
+
+                        accountHolderName,
+
+                        accountNumber,
+
+                        ifscCode
+
+                    })
+
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+
+                    closeWithdrawPopup();
+
+                    applyWalletData(data);
+
+                    alert("Withdraw Request Submitted");
+
+                } else {
+
+                    alert(data.message);
+
+                }
+
+            } catch (err) {
+
+                console.log(err);
+
+            }
+
+        }
+
+        let quizLoading = false;
+        let quizQuestionRequest = 0;
+
+        async function loadQuiz() {
+            if (quizLoading) return;
+            quizLoading = true;
+            const requestId = ++quizQuestionRequest;
+
+            const questionEl = document.getElementById("question");
+            const optDiv = document.getElementById("options");
+
+            if (questionEl) questionEl.innerText = "⏳ Loading question...";
+            if (optDiv) optDiv.innerHTML = '<div style="padding:14px;text-align:center;color:#64748b;font-weight:700;">Please wait...</div>';
+
+            try {
+                if (!quizData.length) {
+                    await loadQuestionBank();
+                }
+
+                if (!quizData.length) {
+                    if (questionEl) questionEl.innerText = "⚠️ No questions available.";
+                    if (optDiv) optDiv.innerHTML = "";
+                    return;
+                }
+
+                // Prevent an old async request from replacing a newer question.
+                if (requestId !== quizQuestionRequest) return;
+
+                const q = quizData[Math.floor(Math.random() * quizData.length)];
+                if (!q || !Array.isArray(q.options) || q.options.length < 2) {
+                    throw new Error("Invalid question received.");
+                }
+
+                currentQuizQuestion = q;
+                quizAnswerTimings = [];
+                lastQuizAnswerAt = 0;
+                try {
+                    await fetch("/api/questions/start", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + localStorage.getItem("token")
+                        },
+                        body: JSON.stringify({ questionId: q._id })
+                    });
+                } catch (e) {
+                    console.warn("Server quiz timer could not start:", e);
+                }
+                updateQuestionProgress();
+                const oldPoll = document.querySelector('.kbc-poll');
+                if (oldPoll) oldPoll.remove();
+                updateLifelineUI();
+
+                if (questionEl) questionEl.innerText = String(q.q);
+                questionStartTime = Date.now();
+                optDiv.innerHTML = "";
+
+                q.options.forEach((o, i) => {
+                    const b = document.createElement("button");
+                    b.className = "option-btn";
+                    b.type = "button";
+                    b.innerText = String(o);
+                    b.setAttribute("data-option", String.fromCharCode(65 + i));
+                    b.onclick = async () => {
+                        if (b.disabled) return;
+
+                        optDiv.querySelectorAll("button").forEach(btn => {
+                            btn.disabled = true;
+                        });
+
+                        const timeTaken = (Date.now() - questionStartTime) / 1000;
+                        quizAnswerTimings.push(timeTaken);
+                        if (quizAnswerTimings.length > 6) quizAnswerTimings.shift();
+                        lastQuizAnswerAt = Date.now();
+
+                        // Detect repeated, unnaturally identical answer timing.
+                        if (quizAnswerTimings.length >= 4) {
+                            const recent = quizAnswerTimings.slice(-4);
+                            const spread = Math.max(...recent) - Math.min(...recent);
+                            const allNormal = recent.every(t => t >= 1.5 && t <= 12);
+                            if (allNormal && spread <= 0.25) {
+                                recordSecurityEvent("suspicious_timing");
+                                await blockStudent("Repeatedly identical answer timing detected");
+                                return;
+                            }
+                        }
+
+                        if (timeTaken < 2.5) {
+                            await recordSecurityEvent("fast_answer");
+                            await blockStudent("વાંચી ને જવાબ આપવાનો છે ઓછા સમય માં જવાબ આપ્યો છે.");
+                            return;
+                        }
+
+                        const isCorrect = i === Number(q.correct);
+                        window.__quizSelectedIndex = i;
+                        window.__quizSelectedAnswer = String(q.options[i] ?? "");
+                        // Remove the answered question immediately so the next render
+                        // can never select this same question again.
+                        quizData = quizData.filter(item => String(item?._id) !== String(q._id));
+
+                        const buttons = optDiv.querySelectorAll(".option-btn");
+                        buttons.forEach(btn => btn.disabled = true);
+
+                        buttons.forEach((btn, index) => {
+                            if (index === Number(q.correct)) {
+                                btn.style.background = "#22c55e";
+                                btn.style.color = "#fff";
+                                btn.style.border = "3px solid #16a34a";
+                                btn.innerHTML = "✅ " + q.options[index];
+                            }
+
+                            if (index === i && !isCorrect) {
+                                btn.style.background = "#ef4444";
+                                btn.style.color = "#fff";
+                                btn.style.border = "3px solid #dc2626";
+                                btn.innerHTML = "❌ " + q.options[index];
+                            }
+                        });
+                        startWarningMonitor();
+
+                        // Save the answer BEFORE requesting the next question.
+                        // This is important because /questions/random excludes questions
+                        // already stored in MongoDB. Waiting here prevents the same
+                        // question from being returned again due to a network race.
+                        const saved = await updateWallet(isCorrect, q._id);
+                        window.__quizSelectedIndex = null;
+                        window.__quizSelectedAnswer = "";
+
+                        if (!saved) {
+                            const nextBox = document.getElementById("options");
+                            if (nextBox) {
+                                nextBox.insertAdjacentHTML(
+                                    "beforeend",
+                                    '<div style="padding:10px;text-align:center;color:#b45309;font-weight:700;">Next question load માટે retry કરી રહ્યા છીએ...</div>'
+                                );
+                            }
+                            setTimeout(() => {
+                                if (!document.getElementById("quiz")?.classList.contains("hidden")) {
+                                    quizData = [];
+                                    loadQuiz();
+                                }
+                            }, 800);
+                            return;
+                        }
+
+                        const nextQuestion = () => {
+                            if (!document.getElementById("quiz")?.classList.contains("hidden")) {
+                                // Always fetch a fresh batch after an answer. The server
+                                // has now recorded this question as answered, so the next
+                                // question cannot be the one just answered.
+                                quizData = [];
+                                loadQuiz();
+                            }
+                        };
+
+                        setTimeout(nextQuestion, 700);
+                    };
+                    optDiv.appendChild(b);
+                });
+            } catch (err) {
+                console.error("Quiz Render Error:", err);
+                if (questionEl) questionEl.innerText = "⚠️ Question display error";
+                if (optDiv) {
+                    optDiv.innerHTML =
+                        '<div style="padding:14px;text-align:center;color:#dc2626;font-weight:700;">' +
+                        (err.message || "Question could not be displayed.") +
+                        '</div>' +
+                        '<button type="button" class="btn" onclick="quizData=[];loadQuiz()">↻ Retry</button>';
+                }
+            } finally {
+                quizLoading = false;
+            }
+        }
+
+
+        // ==========================================
+        // INTERACTIVE ENGLISH EARNING ACTIVITIES
+        // ==========================================
+        let activityType='', activityQuestions=[], activityIndex=0, activityData=null, arrangeWords=[];
+        let activityQuestionStartTime = 0;
+        let activityAnswerLocked = false;
+        let activityUnlockTimer = null;
+        function showActivityScreen(id){
+            ['dashboard','quiz','activities','activityPlay'].forEach(x=>{const e=document.getElementById(x);if(e){e.classList.toggle('hidden',x!==id);e.style.visibility=x===id?'visible':'hidden';e.setAttribute('aria-hidden',x===id?'false':'true');}});
+        }
+        async function openActivity(type){
+            // Open the activity screen immediately. Do not wait for the API.
+            activityType = type;
+            activityQuestions = [];
+            activityIndex = 0;
+            arrangeWords = [];
+
+            const titles = {
+                arrange:'🔀 Arrange Sentence',
+                fill:'🧩 Fill in the Blank',
+                correction:'🛠️ Fix the Sentence',
+                translate:'🔄 Translate to English',
+                word:'🔤 Word Builder',
+                listening:'🎧 Listen & Type',
+                speaking:'🎤 Speak & Earn',
+                reading:'📖 Reading Challenge'
+            };
+            const rewards = {
+                arrange:10, fill:10, correction:15, translate:15,
+                word:5, listening:15, speaking:20, reading:15
+            };
+
+            const nameEl=document.getElementById('activityName');
+            const metaEl=document.getElementById('activityMeta');
+            const box=document.getElementById('activityContent');
+            const fb=document.getElementById('activityFeedback');
+
+            if(nameEl) nameEl.textContent=titles[type] || 'English Activity';
+            if(metaEl) metaEl.textContent='💰 Earn up to '+(rewards[type]||10)+' points';
+            if(box) box.innerHTML='<div class="activity-question">⏳ Loading questions...</div>';
+            if(fb) fb.textContent='';
+
+            // Use the normal navigation so mobile/browser Back works.
+            showScreen('activityPlay');
+
+            try{
+                const token=localStorage.getItem('token') || localStorage.getItem('studentToken') || '';
+                const res=await fetch('/api/activities/'+encodeURIComponent(type),{
+                    method:'GET',
+                    headers: token ? {Authorization:'Bearer '+token} : {}
+                });
+
+                let data={};
+                try { data=await res.json(); } catch(e){}
+
+                if(!res.ok || !data.success){
+                    throw new Error(data.message || ('Unable to load '+type+' activity'));
+                }
+
+                activityQuestions=Array.isArray(data.questions)?data.questions:[];
+                activityData=data;
+
+                if(!activityQuestions.length){
+                    throw new Error('આ activity માટે હાલ questions ઉપલબ્ધ નથી.');
+                }
+
+                activityIndex=Math.floor(Math.random()*activityQuestions.length);
+                arrangeWords=[];
+
+                if(nameEl) nameEl.textContent=data.title || titles[type];
+                if(metaEl) metaEl.textContent='💰 +'+Number(data.reward*100).toFixed(0)+' points • Today limit '+data.dailyLimit;
+                renderActivity();
+                updateActivityWallet();
+            }catch(e){
+                console.error('Activity load error:',e);
+                if(box){
+                    box.innerHTML=
+                        '<div class="activity-question">⚠️ Questions load થઈ શક્યા નથી.</div>'+
+                        '<p style="text-align:center;color:#64748b">'+
+                        'Please login again and try this activity.</p>'+
+                        '<button class="activity-action" type="button" onclick="openActivity('+JSON.stringify(type)+')">↻ Try Again</button>';
+                }
+                if(fb) fb.textContent=e.message || 'Activity load failed';
+            }
+        }
+        function nextActivityQuestion(){ if(!activityQuestions.length)return; activityIndex=(activityIndex+1)%activityQuestions.length; arrangeWords=[]; renderActivity(); }
+        function renderActivity(){
+            const q=activityQuestions[activityIndex], box=document.getElementById('activityContent'), fb=document.getElementById('activityFeedback'); fb.textContent='';
+            activityQuestionStartTime = Date.now();
+            activityAnswerLocked = false;
+            clearInterval(activityUnlockTimer);
+            if(activityType==='arrange'){
+                const words=q.prompt.split('/').map(x=>x.trim()).sort(()=>Math.random()-.5); arrangeWords=[];
+                box.innerHTML='<div class="activity-question">Arrange these words:</div><div class="word-bank" id="wordBank"></div><div class="answer-box" id="arranged">Tap words in the correct order</div><button class="activity-action" onclick="submitArrange()">✅ Check Sentence</button><button class="activity-action" style="background:#64748b" onclick="renderActivity()">↻ Reset</button>';
+                const wb=document.getElementById('wordBank'); words.forEach((w,i)=>{const b=document.createElement('button');b.className='word-chip';b.textContent=w;b.onclick=()=>{arrangeWords.push(w);b.disabled=true;document.getElementById('arranged').textContent=arrangeWords.join(' ')};wb.appendChild(b)});
+            } else if(activityType==='fill'){
+                box.innerHTML='<div class="activity-question">'+q.prompt+'</div>'+q.options.map((o,i)=>`<button type="button" class="activity-option" data-activity-answer="${encodeURIComponent(o)}">${o}</button>`).join('');
+            } else if(activityType==='correction'||activityType==='translate'||activityType==='word'){
+                box.innerHTML='<div class="activity-question">'+q.prompt+'</div><input id="activityAnswer" class="activity-input" placeholder="Type your answer here" autocomplete="off"><button class="activity-action" onclick="submitTypedActivity()">💰 Submit & Earn</button>';
+            } else if(activityType==='listening'){
+                box.innerHTML='<div class="activity-question">🎧 Listen carefully and type the sentence</div><button class="activity-action" onclick="speakCurrent()">🔊 Play Audio</button><input id="activityAnswer" class="activity-input" placeholder="Type what you hear" autocomplete="off"><button class="activity-action" onclick="submitTypedActivity()">💰 Submit & Earn</button>';
+            } else if(activityType==='speaking'){
+                box.innerHTML='<div class="activity-question">🎤 '+q.prompt+'</div><button class="activity-action" onclick="startSpeaking()">🎙️ Start Speaking</button><div class="mic-status" id="micStatus">Microphone permission may be required.</div><button class="activity-action" onclick="submitSpeaking()">💰 Submit & Earn</button>';
+            } else if(activityType==='reading'){
+                box.innerHTML='<div class="passage">'+q.passage+'</div><div class="activity-question">'+q.prompt+'</div>'+q.options.map((o,i)=>`<button type="button" class="activity-option" data-activity-answer="${encodeURIComponent(o)}" disabled data-activity-locked="1">${o}</button>`).join('');
+            }
+            // No answer lock: Activity behaves like Quiz. Answers submitted within 2 seconds are treated as a violation.
+        }
+        function setFeedback(ok,msg){const e=document.getElementById('activityFeedback');e.textContent=msg;e.style.color=ok?'#16a34a':'#dc2626';}
+        async function submitArrange(){submitActivity(arrangeWords.join(' '));}
+        async function submitTypedActivity(){const e=document.getElementById('activityAnswer');if(!e||!e.value.trim()){setFeedback(false,'Answer લખો.');return}submitActivity(e.value.trim());}
+        async function submitActivity(answer){
+            const q=activityQuestions[activityIndex];
+            const minSeconds = 2;
+            const elapsed = (Date.now() - activityQuestionStartTime) / 1000;
+            if(activityAnswerLocked || elapsed < minSeconds){
+                await blockStudent('Activity answer submitted within 2 seconds');
+                setFeedback(false,'⚠️ Answer આપતા પહેલા ઓછામાં ઓછા 2 seconds રાહ જુઓ.');
+                return;
+            }
+            try{
+                const res=await fetch('/api/activities/'+activityType+'/submit',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+localStorage.getItem('token')},body:JSON.stringify({questionId:q.id,answer,startedAt:activityQuestionStartTime})});
+                const data=await res.json(); if(!data.success){setFeedback(false,data.message||'Try again');return}
+                applyWalletData(data);
+                if(data.correct){ try { const t=studentAddonToken(); if(t) fetch('/api/addons/activity',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+t},body:JSON.stringify({xp:10})}).catch(()=>{}); } catch(e){} }
+                if(data.correct){setFeedback(true,'🎉 Correct! +'+(data.reward*100).toFixed(0)+' points earned. Wallet: ₹'+Number(data.wallet).toFixed(2));}
+                else{setFeedback(false,'❌ Wrong. Correct answer: '+(data.correctAnswer||'Try again'));}
+                setTimeout(()=>nextActivityQuestion(),1200);
+            }catch(e){setFeedback(false,'Network error. Please try again.');}
+        }
+        let spokenText='';
+        function startSpeaking(){
+            const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+            if(!SR){document.getElementById('micStatus').textContent='Speech recognition is not supported in this browser. Try Chrome.';return;}
+            const r=new SR();r.lang='en-US';r.interimResults=false;r.maxAlternatives=1;
+            document.getElementById('micStatus').textContent='🎙️ Listening... speak now';
+            r.onresult=e=>{spokenText=e.results[0][0].transcript||'';document.getElementById('micStatus').textContent='You said: '+spokenText};
+            r.onerror=e=>document.getElementById('micStatus').textContent='Microphone error: '+e.error;
+            r.onend=()=>{if(!spokenText)document.getElementById('micStatus').textContent='No speech detected. Try again.'};r.start();
+        }
+        function submitSpeaking(){if(!spokenText){setFeedback(false,'પહેલા Englishમાં બોલો.');return}submitActivity(spokenText);spokenText='';}
+        function speakCurrent(){const q=activityQuestions[activityIndex];const u=new SpeechSynthesisUtterance(q.answer);u.lang='en-US';u.rate=.82;window.speechSynthesis.cancel();window.speechSynthesis.speak(u);}
+        loadQuestionBank();
+        // Wallet is fetched from the server; do not overwrite it with the initial 0.
+        loadWallet();
+        // Disable right click
+        document.addEventListener("contextmenu", e => e.preventDefault());
+
+        // Disable text selection
+        document.addEventListener("selectstart", e => e.preventDefault());
+
+        // Disable copy, cut and paste
+        ["copy", "cut", "paste"].forEach(event => {
+            document.addEventListener(event, e => e.preventDefault());
+        });
+
+        // Disable common shortcut keys
+        document.addEventListener("keydown", function (e) {
+            if (
+                e.ctrlKey &&
+                ["c", "u", "s", "a", "p"].includes(e.key.toLowerCase())
+            ) {
+                e.preventDefault();
+            }
+
+            // Disable F12
+            if (e.key === "F12") e.preventDefault();
+
+            // Disable Ctrl+Shift+I / J / C
+            if (
+                e.ctrlKey &&
+                e.shiftKey &&
+                ["I", "J", "C"].includes(e.key.toUpperCase())
+            ) {
+                e.preventDefault();
+            }
+        });
+
+        // Open Withdraw Popup
+        function openWithdrawPopup() {
+
+            document.getElementById("withdrawPopup").style.display = "flex";
+
+            document.getElementById("withdrawAmountText").innerText =
+                "Withdraw Amount : ₹" + wallet;
+
+            changePaymentMethod();
+        }
+
+        // Close Popup
+        function closeWithdrawPopup() {
+            document.getElementById("withdrawPopup").style.display = "none";
+        }
+
+        // Show / Hide Payment Fields
+        function changePaymentMethod() {
+
+            const method = document.getElementById("paymentMethod").value;
+
+            document.getElementById("upiSection").style.display =
+                method === "UPI" ? "block" : "none";
+
+            document.getElementById("bankSection").style.display =
+                method === "Bank" ? "block" : "none";
+        }
+        // Refresh the authoritative wallet once the page UI is ready.
+        loadWallet();
+
+        async function claimBonus() {
+    try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            alert("❌ Please login first.");
+            return;
+        }
+
+        const response = await fetch("/api/bonus/claim", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            }
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            alert("🎁 Bonus is not available right now.");
+            return;
+        }
+
+        alert(
+            "🎉 Bonus Claim Successful!\n\n" +
+            "📸 આ screen નો screenshot લો.\n\n" +
+            "📤 લીધેલો screenshot Admin ને મોકલવાનો છે.\n\n" +
+            "⏳ Admin screenshot verify કર્યા પછી જ Bonus તમારા Wallet માં add કરશે.\n\n" +
+            "💰 Bonus હાલમાં Wallet માં add થયો નથી."
+        );
+
+    } catch (error) {
+        console.error("Bonus Error:", error);
+
+        alert(
+            "❌ Something went wrong.\n\n" +
+            "Please try again later."
+        );
+    }
+}
+        function toggleTheme() {
+            document.body.classList.toggle("dark");
+
+            const btn = document.getElementById("themeBtn");
+
+            if (document.body.classList.contains("dark")) {
+                btn.innerHTML = "☀️";
+            } else {
+                btn.innerHTML = "🌙";
+            }
+        }
+
+    </script>
+    <!-- Withdraw Popup -->
+    <div id="withdrawPopup" class="withdraw-popup">
+
+        <div class="withdraw-box">
+
+            <h2>Withdraw Request</h2>
+
+            <p id="withdrawAmountText"></p>
+
+            <label>Payment Method</label>
+
+            <select id="paymentMethod" onchange="changePaymentMethod()">
+                <option value="UPI">UPI</option>
+                <option value="Bank">Bank</option>
+            </select>
+
+            <!-- UPI -->
+            <div id="upiSection">
+                <input type="text" id="upiId" placeholder="Enter UPI ID">
+            </div>
+
+            <!-- Bank -->
+            <div id="bankSection" style="display:none;">
+
+                <input type="text" id="bankName" placeholder="Bank Name">
+
+                <input type="text" id="accountHolderName" placeholder="Account Holder Name">
+
+                <input type="text" id="accountNumber" placeholder="Account Number">
+
+                <input type="text" id="ifscCode" placeholder="IFSC Code">
+
+            </div>
+
+            <div class="withdraw-buttons">
+
+                <button onclick="submitWithdraw()">
+                    Submit Request
+                </button>
+
+                <button onclick="closeWithdrawPopup()">
+                    Cancel
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<script id="student-notification-button-script">
+(function(){
+    async function enableStudentNotifications(){
+        const btn=document.getElementById("studentEnableNotificationBtn");
+        const text=document.getElementById("studentNotificationText");
+        if(btn){
+            btn.disabled=true;
+            btn.innerText="⏳ Enabling...";
+        }
+
+        try{
+            if(!("Notification" in window) || !("serviceWorker" in navigator) || !("PushManager" in window)){
+                throw new Error("આ browser notifications support કરતું નથી.");
+            }
+            if(!window.isSecureContext){
+                throw new Error("App Notifications માટે HTTPS જરૂરી છે.");
+            }
+
+            let permission=Notification.permission;
+            if(permission==="denied"){
+                throw new Error("Notifications Block છે. Browser settingsમાં આ site માટે Notifications → Allow કરો.");
+            }
+            if(permission!=="granted"){
+                permission=await Notification.requestPermission();
+            }
+            if(permission!=="granted"){
+                throw new Error("Notifications માટે Allow પસંદ કરવું જરૂરી છે.");
+            }
+
+            const token=localStorage.getItem("token");
+            if(!token) throw new Error("Login session મળી નથી. ફરી login કરો.");
+
+            const registration=await navigator.serviceWorker.register("/sw.js",{scope:"/"});
+            await navigator.serviceWorker.ready;
+
+            const keyRes=await fetch("/api/notifications/vapid-public-key",{
+                headers:{Authorization:"Bearer "+token}
+            });
+            const keyData=await keyRes.json();
+            if(!keyRes.ok || !keyData.publicKey){
+                throw new Error(keyData.message || "VAPID public key મળ્યો નથી.");
+            }
+
+            let sub=await registration.pushManager.getSubscription();
+            if(!sub){
+                sub=await registration.pushManager.subscribe({
+                    userVisibleOnly:true,
+                    applicationServerKey:urlBase64ToUint8Array(keyData.publicKey)
+                });
+            }
+
+            const saveRes=await fetch("/api/notifications/subscribe",{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json",
+                    Authorization:"Bearer "+token
+                },
+                body:JSON.stringify(sub.toJSON())
+            });
+            const saveData=await saveRes.json();
+            if(!saveRes.ok || !saveData.success){
+                throw new Error(saveData.message || "Notification subscription save થઈ નથી.");
+            }
+
+            if(text) text.innerHTML="<b style='color:#16a34a'>✅ App Notifications Enabled</b><br>હવે Update notifications તમને મળશે.";
+            if(btn){
+                btn.disabled=false;
+                btn.innerText="✅ App Notifications Enabled";
+                btn.style.background="linear-gradient(135deg,#16a34a,#059669)";
+            }
+        }catch(err){
+            console.error("Student notification error:",err);
+            if(text) text.innerHTML='<span style="color:#dc2626">❌ '+(err.message||"Notification enable થઈ નથી.")+'</span>';
+            if(btn){
+                btn.disabled=false;
+                btn.innerText="🔔 Enable App Notifications";
+            }
+        }
+    }
+
+    async function checkStudentNotificationStatus(){
+        const btn=document.getElementById("studentEnableNotificationBtn");
+        const text=document.getElementById("studentNotificationText");
+        if(!btn) return;
+
+        try{
+            if("Notification" in window && Notification.permission==="granted" && "serviceWorker" in navigator){
+                const reg=await navigator.serviceWorker.getRegistration("/");
+                const sub=reg ? await reg.pushManager.getSubscription() : null;
+                if(sub){
+                    btn.innerText="✅ App Notifications Enabled";
+                    btn.style.background="linear-gradient(135deg,#16a34a,#059669)";
+                    text.innerHTML="<b style='color:#16a34a'>Notifications ચાલુ છે.</b><br>Adminના notifications તમને મળશે.";
+                }
+            }
+        }catch(e){
+            console.log("Notification status:",e);
+        }
+    }
+
+    window.enableStudentNotifications=enableStudentNotifications;
+    window.addEventListener("load",function(){
+        setTimeout(checkStudentNotificationStatus,300);
+    });
+})();
+</script>
+
+
+<script id="fill-reading-answer-handler">
+document.addEventListener('click', function(e){
+    const btn = e.target.closest('#activityContent .activity-option[data-activity-answer]');
+    if (!btn) return;
+
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    if (typeof window.submitActivity !== 'function') {
+        console.error('submitActivity is not available');
+        return;
+    }
+
+    if (btn.disabled) return;
+    btn.disabled = true;
+
+    const answer = decodeURIComponent(btn.getAttribute('data-activity-answer') || '');
+
+    // Use the real server-backed submitActivity function.
+    window.submitActivity(answer).finally(function(){
+        // renderActivity() creates fresh buttons for the next question.
+        // If the server rejects the answer, re-enable this button.
+        if (document.body.contains(btn)) btn.disabled = false;
+    });
+}, true);
+</script>
+<!-- ADDONS CENTER -->
+<script id="challenge-navigation-fix">
+// The dashboard Challenge button used to call a missing function.
+// Open the real practice/challenge area instead of doing nothing.
+function openAddonsCenter(){
+  try {
+    if (typeof showScreen === 'function') {
+      showScreen('activities');
+      if (typeof renderActivities === 'function') renderActivities();
+      return;
+    }
+  } catch (e) { console.warn('Challenge navigation failed', e); }
+  window.location.hash = '#activities';
+}
+</script>
+
+<div id="aducateAddonsModal" class="book-modal" role="dialog" aria-modal="true" aria-labelledby="aducateAddonsTitle" style="z-index:10020">
+  <div class="book-box ad-addon-modal-box">
+    <div class="ad-addon-modal-head"><div><div class="book-payment-badge">ADUCATE ADD-ONS</div><h3 id="aducateAddonsTitle">🚀 Rewards & Add-ons</h3><p>Extra tools, rewards and support in one place.</p></div><button type="button" class="book-close-x" onclick="closeAducateAddons()">×</button></div>
+    <div class="ad-addon-tabs">
+      <button type="button" class="active" data-addon-tab="rewards" onclick="switchAducateAddonTab('rewards')">🎁 Rewards</button>
+      <button type="button" data-addon-tab="referral" onclick="switchAducateAddonTab('referral')">👥 Refer</button>
+      <button type="button" data-addon-tab="support" onclick="switchAducateAddonTab('support')">💬 Support</button>
+      <button type="button" data-addon-tab="challenge" onclick="switchAducateAddonTab('challenge')">🔥 Challenge</button>
+    </div>
+    <div id="addonPanelRewards" class="ad-addon-panel">
+      <div class="ad-addon-feature"><div class="ad-addon-big">🎟️</div><div><h4>Redeem Coupon</h4><p>Enter your valid Aducate coupon code to add the reward to your wallet.</p></div></div>
+      <div class="ad-addon-input-row"><input id="addonCouponInput" placeholder="Enter coupon code" autocomplete="off"><button type="button" onclick="redeemAducateCoupon()">Redeem</button></div>
+      <div id="addonCouponStatus" class="ad-addon-status"></div>
+    </div>
+    <div id="addonPanelReferral" class="ad-addon-panel" hidden>
+      <div class="ad-addon-feature"><div class="ad-addon-big">👥</div><div><h4>Refer & Earn</h4><p>Share your referral code. Both eligible users can receive the referral reward.</p></div></div>
+      <div class="ad-referral-code"><span id="addonReferralCode">Loading...</span><button type="button" onclick="copyAducateReferral()">Copy</button></div>
+      <div class="ad-addon-input-row"><input id="addonReferralInput" placeholder="Enter friend's referral code" autocomplete="off"><button type="button" onclick="applyAducateReferral()">Apply</button></div>
+      <div id="addonReferralStatus" class="ad-addon-status"></div>
+    </div>
+    <div id="addonPanelSupport" class="ad-addon-panel" hidden>
+      <div class="ad-addon-feature"><div class="ad-addon-big">💬</div><div><h4>Need Help?</h4><p>Send a message to the Aducate support team.</p></div></div>
+      <input id="addonSupportSubject" class="ad-addon-full-input" placeholder="Subject">
+      <select id="addonSupportCategory" class="ad-addon-full-input"><option value="General">General</option><option value="Payment">Payment</option><option value="Course">Course</option><option value="Account">Account</option></select>
+      <textarea id="addonSupportMessage" class="ad-addon-full-input" rows="4" placeholder="Write your message..."></textarea>
+      <button type="button" class="ad-addon-submit" onclick="createAducateTicket()">Send Support Request</button>
+      <div id="addonSupportStatus" class="ad-addon-status"></div>
+    </div>
+    <div id="addonPanelChallenge" class="ad-addon-panel" hidden>
+      <div class="ad-challenge ad-addon-challenge-box"><div class="ad-ring" id="addonRing" data-label="0/10"></div><div><h4>Today's Challenge</h4><p id="addonChallengeText">Complete 10 activities today.</p></div></div>
+      <button type="button" class="ad-addon-submit" id="addonClaimBtn" onclick="claimAducateChallenge()">🎁 Claim ₹1 Reward</button>
+      <div id="addonChallengeStatus" class="ad-addon-status"></div>
+    </div>
+  </div>
+</div>
+
+<div id="bookPurchaseModal" class="book-modal" role="dialog" aria-modal="true">
+  <div class="book-box book-payment-box">
+    <button type="button" class="book-close-x" onclick="closeBookPurchase()" aria-label="Close purchase" title="Close">×</button>
+    <div class="book-payment-head" style="padding-right:48px;">
+      <div>
+        <div class="book-payment-badge">ADUCATE ENGLISH BOOK</div>
+        <h3>📖 Complete English All-in-One</h3>
+        <p>Grammar • Vocabulary • Speaking • Everyday English</p>
+      </div>
+      <div class="book-price">₹499</div>
+    </div>
+
+    <div class="book-pay-grid">
+      <div class="book-qr-card">
+        <div class="book-pay-title">📷 Scan & Pay</div>
+        <img class="book-payment-qr" src="/book-payment-qr.png" alt="Aducate English Book ₹499 UPI QR code">
+        <div class="book-pay-caption">Scan this QR to pay exactly ₹499</div>
+      </div>
+      <div class="book-upi-card">
+        <div class="book-pay-title">📲 Pay with UPI</div>
+        <a class="book-upi-btn" href="upi://pay?pa=baa836610%40okaxis&pn=A%20Ba&am=499.00&cu=INR&tn=Aducate%20English%20Book">Open UPI App • Pay ₹499</a>
+        <div class="book-upi-id"><span>UPI ID</span><b id="bookUpiId">baa836610@okaxis</b><button type="button" onclick="copyBookUpi()">Copy</button></div>
+        <div class="book-pay-caption">After payment, enter your UTR / Transaction ID below.</div>
+      </div>
+    </div>
+
+    <div class="book-wallet-note">💰 Wallet balance ₹499+ હોય તો payment વગર Wallet થી પણ book ખરીદી શકો છો.</div>
+    <input id="bookPaymentReference" placeholder="Enter Payment Reference / UTR Number" autocomplete="off">
+    <div class="book-row"><button class="book-secondary" onclick="closeBookPurchase()">Close</button><button class="book-primary" id="bookWalletBtn" onclick="purchaseBookWithWallet()">💰 Buy with Wallet ₹499</button><button class="book-primary" id="bookRequestBtn" onclick="submitBookPurchase()">✅ Send UTR for Approval</button></div>
+    <div id="bookPurchaseStatus" class="book-status"></div>
+  </div>
+</div>
+<div id="bookReaderModal" class="book-modal" role="dialog" aria-modal="true">
+  <div class="book-box book-reader" id="bookReaderBox">
+    <button type="button" class="book-close-x" onclick="closeBookReader()" aria-label="Close book" title="Close Book">×</button>
+    <h3>📖 Aducate English Book</h3>
+    <div class="book-toolbar">
+      <button type="button" id="bookPrevBtn" onclick="bookPrevPage()">◀ Previous</button>
+      <span class="book-page-info" id="bookPageInfo">Page 1 / —</span>
+      <button type="button" id="bookNextBtn" onclick="bookNextPage()">Next ▶</button>
+      <div class="book-page-jump">
+        <input id="bookPageInput" type="number" min="1" inputmode="numeric" placeholder="Page" aria-label="Page number">
+        <button type="button" onclick="bookGoToPage()">Go</button>
+      </div>
+      <button type="button" onclick="bookZoomOut()">− Zoom</button>
+      <button type="button" onclick="bookZoomIn()">＋ Zoom</button>
+    </div>
+    <div id="bookReaderContent" class="book-reader-content">
+      <div id="bookCanvasWrap" class="book-canvas-wrap"><p>Loading book...</p></div>
+      <div class="book-protection-note">🔒 Online reading only • Download / Print controls disabled</div>
+    </div>
+    <div class="book-row"><button class="book-primary" onclick="closeBookReader()">Close Book</button></div>
+  </div>
+</div>
+
+
+<style id="aducate-addons-ui-style">
+.ad-addon-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.ad-addon-card{border:1px solid var(--ad-border);border-radius:18px;background:linear-gradient(145deg,#fff,#f8f9ff);padding:14px;display:flex;align-items:center;gap:10px;text-align:left;cursor:pointer;transition:.2s;min-height:82px;color:var(--ad-text,#25283d)}.ad-addon-card:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(31,41,55,.08)}.ad-addon-card>span:nth-child(2){flex:1}.ad-addon-card strong,.ad-addon-card small{display:block}.ad-addon-card small{font-size:11px;color:var(--ad-muted);margin-top:4px;line-height:1.35}.ad-addon-card>b{font-size:24px;color:#94a3b8}.ad-addon-icon{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:#f1f3ff;font-size:22px;flex:0 0 auto}.ad-addon-modal-box{width:min(760px,100%);padding:22px}.ad-addon-modal-head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}.ad-addon-modal-head h3{margin:0}.ad-addon-modal-head p{margin:5px 0 0;color:#64748b;font-size:12px}.ad-addon-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0 12px}.ad-addon-tabs button{border:1px solid #e2e8f0;background:#f8fafc;border-radius:12px;padding:11px 7px;font-weight:800;cursor:pointer}.ad-addon-tabs button.active{background:#eef0ff;border-color:#c7d2fe;color:#4338ca}.ad-addon-panel{border:1px solid #e7e9f2;border-radius:18px;background:#fafaff;padding:16px}.ad-addon-feature{display:flex;gap:12px;align-items:center;margin-bottom:14px}.ad-addon-feature h4{margin:0 0 3px;font-size:17px}.ad-addon-feature p{margin:0;color:#64748b;font-size:12px;line-height:1.5}.ad-addon-big{width:50px;height:50px;border-radius:15px;background:#f1f3ff;display:grid;place-items:center;font-size:25px;flex:0 0 auto}.ad-addon-input-row{display:flex;gap:8px}.ad-addon-input-row input,.ad-addon-full-input{width:100%;box-sizing:border-box;border:1px solid #dbe1ea;border-radius:11px;padding:12px;background:#fff;font:inherit;margin-bottom:9px}.ad-addon-input-row button,.ad-referral-code button,.ad-addon-submit{border:0;border-radius:11px;padding:11px 16px;background:linear-gradient(135deg,#5b5cf0,#7c3aed);color:#fff;font-weight:800;cursor:pointer;white-space:nowrap}.ad-referral-code{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px;border-radius:12px;background:#f3f4ff;margin-bottom:12px;font-weight:900;color:#3730a3}.ad-addon-status{min-height:20px;margin-top:9px;font-size:12px;color:#475569}.ad-addon-challenge-box{padding:5px 0 15px}.ad-addon-submit{width:100%}@media(max-width:780px){.ad-addon-grid{grid-template-columns:repeat(2,1fr)}.ad-addon-tabs{grid-template-columns:repeat(2,1fr)}.ad-addon-modal-box{padding:15px}}@media(max-width:480px){.ad-addon-grid{grid-template-columns:1fr}.ad-addon-card{min-height:72px}}
+</style>
+<style id="book-payment-upgrade-style">
+/* Purchase Book popup: fully scrollable on desktop + mobile */
+#bookPurchaseModal{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;align-items:flex-start;padding:14px;box-sizing:border-box;}
+#bookPurchaseModal .book-payment-box{width:min(760px,100%);text-align:left;padding:22px;max-height:calc(100vh - 28px);overflow-y:auto;overflow-x:hidden;box-sizing:border-box;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:thin;}
+#bookPurchaseModal .book-payment-box::-webkit-scrollbar{width:7px}
+#bookPurchaseModal .book-payment-box::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:99px}
+.book-payment-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;border-bottom:1px solid #e9eaf2;padding-bottom:14px}.book-payment-badge{display:inline-block;font-size:10px;font-weight:900;letter-spacing:.12em;color:#6d28d9;background:#f3e8ff;padding:6px 9px;border-radius:999px;margin-bottom:7px}.book-payment-head h3{margin:0;font-size:22px}.book-payment-head p{margin:5px 0 0;color:#64748b;font-size:12px}.book-pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:15px 0}.book-qr-card,.book-upi-card{border:1px solid #e7e9f2;border-radius:18px;background:#fafaff;padding:15px;text-align:center}.book-pay-title{font-weight:900;color:#1e293b;margin-bottom:9px}.book-payment-qr{width:210px;max-width:75%;display:block;margin:0 auto 8px;border-radius:12px;background:#fff;padding:8px;box-shadow:0 8px 24px rgba(15,23,42,.12)}.book-pay-caption{font-size:11px;color:#64748b;line-height:1.5}.book-upi-btn{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;background:linear-gradient(135deg,#16a34a,#059669);color:#fff;text-decoration:none;font-weight:900;margin:10px 0 12px}.book-upi-id{display:flex;align-items:center;gap:7px;justify-content:center;flex-wrap:wrap;font-size:12px;color:#475569}.book-upi-id span{font-weight:700}.book-upi-id b{font-size:13px;color:#111827}.book-upi-id button{border:0;border-radius:8px;padding:5px 9px;background:#e0e7ff;color:#3730a3;font-weight:800;cursor:pointer}.book-wallet-note{background:#f5f3ff;color:#4c1d95;border:1px solid #e9d5ff;border-radius:12px;padding:10px 12px;font-size:12px;margin-bottom:10px}.book-payment-box #bookPaymentReference{margin:0}.book-payment-box .book-row{flex-wrap:wrap}.book-payment-box .book-row button{min-width:150px}.book-payment-box .book-status{background:#f8fafc;border-radius:12px;padding:9px 10px}
+@media(max-width:650px){#bookPurchaseModal{padding:7px;align-items:flex-start}#bookPurchaseModal .book-payment-box{padding:15px;max-height:calc(100vh - 14px);border-radius:18px}.book-payment-head{display:block}.book-price{margin:7px 0 0}.book-pay-grid{grid-template-columns:1fr}.book-payment-qr{width:190px}.book-payment-box .book-row button{width:100%;min-width:0}}
+</style>
+
+<script>
+async function bookApi(path, options={}){
+  const token=localStorage.getItem("token");
+  const res=await fetch("/api/book"+path,{cache:"no-store",...options,headers:{"Content-Type":"application/json","Authorization":"Bearer "+token,...(options.headers||{})}});
+  const data=await res.json().catch(()=>({success:false,message:"Server error"}));
+  if(!res.ok||data.success===false) throw new Error(data.message||"Something went wrong");
+  return data;
+}
+async function copyBookUpi(){
+  const upi=document.getElementById('bookUpiId')?.textContent?.trim()||'baa836610@okaxis';
+  try{await navigator.clipboard.writeText(upi);document.getElementById('bookPurchaseStatus').textContent='✅ UPI ID copied: '+upi;}catch(e){document.getElementById('bookPurchaseStatus').textContent='UPI ID: '+upi;}
+}
+async function openBookPurchase(){
+  const modal=document.getElementById("bookPurchaseModal"), status=document.getElementById("bookPurchaseStatus"), btn=document.getElementById("bookRequestBtn"), input=document.getElementById("bookPaymentReference"), walletBtn=document.getElementById("bookWalletBtn");
+  modal.classList.add("show"); status.textContent="Checking access..."; input.style.display="block"; btn.style.display="block"; walletBtn.style.display="block";
+  try{
+    const d=await bookApi("/status"); const b=d.bookPurchase||{};
+    if(b.status==="approved"){ modal.classList.remove("show"); openBookReader(); return; }
+    if(b.status==="pending"){status.textContent="⏳ Payment verification pending. Admin permission મળ્યા પછી book open થશે."; input.style.display="none"; btn.style.display="none"; walletBtn.style.display="none";}
+    else if(b.status==="rejected"){status.textContent="❌ Previous request rejected. Correct payment reference enter કરીને ફરી request મોકલો.";}
+    else status.textContent="QR scan કરો અથવા UPI buttonથી ₹499 pay કરો. પછી UTR / Transaction ID enter કરીને approval માટે મોકલો.";
+  }catch(err){status.textContent="❌ "+err.message;}
+}
+function closeBookPurchase(){document.getElementById("bookPurchaseModal").classList.remove("show")}
+async function openBookReader(){
+  const modal=document.getElementById("bookReaderModal"), wrap=document.getElementById("bookCanvasWrap");
+  modal.classList.add("show");
+  wrap.innerHTML="<p>Loading your approved book...</p>";
+  try{
+    const token=localStorage.getItem("token");
+    if(!token) throw new Error("Please login first.");
+    if(!window.__bookPdfJsPromise){
+      window.__bookPdfJsPromise=import("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs");
+    }
+    const pdfjsLib=await window.__bookPdfJsPromise;
+    pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";
+    window.__bookPdfDoc=await pdfjsLib.getDocument({
+      url:"/api/book/content?fresh="+Date.now(),
+      httpHeaders:{Authorization:"Bearer "+token},
+      withCredentials:false,
+      disableAutoFetch:false,
+      disableStream:false
+    }).promise;
+    window.__bookPage=1;
+    window.__bookScale=0;
+    window.__bookZoomed=false;
+    await renderBookPage();
+  }catch(err){
+    console.error("Book viewer error:",err);
+    wrap.innerHTML="<p>❌ "+(err.message||"Unable to open book.")+"</p>";
+  }
+}
+
+async function renderBookPage(){
+  const pdf=window.__bookPdfDoc, wrap=document.getElementById("bookCanvasWrap");
+  if(!pdf||!wrap)return;
+  const pageNo=Math.max(1,Math.min(window.__bookPage||1,pdf.numPages));
+  window.__bookPage=pageNo;
+  const page=await pdf.getPage(pageNo);
+  const baseViewport=page.getViewport({scale:1});
+  if(!window.__bookZoomed || !window.__bookScale){
+    const availableWidth=Math.max(180,wrap.clientWidth-12);
+    const fitScale=availableWidth/baseViewport.width; 
+    window.__bookScale=Math.max(.55,Math.min(fitScale,1.65));
+  }
+  const viewport=page.getViewport({scale:window.__bookScale});
+  const canvas=document.createElement("canvas");
+  const ctx=canvas.getContext("2d",{alpha:false});
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  canvas.width=Math.floor(viewport.width*dpr);
+  canvas.height=Math.floor(viewport.height*dpr);
+  canvas.style.width=Math.floor(viewport.width)+"px";
+  canvas.style.height=Math.floor(viewport.height)+"px";
+  canvas.setAttribute("aria-label","Book page "+pageNo);
+  canvas.oncontextmenu=e=>e.preventDefault();
+  wrap.replaceChildren(canvas);
+  await page.render({canvasContext:ctx,viewport,transform:dpr!==1?[dpr,0,0,dpr,0,0]:null}).promise;
+  document.getElementById("bookPageInfo").textContent=`Page ${pageNo} / ${pdf.numPages}`;
+  const pageInput=document.getElementById("bookPageInput");
+  if(pageInput){pageInput.max=pdf.numPages;pageInput.value=pageNo;}
+  document.getElementById("bookPrevBtn").disabled=pageNo<=1;
+  document.getElementById("bookNextBtn").disabled=pageNo>=pdf.numPages;
+  wrap.scrollTop=0;
+}
+function bookPrevPage(){if(window.__bookPage>1){window.__bookPage--;renderBookPage();}}
+function bookNextPage(){if(window.__bookPdfDoc&&window.__bookPage<window.__bookPdfDoc.numPages){window.__bookPage++;renderBookPage();}}
+function bookGoToPage(){
+  const input=document.getElementById("bookPageInput"), pdf=window.__bookPdfDoc;
+  if(!input||!pdf)return;
+  const requested=parseInt(input.value,10);
+  if(!Number.isFinite(requested)||requested<1||requested>pdf.numPages){
+    input.value=window.__bookPage||1;
+    input.focus();
+    return;
+  }
+  window.__bookPage=requested;
+  renderBookPage();
+  input.blur();
+}
+function bookZoomIn(){window.__bookZoomed=true;window.__bookScale=Math.min(2.5,(window.__bookScale||1)+0.15);renderBookPage();}
+function bookZoomOut(){window.__bookZoomed=true;window.__bookScale=Math.max(.55,(window.__bookScale||1)-0.15);renderBookPage();}
+function closeBookReader(){
+  document.getElementById("bookReaderModal").classList.remove("show");
+  const wrap=document.getElementById("bookCanvasWrap");
+  if(wrap)wrap.innerHTML="<p>Book closed.</p>";
+  if(window.__bookPdfDoc){try{window.__bookPdfDoc.destroy();}catch(e){}}
+  window.__bookPdfDoc=null;window.__bookPage=1;window.__bookScale=0;window.__bookZoomed=false;
+  const pageInput=document.getElementById("bookPageInput");
+  if(pageInput){pageInput.value="";pageInput.removeAttribute("max");}
+}
+
+// Student-facing protection: no save/print/context-menu shortcuts while the reader is open.
+document.addEventListener("keydown",e=>{
+  const input=e.target.closest?.("#bookPageInput");
+  if(input&&e.key==="Enter"){e.preventDefault();bookGoToPage();}
+});
+
+document.addEventListener("contextmenu",e=>{if(e.target.closest("#bookReaderModal"))e.preventDefault();});
+document.addEventListener("keydown",e=>{
+  if(!document.getElementById("bookReaderModal")?.classList.contains("show"))return;
+  if((e.ctrlKey||e.metaKey)&&["s","p","u"].includes(e.key.toLowerCase())){e.preventDefault();e.stopPropagation();}
+  if(e.key==="PrintScreen")e.preventDefault();
+});
+let __bookResizeTimer;
+window.addEventListener("resize",()=>{
+  if(!document.getElementById("bookReaderModal")?.classList.contains("show") || window.__bookZoomed) return;
+  clearTimeout(__bookResizeTimer);
+  __bookResizeTimer=setTimeout(()=>renderBookPage(),120);
+});
+
+async function purchaseBookWithWallet(){
+  const status=document.getElementById("bookPurchaseStatus"), btn=document.getElementById("bookWalletBtn");
+  if(!confirm("તમારા Wallet માંથી ₹499 deduct કરીને Book ખરીદવી છે?")) return;
+  btn.disabled=true; btn.textContent="Processing...";
+  try{
+    const d=await bookApi("/wallet-purchase",{method:"POST",body:"{}"});
+    status.textContent="✅ "+d.message;
+    const wallet=document.getElementById("wallet"); if(wallet && d.wallet!==undefined) wallet.textContent=Number(d.wallet).toFixed(2);
+    setTimeout(()=>{closeBookPurchase();openBookReader();},700);
+  }catch(err){status.textContent="❌ "+err.message;btn.disabled=false;btn.textContent="💰 Buy with Wallet ₹499";}
+}
+
+async function submitBookPurchase(){
+  const ref=document.getElementById("bookPaymentReference").value.trim(), status=document.getElementById("bookPurchaseStatus"), btn=document.getElementById("bookRequestBtn");
+  if(ref.length<3){status.textContent="⚠️ Payment Reference / UTR enter કરો.";return}
+  btn.disabled=true; btn.textContent="Sending...";
+  try{const d=await bookApi("/request",{method:"POST",body:JSON.stringify({paymentReference:ref})});status.textContent="✅ "+d.message;document.getElementById("bookPaymentReference").style.display="none";btn.style.display="none";}
+  catch(err){status.textContent="❌ "+err.message;btn.disabled=false;btn.textContent="Send for Admin Approval";}
+}
+</script>
+
+
+<style id="subscription-gate-style">
+#subscriptionGate{position:fixed;inset:0;z-index:999999;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(15,23,42,.78);backdrop-filter:blur(8px)}
+#subscriptionGate.show{display:flex}
+.subscription-box{width:min(560px,100%);max-height:94vh;overflow:auto;background:#fff;color:#172033;border-radius:26px;padding:22px;box-shadow:0 30px 90px rgba(0,0,0,.38);text-align:center}
+.subscription-box h2{margin:0 0 7px;font-size:25px}.subscription-box p{margin:7px 0;color:#64748b;line-height:1.5}
+.subscription-price{font-size:34px;font-weight:900;color:#6d28d9;margin:8px 0 2px}.subscription-qr{width:min(210px,58vw);height:auto;display:block;margin:14px auto;border-radius:16px;border:8px solid #fff;box-shadow:0 8px 30px rgba(0,0,0,.16);image-rendering:auto}
+.subscription-pay-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px 16px;border:0;border-radius:13px;background:#16a34a;color:#fff;font-weight:900;font-size:16px;cursor:pointer;text-decoration:none;margin:4px 0 10px}
+.subscription-input{width:100%;box-sizing:border-box;padding:13px 14px;border:2px solid #e2e8f0;border-radius:13px;font:inherit;outline:none}.subscription-input:focus{border-color:#7c3aed}
+.subscription-submit{width:100%;padding:13px 16px;border:0;border-radius:13px;background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;font-weight:900;font-size:16px;cursor:pointer;margin-top:10px}.subscription-submit:disabled{opacity:.6;cursor:not-allowed}
+.subscription-status{margin-top:12px;padding:11px 12px;border-radius:12px;font-weight:800;background:#f1f5f9;color:#334155}.subscription-status.pending{background:#fef3c7;color:#92400e}.subscription-status.rejected{background:#fee2e2;color:#991b1b}.subscription-note{font-size:12px;color:#64748b!important;margin-top:12px!important}
+@media(max-width:520px){.subscription-box{padding:17px;border-radius:20px}.subscription-box h2{font-size:21px}.subscription-price{font-size:30px}.subscription-qr{width:min(200px,58vw)}}
+</style>
+
+<div id="subscriptionGate" aria-hidden="true">
+  <div class="subscription-box">
+    <h2>🔐 Activate Your App Access</h2>
+    <p>₹200 payment કર્યા પછી Admin payment verify કરશે અને app access activate કરશે.</p>
+    <div class="subscription-price">₹200</div>
+    <p><b>Step 1:</b> નીચેનો QR scan કરીને ₹200 pay કરો.</p>
+    <img class="subscription-qr" src="/payment-qr.jpg" alt="₹200 payment QR code">
+    <a id="subscriptionUpiBtn" class="subscription-pay-btn" href="upi://pay?pa=baa836610%40okaxis&pn=A%20Ba&am=200.00&cu=INR&tn=English%20App%20Subscription">📲 Pay ₹200 via UPI</a>
+    <div style="font-size:13px;color:#475569;margin:2px 0 10px">UPI ID: <b>baa836610@okaxis</b> · Amount: <b>₹200</b></div>
+    <p><b>Step 2:</b> Payment કર્યા પછી UTR / Transaction ID અને payment screenshot upload કરો.</p>
+    <input id="subscriptionPaymentReference" class="subscription-input" type="text" maxlength="100" autocomplete="off" placeholder="Enter UTR / Transaction ID">
+    <label for="subscriptionPaymentScreenshot" style="display:block;text-align:left;margin-top:10px;font-weight:900;color:#334155">📸 Payment Screenshot</label>
+    <input id="subscriptionPaymentScreenshot" class="subscription-input" type="file" accept="image/jpeg,image/png,image/webp" style="padding:10px">
+    <div id="subscriptionScreenshotPreview" style="display:none;margin-top:10px"></div>
+    <button id="subscriptionSubmitBtn" class="subscription-submit" type="button" onclick="submitSubscriptionPayment()">✅ I Have Paid — Send for Verification</button>
+    <div style="margin-top:14px;padding-top:14px;border-top:1px dashed #cbd5e1">
+      <div style="font-size:13px;color:#475569;margin-bottom:8px"><b>Already have an access PIN?</b></div>
+      <div style="display:flex;gap:8px;align-items:stretch">
+        <input id="subscriptionAccessPin" class="subscription-input" type="password" inputmode="numeric" autocomplete="off" maxlength="20" placeholder="Enter Access PIN" style="margin:0">
+        <button id="subscriptionPinBtn" type="button" onclick="submitSubscriptionPin()" style="border:0;border-radius:13px;padding:0 16px;background:#0f172a;color:#fff;font-weight:900;cursor:pointer;white-space:nowrap">🔑 PIN Access</button>
+      </div>
+      <div id="subscriptionPinStatus" style="margin-top:8px;font-size:13px;font-weight:800"></div>
+    </div>
+    <div id="subscriptionStatusBox" class="subscription-status">Checking subscription status...</div>
+    <p class="subscription-note">⚠️ "પ્રિય વિદ્યાર્થી/વાલી, કૃપા કરીને નોંધ લેવી કે એકવાર ચૂકવેલી ફી/પેમેન્ટ કોઈ પણ સંજોગોમાં પરત (refund) મળશે નહીં. સહકાર બદલ આભાર."</p>
+    <p class="subscription-note">⚠️ "Dear Student/Parent, please note that the fees/payment once paid is strictly non-refundable. Thank you for your cooperation."</p>
+  </div>
+</div>
+
+<script id="subscription-student-script">
+(function(){
+  window.__subscriptionActive = false;
+  const gate = document.getElementById('subscriptionGate');
+  const statusBox = document.getElementById('subscriptionStatusBox');
+  const input = document.getElementById('subscriptionPaymentReference');
+  const submitBtn = document.getElementById('subscriptionSubmitBtn');
+  const screenshotInput = document.getElementById('subscriptionPaymentScreenshot');
+  const screenshotPreview = document.getElementById('subscriptionScreenshotPreview');
+
+  function showGate(status, note){
+    window.__subscriptionActive = false;
+    gate.classList.add('show');
+    gate.setAttribute('aria-hidden','false');
+    if(statusBox){
+      statusBox.className = 'subscription-status ' + (status || '');
+      statusBox.textContent = note || 'Subscription payment is required.';
+    }
+  }
+  function hideGate(){
+    window.__subscriptionActive = true;
+    gate.classList.remove('show');
+    gate.setAttribute('aria-hidden','true');
+  }
+  window.checkSubscriptionStatus = async function(){
+    const token = localStorage.getItem('token');
+    if(!token){ return; }
+    try{
+      const res = await fetch('/api/subscription/status?_='+Date.now(), {
+        cache:'no-store',
+        headers:{Authorization:'Bearer '+token}
+      });
+      const data = await res.json().catch(()=>({}));
+      if(!res.ok || !data.success){
+        if(res.status===401){ localStorage.removeItem('token'); localStorage.removeItem('user'); location.replace('login.html'); return; }
+        throw new Error(data.message || 'Subscription status could not be loaded.');
+      }
+      const sub = data.subscription || {};
+      if(sub.status==='active' && sub.access===true){ hideGate(); return true; }
+      if(sub.status==='pending'){
+        if(input && sub.paymentReference) input.value=sub.paymentReference;
+        showGate('pending','⏳ Payment submitted. Please wait for Admin confirmation.');
+      }else if(sub.status==='rejected'){
+        if(input && sub.paymentReference) input.value=sub.paymentReference;
+        showGate('rejected','❌ Payment was not verified. Please pay again and submit the new UTR.');
+      }else{
+        showGate('','💳 No active subscription found. Pay ₹200 and submit your UTR for verification.');
+      }
+      return false;
+    }catch(e){
+      console.error('Subscription status error:',e);
+      showGate('', '⚠️ Subscription status could not be checked. Please try again.');
+      return false;
+    }
+  };
+  const upiBtn = document.getElementById('subscriptionUpiBtn');
+  if(upiBtn){
+    upiBtn.addEventListener('click', function(){
+      // Standard UPI deep-link: on supported Android/mobile browsers this opens
+      // the installed UPI app/chooser with the payee and ₹200 pre-filled.
+      upiBtn.textContent='📲 Opening UPI App...';
+      setTimeout(()=>{upiBtn.textContent='📲 Pay ₹200 via UPI';},2500);
+    });
+  }
+
+  function setScreenshotPreview(dataUrl){
+    if(!screenshotPreview) return;
+    if(!dataUrl){ screenshotPreview.style.display='none'; screenshotPreview.innerHTML=''; return; }
+    screenshotPreview.style.display='block';
+    screenshotPreview.innerHTML='<img src="'+dataUrl+'" alt="Payment screenshot preview" style="max-width:180px;max-height:220px;border-radius:12px;border:1px solid #e2e8f0;box-shadow:0 6px 20px rgba(0,0,0,.12)"><div style="font-size:12px;color:#64748b;margin-top:5px">Screenshot selected</div>';
+  }
+  function compressScreenshot(file){
+    return new Promise((resolve,reject)=>{
+      if(!file) return reject(new Error('Please upload your payment screenshot.'));
+      if(!/^image\/(jpeg|png|webp)$/i.test(file.type)) return reject(new Error('Please upload JPG, PNG or WEBP screenshot.'));
+      const reader=new FileReader();
+      reader.onload=()=>{
+        const img=new Image();
+        img.onload=()=>{
+          const max=1200;
+          const scale=Math.min(1,max/Math.max(img.width,img.height));
+          const canvas=document.createElement('canvas');
+          canvas.width=Math.max(1,Math.round(img.width*scale));
+          canvas.height=Math.max(1,Math.round(img.height*scale));
+          const ctx=canvas.getContext('2d');
+          ctx.drawImage(img,0,0,canvas.width,canvas.height);
+          let quality=.78, data=canvas.toDataURL('image/jpeg',quality);
+          while(data.length>1800000 && quality>.45){ quality-=.08; data=canvas.toDataURL('image/jpeg',quality); }
+          if(data.length>2200000) return reject(new Error('Screenshot is too large. Please choose a smaller image.'));
+          resolve(data);
+        };
+        img.onerror=()=>reject(new Error('Could not read screenshot.'));
+        img.src=reader.result;
+      };
+      reader.onerror=()=>reject(new Error('Could not read screenshot.'));
+      reader.readAsDataURL(file);
+    });
+  }
+  if(screenshotInput){
+    screenshotInput.addEventListener('change', async function(){
+      try{ const data=await compressScreenshot(this.files?.[0]); setScreenshotPreview(data); this.dataset.compressed=data; }
+      catch(e){ this.value=''; delete this.dataset.compressed; setScreenshotPreview(''); if(statusBox){statusBox.className='subscription-status rejected';statusBox.textContent='❌ '+e.message;} }
+    });
+  }
+
+  window.submitSubscriptionPin = async function(){
+    const pinInput = document.getElementById('subscriptionAccessPin');
+    const pinBtn = document.getElementById('subscriptionPinBtn');
+    const pinStatus = document.getElementById('subscriptionPinStatus');
+    const token = localStorage.getItem('token');
+    const pin = String(pinInput?.value || '').trim();
+    if(!token){ location.replace('login.html'); return; }
+    if(!pin){
+      if(pinStatus){ pinStatus.style.color='#b91c1c'; pinStatus.textContent='❌ Enter the access PIN.'; }
+      pinInput?.focus();
+      return;
+    }
+    if(pinBtn){ pinBtn.disabled=true; pinBtn.textContent='Checking...'; }
+    try{
+      const res=await fetch('/api/subscription/pin-access',{
+        method:'POST',
+        headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},
+        body:JSON.stringify({pin})
+      });
+      const data=await res.json().catch(()=>({}));
+      if(!res.ok || !data.success) throw new Error(data.message || 'Invalid access PIN.');
+      if(pinStatus){ pinStatus.style.color='#15803d'; pinStatus.textContent='✅ PIN accepted. Access granted.'; }
+      hideGate();
+      // Refresh the cached user/session state without requiring another login.
+      try{
+        const statusRes=await fetch('/api/subscription/status?_='+Date.now(),{cache:'no-store',headers:{Authorization:'Bearer '+token}});
+        const statusData=await statusRes.json().catch(()=>({}));
+        if(statusData.subscription){
+          const oldUser=JSON.parse(localStorage.getItem('user')||'{}');
+          localStorage.setItem('user',JSON.stringify({...oldUser,subscriptionStatus:'active',subscriptionAccess:true,isBlocked:false,permanentBlocked:false}));
+        }
+      }catch(_){}
+    }catch(e){
+      if(pinStatus){ pinStatus.style.color='#b91c1c'; pinStatus.textContent='❌ '+e.message; }
+    }finally{
+      if(pinBtn){ pinBtn.disabled=false; pinBtn.textContent='🔑 PIN Access'; }
+    }
+  };
+
+  window.submitSubscriptionPayment = async function(){
+    const token = localStorage.getItem('token');
+    const ref = String(input?.value || '').trim();
+    if(!token){ location.replace('login.html'); return; }
+    if(ref.length < 3){
+      if(statusBox){statusBox.className='subscription-status rejected';statusBox.textContent='❌ Please enter a valid UTR / Transaction ID.';}
+      input?.focus(); return;
+    }
+    const screenshot = screenshotInput?.dataset?.compressed || '';
+    if(!screenshot){
+      if(statusBox){statusBox.className='subscription-status rejected';statusBox.textContent='❌ Please upload the payment screenshot.';}
+      screenshotInput?.focus(); return;
+    }
+    if(submitBtn) { submitBtn.disabled=true; submitBtn.textContent='Submitting...'; }
+    try{
+      const res=await fetch('/api/subscription/request',{
+        method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},
+        body:JSON.stringify({paymentReference:ref,paymentScreenshot:screenshot,paymentScreenshotName:screenshotInput?.files?.[0]?.name||'payment-screenshot.jpg'})
+      });
+      const data=await res.json().catch(()=>({}));
+      if(!res.ok || !data.success) throw new Error(data.message || 'Payment request failed.');
+      showGate('pending','⏳ Payment details + screenshot submitted. Admin will verify the ₹200 payment and activate your access.');
+    }catch(e){
+      if(statusBox){statusBox.className='subscription-status rejected';statusBox.textContent='❌ '+e.message;}
+    }finally{
+      if(submitBtn){submitBtn.disabled=false;submitBtn.textContent='✅ I Have Paid — Send for Verification';}
+    }
+  };
+
+  // Check immediately after the page DOM is ready. The overlay remains on top
+  // while every protected API is blocked server-side until admin approval.
+  document.addEventListener('DOMContentLoaded', function(){
+    if(localStorage.getItem('token')) window.checkSubscriptionStatus();
+  }, {once:true});
+
+  // Admin confirmation from another device is picked up automatically.
+  setInterval(function(){
+    if(localStorage.getItem('token') && !window.__subscriptionActive) window.checkSubscriptionStatus();
+  }, 8000);
+})();
+</script>
+
+<script id="block-rules-script">
+function openBlockRules(){const m=document.getElementById('blockRulesModal');if(m){m.classList.add('show');document.body.style.overflow='hidden';}}
+function closeBlockRules(){const m=document.getElementById('blockRulesModal');if(m){m.classList.remove('show');document.body.style.overflow='';}}
+document.addEventListener('click',function(e){const m=document.getElementById('blockRulesModal');if(m&&e.target===m)closeBlockRules();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBlockRules();});
+</script>
+
+<script id="aducate-addons-center-script">
+(function(){
+  const token=()=>localStorage.getItem('token')||'';
+  const api=async(path,opts={})=>{const r=await fetch('/api/addons'+path,{...opts,headers:{'Content-Type':'application/json',Authorization:'Bearer '+token(),...(opts.headers||{})}});const d=await r.json().catch(()=>({}));if(!r.ok||!d.success)throw new Error(d.message||'Something went wrong.');return d;};
+  function status(id,msg,ok){const e=document.getElementById(id);if(e){e.textContent=msg||'';e.style.color=ok?'#15803d':'#b91c1c';}}
+  window.switchAducateAddonTab=function(tab){['rewards','referral','support','challenge'].forEach(x=>{const p=document.getElementById('addonPanel'+x[0].toUpperCase()+x.slice(1));if(p)p.hidden=x!==tab;const b=document.querySelector('[data-addon-tab="'+x+'"]');if(b)b.classList.toggle('active',x===tab);});if(tab==='referral')loadReferral();if(tab==='challenge')loadChallenge();};
+  window.openAducateAddons=function(tab='rewards'){const m=document.getElementById('aducateAddonsModal');if(!m)return;m.classList.add('show');document.body.style.overflow='hidden';switchAducateAddonTab(tab);};
+  window.closeAducateAddons=function(){const m=document.getElementById('aducateAddonsModal');if(m)m.classList.remove('show');document.body.style.overflow='';};
+  async function loadReferral(){try{const d=await api('/dashboard');document.getElementById('addonReferralCode').textContent=d.profile?.referralCode||'Unavailable';}catch(e){status('addonReferralStatus',e.message,false);}}
+  window.copyAducateReferral=async function(){const v=document.getElementById('addonReferralCode')?.textContent||'';if(!v||v==='Loading...')return;try{await navigator.clipboard.writeText(v);status('addonReferralStatus','✅ Referral code copied.',true);}catch(e){status('addonReferralStatus','Referral code: '+v,true);}};
+  window.redeemAducateCoupon=async function(){const code=document.getElementById('addonCouponInput')?.value.trim();if(!code)return status('addonCouponStatus','❌ Enter a coupon code.',false);try{const d=await api('/coupon',{method:'POST',body:JSON.stringify({code})});status('addonCouponStatus','✅ '+(d.message||'Coupon redeemed successfully.'),true);document.getElementById('addonCouponInput').value='';if(window.refreshAducateModernDashboard)window.refreshAducateModernDashboard();}catch(e){status('addonCouponStatus','❌ '+e.message,false);}};
+  window.applyAducateReferral=async function(){const code=document.getElementById('addonReferralInput')?.value.trim();if(!code)return status('addonReferralStatus','❌ Enter a referral code.',false);try{const d=await api('/referral/apply',{method:'POST',body:JSON.stringify({code})});status('addonReferralStatus','✅ '+(d.message||'Referral applied.'),true);document.getElementById('addonReferralInput').value='';if(window.refreshAducateModernDashboard)window.refreshAducateModernDashboard();}catch(e){status('addonReferralStatus','❌ '+e.message,false);}};
+  window.createAducateTicket=async function(){const subject=document.getElementById('addonSupportSubject')?.value.trim(),message=document.getElementById('addonSupportMessage')?.value.trim(),category=document.getElementById('addonSupportCategory')?.value;if(!subject||!message)return status('addonSupportStatus','❌ Please enter subject and message.',false);try{const d=await api('/tickets',{method:'POST',body:JSON.stringify({subject,message,category})});status('addonSupportStatus','✅ '+(d.message||'Support request sent.'),true);document.getElementById('addonSupportSubject').value='';document.getElementById('addonSupportMessage').value='';}catch(e){status('addonSupportStatus','❌ '+e.message,false);}};
+  async function loadChallenge(){try{const d=await api('/dashboard');const c=d.profile?.dailyChallenge||{},p=Math.min(10,Number(c.progress||0)),ring=document.getElementById('addonRing');if(ring){const deg=p/10*360;ring.style.background=`conic-gradient(#5b5cf0 ${deg}deg,#eceef7 ${deg}deg)`;ring.setAttribute('data-label',p+'/10');}document.getElementById('addonChallengeText').textContent=p>=10?(c.claimed?'Reward already claimed today.':'🎉 Challenge complete! Claim your ₹1 reward.'):`${p}/10 quiz questions answered today.`;const b=document.getElementById('addonClaimBtn');if(b){b.disabled=p<10||!!c.claimed;b.textContent=c.claimed?'✅ Reward Claimed':p>=10?'🎁 Claim ₹1 Reward':'🔒 Complete 10 Activities';}}catch(e){status('addonChallengeStatus',e.message,false);}}
+  window.claimAducateChallenge=async function(){try{const d=await api('/challenge/claim',{method:'POST',body:'{}'});status('addonChallengeStatus','✅ ₹'+(d.reward||1)+' added to your wallet.',true);loadChallenge();if(window.refreshAducateModernDashboard)window.refreshAducateModernDashboard();}catch(e){status('addonChallengeStatus','❌ '+e.message,false);}};
+  document.addEventListener('click',e=>{const m=document.getElementById('aducateAddonsModal');if(m&&e.target===m)closeAducateAddons();});
+})();
+</script>
+<script id="aducate-modern-dashboard-script">
+(function(){
+  function getUser(){try{return JSON.parse(localStorage.getItem('user')||'{}')}catch(e){return {}}}
+  function setText(id,v){const e=document.getElementById(id);if(e)e.textContent=v}
+  function renderDays(streak){const box=document.getElementById('adDays');if(!box)return;const day=Math.max(1,Math.min(30,Number(streak||1)));box.innerHTML=Array.from({length:30},(_,i)=>`<div class="ad-day ${i+1<day?'done ':''}${i+1===day?'today':''}">${i+1}</div>`).join('')}
+  async function loadModern(){
+    const u=getUser(); const name=u.name||u.fullName||'Student';
+    setText('adWelcome',`Hi ${name}! આજે થોડું English practice કરીએ અને તમારું learning streak વધારીએ.`);
+    try{
+      const r=await fetch('/api/addons/dashboard',{headers:{Authorization:'Bearer '+(localStorage.getItem('token')||'')}});
+      const d=await r.json(); if(!d.success)return; const p=d.profile||{};
+      const q=Number(window.totalQuestionsAnswered||0); const progress=Math.min(100,Math.round((q%100)));
+      setText('adLevelText','Level '+(p.level||1));setText('adQuestions',q);setText('adStreak',p.streak||0);setText('adXp',p.experience||0);
+      setText('adProgressText',progress+'%'); const bar=document.getElementById('adProgressBar');if(bar)bar.style.width=progress+'%';
+      const cp=Math.min(10,Number(p.dailyChallenge?.progress||0)); const deg=cp/10*360; const ring=document.getElementById('adRing');if(ring){ring.style.background=`conic-gradient(#5b5cf0 ${deg}deg,#eceef7 ${deg}deg)`;ring.setAttribute('data-label',cp+'/10')}
+      const day=Math.max(1,Math.min(30,Number(p.streak||1)));setText('adChallengeLabel','Day '+day);
+      setText('adChallengeText',cp>=10?'🎉 Today’s mission complete! Claim your reward in Add-ons.':`${cp}/10 quiz questions answered today • 500 quiz questions available.`);
+      const ap=Math.max(0,Number(p.dailyActivities?.progress||0)); const ar=document.getElementById('adActivityRing'); if(ar){ const adeg=Math.min(1,ap/10)*360; ar.style.background=`conic-gradient(#06b6d4 ${adeg}deg,#e0f2fe ${adeg}deg)`; ar.setAttribute('data-label',String(ap)); } setText('adActivityText',`${ap} activities completed today.`); renderDays(p.streak||0);
+    }catch(e){renderDays(0)}
+  }
+  window.addEventListener('load',()=>setTimeout(loadModern,500));
+  window.addEventListener('DOMContentLoaded',()=>setTimeout(loadModern,300));
+  window.refreshAducateModernDashboard=loadModern;
+})();
+</script>
+</body>
+
+</html>

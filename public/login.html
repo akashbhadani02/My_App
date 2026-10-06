@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#506ef0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="/aducate-logo.png">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aducate - Login</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#4facfe,#00f2fe);
+}
+
+.container{
+
+width:360px;
+
+background:white;
+
+padding:30px;
+
+border-radius:15px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+}
+
+h2{
+
+text-align:center;
+
+margin-bottom:20px;
+
+}
+
+input{
+
+width:100%;
+
+padding:12px;
+
+margin:8px 0;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+font-size:16px;
+
+}
+
+button{
+
+width:100%;
+
+padding:12px;
+
+margin-top:10px;
+
+border:none;
+
+border-radius:8px;
+
+background:#2196f3;
+
+color:white;
+
+font-size:16px;
+
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:#0b7dda;
+
+}
+
+p{
+
+text-align:center;
+
+margin-top:15px;
+
+}
+
+a{
+
+cursor:pointer;
+
+color:#2196f3;
+
+}
+
+#signupForm{
+
+display:none;
+
+}
+
+#message{
+
+margin-top:15px;
+
+text-align:center;
+
+font-weight:bold;
+
+color:green;
+
+}
+
+
+
+.blocked-timer-box{
+    display:none;
+    margin-top:14px;
+    padding:16px;
+    border-radius:16px;
+    background:#fff7ed;
+    border:2px solid #f97316;
+    color:#9a3412;
+    text-align:center;
+    font-weight:700;
+}
+.blocked-timer{
+    font-size:30px;
+    letter-spacing:2px;
+    margin-top:6px;
+    color:#dc2626;
+    font-variant-numeric:tabular-nums;
+}
+</style>
+
+
+<style id="course-overview-style">
+.course-overview{min-height:100vh;width:min(1180px,100%);margin:0 auto;padding:22px 0 34px;color:#172033}
+.course-hero{background:linear-gradient(135deg,#111827 0%,#312e81 48%,#7c3aed 100%);border-radius:30px;padding:46px;color:#fff;box-shadow:0 28px 80px rgba(49,46,129,.22);overflow:hidden;position:relative}.course-hero:after{content:"";position:absolute;width:430px;height:430px;border-radius:50%;right:-180px;top:-210px;background:rgba(255,255,255,.08);pointer-events:none}
+.course-brand{display:inline-flex;align-items:center;gap:9px;padding:8px 13px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.09);border-radius:999px;font-size:11px;font-weight:900;letter-spacing:1.4px}.course-brand img{width:28px;height:28px;border-radius:50%;background:#fff;padding:2px;object-fit:cover}.course-hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center;margin-top:30px}.course-badge{font-size:11px;font-weight:900;letter-spacing:1.2px;color:#ddd6fe;margin-bottom:15px}.course-hero h1{font-size:52px;line-height:1.03;margin:0 0 18px}.course-hero h1 span{color:#c4b5fd}.course-hero p{font-size:16px;line-height:1.75;color:#e5e7eb;max-width:680px}.course-hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.course-hero button,.course-bottom-cta button{border:0;border-radius:13px;padding:13px 19px;font-weight:900;cursor:pointer;background:#fff;color:#312e81;box-shadow:0 10px 24px rgba(0,0,0,.16)}.course-hero .course-secondary{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.24);box-shadow:none}.course-visual{display:flex;flex-direction:column;gap:14px}.visual-card{padding:28px;border-radius:24px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(8px);display:flex;flex-direction:column;gap:7px}.visual-icon{font-size:54px}.visual-card strong{font-size:22px}.visual-card span{font-size:13px;color:#ddd6fe;line-height:1.5}.visual-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.visual-stats div{padding:15px 8px;text-align:center;border-radius:16px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12)}.visual-stats b{display:block;font-size:21px}.visual-stats small{display:block;margin-top:4px;color:#ddd6fe;font-size:10px}
+.course-section{padding:62px 4px 20px}.section-heading{text-align:center;max-width:680px;margin:0 auto 30px}.section-heading span,.path-copy>span{font-size:11px;font-weight:900;letter-spacing:1.5px;color:#7c3aed}.section-heading h2,.path-copy h2{font-size:34px;margin:8px 0 9px;color:#111827}.section-heading p,.path-copy p{color:#64748b;line-height:1.65;margin:0}.module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.module-card{background:#fff;border:1px solid #e8eaf2;border-radius:22px;padding:23px;box-shadow:0 12px 30px rgba(31,41,55,.06);position:relative;overflow:hidden}.module-number{position:absolute;right:17px;top:14px;font-size:11px;font-weight:900;color:#c4b5fd}.module-icon{font-size:30px;margin-bottom:12px}.module-card h3{margin:0 0 8px;font-size:19px}.module-card p{margin:0 0 13px;color:#64748b;font-size:13px;line-height:1.55}.module-card ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}.module-card li{font-size:12px;color:#374151}.module-card li:before{content:"✓";color:#7c3aed;font-weight:900;margin-right:7px}
+.course-path-section{margin:46px 4px 0;padding:34px;border-radius:24px;background:linear-gradient(135deg,#eef2ff,#faf5ff);border:1px solid #e5e7eb;display:grid;grid-template-columns:.8fr 1.2fr;gap:30px;align-items:center}.path-copy h2{font-size:28px}.path-steps{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:9px}.path-steps div{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:17px 13px;text-align:center;box-shadow:0 8px 20px rgba(31,41,55,.05)}.path-steps b{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#ede9fe;color:#6d28d9;margin:0 auto 8px}.path-steps strong{display:block;font-size:13px}.path-steps small{display:block;color:#64748b;font-size:10px;margin-top:4px}.path-steps i{font-style:normal;color:#7c3aed;font-size:22px;font-weight:900}.course-extra{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:28px 4px}.course-extra>div{padding:22px;background:#fff;border:1px solid #e8eaf2;border-radius:20px}.course-extra span{font-size:27px}.course-extra h3{font-size:16px;margin:10px 0 6px}.course-extra p{font-size:12px;line-height:1.6;color:#64748b;margin:0}.course-bottom-cta{margin:25px 4px 0;padding:25px 28px;border-radius:23px;background:linear-gradient(90deg,#4f46e5,#7c3aed,#db2777);color:#fff;display:flex;justify-content:space-between;align-items:center;gap:20px}.course-bottom-cta h2{margin:0 0 5px;font-size:23px}.course-bottom-cta p{margin:0;color:#ede9fe;font-size:13px}.course-bottom-cta button{white-space:nowrap}
+@media(max-width:850px){.course-overview{padding:12px}.course-hero{padding:30px 22px;border-radius:24px}.course-hero-grid{grid-template-columns:1fr;gap:25px}.course-hero h1{font-size:39px}.module-grid{grid-template-columns:1fr 1fr}.course-path-section{grid-template-columns:1fr}.course-extra{grid-template-columns:1fr}.course-bottom-cta{flex-direction:column;align-items:flex-start}.course-bottom-cta button{width:100%}}@media(max-width:560px){.course-hero h1{font-size:32px}.course-hero p{font-size:14px}.module-grid{grid-template-columns:1fr}.path-steps{grid-template-columns:1fr;gap:7px}.path-steps i{transform:rotate(90deg);text-align:center}.course-section{padding-top:45px}.section-heading h2{font-size:27px}.course-bottom-cta{padding:22px}}
+</style>
+<style id="aducate-login-modern">
+body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;background:radial-gradient(circle at 10% 10%,#dfe7ff,transparent 32%),radial-gradient(circle at 90% 90%,#eadcff,transparent 32%),#f6f7fb!important;padding:18px}
+.container{width:min(420px,100%);padding:34px 30px;border-radius:26px;box-shadow:0 24px 70px rgba(31,41,55,.14);border:1px solid #eef0f6}
+h2{font-size:28px;color:#111827;margin-bottom:8px}.container:before{content:"ADUCATE";display:block;text-align:center;font-weight:800;letter-spacing:3px;color:#5b5cf0;font-size:13px;margin-bottom:8px}
+input{border:1px solid #e1e5ef;border-radius:12px;padding:14px;background:#fbfcff;outline:none}input:focus{border-color:#6d6ff5;box-shadow:0 0 0 4px rgba(91,92,240,.10)}
+button{border-radius:12px;background:linear-gradient(135deg,#5b5cf0,#7c3aed);box-shadow:0 10px 20px rgba(91,92,240,.20);font-weight:700}button:hover{background:linear-gradient(135deg,#4f50e5,#6d28d9)}
+p{color:#6b7280}a{color:#5b5cf0;font-weight:600}
+</style>
+
+<style id="aducate-login-colorful">
+body{background:linear-gradient(135deg,#eef2ff 0%,#fdf2f8 45%,#ecfeff 100%)!important;position:relative;overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;border-radius:50%;filter:blur(4px);opacity:.55;z-index:-1;pointer-events:none}
+body:before{width:360px;height:360px;background:linear-gradient(135deg,#8b5cf6,#ec4899);left:-150px;top:-120px}
+body:after{width:420px;height:420px;background:linear-gradient(135deg,#06b6d4,#3b82f6);right:-180px;bottom:-170px}
+.login-shell{background:rgba(255,255,255,.92)!important;border:2px solid rgba(255,255,255,.8)!important;box-shadow:0 30px 90px rgba(79,70,229,.20)!important}
+.login-info{background:linear-gradient(145deg,#4f46e5 0%,#7c3aed 42%,#db2777 100%)!important}
+.login-info:before{background:rgba(255,255,255,.13)!important;box-shadow:0 0 0 70px rgba(255,255,255,.04)}
+.login-info:after{background:rgba(6,182,212,.22)!important}
+.brand-pill{background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,.08))!important;border-color:rgba(255,255,255,.3)!important}
+.login-info h1{color:#fff;text-shadow:0 3px 20px rgba(0,0,0,.18)}
+.book-preview{background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.07))!important;border-color:rgba(255,255,255,.25)!important}
+.book-cover{background:linear-gradient(160deg,#fff,#fef3c7)!important;box-shadow:0 15px 30px rgba(0,0,0,.25)!important}
+.book-price-tag{background:linear-gradient(90deg,#fef3c7,#fff)!important;color:#7c2d12!important}
+.feature-list div{background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.07))!important;border:1px solid rgba(255,255,255,.12)}
+.login-shell>.container{background:linear-gradient(180deg,#ffffff 0%,#fafaff 100%)!important}
+.login-logo{background:linear-gradient(135deg,#06b6d4,#4f46e5 55%,#ec4899)!important;box-shadow:0 14px 30px rgba(79,70,229,.30)!important}
+.login-shell h2{background:linear-gradient(90deg,#4338ca,#db2777);-webkit-background-clip:text;background-clip:text;color:transparent!important}
+input{background:linear-gradient(180deg,#fff,#f8faff)!important;border:2px solid #e5e7eb!important;transition:.2s}
+input:focus{border-color:#8b5cf6!important;box-shadow:0 0 0 4px rgba(139,92,246,.12)!important}
+#loginForm button:first-of-type,#signupForm button:first-of-type{background:linear-gradient(90deg,#4f46e5,#7c3aed,#db2777)!important;box-shadow:0 12px 24px rgba(124,58,237,.25)!important}
+#loginForm button:first-of-type:hover,#signupForm button:first-of-type:hover{transform:translateY(-1px);filter:brightness(1.05)}
+#aducate-install-app{background:linear-gradient(90deg,#06b6d4,#2563eb)!important;box-shadow:0 10px 20px rgba(37,99,235,.18)!important}
+#loginForm button[onclick*="admin-login"]{background:linear-gradient(90deg,#111827,#334155)!important}
+.login-subtitle{color:#64748b!important}
+a{color:#7c3aed!important}
+#message{color:#059669!important}
+</style>
+
+<style id="aducate-login-v2">
+body{min-height:100vh!important;padding:24px!important;background:radial-gradient(circle at 10% 15%,#dbeafe 0,transparent 30%),radial-gradient(circle at 90% 85%,#ede9fe 0,transparent 32%),#f7f8fc!important;display:flex!important;align-items:center!important;justify-content:center!important}
+.login-shell{width:min(980px,100%);display:grid;grid-template-columns:1.08fr .92fr;gap:0;background:#fff;border:1px solid #e8eaf2;border-radius:30px;overflow:hidden;box-shadow:0 28px 90px rgba(31,41,55,.16)}
+.login-info{position:relative;overflow:hidden;padding:42px;background:linear-gradient(145deg,#111827 0%,#312e81 48%,#6d28d9 100%);color:#fff;min-height:570px;display:flex;flex-direction:column;justify-content:space-between}
+.login-info:before,.login-info:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.08);pointer-events:none}.login-info:before{width:300px;height:300px;right:-130px;top:-120px}.login-info:after{width:230px;height:230px;left:-120px;bottom:-120px}
+.brand-pill{display:inline-flex;align-items:center;gap:8px;width:max-content;padding:8px 13px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10);border-radius:999px;font-size:12px;font-weight:800;letter-spacing:1.5px}
+.login-info h1{font-size:42px;line-height:1.08;margin:24px 0 12px;max-width:460px}.login-info .lead{font-size:16px;line-height:1.7;color:#e5e7eb;max-width:470px}
+.book-preview{margin:28px 0 20px;display:flex;align-items:center;gap:18px;padding:16px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.09);border-radius:22px;backdrop-filter:blur(10px)}
+.book-cover{width:92px;height:126px;flex:0 0 auto;border-radius:7px;background:linear-gradient(160deg,#fff,#eef2ff);box-shadow:0 12px 25px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;padding:9px;text-align:center;color:#111827;font-weight:900;font-size:13px;line-height:1.25;position:relative}.book-cover:after{content:"ADUCATE";position:absolute;bottom:7px;font-size:7px;letter-spacing:1.5px;color:#6d28d9}
+.book-copy strong{display:block;font-size:18px;margin-bottom:5px}.book-copy span{display:block;color:#ddd6fe;font-size:13px;line-height:1.5}.book-price-tag{display:inline-block;margin-top:9px;padding:5px 9px;border-radius:8px;background:#fff;color:#4c1d95;font-weight:900;font-size:12px}
+.feature-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.feature-list div{padding:11px 12px;border-radius:14px;background:rgba(255,255,255,.09);font-size:12px;font-weight:700;color:#f5f3ff}
+.login-shell>.container{width:auto!important;max-width:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:42px 38px!important;display:flex;flex-direction:column;justify-content:center}
+.login-shell>.container:before{display:none!important}.login-shell h2{text-align:left!important;font-size:30px!important;margin-bottom:7px!important}.login-subtitle{color:#6b7280;font-size:13px;margin-bottom:22px}.login-logo{width:58px;height:58px;border-radius:18px;background:linear-gradient(135deg,#5b5cf0,#7c3aed);display:grid;place-items:center;color:#fff;font-weight:900;font-size:22px;box-shadow:0 12px 24px rgba(91,92,240,.25);margin-bottom:17px}
+@media(max-width:780px){body{padding:12px!important;align-items:flex-start!important}.login-shell{grid-template-columns:1fr;border-radius:24px;margin:10px 0}.login-info{min-height:auto;padding:28px 24px}.login-info h1{font-size:32px}.feature-list{grid-template-columns:1fr 1fr}.login-shell>.container{padding:28px 22px!important}.login-info .lead{font-size:14px}.book-preview{margin:20px 0 8px}}
+@media(max-width:420px){.feature-list{grid-template-columns:1fr}.login-info h1{font-size:29px}.book-cover{width:78px;height:110px}.book-copy strong{font-size:15px}}
+</style>
+
+<style id="aducate-logo-enhancement">
+.brand-pill img{width:26px;height:26px;border-radius:50%;object-fit:cover;background:#fff;padding:1px;box-shadow:0 3px 10px rgba(0,0,0,.18)}
+.login-logo{background:#fff!important;padding:4px!important;overflow:hidden!important;border:2px solid rgba(255,255,255,.9);box-shadow:0 14px 32px rgba(79,70,229,.30)!important}
+.login-logo img{width:100%;height:100%;display:block;object-fit:cover;border-radius:14px}
+</style>
+
+<style id="aducate-login-logo-final">
+/* Final Aducate logo positioning */
+.login-logo{
+  width:108px!important;
+  height:108px!important;
+  border-radius:50%!important;
+  background:#fff!important;
+  padding:5px!important;
+  margin:0 auto 18px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:hidden!important;
+  border:3px solid #f1c232!important;
+  box-shadow:0 12px 28px rgba(31,41,55,.18)!important;
+}
+.login-logo img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  border-radius:50%!important;
+  display:block!important;
+}
+.login-shell>.container .login-logo + h2{
+  text-align:center!important;
+  font-size:30px!important;
+  margin-top:0!important;
+}
+.brand-pill{
+  gap:7px!important;
+  padding:6px 11px!important;
+}
+.brand-pill img{
+  width:30px!important;
+  height:30px!important;
+  min-width:30px!important;
+  min-height:30px!important;
+  border-radius:50%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:#fff!important;
+  padding:0!important;
+  border:1.5px solid rgba(241,194,50,.9)!important;
+  box-shadow:0 2px 8px rgba(0,0,0,.16)!important;
+}
+@media(max-width:780px){
+  .login-logo{width:92px!important;height:92px!important;margin-bottom:15px!important}
+  .login-shell>.container .login-logo + h2{font-size:27px!important}
+}
+</style>
+
+<style id="aducate-mobile-login-fix">
+/* Mobile layout: keep the full login page usable and scrollable */
+html{min-height:100%;overflow-x:hidden}
+body{
+  min-height:100vh!important;
+  height:auto!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  -webkit-overflow-scrolling:touch;
+}
+.login-shell{width:min(980px,100%)!important;max-width:100%!important}
+.login-info,.login-shell>.container{min-width:0!important}
+@media(max-width:780px){
+  body{padding:10px!important;align-items:flex-start!important}
+  .login-shell{width:100%!important;margin:0!important;border-radius:22px!important}
+  .login-info{padding:22px 18px!important;min-height:auto!important}
+  .brand-pill{max-width:100%;font-size:10px!important;letter-spacing:1px!important;padding:6px 9px!important}
+  .brand-pill img{width:27px!important;height:27px!important;min-width:27px!important;min-height:27px!important}
+  .login-info h1{font-size:28px!important;line-height:1.12!important;margin:18px 0 9px!important}
+  .login-info .lead{font-size:13px!important;line-height:1.55!important}
+  .book-preview{gap:12px!important;padding:12px!important;margin:16px 0 12px!important}
+  .book-cover{width:68px!important;height:94px!important;font-size:10px!important;padding:7px!important}
+  .book-copy strong{font-size:14px!important}
+  .book-copy span{font-size:11px!important;line-height:1.4!important}
+  .book-price-tag{font-size:10px!important;padding:4px 7px!important}
+  .feature-list{grid-template-columns:1fr 1fr!important;gap:7px!important;margin-top:12px!important}
+  .feature-list div{padding:9px 8px!important;font-size:10px!important}
+  .login-shell>.container{padding:24px 18px 26px!important}
+  .login-logo{width:84px!important;height:84px!important;margin:0 auto 13px!important}
+  .login-shell>.container .login-logo + h2{font-size:24px!important;line-height:1.2!important;margin-bottom:7px!important}
+  .login-subtitle{font-size:12px!important;margin-bottom:16px!important}
+  input{font-size:16px!important;padding:12px!important}
+  button{min-height:44px!important;font-size:15px!important}
+}
+@media(max-width:360px){
+  body{padding:7px!important}
+  .login-info{padding:18px 14px!important}
+  .login-info h1{font-size:25px!important}
+  .brand-pill span{white-space:normal}
+  .book-preview{align-items:flex-start!important}
+  .book-cover{width:60px!important;height:84px!important}
+  .feature-list{grid-template-columns:1fr!important}
+  .login-shell>.container{padding:20px 14px 22px!important}
+  .login-logo{width:76px!important;height:76px!important}
+  .login-shell>.container .login-logo + h2{font-size:22px!important}
+}
+</style>
+</head>
+
+<body>
+<div id="courseOverview" class="course-overview">
+  <header class="course-hero">
+    <div class="course-brand"><img src="/aducate-logo.png" alt="Aducate Logo"><span>ADUCATE • ENGLISH LEARNING</span></div>
+    <div class="course-hero-grid">
+      <div>
+        <div class="course-badge">🎓 COMPLETE ENGLISH LEARNING PROGRAM</div>
+        <h1>Learn English.<br><span>Speak with confidence.</span></h1>
+        <p>Login કરતા પહેલા course માં શું મળશે તે સંપૂર્ણ રીતે જુઓ. Beginner થી Advanced સુધી learning path, daily practice, quizzes અને progress tracking એક જ જગ્યાએ.</p>
+        <div class="course-hero-actions">
+          <button type="button" onclick="openCourseLogin()">🔐 Continue to Login</button>
+          <button type="button" class="course-secondary" onclick="document.getElementById('courseModules').scrollIntoView({behavior:'smooth'})">📚 View Course Details</button>
+        </div>
+      </div>
+      <div class="course-visual">
+        <div class="visual-card"><div class="visual-icon">📖</div><strong>Aducate English</strong><span>Grammar • Vocabulary • Speaking • Everyday English</span></div>
+        <div class="visual-stats"><div><b>3</b><small>Learning Levels</small></div><div><b>30</b><small>Day Challenge</small></div><div><b>Daily</b><small>Quiz Practice</small></div></div>
+      </div>
+    </div>
+  </header>
+
+  <section id="courseModules" class="course-section">
+    <div class="section-heading"><span>WHAT YOU WILL LEARN</span><h2>Course માં શું શું આવે છે?</h2><p>તમારા English learning journey ને step-by-step structured રાખવા માટે મુખ્ય learning areas.</p></div>
+    <div class="module-grid">
+      <article class="module-card"><div class="module-number">01</div><div class="module-icon">🌱</div><h3>Beginner English</h3><p>Basic sentences, useful vocabulary અને everyday English થી શરૂઆત.</p><ul><li>Basic sentence practice</li><li>Common vocabulary</li><li>Everyday English</li></ul></article>
+      <article class="module-card"><div class="module-number">02</div><div class="module-icon">🚀</div><h3>Intermediate English</h3><p>Grammar અને sentence building સાથે English confidence વધારવા માટે practice.</p><ul><li>Grammar practice</li><li>Sentence building</li><li>Confidence practice</li></ul></article>
+      <article class="module-card"><div class="module-number">03</div><div class="module-icon">🏆</div><h3>Advanced Practice</h3><p>Mixed practice અને challenging quiz દ્વારા તમારી English skills test કરો.</p><ul><li>Mixed practice</li><li>Advanced quiz</li><li>Challenge-based learning</li></ul></article>
+      <article class="module-card"><div class="module-number">04</div><div class="module-icon">🎤</div><h3>Speaking Practice</h3><p>Speaking-focused activities દ્વારા English બોલવાની practice કરો.</p><ul><li>Speaking activity</li><li>Practical English</li><li>Regular practice</li></ul></article>
+      <article class="module-card"><div class="module-number">05</div><div class="module-icon">📝</div><h3>Daily Quiz</h3><p>Question practice અને quiz system દ્વારા knowledge check કરો.</p><ul><li>Daily questions</li><li>Quiz practice</li><li>Score & reward tracking</li></ul></article>
+      <article class="module-card"><div class="module-number">06</div><div class="module-icon">🔥</div><h3>30-Day Challenge</h3><p>દરરોજ English mission complete કરીને consistent learning habit બનાવો.</p><ul><li>Daily mission</li><li>Progress tracking</li><li>Learning streak</li></ul></article>
+    </div>
+  </section>
+
+  <section class="course-path-section">
+    <div class="path-copy"><span>YOUR LEARNING PATH</span><h2>એક જ course માં clear progression</h2><p>તમારી શરૂઆત Beginner થી થાય છે અને practice સાથે Intermediate તથા Advanced challenge સુધી જઈ શકો છો.</p></div>
+    <div class="path-steps"><div><b>1</b><strong>Beginner</strong><small>Basics & vocabulary</small></div><i>→</i><div><b>2</b><strong>Intermediate</strong><small>Grammar & sentences</small></div><i>→</i><div><b>3</b><strong>Advanced</strong><small>Quiz & mixed practice</small></div></div>
+  </section>
+
+  <section class="course-extra">
+    <div><span>📊</span><h3>Track your progress</h3><p>Learning progress, quiz performance અને challenge progress એક જ dashboard માં જુઓ.</p></div>
+    <div><span>📚</span><h3>Complete English Book</h3><p>Grammar, vocabulary, speaking practice અને everyday English માટે Aducate English Book પણ ઉપલબ્ધ છે.</p></div>
+    <div><span>📱</span><h3>Mobile-friendly learning</h3><p>Phone અને desktop બંને પર learning experience માટે responsive interface.</p></div>
+  </section>
+
+  <div class="course-bottom-cta"><div><h2>Ready to start learning?</h2><p>Course details જોઈ લીધા પછી login કરીને તમારું learning dashboard ખોલો.</p></div><button type="button" onclick="openCourseLogin()">🔐 Login & Start Learning</button></div>
+</div>
+
+<div class="login-shell" id="loginShell" style="display:none">
+  <section class="login-info">
+    <div>
+      <div class="brand-pill"><img src="/aducate-logo.png" alt="Aducate Logo"> <span>ADUCATE • ENGLISH LEARNING</span></div>
+      <h1>Learn English.<br>Speak with confidence.</h1>
+      <p class="lead">Interactive lessons, daily practice, quizzes and a complete English book — all in one place.</p>
+      <div class="book-preview">
+        <div class="book-cover">ENGLISH<br>ALL IN ONE<br>BOOK</div>
+        <div class="book-copy"><strong>📖 Aducate English Book</strong><span>Grammar • Vocabulary • Speaking • Everyday English</span><span class="book-price-tag">Spacial price ₹499</span></div>
+      </div>
+      <div class="feature-list">
+        <div>📚 Structured Courses</div><div>🔥 30-Day Challenge</div>
+        <div>📝 Daily Quiz</div><div>🏆 Track Progress</div>
+      </div>
+    </div>
+    <small style="color:#c4b5fd;font-size:11px">Your learning journey starts here.</small>
+  </section>
+
+<div class="container">
+
+    <div class="login-logo"><img src="/aducate-logo.png" alt="Aducate Logo"></div>
+    <h2>
+        Welcome to Aducate
+    </h2>
+
+        
+<div id="loginForm">
+
+<input type="text" id="loginMobile" placeholder="Mobile Number">
+
+<input type="password" id="loginPassword" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+<button type="button" onclick="location.href='admin-login.html'" style="margin-top:10px;background:#111827;color:#fff;">🛡️ Admin Login</button>
+
+<button id="aducate-install-app" type="button" style="margin-top:10px;background:#506ef0;color:#fff;border:0;border-radius:10px;padding:12px;width:100%;font-weight:800;cursor:pointer;">📲 Install Aducate app</button>
+
+<p>
+
+Don't have an account?
+
+<a onclick="showSignup()">Signup</a>
+</p>
+
+</div>
+
+<div id="signupForm">
+
+<input type="text" id="signupName" placeholder="Full Name">
+
+<input type="text" id="signupMobile" placeholder="Mobile Number">
+
+<input type="password" id="signupPassword" placeholder="Password">
+
+<button onclick="signup()">Create Account</button>
+
+<p>
+
+Already have an account?
+
+<a onclick="showLogin()">Login</a>
+
+</p>
+
+</div>
+
+<div id="message"></div>
+<div id="blockedTimerBox" class="blocked-timer-box" style="display:none">
+    🚫 Account Blocked<br>
+    <span id="blockedTimerText">12:00:00</span>
+    <div style="font-size:12px;font-weight:500;margin-top:5px;">Time remaining</div>
+</div>
+<div id="notificationGate" style="display:none;margin-top:12px;padding:12px;border-radius:10px;background:#fff7ed;color:#9a3412;font-size:13px;text-align:center;"></div>
+
+</div>
+</div>
+
+<div id="notificationModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:99999;align-items:center;justify-content:center;padding:20px;">
+  <div style="width:100%;max-width:390px;background:#fff;border-radius:22px;padding:26px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3);">
+    <div style="font-size:48px;margin-bottom:8px;">🔔</div>
+    <h3 style="margin-bottom:10px;color:#222;">Admin Notifications Enable કરો</h3>
+    <p style="font-size:14px;line-height:1.6;color:#666;margin-bottom:20px;">
+      Admin તરફથી આવતી મહત્વની notifications મેળવવા માટે Notifications <b>Allow</b> કરવી જરૂરી છે.
+    </p>
+    <button id="notificationAllowBtn" onclick="allowNotificationsAndContinue()" style="width:100%;padding:13px;border:0;border-radius:12px;background:#2563eb;color:#fff;font-size:16px;font-weight:700;cursor:pointer;">
+      🔔 Allow Notifications
+    </button>
+    <button onclick="denyNotificationsAndReturn()" style="width:100%;padding:11px;border:0;background:transparent;color:#777;font-size:14px;cursor:pointer;margin-top:6px;">
+      Cancel / Deny
+    </button>
+    <div id="notificationModalMsg" style="font-size:13px;color:#dc2626;margin-top:10px;"></div>
+  </div>
+</div>
+
+<script>
+
+const API = "/api/auth";
+let pendingLogin = null;
+
+// One persistent ID per browser/device. The server still enforces the actual
+// single active session using activeSessionId, while this ID identifies the device.
+function getDeviceId(){
+    let id = localStorage.getItem("studentDeviceId");
+    if(!id){
+        id = (crypto.randomUUID ? crypto.randomUUID() : (Date.now() + "-" + Math.random().toString(36).slice(2)));
+        localStorage.setItem("studentDeviceId", id);
+    }
+    return id;
+}
+
+
+function showCourseOverview(){
+    const overview = document.getElementById("courseOverview");
+    const shell = document.getElementById("loginShell");
+    if (overview) overview.style.display = "block";
+    if (shell) shell.style.display = "none";
+    window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function openCourseLogin(){
+    const overview = document.getElementById("courseOverview");
+    const shell = document.getElementById("loginShell");
+    if (overview) overview.style.display = "none";
+    if (shell) shell.style.display = "grid";
+    window.scrollTo({top:0, behavior:"smooth"});
+    setTimeout(() => document.getElementById("loginMobile")?.focus(), 100);
+}
+
+function showSignup(){
+
+document.getElementById("loginForm").style.display="none";
+
+document.getElementById("signupForm").style.display="block";
+
+document.getElementById("message").innerHTML="";
+
+}
+
+function showLogin(){
+
+openCourseLogin();
+
+document.getElementById("signupForm").style.display="none";
+
+document.getElementById("loginForm").style.display="block";
+
+document.getElementById("message").innerHTML="";
+
+}
+
+async function signup(){
+
+const name=document.getElementById("signupName").value;
+
+const mobile=document.getElementById("signupMobile").value;
+
+const password=document.getElementById("signupPassword").value;
+
+const res=await fetch(API+"/signup",{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify({
+
+name,
+
+mobile,
+
+password
+
+})
+
+});
+
+const data=await res.json();
+
+document.getElementById("message").innerHTML=data.message;
+
+if(data.success){
+
+showLogin();
+
+}
+
+}
+
+showCourseOverview();
+
+async function requestNotificationPermissionBeforeLogin(){
+
+    if ("Notification" in window && Notification.permission === "granted") {
+        return true;
+    }
+
+    if (!("Notification" in window)) {
+        document.getElementById("message").innerHTML =
+            "❌ આ browser notifications support કરતું નથી.";
+        return false;
+    }
+
+    if (!window.isSecureContext) {
+        document.getElementById("message").innerHTML =
+            "❌ Notifications માટે HTTPS જરૂરી છે.";
+        return false;
+    }
+
+    if (Notification.permission === "denied") {
+        document.getElementById("message").innerHTML =
+            "❌ Notifications Block છે. Browser site settings માં Notifications → Allow કરો અને ફરી Login કરો.";
+        return false;
+    }
+
+    document.getElementById("notificationModal").style.display = "flex";
+    document.getElementById("notificationModalMsg").innerHTML = "";
+    return false;
+}
+
+async function allowNotificationsAndContinue(){
+
+    const btn = document.getElementById("notificationAllowBtn");
+    const msg = document.getElementById("notificationModalMsg");
+
+    btn.disabled = true;
+    btn.innerText = "Please wait...";
+    msg.innerHTML = "";
+
+    try {
+        const permission = await Notification.requestPermission();
+
+        if (permission === "granted") {
+            document.getElementById("notificationModal").style.display = "none";
+
+            // Continue the exact login that was waiting for permission.
+            if (pendingLogin) {
+                const credentials = pendingLogin;
+                pendingLogin = null;
+                await performLogin(credentials.mobile, credentials.password);
+            }
+        } else {
+            // Deny = do not login. User must press Login again.
+            pendingLogin = null;
+            document.getElementById("notificationModal").style.display = "none";
+            document.getElementById("loginMobile").value = "";
+            document.getElementById("loginPassword").value = "";
+            document.getElementById("message").innerHTML =
+                "⚠️ Notifications Allow કર્યા વગર Login થઈ શકશે નહીં. ફરી Login કરો.";
+        }
+    } catch (error) {
+        console.error("Notification permission error:", error);
+        pendingLogin = null;
+        document.getElementById("notificationModal").style.display = "none";
+        document.getElementById("message").innerHTML =
+            "❌ Notification permission મળી નથી. ફરી Login કરો.";
+    } finally {
+        btn.disabled = false;
+        btn.innerText = "🔔 Allow Notifications";
+    }
+}
+
+function denyNotificationsAndReturn(){
+    pendingLogin = null;
+    document.getElementById("notificationModal").style.display = "none";
+    document.getElementById("loginMobile").value = "";
+    document.getElementById("loginPassword").value = "";
+    document.getElementById("message").innerHTML =
+        "⚠️ Notifications Allow કર્યા વગર Login થઈ શકશે નહીં. ફરી Login કરો.";
+}
+
+
+async function login(){
+
+    const mobile = document.getElementById("loginMobile").value.trim();
+    const password = document.getElementById("loginPassword").value;
+
+    if(!mobile || !password){
+        document.getElementById("message").innerHTML =
+            "Mobile Number અને Password નાખો.";
+        return;
+    }
+
+    // If already granted, login directly. Otherwise show the permission popup.
+    if ("Notification" in window && Notification.permission === "granted") {
+        await performLogin(mobile, password);
+        return;
+    }
+
+    if ("Notification" in window && Notification.permission === "denied") {
+        document.getElementById("message").innerHTML =
+            "❌ Notifications Block છે. Browser site settings માં Notifications → Allow કરો અને ફરી Login કરો.";
+        return;
+    }
+
+    pendingLogin = { mobile, password };
+    await requestNotificationPermissionBeforeLogin();
+}
+
+
+function loginBase64ToUint8Array(base64String){
+    const padding = "=".repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
+    const rawData = window.atob(base64);
+    return Uint8Array.from([...rawData].map(char => char.charCodeAt(0)));
+}
+
+async function registerAdminPushSubscription(token){
+    if (!window.isSecureContext || !("Notification" in window) ||
+        !("serviceWorker" in navigator) || !("PushManager" in window)) {
+        throw new Error("Admin notifications માટે આ browser/HTTPS જરૂરી છે.");
+    }
+
+    if (Notification.permission !== "granted") {
+        throw new Error("Admin notifications permission Allow નથી.");
+    }
+
+    const registration = await navigator.serviceWorker.register("/sw.js", { scope: "/" });
+    await navigator.serviceWorker.ready;
+
+    const keyResponse = await fetch("/api/notifications/vapid-public-key", {
+        headers: { Authorization: "Bearer " + token }
+    });
+    const keyData = await keyResponse.json();
+
+    if (!keyResponse.ok || !keyData.success || !keyData.publicKey) {
+        throw new Error(keyData.message || "Push notification server configuration missing.");
+    }
+
+    let subscription = await registration.pushManager.getSubscription();
+
+    if (!subscription) {
+        subscription = await registration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: loginBase64ToUint8Array(keyData.publicKey)
+        });
+    }
+
+    const saveResponse = await fetch("/api/notifications/subscribe", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token
+        },
+        body: JSON.stringify(subscription.toJSON())
+    });
+    const saveData = await saveResponse.json();
+
+    if (!saveResponse.ok || !saveData.success) {
+        throw new Error(saveData.message || "Push subscription save failed.");
+    }
+
+    return true;
+}
+
+let blockedTimerInterval = null;
+
+function startBlockedCountdown(remainingMs){
+    const box = document.getElementById("blockedTimerBox");
+    const timer = document.getElementById("blockedTimerText");
+    if(!box || !timer) return;
+
+    clearInterval(blockedTimerInterval);
+    box.style.display = "block";
+
+    // Server-provided remaining time is authoritative. This is the same
+    // remainingMs derived from the user's canonical blockUntil used by Admin.
+    let endTime = Date.now() + Math.max(0, Number(remainingMs || 0));
+
+    function render(){
+        const left = Math.max(0, endTime - Date.now());
+        const totalSeconds = Math.floor(left / 1000);
+        const h = String(Math.floor(totalSeconds / 3600)).padStart(2,"0");
+        const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2,"0");
+        const sec = String(totalSeconds % 60).padStart(2,"0");
+        timer.textContent = h + ":" + m + ":" + sec;
+
+        if(left <= 0){
+            clearInterval(blockedTimerInterval);
+            box.innerHTML = "✅ Block time completed. Please login again.";
+        }
+    }
+    render();
+    blockedTimerInterval = setInterval(render, 1000);
+}
+
+async function performLogin(mobile, password){
+
+    const loginButton = document.querySelector('#loginForm button');
+    if(loginButton){
+        loginButton.disabled = true;
+        loginButton.innerText = "Logging in...";
+    }
+
+    try{
+        const res = await fetch(API+"/login",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+                "X-Device-ID": getDeviceId()
+            },
+            body:JSON.stringify({ mobile, password })
+        });
+
+        const data = await res.json();
+
+        if(data.blocked){
+            if(data.permanentBlocked && data.token){
+                // Permanent blocks have no 3-hour countdown. The special
+                // subscription-only session lets the student open the ₹200
+                // payment gate; normal app APIs remain blocked server-side.
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("user", JSON.stringify({
+                    mobile,
+                    permanentBlocked: true,
+                    subscriptionRequired: true
+                }));
+                document.getElementById("message").innerHTML =
+                    "🚫 Account permanently blocked.<br>" +
+                    "3-hour timer removed. ₹200 subscription payment is available.";
+                setTimeout(() => {
+                    location.href = "earn.html";
+                }, 250);
+                return;
+            }
+
+            document.getElementById("message").innerHTML =
+                "🚫 Account blocked.<br>" +
+                "Block is active. નીચે actual remaining time દેખાશે.";
+            startBlockedCountdown(data.remainingMs);
+            if(loginButton){
+                loginButton.disabled = false;
+                loginButton.innerText = "Login";
+            }
+            return;
+        }
+
+        const timerBox = document.getElementById("blockedTimerBox");
+        if(timerBox) timerBox.style.display = "none";
+
+        if(data.success && data.token){
+            // Save the real Web Push subscription BEFORE opening the dashboard.
+            // Browser permission alone is not enough for Admin -> Student notifications.
+            await registerAdminPushSubscription(data.token);
+
+            localStorage.setItem("token", data.token);
+            if(data.user) localStorage.setItem("user", JSON.stringify(data.user));
+
+            window.location.replace("earn.html");
+        }else{
+            document.getElementById("message").innerHTML =
+                data.message || "Invalid login details.";
+            if(loginButton){
+                loginButton.disabled = false;
+                loginButton.innerText = "Login";
+            }
+        }
+    }catch(error){
+        console.error(error);
+        document.getElementById("message").innerHTML =
+            "❌ " + (error.message || "Login/notification setup failed.");
+        if(loginButton){
+            loginButton.disabled = false;
+            loginButton.innerText = "Login";
+        }
+    }
+}
+
+</script>
+
+
+<script>
+(function(){
+  let deferredPrompt = null;
+  const btn = document.getElementById('aducate-install-app');
+  if(!btn) return;
+
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+  function hideIfInstalled(){
+    if(isStandalone) btn.style.display='none';
+  }
+
+  window.addEventListener('beforeinstallprompt', function(e){
+    e.preventDefault();
+    deferredPrompt = e;
+    btn.style.display = 'block';
+  });
+
+  btn.addEventListener('click', async function(){
+    if(deferredPrompt){
+      deferredPrompt.prompt();
+      try { await deferredPrompt.userChoice; } catch(e) {}
+      deferredPrompt = null;
+      return;
+    }
+
+    if(isIOS){
+      alert('Aducate.app install કરવા: Safari ના Share (↑) button પર tap કરો → “Add to Home Screen” પસંદ કરો → Add કરો.');
+      return;
+    }
+
+    alert('Aducate.app install કરવા Chrome ના menu (⋮) માંથી “Install app” અથવા “Add to Home screen” પસંદ કરો.');
+  });
+
+  window.addEventListener('appinstalled', function(){
+    deferredPrompt = null;
+    btn.style.display = 'none';
+  });
+
+  window.addEventListener('load', function(){
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.register('/sw.js', {scope:'/'}).catch(console.error);
+    }
+    hideIfInstalled();
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,5002 @@
+[
+  {
+    "q": "Choose the correct sentence using 'accept'.",
+    "options": [
+      "She accepted English every day.",
+      "She accept English every day.",
+      "She is accepting English every day.",
+      "She accepts English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'accept': Yesterday, I ____ at home.",
+    "options": [
+      "appeared",
+      "accepted",
+      "createed",
+      "changeed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'accept': I have ____ my work.",
+    "options": [
+      "changeed",
+      "accepted",
+      "createed",
+      "appeared"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'accept': They are ____ now.",
+    "options": [
+      "creating",
+      "changing",
+      "appearing",
+      "accepting"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'accept'.",
+    "options": [
+      "She does not accept every day.",
+      "She does not accepts every day.",
+      "She did not accepted every day.",
+      "She is not accepting every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'add'.",
+    "options": [
+      "She adds English every day.",
+      "She is adding English every day.",
+      "She added English every day.",
+      "She add English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'add': Yesterday, I ____ at home.",
+    "options": [
+      "arriveed",
+      "danceed",
+      "checked",
+      "added"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'add': I have ____ my work.",
+    "options": [
+      "danceed",
+      "checked",
+      "arriveed",
+      "added"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'add': They are ____ now.",
+    "options": [
+      "arriving",
+      "adding",
+      "checking",
+      "dancing"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'add'.",
+    "options": [
+      "She does not add every day.",
+      "She is not adding every day.",
+      "She did not added every day.",
+      "She does not adds every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'admire'.",
+    "options": [
+      "She admire English every day.",
+      "She is admiring English every day.",
+      "She admires English every day.",
+      "She admireed English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'admire': Yesterday, I ____ at home.",
+    "options": [
+      "admireed",
+      "asked",
+      "decideed",
+      "cleaned"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'admire': I have ____ my work.",
+    "options": [
+      "asked",
+      "decideed",
+      "admireed",
+      "cleaned"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'admire': They are ____ now.",
+    "options": [
+      "admiring",
+      "asking",
+      "cleaning",
+      "deciding"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'admire'.",
+    "options": [
+      "She is not admiring every day.",
+      "She does not admires every day.",
+      "She did not admireed every day.",
+      "She does not admire every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'advise'.",
+    "options": [
+      "She adviseed English every day.",
+      "She is advising English every day.",
+      "She advise English every day.",
+      "She advises English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'advise': Yesterday, I ____ at home.",
+    "options": [
+      "adviseed",
+      "climbed",
+      "delivered",
+      "avoided"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'advise': I have ____ my work.",
+    "options": [
+      "delivered",
+      "avoided",
+      "adviseed",
+      "climbed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'advise': They are ____ now.",
+    "options": [
+      "climbing",
+      "delivering",
+      "advising",
+      "avoiding"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'advise'.",
+    "options": [
+      "She does not advise every day.",
+      "She does not advises every day.",
+      "She is not advising every day.",
+      "She did not adviseed every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'agree'.",
+    "options": [
+      "She is agreeing English every day.",
+      "She agrees English every day.",
+      "She agree English every day.",
+      "She agreeed English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'agree': Yesterday, I ____ at home.",
+    "options": [
+      "bakeed",
+      "describeed",
+      "agreeed",
+      "closeed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past participle of 'agree': I have ____ my work.",
+    "options": [
+      "agreeed",
+      "bakeed",
+      "closeed",
+      "describeed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'agree': They are ____ now.",
+    "options": [
+      "baking",
+      "agreeing",
+      "describing",
+      "closing"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'agree'.",
+    "options": [
+      "She does not agrees every day.",
+      "She does not agree every day.",
+      "She is not agreeing every day.",
+      "She did not agreeed every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'allow'.",
+    "options": [
+      "She allow English every day.",
+      "She allowed English every day.",
+      "She allows English every day.",
+      "She is allowing English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'allow': Yesterday, I ____ at home.",
+    "options": [
+      "allowed",
+      "collected",
+      "designed",
+      "balanceed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'allow': I have ____ my work.",
+    "options": [
+      "balanceed",
+      "collected",
+      "allowed",
+      "designed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'allow': They are ____ now.",
+    "options": [
+      "designing",
+      "collecting",
+      "allowing",
+      "balancing"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'allow'.",
+    "options": [
+      "She does not allow every day.",
+      "She did not allowed every day.",
+      "She is not allowing every day.",
+      "She does not allows every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'answer'.",
+    "options": [
+      "She is answering English every day.",
+      "She answer English every day.",
+      "She answered English every day.",
+      "She answers English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'answer': Yesterday, I ____ at home.",
+    "options": [
+      "answered",
+      "believeed",
+      "compareed",
+      "destroyed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'answer': I have ____ my work.",
+    "options": [
+      "answered",
+      "compareed",
+      "destroyed",
+      "believeed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'answer': They are ____ now.",
+    "options": [
+      "comparing",
+      "destroying",
+      "believing",
+      "answering"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'answer'.",
+    "options": [
+      "She did not answered every day.",
+      "She does not answers every day.",
+      "She is not answering every day.",
+      "She does not answer every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'appear'.",
+    "options": [
+      "She is appearing English every day.",
+      "She appears English every day.",
+      "She appeared English every day.",
+      "She appear English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'appear': Yesterday, I ____ at home.",
+    "options": [
+      "developed",
+      "completeed",
+      "appeared",
+      "belonged"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past participle of 'appear': I have ____ my work.",
+    "options": [
+      "completeed",
+      "appeared",
+      "belonged",
+      "developed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'appear': They are ____ now.",
+    "options": [
+      "completing",
+      "appearing",
+      "developing",
+      "belonging"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'appear'.",
+    "options": [
+      "She did not appeared every day.",
+      "She does not appear every day.",
+      "She is not appearing every day.",
+      "She does not appears every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'arrive'.",
+    "options": [
+      "She is arriving English every day.",
+      "She arrive English every day.",
+      "She arriveed English every day.",
+      "She arrives English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'arrive': Yesterday, I ____ at home.",
+    "options": [
+      "discovered",
+      "cooked",
+      "borrowed",
+      "arriveed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'arrive': I have ____ my work.",
+    "options": [
+      "cooked",
+      "discovered",
+      "arriveed",
+      "borrowed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'arrive': They are ____ now.",
+    "options": [
+      "borrowing",
+      "arriving",
+      "discovering",
+      "cooking"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'arrive'.",
+    "options": [
+      "She does not arrives every day.",
+      "She does not arrive every day.",
+      "She is not arriving every day.",
+      "She did not arriveed every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'ask'.",
+    "options": [
+      "She asks English every day.",
+      "She ask English every day.",
+      "She is asking English every day.",
+      "She asked English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'ask': Yesterday, I ____ at home.",
+    "options": [
+      "copied",
+      "brushed",
+      "discussed",
+      "asked"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'ask': I have ____ my work.",
+    "options": [
+      "asked",
+      "brushed",
+      "copied",
+      "discussed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'ask': They are ____ now.",
+    "options": [
+      "asking",
+      "brushing",
+      "copying",
+      "discussing"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'ask'.",
+    "options": [
+      "She is not asking every day.",
+      "She does not ask every day.",
+      "She did not asked every day.",
+      "She does not asks every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'avoid'.",
+    "options": [
+      "She is avoiding English every day.",
+      "She avoids English every day.",
+      "She avoided English every day.",
+      "She avoid English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'avoid': Yesterday, I ____ at home.",
+    "options": [
+      "avoided",
+      "called",
+      "divideed",
+      "counted"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'avoid': I have ____ my work.",
+    "options": [
+      "counted",
+      "divideed",
+      "called",
+      "avoided"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'avoid': They are ____ now.",
+    "options": [
+      "counting",
+      "calling",
+      "dividing",
+      "avoiding"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'avoid'.",
+    "options": [
+      "She did not avoided every day.",
+      "She does not avoid every day.",
+      "She is not avoiding every day.",
+      "She does not avoids every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'bake'.",
+    "options": [
+      "She bakeed English every day.",
+      "She bakes English every day.",
+      "She bake English every day.",
+      "She is baking English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'bake': Yesterday, I ____ at home.",
+    "options": [
+      "bakeed",
+      "covered",
+      "carried",
+      "dressed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'bake': I have ____ my work.",
+    "options": [
+      "bakeed",
+      "covered",
+      "dressed",
+      "carried"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'bake': They are ____ now.",
+    "options": [
+      "covering",
+      "carrying",
+      "baking",
+      "dressing"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'bake'.",
+    "options": [
+      "She did not bakeed every day.",
+      "She does not bakes every day.",
+      "She does not bake every day.",
+      "She is not baking every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'balance'.",
+    "options": [
+      "She balance English every day.",
+      "She balanceed English every day.",
+      "She is balancing English every day.",
+      "She balances English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'balance': Yesterday, I ____ at home.",
+    "options": [
+      "createed",
+      "changeed",
+      "balanceed",
+      "dried"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past participle of 'balance': I have ____ my work.",
+    "options": [
+      "balanceed",
+      "changeed",
+      "dried",
+      "createed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'balance': They are ____ now.",
+    "options": [
+      "changing",
+      "drying",
+      "creating",
+      "balancing"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'balance'.",
+    "options": [
+      "She does not balance every day.",
+      "She did not balanceed every day.",
+      "She is not balancing every day.",
+      "She does not balances every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'believe'.",
+    "options": [
+      "She believe English every day.",
+      "She believes English every day.",
+      "She believeed English every day.",
+      "She is believing English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'believe': Yesterday, I ____ at home.",
+    "options": [
+      "earned",
+      "checked",
+      "danceed",
+      "believeed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'believe': I have ____ my work.",
+    "options": [
+      "earned",
+      "believeed",
+      "danceed",
+      "checked"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'believe': They are ____ now.",
+    "options": [
+      "dancing",
+      "earning",
+      "checking",
+      "believing"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'believe'.",
+    "options": [
+      "She did not believeed every day.",
+      "She does not believes every day.",
+      "She is not believing every day.",
+      "She does not believe every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'belong'.",
+    "options": [
+      "She belongs English every day.",
+      "She is belonging English every day.",
+      "She belong English every day.",
+      "She belonged English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'belong': Yesterday, I ____ at home.",
+    "options": [
+      "decideed",
+      "cleaned",
+      "enjoyed",
+      "belonged"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'belong': I have ____ my work.",
+    "options": [
+      "decideed",
+      "enjoyed",
+      "belonged",
+      "cleaned"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'belong': They are ____ now.",
+    "options": [
+      "cleaning",
+      "belonging",
+      "enjoying",
+      "deciding"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'belong'.",
+    "options": [
+      "She is not belonging every day.",
+      "She does not belongs every day.",
+      "She does not belong every day.",
+      "She did not belonged every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'borrow'.",
+    "options": [
+      "She borrowed English every day.",
+      "She is borrowing English every day.",
+      "She borrows English every day.",
+      "She borrow English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'borrow': Yesterday, I ____ at home.",
+    "options": [
+      "borrowed",
+      "entered",
+      "climbed",
+      "delivered"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'borrow': I have ____ my work.",
+    "options": [
+      "delivered",
+      "climbed",
+      "borrowed",
+      "entered"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'borrow': They are ____ now.",
+    "options": [
+      "climbing",
+      "entering",
+      "borrowing",
+      "delivering"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'borrow'.",
+    "options": [
+      "She did not borrowed every day.",
+      "She does not borrows every day.",
+      "She is not borrowing every day.",
+      "She does not borrow every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'brush'.",
+    "options": [
+      "She brushes English every day.",
+      "She brush English every day.",
+      "She brushed English every day.",
+      "She is brushing English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'brush': Yesterday, I ____ at home.",
+    "options": [
+      "closeed",
+      "escapeed",
+      "brushed",
+      "describeed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past participle of 'brush': I have ____ my work.",
+    "options": [
+      "brushed",
+      "describeed",
+      "escapeed",
+      "closeed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'brush': They are ____ now.",
+    "options": [
+      "brushing",
+      "closing",
+      "describing",
+      "escaping"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'brush'.",
+    "options": [
+      "She is not brushing every day.",
+      "She does not brush every day.",
+      "She did not brushed every day.",
+      "She does not brushes every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'call'.",
+    "options": [
+      "She called English every day.",
+      "She calls English every day.",
+      "She call English every day.",
+      "She is calling English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'call': Yesterday, I ____ at home.",
+    "options": [
+      "collected",
+      "designed",
+      "examineed",
+      "called"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'call': I have ____ my work.",
+    "options": [
+      "examineed",
+      "called",
+      "collected",
+      "designed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'call': They are ____ now.",
+    "options": [
+      "calling",
+      "examining",
+      "collecting",
+      "designing"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'call'.",
+    "options": [
+      "She did not called every day.",
+      "She is not calling every day.",
+      "She does not calls every day.",
+      "She does not call every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'carry'.",
+    "options": [
+      "She carry English every day.",
+      "She carried English every day.",
+      "She carries English every day.",
+      "She is carrying English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'carry': Yesterday, I ____ at home.",
+    "options": [
+      "compareed",
+      "destroyed",
+      "carried",
+      "exerciseed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past participle of 'carry': I have ____ my work.",
+    "options": [
+      "carried",
+      "destroyed",
+      "exerciseed",
+      "compareed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'carry': They are ____ now.",
+    "options": [
+      "comparing",
+      "exercising",
+      "destroying",
+      "carrying"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'carry'.",
+    "options": [
+      "She does not carries every day.",
+      "She is not carrying every day.",
+      "She does not carry every day.",
+      "She did not carried every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'change'.",
+    "options": [
+      "She is changing English every day.",
+      "She changeed English every day.",
+      "She change English every day.",
+      "She changes English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'change': Yesterday, I ____ at home.",
+    "options": [
+      "explained",
+      "changeed",
+      "developed",
+      "completeed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'change': I have ____ my work.",
+    "options": [
+      "changeed",
+      "developed",
+      "explained",
+      "completeed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'change': They are ____ now.",
+    "options": [
+      "completing",
+      "explaining",
+      "changing",
+      "developing"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'change'.",
+    "options": [
+      "She did not changeed every day.",
+      "She does not change every day.",
+      "She does not changes every day.",
+      "She is not changing every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'check'.",
+    "options": [
+      "She check English every day.",
+      "She checked English every day.",
+      "She is checking English every day.",
+      "She checks English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'check': Yesterday, I ____ at home.",
+    "options": [
+      "checked",
+      "filled",
+      "discovered",
+      "cooked"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'check': I have ____ my work.",
+    "options": [
+      "checked",
+      "cooked",
+      "filled",
+      "discovered"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'check': They are ____ now.",
+    "options": [
+      "cooking",
+      "discovering",
+      "checking",
+      "filling"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'check'.",
+    "options": [
+      "She does not checks every day.",
+      "She does not check every day.",
+      "She is not checking every day.",
+      "She did not checked every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'clean'.",
+    "options": [
+      "She cleans English every day.",
+      "She clean English every day.",
+      "She is cleaning English every day.",
+      "She cleaned English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'clean': Yesterday, I ____ at home.",
+    "options": [
+      "discussed",
+      "finished",
+      "copied",
+      "cleaned"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'clean': I have ____ my work.",
+    "options": [
+      "cleaned",
+      "finished",
+      "discussed",
+      "copied"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'clean': They are ____ now.",
+    "options": [
+      "copying",
+      "finishing",
+      "cleaning",
+      "discussing"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'clean'.",
+    "options": [
+      "She did not cleaned every day.",
+      "She does not cleans every day.",
+      "She is not cleaning every day.",
+      "She does not clean every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'climb'.",
+    "options": [
+      "She climb English every day.",
+      "She climbed English every day.",
+      "She climbs English every day.",
+      "She is climbing English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'climb': Yesterday, I ____ at home.",
+    "options": [
+      "divideed",
+      "counted",
+      "fixed",
+      "climbed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'climb': I have ____ my work.",
+    "options": [
+      "counted",
+      "fixed",
+      "divideed",
+      "climbed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'climb': They are ____ now.",
+    "options": [
+      "climbing",
+      "dividing",
+      "counting",
+      "fixing"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'climb'.",
+    "options": [
+      "She does not climbs every day.",
+      "She is not climbing every day.",
+      "She did not climbed every day.",
+      "She does not climb every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'close'.",
+    "options": [
+      "She close English every day.",
+      "She is closing English every day.",
+      "She closes English every day.",
+      "She closeed English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'close': Yesterday, I ____ at home.",
+    "options": [
+      "closeed",
+      "covered",
+      "followed",
+      "dressed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'close': I have ____ my work.",
+    "options": [
+      "dressed",
+      "covered",
+      "closeed",
+      "followed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'close': They are ____ now.",
+    "options": [
+      "covering",
+      "following",
+      "closing",
+      "dressing"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'close'.",
+    "options": [
+      "She is not closing every day.",
+      "She does not close every day.",
+      "She did not closeed every day.",
+      "She does not closes every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'collect'.",
+    "options": [
+      "She is collecting English every day.",
+      "She collect English every day.",
+      "She collects English every day.",
+      "She collected English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'collect': Yesterday, I ____ at home.",
+    "options": [
+      "createed",
+      "guessed",
+      "dried",
+      "collected"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'collect': I have ____ my work.",
+    "options": [
+      "collected",
+      "createed",
+      "guessed",
+      "dried"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'collect': They are ____ now.",
+    "options": [
+      "guessing",
+      "drying",
+      "collecting",
+      "creating"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'collect'.",
+    "options": [
+      "She did not collected every day.",
+      "She does not collects every day.",
+      "She is not collecting every day.",
+      "She does not collect every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'compare'.",
+    "options": [
+      "She compares English every day.",
+      "She is comparing English every day.",
+      "She compareed English every day.",
+      "She compare English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'compare': Yesterday, I ____ at home.",
+    "options": [
+      "earned",
+      "happened",
+      "danceed",
+      "compareed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'compare': I have ____ my work.",
+    "options": [
+      "compareed",
+      "happened",
+      "earned",
+      "danceed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'compare': They are ____ now.",
+    "options": [
+      "earning",
+      "comparing",
+      "dancing",
+      "happening"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'compare'.",
+    "options": [
+      "She does not compares every day.",
+      "She did not compareed every day.",
+      "She does not compare every day.",
+      "She is not comparing every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'complete'.",
+    "options": [
+      "She completeed English every day.",
+      "She is completing English every day.",
+      "She complete English every day.",
+      "She completes English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'complete': Yesterday, I ____ at home.",
+    "options": [
+      "completeed",
+      "decideed",
+      "helped",
+      "enjoyed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'complete': I have ____ my work.",
+    "options": [
+      "enjoyed",
+      "completeed",
+      "decideed",
+      "helped"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'complete': They are ____ now.",
+    "options": [
+      "helping",
+      "completing",
+      "enjoying",
+      "deciding"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'complete'.",
+    "options": [
+      "She did not completeed every day.",
+      "She does not completes every day.",
+      "She does not complete every day.",
+      "She is not completing every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'cook'.",
+    "options": [
+      "She cooked English every day.",
+      "She is cooking English every day.",
+      "She cooks English every day.",
+      "She cook English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'cook': Yesterday, I ____ at home.",
+    "options": [
+      "cooked",
+      "hopeed",
+      "entered",
+      "delivered"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'cook': I have ____ my work.",
+    "options": [
+      "cooked",
+      "delivered",
+      "entered",
+      "hopeed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'cook': They are ____ now.",
+    "options": [
+      "entering",
+      "hoping",
+      "delivering",
+      "cooking"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'cook'.",
+    "options": [
+      "She is not cooking every day.",
+      "She did not cooked every day.",
+      "She does not cook every day.",
+      "She does not cooks every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'copy'.",
+    "options": [
+      "She copies English every day.",
+      "She is copying English every day.",
+      "She copied English every day.",
+      "She copy English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'copy': Yesterday, I ____ at home.",
+    "options": [
+      "describeed",
+      "imagineed",
+      "copied",
+      "escapeed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past participle of 'copy': I have ____ my work.",
+    "options": [
+      "describeed",
+      "imagineed",
+      "copied",
+      "escapeed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'copy': They are ____ now.",
+    "options": [
+      "describing",
+      "escaping",
+      "copying",
+      "imagining"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'copy'.",
+    "options": [
+      "She is not copying every day.",
+      "She did not copied every day.",
+      "She does not copies every day.",
+      "She does not copy every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'count'.",
+    "options": [
+      "She is counting English every day.",
+      "She counts English every day.",
+      "She count English every day.",
+      "She counted English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'count': Yesterday, I ____ at home.",
+    "options": [
+      "improveed",
+      "counted",
+      "designed",
+      "examineed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'count': I have ____ my work.",
+    "options": [
+      "examineed",
+      "improveed",
+      "designed",
+      "counted"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'count': They are ____ now.",
+    "options": [
+      "designing",
+      "improving",
+      "examining",
+      "counting"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'count'.",
+    "options": [
+      "She does not count every day.",
+      "She is not counting every day.",
+      "She does not counts every day.",
+      "She did not counted every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'cover'.",
+    "options": [
+      "She is covering English every day.",
+      "She covered English every day.",
+      "She cover English every day.",
+      "She covers English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'cover': Yesterday, I ____ at home.",
+    "options": [
+      "covered",
+      "destroyed",
+      "includeed",
+      "exerciseed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'cover': I have ____ my work.",
+    "options": [
+      "exerciseed",
+      "covered",
+      "includeed",
+      "destroyed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'cover': They are ____ now.",
+    "options": [
+      "including",
+      "destroying",
+      "covering",
+      "exercising"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'cover'.",
+    "options": [
+      "She does not cover every day.",
+      "She is not covering every day.",
+      "She did not covered every day.",
+      "She does not covers every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'create'.",
+    "options": [
+      "She create English every day.",
+      "She creates English every day.",
+      "She is creating English every day.",
+      "She createed English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'create': Yesterday, I ____ at home.",
+    "options": [
+      "explained",
+      "developed",
+      "increaseed",
+      "createed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'create': I have ____ my work.",
+    "options": [
+      "createed",
+      "developed",
+      "increaseed",
+      "explained"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'create': They are ____ now.",
+    "options": [
+      "increasing",
+      "developing",
+      "explaining",
+      "creating"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'create'.",
+    "options": [
+      "She did not createed every day.",
+      "She does not create every day.",
+      "She is not creating every day.",
+      "She does not creates every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'dance'.",
+    "options": [
+      "She danceed English every day.",
+      "She dances English every day.",
+      "She is dancing English every day.",
+      "She dance English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'dance': Yesterday, I ____ at home.",
+    "options": [
+      "discovered",
+      "filled",
+      "danceed",
+      "inviteed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past participle of 'dance': I have ____ my work.",
+    "options": [
+      "inviteed",
+      "filled",
+      "danceed",
+      "discovered"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'dance': They are ____ now.",
+    "options": [
+      "filling",
+      "inviting",
+      "discovering",
+      "dancing"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'dance'.",
+    "options": [
+      "She does not dances every day.",
+      "She does not dance every day.",
+      "She did not danceed every day.",
+      "She is not dancing every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'decide'.",
+    "options": [
+      "She is deciding English every day.",
+      "She decide English every day.",
+      "She decideed English every day.",
+      "She decides English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'decide': Yesterday, I ____ at home.",
+    "options": [
+      "joined",
+      "decideed",
+      "discussed",
+      "finished"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'decide': I have ____ my work.",
+    "options": [
+      "decideed",
+      "finished",
+      "joined",
+      "discussed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'decide': They are ____ now.",
+    "options": [
+      "finishing",
+      "discussing",
+      "joining",
+      "deciding"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'decide'.",
+    "options": [
+      "She is not deciding every day.",
+      "She did not decideed every day.",
+      "She does not decide every day.",
+      "She does not decides every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'deliver'.",
+    "options": [
+      "She deliver English every day.",
+      "She delivers English every day.",
+      "She is delivering English every day.",
+      "She delivered English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'deliver': Yesterday, I ____ at home.",
+    "options": [
+      "jumped",
+      "delivered",
+      "divideed",
+      "fixed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'deliver': I have ____ my work.",
+    "options": [
+      "jumped",
+      "delivered",
+      "fixed",
+      "divideed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'deliver': They are ____ now.",
+    "options": [
+      "jumping",
+      "delivering",
+      "fixing",
+      "dividing"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'deliver'.",
+    "options": [
+      "She does not delivers every day.",
+      "She did not delivered every day.",
+      "She does not deliver every day.",
+      "She is not delivering every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'describe'.",
+    "options": [
+      "She describes English every day.",
+      "She describeed English every day.",
+      "She is describing English every day.",
+      "She describe English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'describe': Yesterday, I ____ at home.",
+    "options": [
+      "kicked",
+      "describeed",
+      "followed",
+      "dressed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'describe': I have ____ my work.",
+    "options": [
+      "kicked",
+      "describeed",
+      "followed",
+      "dressed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'describe': They are ____ now.",
+    "options": [
+      "dressing",
+      "kicking",
+      "following",
+      "describing"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'describe'.",
+    "options": [
+      "She does not describes every day.",
+      "She did not describeed every day.",
+      "She is not describing every day.",
+      "She does not describe every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'design'.",
+    "options": [
+      "She is designing English every day.",
+      "She designs English every day.",
+      "She design English every day.",
+      "She designed English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'design': Yesterday, I ____ at home.",
+    "options": [
+      "designed",
+      "knocked",
+      "dried",
+      "guessed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'design': I have ____ my work.",
+    "options": [
+      "dried",
+      "knocked",
+      "designed",
+      "guessed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'design': They are ____ now.",
+    "options": [
+      "knocking",
+      "drying",
+      "guessing",
+      "designing"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'design'.",
+    "options": [
+      "She does not design every day.",
+      "She did not designed every day.",
+      "She does not designs every day.",
+      "She is not designing every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'destroy'.",
+    "options": [
+      "She destroy English every day.",
+      "She destroys English every day.",
+      "She is destroying English every day.",
+      "She destroyed English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'destroy': Yesterday, I ____ at home.",
+    "options": [
+      "destroyed",
+      "laughed",
+      "earned",
+      "happened"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'destroy': I have ____ my work.",
+    "options": [
+      "laughed",
+      "earned",
+      "happened",
+      "destroyed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'destroy': They are ____ now.",
+    "options": [
+      "earning",
+      "destroying",
+      "happening",
+      "laughing"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'destroy'.",
+    "options": [
+      "She is not destroying every day.",
+      "She does not destroy every day.",
+      "She did not destroyed every day.",
+      "She does not destroys every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'develop'.",
+    "options": [
+      "She is developing English every day.",
+      "She develops English every day.",
+      "She developed English every day.",
+      "She develop English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'develop': Yesterday, I ____ at home.",
+    "options": [
+      "enjoyed",
+      "learned",
+      "helped",
+      "developed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'develop': I have ____ my work.",
+    "options": [
+      "enjoyed",
+      "learned",
+      "developed",
+      "helped"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'develop': They are ____ now.",
+    "options": [
+      "helping",
+      "developing",
+      "learning",
+      "enjoying"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'develop'.",
+    "options": [
+      "She is not developing every day.",
+      "She does not develop every day.",
+      "She does not develops every day.",
+      "She did not developed every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'discover'.",
+    "options": [
+      "She discovered English every day.",
+      "She discover English every day.",
+      "She discovers English every day.",
+      "She is discovering English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'discover': Yesterday, I ____ at home.",
+    "options": [
+      "entered",
+      "discovered",
+      "hopeed",
+      "likeed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'discover': I have ____ my work.",
+    "options": [
+      "hopeed",
+      "likeed",
+      "entered",
+      "discovered"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'discover': They are ____ now.",
+    "options": [
+      "entering",
+      "liking",
+      "hoping",
+      "discovering"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'discover'.",
+    "options": [
+      "She does not discover every day.",
+      "She does not discovers every day.",
+      "She did not discovered every day.",
+      "She is not discovering every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'discuss'.",
+    "options": [
+      "She discusses English every day.",
+      "She discuss English every day.",
+      "She is discussing English every day.",
+      "She discussed English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'discuss': Yesterday, I ____ at home.",
+    "options": [
+      "discussed",
+      "escapeed",
+      "listened",
+      "imagineed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'discuss': I have ____ my work.",
+    "options": [
+      "imagineed",
+      "discussed",
+      "escapeed",
+      "listened"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'discuss': They are ____ now.",
+    "options": [
+      "imagining",
+      "escaping",
+      "discussing",
+      "listening"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'discuss'.",
+    "options": [
+      "She does not discuss every day.",
+      "She does not discusses every day.",
+      "She is not discussing every day.",
+      "She did not discussed every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'divide'.",
+    "options": [
+      "She divide English every day.",
+      "She is dividing English every day.",
+      "She divides English every day.",
+      "She divideed English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'divide': Yesterday, I ____ at home.",
+    "options": [
+      "improveed",
+      "divideed",
+      "liveed",
+      "examineed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'divide': I have ____ my work.",
+    "options": [
+      "divideed",
+      "improveed",
+      "examineed",
+      "liveed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'divide': They are ____ now.",
+    "options": [
+      "dividing",
+      "examining",
+      "improving",
+      "living"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'divide'.",
+    "options": [
+      "She does not divide every day.",
+      "She does not divides every day.",
+      "She did not divideed every day.",
+      "She is not dividing every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'dress'.",
+    "options": [
+      "She dress English every day.",
+      "She dresses English every day.",
+      "She is dressing English every day.",
+      "She dressed English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'dress': Yesterday, I ____ at home.",
+    "options": [
+      "dressed",
+      "exerciseed",
+      "looked",
+      "includeed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'dress': I have ____ my work.",
+    "options": [
+      "exerciseed",
+      "includeed",
+      "dressed",
+      "looked"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'dress': They are ____ now.",
+    "options": [
+      "exercising",
+      "including",
+      "dressing",
+      "looking"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'dress'.",
+    "options": [
+      "She is not dressing every day.",
+      "She does not dresses every day.",
+      "She did not dressed every day.",
+      "She does not dress every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'dry'.",
+    "options": [
+      "She dry English every day.",
+      "She dried English every day.",
+      "She is drying English every day.",
+      "She dries English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'dry': Yesterday, I ____ at home.",
+    "options": [
+      "loveed",
+      "increaseed",
+      "explained",
+      "dried"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'dry': I have ____ my work.",
+    "options": [
+      "increaseed",
+      "explained",
+      "loveed",
+      "dried"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'dry': They are ____ now.",
+    "options": [
+      "drying",
+      "explaining",
+      "increasing",
+      "loving"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'dry'.",
+    "options": [
+      "She is not drying every day.",
+      "She does not dries every day.",
+      "She does not dry every day.",
+      "She did not dried every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'earn'.",
+    "options": [
+      "She earn English every day.",
+      "She earned English every day.",
+      "She is earning English every day.",
+      "She earns English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'earn': Yesterday, I ____ at home.",
+    "options": [
+      "manageed",
+      "inviteed",
+      "filled",
+      "earned"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'earn': I have ____ my work.",
+    "options": [
+      "earned",
+      "inviteed",
+      "manageed",
+      "filled"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'earn': They are ____ now.",
+    "options": [
+      "managing",
+      "inviting",
+      "earning",
+      "filling"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'earn'.",
+    "options": [
+      "She is not earning every day.",
+      "She did not earned every day.",
+      "She does not earn every day.",
+      "She does not earns every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'enjoy'.",
+    "options": [
+      "She enjoy English every day.",
+      "She enjoys English every day.",
+      "She is enjoying English every day.",
+      "She enjoyed English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'enjoy': Yesterday, I ____ at home.",
+    "options": [
+      "enjoyed",
+      "joined",
+      "finished",
+      "marked"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'enjoy': I have ____ my work.",
+    "options": [
+      "joined",
+      "enjoyed",
+      "marked",
+      "finished"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'enjoy': They are ____ now.",
+    "options": [
+      "joining",
+      "marking",
+      "finishing",
+      "enjoying"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'enjoy'.",
+    "options": [
+      "She did not enjoyed every day.",
+      "She does not enjoy every day.",
+      "She is not enjoying every day.",
+      "She does not enjoys every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'enter'.",
+    "options": [
+      "She is entering English every day.",
+      "She enters English every day.",
+      "She enter English every day.",
+      "She entered English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'enter': Yesterday, I ____ at home.",
+    "options": [
+      "entered",
+      "jumped",
+      "fixed",
+      "married"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'enter': I have ____ my work.",
+    "options": [
+      "jumped",
+      "married",
+      "entered",
+      "fixed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'enter': They are ____ now.",
+    "options": [
+      "jumping",
+      "marrying",
+      "entering",
+      "fixing"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'enter'.",
+    "options": [
+      "She did not entered every day.",
+      "She is not entering every day.",
+      "She does not enters every day.",
+      "She does not enter every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'escape'.",
+    "options": [
+      "She is escaping English every day.",
+      "She escapeed English every day.",
+      "She escapes English every day.",
+      "She escape English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'escape': Yesterday, I ____ at home.",
+    "options": [
+      "escapeed",
+      "measureed",
+      "kicked",
+      "followed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'escape': I have ____ my work.",
+    "options": [
+      "escapeed",
+      "followed",
+      "kicked",
+      "measureed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'escape': They are ____ now.",
+    "options": [
+      "escaping",
+      "kicking",
+      "measuring",
+      "following"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'escape'.",
+    "options": [
+      "She did not escapeed every day.",
+      "She does not escapes every day.",
+      "She is not escaping every day.",
+      "She does not escape every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'examine'.",
+    "options": [
+      "She examineed English every day.",
+      "She examines English every day.",
+      "She is examining English every day.",
+      "She examine English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'examine': Yesterday, I ____ at home.",
+    "options": [
+      "examineed",
+      "mentioned",
+      "knocked",
+      "guessed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'examine': I have ____ my work.",
+    "options": [
+      "examineed",
+      "knocked",
+      "guessed",
+      "mentioned"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'examine': They are ____ now.",
+    "options": [
+      "knocking",
+      "examining",
+      "mentioning",
+      "guessing"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'examine'.",
+    "options": [
+      "She does not examines every day.",
+      "She did not examineed every day.",
+      "She is not examining every day.",
+      "She does not examine every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'exercise'.",
+    "options": [
+      "She exercise English every day.",
+      "She exercises English every day.",
+      "She is exercising English every day.",
+      "She exerciseed English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'exercise': Yesterday, I ____ at home.",
+    "options": [
+      "missed",
+      "happened",
+      "laughed",
+      "exerciseed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'exercise': I have ____ my work.",
+    "options": [
+      "missed",
+      "exerciseed",
+      "happened",
+      "laughed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'exercise': They are ____ now.",
+    "options": [
+      "exercising",
+      "laughing",
+      "happening",
+      "missing"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'exercise'.",
+    "options": [
+      "She does not exercises every day.",
+      "She does not exercise every day.",
+      "She did not exerciseed every day.",
+      "She is not exercising every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'explain'.",
+    "options": [
+      "She explained English every day.",
+      "She explains English every day.",
+      "She is explaining English every day.",
+      "She explain English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'explain': Yesterday, I ____ at home.",
+    "options": [
+      "helped",
+      "moveed",
+      "learned",
+      "explained"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'explain': I have ____ my work.",
+    "options": [
+      "explained",
+      "helped",
+      "learned",
+      "moveed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'explain': They are ____ now.",
+    "options": [
+      "helping",
+      "learning",
+      "explaining",
+      "moving"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'explain'.",
+    "options": [
+      "She did not explained every day.",
+      "She does not explains every day.",
+      "She does not explain every day.",
+      "She is not explaining every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'fill'.",
+    "options": [
+      "She filled English every day.",
+      "She is filling English every day.",
+      "She fill English every day.",
+      "She fills English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'fill': Yesterday, I ____ at home.",
+    "options": [
+      "hopeed",
+      "needed",
+      "likeed",
+      "filled"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'fill': I have ____ my work.",
+    "options": [
+      "hopeed",
+      "likeed",
+      "filled",
+      "needed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'fill': They are ____ now.",
+    "options": [
+      "liking",
+      "filling",
+      "needing",
+      "hoping"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'fill'.",
+    "options": [
+      "She does not fill every day.",
+      "She is not filling every day.",
+      "She did not filled every day.",
+      "She does not fills every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'finish'.",
+    "options": [
+      "She is finishing English every day.",
+      "She finish English every day.",
+      "She finishes English every day.",
+      "She finished English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'finish': Yesterday, I ____ at home.",
+    "options": [
+      "listened",
+      "noticeed",
+      "finished",
+      "imagineed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past participle of 'finish': I have ____ my work.",
+    "options": [
+      "finished",
+      "imagineed",
+      "noticeed",
+      "listened"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'finish': They are ____ now.",
+    "options": [
+      "listening",
+      "imagining",
+      "noticing",
+      "finishing"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'finish'.",
+    "options": [
+      "She does not finishes every day.",
+      "She did not finished every day.",
+      "She does not finish every day.",
+      "She is not finishing every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'fix'.",
+    "options": [
+      "She is fixing English every day.",
+      "She fix English every day.",
+      "She fixed English every day.",
+      "She fixes English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'fix': Yesterday, I ____ at home.",
+    "options": [
+      "liveed",
+      "offered",
+      "improveed",
+      "fixed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'fix': I have ____ my work.",
+    "options": [
+      "liveed",
+      "fixed",
+      "improveed",
+      "offered"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'fix': They are ____ now.",
+    "options": [
+      "improving",
+      "fixing",
+      "offering",
+      "living"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'fix'.",
+    "options": [
+      "She is not fixing every day.",
+      "She does not fix every day.",
+      "She does not fixes every day.",
+      "She did not fixed every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'follow'.",
+    "options": [
+      "She followed English every day.",
+      "She follow English every day.",
+      "She is following English every day.",
+      "She follows English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'follow': Yesterday, I ____ at home.",
+    "options": [
+      "followed",
+      "opened",
+      "looked",
+      "includeed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'follow': I have ____ my work.",
+    "options": [
+      "followed",
+      "opened",
+      "looked",
+      "includeed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'follow': They are ____ now.",
+    "options": [
+      "looking",
+      "including",
+      "following",
+      "opening"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'follow'.",
+    "options": [
+      "She does not follow every day.",
+      "She did not followed every day.",
+      "She does not follows every day.",
+      "She is not following every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'guess'.",
+    "options": [
+      "She guesses English every day.",
+      "She is guessing English every day.",
+      "She guessed English every day.",
+      "She guess English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'guess': Yesterday, I ____ at home.",
+    "options": [
+      "increaseed",
+      "ordered",
+      "loveed",
+      "guessed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'guess': I have ____ my work.",
+    "options": [
+      "loveed",
+      "increaseed",
+      "ordered",
+      "guessed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'guess': They are ____ now.",
+    "options": [
+      "ordering",
+      "increasing",
+      "guessing",
+      "loving"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'guess'.",
+    "options": [
+      "She did not guessed every day.",
+      "She does not guess every day.",
+      "She is not guessing every day.",
+      "She does not guesses every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'happen'.",
+    "options": [
+      "She is happening English every day.",
+      "She happened English every day.",
+      "She happen English every day.",
+      "She happens English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'happen': Yesterday, I ____ at home.",
+    "options": [
+      "organizeed",
+      "manageed",
+      "happened",
+      "inviteed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past participle of 'happen': I have ____ my work.",
+    "options": [
+      "organizeed",
+      "manageed",
+      "happened",
+      "inviteed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'happen': They are ____ now.",
+    "options": [
+      "organizing",
+      "happening",
+      "managing",
+      "inviting"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'happen'.",
+    "options": [
+      "She did not happened every day.",
+      "She is not happening every day.",
+      "She does not happen every day.",
+      "She does not happens every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'help'.",
+    "options": [
+      "She helped English every day.",
+      "She is helping English every day.",
+      "She helps English every day.",
+      "She help English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'help': Yesterday, I ____ at home.",
+    "options": [
+      "joined",
+      "marked",
+      "helped",
+      "painted"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past participle of 'help': I have ____ my work.",
+    "options": [
+      "joined",
+      "painted",
+      "helped",
+      "marked"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'help': They are ____ now.",
+    "options": [
+      "joining",
+      "marking",
+      "helping",
+      "painting"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'help'.",
+    "options": [
+      "She does not helps every day.",
+      "She is not helping every day.",
+      "She did not helped every day.",
+      "She does not help every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'hope'.",
+    "options": [
+      "She hopes English every day.",
+      "She hopeed English every day.",
+      "She hope English every day.",
+      "She is hoping English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'hope': Yesterday, I ____ at home.",
+    "options": [
+      "hopeed",
+      "married",
+      "jumped",
+      "parked"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'hope': I have ____ my work.",
+    "options": [
+      "married",
+      "parked",
+      "jumped",
+      "hopeed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'hope': They are ____ now.",
+    "options": [
+      "jumping",
+      "parking",
+      "hoping",
+      "marrying"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'hope'.",
+    "options": [
+      "She does not hope every day.",
+      "She did not hopeed every day.",
+      "She is not hoping every day.",
+      "She does not hopes every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'imagine'.",
+    "options": [
+      "She imagines English every day.",
+      "She imagine English every day.",
+      "She is imagining English every day.",
+      "She imagineed English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'imagine': Yesterday, I ____ at home.",
+    "options": [
+      "passed",
+      "measureed",
+      "kicked",
+      "imagineed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'imagine': I have ____ my work.",
+    "options": [
+      "kicked",
+      "measureed",
+      "passed",
+      "imagineed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'imagine': They are ____ now.",
+    "options": [
+      "imagining",
+      "measuring",
+      "passing",
+      "kicking"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'imagine'.",
+    "options": [
+      "She is not imagining every day.",
+      "She does not imagine every day.",
+      "She did not imagineed every day.",
+      "She does not imagines every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'improve'.",
+    "options": [
+      "She is improving English every day.",
+      "She improve English every day.",
+      "She improveed English every day.",
+      "She improves English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'improve': Yesterday, I ____ at home.",
+    "options": [
+      "mentioned",
+      "improveed",
+      "planed",
+      "knocked"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'improve': I have ____ my work.",
+    "options": [
+      "improveed",
+      "mentioned",
+      "knocked",
+      "planed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'improve': They are ____ now.",
+    "options": [
+      "mentioning",
+      "improving",
+      "planing",
+      "knocking"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'improve'.",
+    "options": [
+      "She did not improveed every day.",
+      "She does not improve every day.",
+      "She does not improves every day.",
+      "She is not improving every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'include'.",
+    "options": [
+      "She includes English every day.",
+      "She includeed English every day.",
+      "She include English every day.",
+      "She is including English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'include': Yesterday, I ____ at home.",
+    "options": [
+      "missed",
+      "includeed",
+      "laughed",
+      "played"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'include': I have ____ my work.",
+    "options": [
+      "laughed",
+      "includeed",
+      "missed",
+      "played"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'include': They are ____ now.",
+    "options": [
+      "missing",
+      "playing",
+      "laughing",
+      "including"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'include'.",
+    "options": [
+      "She did not includeed every day.",
+      "She is not including every day.",
+      "She does not include every day.",
+      "She does not includes every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'increase'.",
+    "options": [
+      "She increases English every day.",
+      "She increase English every day.",
+      "She is increasing English every day.",
+      "She increaseed English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'increase': Yesterday, I ____ at home.",
+    "options": [
+      "learned",
+      "practiceed",
+      "moveed",
+      "increaseed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'increase': I have ____ my work.",
+    "options": [
+      "moveed",
+      "learned",
+      "practiceed",
+      "increaseed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'increase': They are ____ now.",
+    "options": [
+      "moving",
+      "learning",
+      "practicing",
+      "increasing"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'increase'.",
+    "options": [
+      "She does not increases every day.",
+      "She is not increasing every day.",
+      "She did not increaseed every day.",
+      "She does not increase every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'invite'.",
+    "options": [
+      "She is inviting English every day.",
+      "She inviteed English every day.",
+      "She invites English every day.",
+      "She invite English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'invite': Yesterday, I ____ at home.",
+    "options": [
+      "likeed",
+      "inviteed",
+      "needed",
+      "prefered"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'invite': I have ____ my work.",
+    "options": [
+      "needed",
+      "prefered",
+      "likeed",
+      "inviteed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'invite': They are ____ now.",
+    "options": [
+      "inviting",
+      "liking",
+      "prefering",
+      "needing"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'invite'.",
+    "options": [
+      "She is not inviting every day.",
+      "She does not invites every day.",
+      "She does not invite every day.",
+      "She did not inviteed every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'join'.",
+    "options": [
+      "She join English every day.",
+      "She joins English every day.",
+      "She is joining English every day.",
+      "She joined English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'join': Yesterday, I ____ at home.",
+    "options": [
+      "listened",
+      "prepareed",
+      "joined",
+      "noticeed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past participle of 'join': I have ____ my work.",
+    "options": [
+      "joined",
+      "noticeed",
+      "prepareed",
+      "listened"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'join': They are ____ now.",
+    "options": [
+      "joining",
+      "noticing",
+      "listening",
+      "preparing"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'join'.",
+    "options": [
+      "She is not joining every day.",
+      "She does not join every day.",
+      "She does not joins every day.",
+      "She did not joined every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'jump'.",
+    "options": [
+      "She jumps English every day.",
+      "She is jumping English every day.",
+      "She jumped English every day.",
+      "She jump English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'jump': Yesterday, I ____ at home.",
+    "options": [
+      "liveed",
+      "jumped",
+      "offered",
+      "presented"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'jump': I have ____ my work.",
+    "options": [
+      "jumped",
+      "offered",
+      "liveed",
+      "presented"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'jump': They are ____ now.",
+    "options": [
+      "offering",
+      "living",
+      "presenting",
+      "jumping"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'jump'.",
+    "options": [
+      "She is not jumping every day.",
+      "She does not jumps every day.",
+      "She does not jump every day.",
+      "She did not jumped every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'kick'.",
+    "options": [
+      "She kicked English every day.",
+      "She kick English every day.",
+      "She kicks English every day.",
+      "She is kicking English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'kick': Yesterday, I ____ at home.",
+    "options": [
+      "printed",
+      "kicked",
+      "looked",
+      "opened"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'kick': I have ____ my work.",
+    "options": [
+      "looked",
+      "opened",
+      "kicked",
+      "printed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'kick': They are ____ now.",
+    "options": [
+      "printing",
+      "kicking",
+      "opening",
+      "looking"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'kick'.",
+    "options": [
+      "She does not kicks every day.",
+      "She is not kicking every day.",
+      "She did not kicked every day.",
+      "She does not kick every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'knock'.",
+    "options": [
+      "She knocked English every day.",
+      "She is knocking English every day.",
+      "She knocks English every day.",
+      "She knock English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'knock': Yesterday, I ____ at home.",
+    "options": [
+      "ordered",
+      "knocked",
+      "loveed",
+      "produceed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'knock': I have ____ my work.",
+    "options": [
+      "ordered",
+      "loveed",
+      "produceed",
+      "knocked"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'knock': They are ____ now.",
+    "options": [
+      "loving",
+      "ordering",
+      "knocking",
+      "producing"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'knock'.",
+    "options": [
+      "She does not knock every day.",
+      "She does not knocks every day.",
+      "She did not knocked every day.",
+      "She is not knocking every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'laugh'.",
+    "options": [
+      "She laughs English every day.",
+      "She laugh English every day.",
+      "She laughed English every day.",
+      "She is laughing English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'laugh': Yesterday, I ____ at home.",
+    "options": [
+      "manageed",
+      "organizeed",
+      "promiseed",
+      "laughed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'laugh': I have ____ my work.",
+    "options": [
+      "laughed",
+      "promiseed",
+      "manageed",
+      "organizeed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'laugh': They are ____ now.",
+    "options": [
+      "organizing",
+      "managing",
+      "laughing",
+      "promising"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'laugh'.",
+    "options": [
+      "She does not laugh every day.",
+      "She does not laughs every day.",
+      "She did not laughed every day.",
+      "She is not laughing every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'learn'.",
+    "options": [
+      "She learn English every day.",
+      "She is learning English every day.",
+      "She learns English every day.",
+      "She learned English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'learn': Yesterday, I ____ at home.",
+    "options": [
+      "learned",
+      "painted",
+      "marked",
+      "accepted"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'learn': I have ____ my work.",
+    "options": [
+      "painted",
+      "marked",
+      "learned",
+      "accepted"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'learn': They are ____ now.",
+    "options": [
+      "learning",
+      "accepting",
+      "marking",
+      "painting"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'learn'.",
+    "options": [
+      "She did not learned every day.",
+      "She is not learning every day.",
+      "She does not learns every day.",
+      "She does not learn every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'like'.",
+    "options": [
+      "She likes English every day.",
+      "She like English every day.",
+      "She likeed English every day.",
+      "She is liking English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'like': Yesterday, I ____ at home.",
+    "options": [
+      "likeed",
+      "married",
+      "added",
+      "parked"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'like': I have ____ my work.",
+    "options": [
+      "likeed",
+      "married",
+      "added",
+      "parked"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'like': They are ____ now.",
+    "options": [
+      "liking",
+      "marrying",
+      "adding",
+      "parking"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'like'.",
+    "options": [
+      "She did not likeed every day.",
+      "She does not likes every day.",
+      "She is not liking every day.",
+      "She does not like every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'listen'.",
+    "options": [
+      "She listen English every day.",
+      "She listens English every day.",
+      "She listened English every day.",
+      "She is listening English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'listen': Yesterday, I ____ at home.",
+    "options": [
+      "measureed",
+      "listened",
+      "passed",
+      "admireed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'listen': I have ____ my work.",
+    "options": [
+      "measureed",
+      "passed",
+      "admireed",
+      "listened"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'listen': They are ____ now.",
+    "options": [
+      "listening",
+      "measuring",
+      "admiring",
+      "passing"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'listen'.",
+    "options": [
+      "She does not listens every day.",
+      "She does not listen every day.",
+      "She is not listening every day.",
+      "She did not listened every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'live'.",
+    "options": [
+      "She liveed English every day.",
+      "She lives English every day.",
+      "She live English every day.",
+      "She is living English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'live': Yesterday, I ____ at home.",
+    "options": [
+      "planed",
+      "liveed",
+      "mentioned",
+      "adviseed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'live': I have ____ my work.",
+    "options": [
+      "planed",
+      "mentioned",
+      "liveed",
+      "adviseed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'live': They are ____ now.",
+    "options": [
+      "mentioning",
+      "advising",
+      "living",
+      "planing"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'live'.",
+    "options": [
+      "She does not lives every day.",
+      "She does not live every day.",
+      "She did not liveed every day.",
+      "She is not living every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'look'.",
+    "options": [
+      "She looked English every day.",
+      "She looks English every day.",
+      "She is looking English every day.",
+      "She look English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'look': Yesterday, I ____ at home.",
+    "options": [
+      "looked",
+      "agreeed",
+      "missed",
+      "played"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'look': I have ____ my work.",
+    "options": [
+      "looked",
+      "agreeed",
+      "missed",
+      "played"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'look': They are ____ now.",
+    "options": [
+      "playing",
+      "missing",
+      "looking",
+      "agreeing"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'look'.",
+    "options": [
+      "She is not looking every day.",
+      "She does not looks every day.",
+      "She did not looked every day.",
+      "She does not look every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'love'.",
+    "options": [
+      "She loves English every day.",
+      "She is loving English every day.",
+      "She loveed English every day.",
+      "She love English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'love': Yesterday, I ____ at home.",
+    "options": [
+      "moveed",
+      "loveed",
+      "practiceed",
+      "allowed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'love': I have ____ my work.",
+    "options": [
+      "moveed",
+      "loveed",
+      "practiceed",
+      "allowed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'love': They are ____ now.",
+    "options": [
+      "moving",
+      "loving",
+      "practicing",
+      "allowing"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'love'.",
+    "options": [
+      "She does not love every day.",
+      "She does not loves every day.",
+      "She did not loveed every day.",
+      "She is not loving every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'manage'.",
+    "options": [
+      "She manage English every day.",
+      "She manageed English every day.",
+      "She manages English every day.",
+      "She is managing English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'manage': Yesterday, I ____ at home.",
+    "options": [
+      "manageed",
+      "needed",
+      "prefered",
+      "answered"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'manage': I have ____ my work.",
+    "options": [
+      "answered",
+      "needed",
+      "prefered",
+      "manageed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'manage': They are ____ now.",
+    "options": [
+      "answering",
+      "managing",
+      "prefering",
+      "needing"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'manage'.",
+    "options": [
+      "She did not manageed every day.",
+      "She does not manage every day.",
+      "She does not manages every day.",
+      "She is not managing every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'mark'.",
+    "options": [
+      "She is marking English every day.",
+      "She mark English every day.",
+      "She marks English every day.",
+      "She marked English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'mark': Yesterday, I ____ at home.",
+    "options": [
+      "noticeed",
+      "prepareed",
+      "marked",
+      "appeared"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past participle of 'mark': I have ____ my work.",
+    "options": [
+      "marked",
+      "appeared",
+      "noticeed",
+      "prepareed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'mark': They are ____ now.",
+    "options": [
+      "noticing",
+      "appearing",
+      "preparing",
+      "marking"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'mark'.",
+    "options": [
+      "She did not marked every day.",
+      "She is not marking every day.",
+      "She does not marks every day.",
+      "She does not mark every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'marry'.",
+    "options": [
+      "She marry English every day.",
+      "She married English every day.",
+      "She is marrying English every day.",
+      "She marries English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'marry': Yesterday, I ____ at home.",
+    "options": [
+      "arriveed",
+      "presented",
+      "offered",
+      "married"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'marry': I have ____ my work.",
+    "options": [
+      "arriveed",
+      "married",
+      "offered",
+      "presented"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'marry': They are ____ now.",
+    "options": [
+      "marrying",
+      "arriving",
+      "offering",
+      "presenting"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'marry'.",
+    "options": [
+      "She did not married every day.",
+      "She does not marries every day.",
+      "She does not marry every day.",
+      "She is not marrying every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'measure'.",
+    "options": [
+      "She measureed English every day.",
+      "She measure English every day.",
+      "She is measuring English every day.",
+      "She measures English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'measure': Yesterday, I ____ at home.",
+    "options": [
+      "measureed",
+      "printed",
+      "asked",
+      "opened"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'measure': I have ____ my work.",
+    "options": [
+      "opened",
+      "measureed",
+      "asked",
+      "printed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'measure': They are ____ now.",
+    "options": [
+      "printing",
+      "asking",
+      "measuring",
+      "opening"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'measure'.",
+    "options": [
+      "She is not measuring every day.",
+      "She does not measures every day.",
+      "She did not measureed every day.",
+      "She does not measure every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'mention'.",
+    "options": [
+      "She is mentioning English every day.",
+      "She mentions English every day.",
+      "She mention English every day.",
+      "She mentioned English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'mention': Yesterday, I ____ at home.",
+    "options": [
+      "avoided",
+      "ordered",
+      "produceed",
+      "mentioned"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'mention': I have ____ my work.",
+    "options": [
+      "produceed",
+      "mentioned",
+      "ordered",
+      "avoided"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'mention': They are ____ now.",
+    "options": [
+      "mentioning",
+      "ordering",
+      "producing",
+      "avoiding"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'mention'.",
+    "options": [
+      "She does not mention every day.",
+      "She is not mentioning every day.",
+      "She did not mentioned every day.",
+      "She does not mentions every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'miss'.",
+    "options": [
+      "She misses English every day.",
+      "She miss English every day.",
+      "She missed English every day.",
+      "She is missing English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'miss': Yesterday, I ____ at home.",
+    "options": [
+      "bakeed",
+      "missed",
+      "organizeed",
+      "promiseed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'miss': I have ____ my work.",
+    "options": [
+      "organizeed",
+      "missed",
+      "bakeed",
+      "promiseed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'miss': They are ____ now.",
+    "options": [
+      "baking",
+      "promising",
+      "organizing",
+      "missing"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'miss'.",
+    "options": [
+      "She does not misses every day.",
+      "She did not missed every day.",
+      "She does not miss every day.",
+      "She is not missing every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'move'.",
+    "options": [
+      "She is moving English every day.",
+      "She move English every day.",
+      "She moveed English every day.",
+      "She moves English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'move': Yesterday, I ____ at home.",
+    "options": [
+      "balanceed",
+      "painted",
+      "accepted",
+      "moveed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'move': I have ____ my work.",
+    "options": [
+      "accepted",
+      "moveed",
+      "balanceed",
+      "painted"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'move': They are ____ now.",
+    "options": [
+      "accepting",
+      "moving",
+      "painting",
+      "balancing"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'move'.",
+    "options": [
+      "She did not moveed every day.",
+      "She does not moves every day.",
+      "She is not moving every day.",
+      "She does not move every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'need'.",
+    "options": [
+      "She need English every day.",
+      "She needs English every day.",
+      "She is needing English every day.",
+      "She needed English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'need': Yesterday, I ____ at home.",
+    "options": [
+      "parked",
+      "believeed",
+      "needed",
+      "added"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past participle of 'need': I have ____ my work.",
+    "options": [
+      "added",
+      "needed",
+      "parked",
+      "believeed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'need': They are ____ now.",
+    "options": [
+      "believing",
+      "adding",
+      "parking",
+      "needing"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'need'.",
+    "options": [
+      "She did not needed every day.",
+      "She is not needing every day.",
+      "She does not need every day.",
+      "She does not needs every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'notice'.",
+    "options": [
+      "She is noticing English every day.",
+      "She notices English every day.",
+      "She notice English every day.",
+      "She noticeed English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'notice': Yesterday, I ____ at home.",
+    "options": [
+      "noticeed",
+      "admireed",
+      "belonged",
+      "passed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'notice': I have ____ my work.",
+    "options": [
+      "admireed",
+      "noticeed",
+      "belonged",
+      "passed"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'notice': They are ____ now.",
+    "options": [
+      "belonging",
+      "noticing",
+      "admiring",
+      "passing"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'notice'.",
+    "options": [
+      "She is not noticing every day.",
+      "She does not notices every day.",
+      "She did not noticeed every day.",
+      "She does not notice every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'offer'.",
+    "options": [
+      "She offers English every day.",
+      "She offered English every day.",
+      "She offer English every day.",
+      "She is offering English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'offer': Yesterday, I ____ at home.",
+    "options": [
+      "planed",
+      "borrowed",
+      "offered",
+      "adviseed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past participle of 'offer': I have ____ my work.",
+    "options": [
+      "planed",
+      "borrowed",
+      "offered",
+      "adviseed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'offer': They are ____ now.",
+    "options": [
+      "advising",
+      "planing",
+      "offering",
+      "borrowing"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'offer'.",
+    "options": [
+      "She does not offer every day.",
+      "She does not offers every day.",
+      "She did not offered every day.",
+      "She is not offering every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'open'.",
+    "options": [
+      "She open English every day.",
+      "She opened English every day.",
+      "She is opening English every day.",
+      "She opens English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'open': Yesterday, I ____ at home.",
+    "options": [
+      "played",
+      "brushed",
+      "agreeed",
+      "opened"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'open': I have ____ my work.",
+    "options": [
+      "opened",
+      "played",
+      "brushed",
+      "agreeed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'open': They are ____ now.",
+    "options": [
+      "playing",
+      "brushing",
+      "opening",
+      "agreeing"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'open'.",
+    "options": [
+      "She is not opening every day.",
+      "She does not open every day.",
+      "She did not opened every day.",
+      "She does not opens every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'order'.",
+    "options": [
+      "She orders English every day.",
+      "She order English every day.",
+      "She ordered English every day.",
+      "She is ordering English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'order': Yesterday, I ____ at home.",
+    "options": [
+      "ordered",
+      "allowed",
+      "called",
+      "practiceed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'order': I have ____ my work.",
+    "options": [
+      "practiceed",
+      "called",
+      "allowed",
+      "ordered"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'order': They are ____ now.",
+    "options": [
+      "calling",
+      "ordering",
+      "allowing",
+      "practicing"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'order'.",
+    "options": [
+      "She does not order every day.",
+      "She is not ordering every day.",
+      "She did not ordered every day.",
+      "She does not orders every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct sentence using 'organize'.",
+    "options": [
+      "She organizeed English every day.",
+      "She organize English every day.",
+      "She is organizing English every day.",
+      "She organizes English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'organize': Yesterday, I ____ at home.",
+    "options": [
+      "organizeed",
+      "carried",
+      "answered",
+      "prefered"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'organize': I have ____ my work.",
+    "options": [
+      "answered",
+      "prefered",
+      "organizeed",
+      "carried"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'organize': They are ____ now.",
+    "options": [
+      "organizing",
+      "carrying",
+      "prefering",
+      "answering"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'organize'.",
+    "options": [
+      "She did not organizeed every day.",
+      "She does not organize every day.",
+      "She is not organizing every day.",
+      "She does not organizes every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'paint'.",
+    "options": [
+      "She paints English every day.",
+      "She is painting English every day.",
+      "She paint English every day.",
+      "She painted English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'paint': Yesterday, I ____ at home.",
+    "options": [
+      "changeed",
+      "prepareed",
+      "appeared",
+      "painted"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'paint': I have ____ my work.",
+    "options": [
+      "appeared",
+      "prepareed",
+      "painted",
+      "changeed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'paint': They are ____ now.",
+    "options": [
+      "preparing",
+      "painting",
+      "appearing",
+      "changing"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'paint'.",
+    "options": [
+      "She does not paints every day.",
+      "She does not paint every day.",
+      "She is not painting every day.",
+      "She did not painted every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'park'.",
+    "options": [
+      "She park English every day.",
+      "She is parking English every day.",
+      "She parked English every day.",
+      "She parks English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'park': Yesterday, I ____ at home.",
+    "options": [
+      "parked",
+      "arriveed",
+      "presented",
+      "checked"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'park': I have ____ my work.",
+    "options": [
+      "checked",
+      "parked",
+      "arriveed",
+      "presented"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct -ing form of 'park': They are ____ now.",
+    "options": [
+      "parking",
+      "checking",
+      "presenting",
+      "arriving"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'park'.",
+    "options": [
+      "She did not parked every day.",
+      "She does not park every day.",
+      "She is not parking every day.",
+      "She does not parks every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'pass'.",
+    "options": [
+      "She passes English every day.",
+      "She is passing English every day.",
+      "She passed English every day.",
+      "She pass English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'pass': Yesterday, I ____ at home.",
+    "options": [
+      "printed",
+      "cleaned",
+      "asked",
+      "passed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'pass': I have ____ my work.",
+    "options": [
+      "printed",
+      "cleaned",
+      "asked",
+      "passed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'pass': They are ____ now.",
+    "options": [
+      "printing",
+      "cleaning",
+      "passing",
+      "asking"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'pass'.",
+    "options": [
+      "She is not passing every day.",
+      "She does not pass every day.",
+      "She does not passes every day.",
+      "She did not passed every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'plan'.",
+    "options": [
+      "She planed English every day.",
+      "She plan English every day.",
+      "She plans English every day.",
+      "She is planing English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'plan': Yesterday, I ____ at home.",
+    "options": [
+      "produceed",
+      "avoided",
+      "climbed",
+      "planed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'plan': I have ____ my work.",
+    "options": [
+      "climbed",
+      "produceed",
+      "avoided",
+      "planed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'plan': They are ____ now.",
+    "options": [
+      "planing",
+      "producing",
+      "climbing",
+      "avoiding"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'plan'.",
+    "options": [
+      "She does not plans every day.",
+      "She does not plan every day.",
+      "She is not planing every day.",
+      "She did not planed every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct sentence using 'play'.",
+    "options": [
+      "She play English every day.",
+      "She is playing English every day.",
+      "She plays English every day.",
+      "She played English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'play': Yesterday, I ____ at home.",
+    "options": [
+      "promiseed",
+      "closeed",
+      "played",
+      "bakeed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past participle of 'play': I have ____ my work.",
+    "options": [
+      "closeed",
+      "promiseed",
+      "bakeed",
+      "played"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'play': They are ____ now.",
+    "options": [
+      "baking",
+      "closing",
+      "playing",
+      "promising"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'play'.",
+    "options": [
+      "She did not played every day.",
+      "She is not playing every day.",
+      "She does not plays every day.",
+      "She does not play every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'practice'.",
+    "options": [
+      "She practices English every day.",
+      "She is practicing English every day.",
+      "She practice English every day.",
+      "She practiceed English every day."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past form of 'practice': Yesterday, I ____ at home.",
+    "options": [
+      "collected",
+      "accepted",
+      "balanceed",
+      "practiceed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past participle of 'practice': I have ____ my work.",
+    "options": [
+      "collected",
+      "accepted",
+      "balanceed",
+      "practiceed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'practice': They are ____ now.",
+    "options": [
+      "balancing",
+      "accepting",
+      "practicing",
+      "collecting"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'practice'.",
+    "options": [
+      "She did not practiceed every day.",
+      "She is not practicing every day.",
+      "She does not practice every day.",
+      "She does not practices every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'prefer'.",
+    "options": [
+      "She prefered English every day.",
+      "She prefers English every day.",
+      "She is prefering English every day.",
+      "She prefer English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'prefer': Yesterday, I ____ at home.",
+    "options": [
+      "believeed",
+      "prefered",
+      "compareed",
+      "added"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'prefer': I have ____ my work.",
+    "options": [
+      "prefered",
+      "believeed",
+      "added",
+      "compareed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'prefer': They are ____ now.",
+    "options": [
+      "prefering",
+      "believing",
+      "comparing",
+      "adding"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct negative sentence with 'prefer'.",
+    "options": [
+      "She did not prefered every day.",
+      "She does not prefers every day.",
+      "She is not prefering every day.",
+      "She does not prefer every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'prepare'.",
+    "options": [
+      "She is preparing English every day.",
+      "She prepare English every day.",
+      "She prepareed English every day.",
+      "She prepares English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'prepare': Yesterday, I ____ at home.",
+    "options": [
+      "prepareed",
+      "belonged",
+      "completeed",
+      "admireed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'prepare': I have ____ my work.",
+    "options": [
+      "admireed",
+      "completeed",
+      "belonged",
+      "prepareed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'prepare': They are ____ now.",
+    "options": [
+      "admiring",
+      "preparing",
+      "completing",
+      "belonging"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'prepare'.",
+    "options": [
+      "She is not preparing every day.",
+      "She does not prepares every day.",
+      "She does not prepare every day.",
+      "She did not prepareed every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'present'.",
+    "options": [
+      "She present English every day.",
+      "She presents English every day.",
+      "She presented English every day.",
+      "She is presenting English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'present': Yesterday, I ____ at home.",
+    "options": [
+      "cooked",
+      "adviseed",
+      "presented",
+      "borrowed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past participle of 'present': I have ____ my work.",
+    "options": [
+      "adviseed",
+      "cooked",
+      "presented",
+      "borrowed"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct -ing form of 'present': They are ____ now.",
+    "options": [
+      "advising",
+      "cooking",
+      "borrowing",
+      "presenting"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'present'.",
+    "options": [
+      "She does not presents every day.",
+      "She is not presenting every day.",
+      "She did not presented every day.",
+      "She does not present every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'print'.",
+    "options": [
+      "She print English every day.",
+      "She printed English every day.",
+      "She prints English every day.",
+      "She is printing English every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past form of 'print': Yesterday, I ____ at home.",
+    "options": [
+      "printed",
+      "copied",
+      "agreeed",
+      "brushed"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct past participle of 'print': I have ____ my work.",
+    "options": [
+      "brushed",
+      "agreeed",
+      "copied",
+      "printed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'print': They are ____ now.",
+    "options": [
+      "agreeing",
+      "brushing",
+      "printing",
+      "copying"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct negative sentence with 'print'.",
+    "options": [
+      "She does not prints every day.",
+      "She is not printing every day.",
+      "She does not print every day.",
+      "She did not printed every day."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct sentence using 'produce'.",
+    "options": [
+      "She produce English every day.",
+      "She produceed English every day.",
+      "She is producing English every day.",
+      "She produces English every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct past form of 'produce': Yesterday, I ____ at home.",
+    "options": [
+      "allowed",
+      "called",
+      "produceed",
+      "counted"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Choose the correct past participle of 'produce': I have ____ my work.",
+    "options": [
+      "produceed",
+      "counted",
+      "allowed",
+      "called"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Choose the correct -ing form of 'produce': They are ____ now.",
+    "options": [
+      "allowing",
+      "calling",
+      "counting",
+      "producing"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct negative sentence with 'produce'.",
+    "options": [
+      "She is not producing every day.",
+      "She did not produceed every day.",
+      "She does not produces every day.",
+      "She does not produce every day."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct sentence using 'promise'.",
+    "options": [
+      "She promise English every day.",
+      "She promises English every day.",
+      "She promiseed English every day.",
+      "She is promising English every day."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past form of 'promise': Yesterday, I ____ at home.",
+    "options": [
+      "carried",
+      "promiseed",
+      "covered",
+      "answered"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct past participle of 'promise': I have ____ my work.",
+    "options": [
+      "carried",
+      "answered",
+      "covered",
+      "promiseed"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Choose the correct -ing form of 'promise': They are ____ now.",
+    "options": [
+      "answering",
+      "promising",
+      "carrying",
+      "covering"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Choose the correct negative sentence with 'promise'.",
+    "options": [
+      "She is not promising every day.",
+      "She did not promiseed every day.",
+      "She does not promises every day.",
+      "She does not promise every day."
+    ],
+    "correct": 3
+  }
+]
