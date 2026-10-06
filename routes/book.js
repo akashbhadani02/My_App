@@ -60,23 +60,86 @@ router.get("/content", auth, async (req,res)=>{
     ];
 
     async function fetchDrivePdf(url) {
-      const headers={Accept:"application/pdf,application/octet-stream;q=0.9,*/*;q=0.1"};
+      const headers={
+        Accept:"application/pdf,application/octet-stream;q=0.9,text/html;q=0.8,*/*;q=0.1",
+        "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/154 Safari/537.36"
+      };
       if(req.headers.range) headers.Range=req.headers.range;
-      const upstream=await fetch(url,{headers,redirect:"follow",signal:AbortSignal.timeout(55000)});
+
+      async function request(target, extraHeaders={}) {
+        return fetch(target,{
+          headers:{...headers,...extraHeaders},
+          redirect:"follow",
+          signal:AbortSignal.timeout(55000)
+        });
+      }
+
+      let upstream=await request(url);
       if(!upstream.ok || !upstream.body) return null;
 
+      const contentType=(upstream.headers.get("content-type")||"").toLowerCase();
       const reader=upstream.body.getReader();
       const first=await reader.read();
       const firstBuf=first.value ? Buffer.from(first.value) : Buffer.alloc(0);
-      const contentType=(upstream.headers.get("content-type")||"").toLowerCase();
       const looksPdf=firstBuf.subarray(0,5).toString()==="%PDF-" || contentType.includes("application/pdf");
-      if(!looksPdf) {
-        try { await reader.cancel(); } catch(e) {}
+      if(looksPdf) return {upstream,reader,firstBuf};
+
+      // Google Drive may return a small HTML confirmation page for large files.
+      // Extract its hidden download parameters and retry the real download.
+      let html=firstBuf.toString("utf8");
+      if(!first.done){
+        try {
+          const chunks=[];
+          let total=firstBuf.length;
+          while(total < 2 * 1024 * 1024){
+            const part=await reader.read();
+            if(part.done) break;
+            if(part.value){
+              const buf=Buffer.from(part.value);
+              const remaining=(2 * 1024 * 1024) - total;
+              const take=buf.subarray(0, remaining);
+              chunks.push(take);
+              total+=take.length;
+              if(take.length < buf.length) break;
+            }
+          }
+          if(chunks.length) html += Buffer.concat(chunks).toString("utf8");
+        } catch(e) {}
+      }
+      try { reader.releaseLock(); } catch(e) {}
+
+      const formMatch=html.match(/<form[^>]+action=["']([^"']+)["'][^>]*>/i);
+      const action=formMatch?.[1] || "https://drive.usercontent.google.com/download";
+      const params=new URLSearchParams();
+      const hiddenRe=/<input[^>]+type=["']hidden["'][^>]+>/gi;
+      for(const input of html.match(hiddenRe)||[]){
+        const name=input.match(/name=["']([^"']+)["']/i)?.[1];
+        const value=input.match(/value=["']([^"']*)["']/i)?.[1] ?? "";
+        if(name) params.set(name,value);
+      }
+      if(!params.has("id")) params.set("id",BOOK_DRIVE_FILE_ID);
+      if(!params.has("export")) params.set("export","download");
+      const confirm=html.match(/[?&]confirm=([0-9A-Za-z_-]+)/i);
+      if(confirm && !params.has("confirm")) params.set("confirm",confirm[1]);
+
+      if(!params.has("confirm") && !html.includes("download")) return null;
+
+      const cookies=(upstream.headers.get("set-cookie")||"").split(/,(?=[^;]+?=)/).map(v=>v.split(";")[0]).filter(Boolean).join("; ");
+      const finalUrl=action + (action.includes("?") ? "&" : "?") + params.toString();
+      const retry=await request(finalUrl,cookies?{"Cookie":cookies}:{});
+      if(!retry.ok || !retry.body) return null;
+
+      const retryType=(retry.headers.get("content-type")||"").toLowerCase();
+      const retryReader=retry.body.getReader();
+      const retryFirst=await retryReader.read();
+      const retryBuf=retryFirst.value ? Buffer.from(retryFirst.value) : Buffer.alloc(0);
+      const retryLooksPdf=retryBuf.subarray(0,5).toString()==="%PDF-" || retryType.includes("application/pdf");
+      if(!retryLooksPdf){
+        try { await retryReader.cancel(); } catch(e) {}
         return null;
       }
-      return {upstream,reader,firstBuf};
+      return {upstream:retry,reader:retryReader,firstBuf:retryBuf};
     }
-
     let result=null;
     for(const url of candidates){
       try {
