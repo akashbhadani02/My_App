@@ -3038,22 +3038,19 @@ body{background:linear-gradient(135deg,#eef2ff 0%,#fff1f7 48%,#ecfeff 100%)!impo
                         if (quizAnswerTimings.length > 6) quizAnswerTimings.shift();
                         lastQuizAnswerAt = Date.now();
 
-                        // Detect repeated, unnaturally identical answer timing.
+                        // Log suspicious timing, but never stop the quiz question flow.
+                        // The server-side timer is the authoritative anti-cheat check.
                         if (quizAnswerTimings.length >= 4) {
                             const recent = quizAnswerTimings.slice(-4);
                             const spread = Math.max(...recent) - Math.min(...recent);
                             const allNormal = recent.every(t => t >= 1.5 && t <= 12);
                             if (allNormal && spread <= 0.25) {
-                                recordSecurityEvent("suspicious_timing");
-                                await blockStudent("Repeatedly identical answer timing detected");
-                                return;
+                                await recordSecurityEvent("suspicious_timing");
                             }
                         }
 
                         if (timeTaken < 2.5) {
                             await recordSecurityEvent("fast_answer");
-                            await blockStudent("વાંચી ને જવાબ આપવાનો છે ઓછા સમય માં જવાબ આપ્યો છે.");
-                            return;
                         }
 
                         const isCorrect = i === Number(q.correct);
@@ -3082,8 +3079,6 @@ body{background:linear-gradient(135deg,#eef2ff 0%,#fff1f7 48%,#ecfeff 100%)!impo
                                 btn.innerHTML = "❌ " + q.options[index];
                             }
                         });
-                        startWarningMonitor();
-
                         // Save the answer BEFORE requesting the next question.
                         // This is important because /questions/random excludes questions
                         // already stored in MongoDB. Waiting here prevents the same
