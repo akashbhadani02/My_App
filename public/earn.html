@@ -2012,6 +2012,139 @@ button{touch-action:manipulation}
   input,select,textarea{min-width:0!important}
 }
 </style>
+
+<style id="dashboard-device-final-fix">
+/* ===== DASHBOARD DEVICE-SIZE FINAL POLISH ===== */
+html{width:100%;min-width:0;overflow-x:hidden;-webkit-text-size-adjust:100%}
+body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
+#dashboard.card{
+  width:min(1060px,calc(100vw - 40px))!important;
+  max-width:1060px!important;
+  min-width:0!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  overflow:visible!important;
+}
+#dashboard .dashboard-topbar,#dashboard .ad-main,#dashboard .ad-welcome,#dashboard .wallet-box,#dashboard>h2{min-width:0!important;max-width:100%!important}
+#dashboard .ad-main{width:100%!important}
+#dashboard .ad-grid>*,#dashboard .ad-course-grid>*,#dashboard .ad-addon-grid>*,#dashboard .ad-actions>*{min-width:0!important}
+#dashboard .ad-action,#dashboard .ad-addon-card,#dashboard .ad-course{width:100%!important;min-width:0!important;overflow:hidden!important}
+#dashboard .ad-action,.dashboard-actions .btn{white-space:normal!important;overflow-wrap:anywhere!important}
+#dashboard .ad-book-card{width:100%!important;min-width:0!important}
+#dashboard .ad-book-card>div{min-width:0!important}
+#dashboard .ad-book-card>div>div:nth-child(2){min-width:0!important;flex:1 1 220px!important}
+#dashboard .ad-book-cover{flex:0 0 118px!important;width:118px!important;height:158px!important;overflow:hidden!important}
+#dashboard .ad-book-cover img{width:100%!important;height:100%!important;display:block!important;object-fit:cover!important;object-position:center top!important}
+#dashboard .ad-book-buy{width:auto!important;max-width:100%!important}
+#dashboard .ad-challenge{min-width:0!important}
+#dashboard .ad-challenge>div:last-child{min-width:0!important}
+#dashboard .ad-challenge p{overflow-wrap:anywhere!important}
+#dashboard .ad-days{width:100%!important;min-width:0!important}
+
+@media (min-width:1101px){
+  #dashboard.card{padding:18px!important}
+  #dashboard .ad-main{padding:0 4px 28px!important}
+  #dashboard .ad-grid{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)!important}
+  #dashboard .ad-course-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  #dashboard .ad-actions{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+  #dashboard .ad-addon-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+
+@media (min-width:781px) and (max-width:1100px){
+  body{padding:16px!important}
+  #dashboard.card{width:min(100%,960px)!important}
+  #dashboard .ad-grid{grid-template-columns:1fr!important}
+  #dashboard .ad-course-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  #dashboard .ad-actions{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+  #dashboard .ad-addon-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #dashboard .ad-book-cover{flex-basis:105px!important;width:105px!important;height:142px!important}
+}
+
+@media (max-width:780px){
+  body{padding:0!important;align-items:flex-start!important}
+  #dashboard.card{
+    width:100%!important;
+    max-width:none!important;
+    min-height:100dvh!important;
+    margin:0!important;
+    border-radius:0!important;
+    border-left:0!important;
+    border-right:0!important;
+    padding:12px!important;
+  }
+  #dashboard .dashboard-topbar{padding:10px 4px 12px!important;margin-bottom:15px!important}
+  #dashboard .dashboard-topbar .topbar-right{display:flex!important;gap:7px!important}
+  #dashboard .icon-btn{width:40px!important;height:40px!important;flex:0 0 40px!important}
+  #dashboard>h2{padding:0!important;font-size:clamp(22px,6vw,28px)!important;line-height:1.2!important}
+  #dashboard .ad-welcome{padding:0!important;font-size:12px!important;line-height:1.55!important}
+  #dashboard .wallet-box{margin:15px 0!important;padding:20px 17px!important;min-height:0!important}
+  #dashboard .wallet-val{font-size:clamp(29px,8vw,38px)!important}
+  #dashboard .ad-main{padding:16px 0 22px!important}
+  #dashboard .ad-section-title{gap:8px!important;align-items:flex-end!important}
+  #dashboard .ad-section-title h3{font-size:16px!important}
+  #dashboard .ad-section-title span{font-size:10px!important;text-align:right}
+  #dashboard .ad-card{padding:15px!important;border-radius:17px!important}
+  #dashboard .ad-stats{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+  #dashboard .ad-stat{padding:10px 6px!important;min-width:0!important;text-align:center!important}
+  #dashboard .ad-stat b{font-size:18px!important}
+  #dashboard .ad-stat small{font-size:9px!important;display:block!important;overflow-wrap:anywhere}
+  #dashboard .ad-actions{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+  #dashboard .ad-action{min-height:78px!important;padding:11px 7px!important;font-size:12px!important}
+  #dashboard .ad-action .ico{font-size:23px!important}
+  #dashboard .ad-addon-grid{grid-template-columns:1fr!important;gap:8px!important}
+  #dashboard .ad-addon-card{min-height:70px!important;padding:12px!important}
+  #dashboard .ad-addon-card strong{font-size:13px!important}
+  #dashboard .ad-addon-card small{font-size:10px!important}
+  #dashboard .ad-book-card{padding:14px!important}
+  #dashboard .ad-book-card>div{align-items:flex-start!important}
+  #dashboard .ad-book-cover{flex:0 0 88px!important;width:88px!important;height:122px!important}
+  #dashboard .ad-book-card>div>div:nth-child(2){flex:1 1 calc(100% - 100px)!important;min-width:0!important}
+  #dashboard .ad-book-card h3{font-size:15px!important;line-height:1.3!important}
+  #dashboard .ad-book-card p{font-size:11px!important;line-height:1.5!important}
+  #dashboard .ad-book-buy{width:100%!important;font-size:12px!important;padding:10px 9px!important}
+  #dashboard .ad-grid{grid-template-columns:1fr!important;gap:14px!important}
+  #dashboard .ad-course-grid{grid-template-columns:1fr!important;gap:9px!important}
+  #dashboard .ad-course{min-height:0!important;padding:15px!important}
+  #dashboard .ad-course p{font-size:11px!important;line-height:1.5!important}
+  #dashboard .ad-course button{width:100%!important}
+  #dashboard .ad-challenge{gap:10px!important;padding:12px!important}
+  #dashboard .ad-days{overflow-x:auto!important;display:grid!important;grid-template-columns:repeat(10,minmax(34px,1fr))!important;gap:4px!important;padding-bottom:5px!important}
+  #dashboard .dashboard-actions{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;padding-top:4px!important}
+  #dashboard .dashboard-actions .btn,#dashboard .telegram-btn{width:100%!important;min-height:48px!important;padding:10px 7px!important;font-size:12px!important;white-space:normal!important;overflow-wrap:anywhere!important}
+}
+
+@media (max-width:480px){
+  #dashboard.card{padding:9px!important}
+  #dashboard .dashboard-topbar{padding:8px 3px 10px!important}
+  #dashboard .ad-topbar-brand span{font-size:16px!important}
+  #dashboard .icon-btn{width:38px!important;height:38px!important;flex-basis:38px!important}
+  #dashboard .wallet-box{padding:18px 14px!important;border-radius:18px!important}
+  #dashboard .ad-stats{gap:5px!important}
+  #dashboard .ad-stat{padding:9px 4px!important}
+  #dashboard .ad-action{min-height:72px!important;padding:10px 6px!important}
+  #dashboard .ad-action .ico{font-size:21px!important}
+  #dashboard .ad-action-title{font-size:11px!important}
+  #dashboard .ad-action-sub{font-size:9px!important}
+  #dashboard .ad-book-cover{flex:0 0 76px!important;width:76px!important;height:106px!important}
+  #dashboard .ad-book-card>div>div:nth-child(2){flex-basis:calc(100% - 86px)!important}
+  #dashboard .ad-book-card h3{font-size:13px!important}
+  #dashboard .ad-book-card p{font-size:10px!important}
+  #dashboard .ad-book-buy{font-size:11px!important;padding:9px 6px!important}
+  #dashboard .dashboard-actions{grid-template-columns:1fr 1fr!important}
+  #dashboard .dashboard-actions .btn,#dashboard .telegram-btn{font-size:11px!important}
+}
+
+@media (max-width:360px){
+  #dashboard.card{padding:7px!important}
+  #dashboard .dashboard-topbar .topbar-right{gap:5px!important}
+  #dashboard .icon-btn{width:35px!important;height:35px!important;flex-basis:35px!important;font-size:14px!important}
+  #dashboard .ad-action{min-height:68px!important;font-size:10px!important}
+  #dashboard .ad-book-cover{flex-basis:68px!important;width:68px!important;height:96px!important}
+  #dashboard .ad-book-card>div>div:nth-child(2){flex-basis:calc(100% - 78px)!important}
+  #dashboard .dashboard-actions .btn,#dashboard .telegram-btn{font-size:10px!important;padding:9px 5px!important}
+}
+</style>
+
 </head>
 
 <body>

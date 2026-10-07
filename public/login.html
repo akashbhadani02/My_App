@@ -492,6 +492,123 @@ button{touch-action:manipulation}
   input,select,textarea{min-width:0!important}
 }
 </style>
+
+<style id="responsive-device-final-fix">
+/* ===== DEVICE-SIZE FINAL POLISH ===== */
+html{width:100%;min-width:0;overflow-x:hidden;-webkit-text-size-adjust:100%}
+body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
+
+/* Landing/course page */
+.course-overview{
+  width:min(1240px,calc(100vw - 32px))!important;
+  max-width:1240px!important;
+  min-width:0!important;
+  margin:0 auto!important;
+  padding:24px 0 44px!important;
+}
+.course-hero,.course-section,.course-path-section,.course-extra,.start-highlight,.book-offer,.start-login-note,.free-demo-banner,.course-bottom-cta{min-width:0!important;max-width:100%!important}
+.course-hero-grid{min-width:0!important}
+.course-hero-grid>*,.course-path-section>*,.book-offer>*,.course-bottom-cta>*{min-width:0!important}
+.course-hero-actions{align-items:center}
+.course-hero-actions button{width:auto!important;max-width:100%;flex:0 1 auto}
+.course-bottom-cta{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-between!important}
+.course-bottom-cta button{width:auto!important;max-width:100%!important;flex:0 1 auto!important}
+.free-demo-banner{display:flex!important;align-items:center!important;flex-wrap:nowrap!important}
+.free-demo-copy{min-width:0!important;flex:1 1 auto!important}
+.free-demo-banner button{width:auto!important;max-width:100%!important;flex:0 0 auto!important}
+.earning-grid{min-width:0!important}
+.earning-card{min-width:0!important;overflow:hidden}
+.book-offer-copy,.offer-price{min-width:0!important}
+.book-points{min-width:0!important}
+
+@media (max-width:1100px){
+  .course-overview{width:min(100%,calc(100vw - 28px))!important}
+  .course-hero{padding:40px!important}
+  .course-hero-grid{gap:30px!important}
+  .course-hero h1{font-size:clamp(38px,5.2vw,54px)!important}
+  .module-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .course-path-section{grid-template-columns:1fr!important}
+  .path-steps{grid-template-columns:1fr auto 1fr auto 1fr!important}
+  .earning-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .book-offer{grid-template-columns:140px minmax(0,1fr) 150px!important;gap:18px!important;padding:24px!important}
+}
+
+@media (max-width:780px){
+  .course-overview{width:100%!important;padding:10px 10px 28px!important}
+  .course-hero{padding:30px 22px!important;border-radius:24px!important}
+  .course-hero-grid{grid-template-columns:1fr!important;gap:24px!important}
+  .course-hero h1{font-size:clamp(30px,8vw,42px)!important;letter-spacing:-1px!important}
+  .course-hero p{font-size:14px!important;line-height:1.6!important}
+  .course-hero-actions{display:grid!important;grid-template-columns:1fr!important;gap:9px!important}
+  .course-hero-actions button{width:100%!important}
+  .visual-card{padding:20px!important}
+  .visual-stats{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .module-grid{grid-template-columns:1fr!important}
+  .course-section{padding:46px 4px 18px!important}
+  .section-heading h2{font-size:clamp(25px,7vw,32px)!important}
+  .course-path-section{margin:30px 4px 0!important;padding:24px!important;gap:20px!important}
+  .path-steps{grid-template-columns:1fr!important;gap:7px!important}
+  .path-steps i{transform:rotate(90deg);display:block;text-align:center}
+  .course-extra{grid-template-columns:1fr!important;margin:22px 4px!important}
+  .start-highlight{padding:22px!important;margin:22px 4px 0!important}
+  .earning-grid{grid-template-columns:1fr!important}
+  .book-offer{grid-template-columns:1fr!important;padding:22px!important;gap:17px!important;margin:24px 4px 0!important}
+  .book-offer-cover{width:145px!important;height:195px!important;margin:0 auto!important}
+  .book-offer-copy h2{font-size:clamp(24px,7vw,30px)!important}
+  .offer-price{text-align:left!important;min-width:0!important}
+  .offer-price button{width:100%!important;margin-top:12px!important}
+  .start-login-note{margin:17px 4px 0!important;line-height:1.55!important}
+  .free-demo-banner{flex-wrap:wrap!important;align-items:flex-start!important;padding:18px!important}
+  .free-demo-banner button{width:100%!important;flex:1 1 100%!important}
+  .course-bottom-cta{flex-direction:column!important;align-items:stretch!important;padding:22px!important;gap:14px!important}
+  .course-bottom-cta button{width:100%!important}
+}
+
+@media (max-width:480px){
+  .course-overview{padding:7px 7px 22px!important}
+  .course-hero{padding:23px 16px!important;border-radius:20px!important}
+  .course-brand{font-size:9px!important;letter-spacing:.7px!important;max-width:100%!important}
+  .course-brand img{width:24px!important;height:24px!important}
+  .course-hero h1{font-size:29px!important;line-height:1.08!important}
+  .course-hero p{font-size:13px!important}
+  .visual-card{padding:17px!important}
+  .visual-icon.book-visual-image{width:88px!important;height:118px!important}
+  .visual-card strong{font-size:19px!important}
+  .visual-card span{font-size:11px!important}
+  .visual-stats{gap:6px!important}
+  .visual-stats div{padding:11px 5px!important}
+  .visual-stats b{font-size:17px!important}
+  .visual-stats small{font-size:8px!important}
+  .module-card,.course-extra>div{padding:18px!important}
+  .course-path-section{padding:19px!important}
+  .path-copy h2{font-size:23px!important}
+  .path-copy p{font-size:12px!important}
+  .start-highlight{padding:18px!important}
+  .start-highlight h2{font-size:21px!important}
+  .start-highlight>p{font-size:12px!important}
+  .earning-card{padding:16px!important}
+  .book-offer{padding:18px!important}
+  .book-offer-cover{width:125px!important;height:170px!important}
+  .book-offer-copy p{font-size:12px!important}
+  .book-points{gap:6px!important}
+  .book-points span{font-size:9px!important;padding:6px 8px!important}
+  .offer-price strong{font-size:30px!important}
+  .free-demo-copy span{font-size:12px!important}
+  .course-bottom-cta h2{font-size:21px!important}
+  .course-bottom-cta p{font-size:12px!important}
+}
+
+@media (max-width:360px){
+  .course-overview{padding:5px 5px 18px!important}
+  .course-hero{padding:19px 13px!important}
+  .course-hero h1{font-size:26px!important}
+  .course-hero-actions button{font-size:13px!important;min-height:43px!important}
+  .visual-stats small{font-size:7px!important}
+  .book-offer-cover{width:112px!important;height:152px!important}
+  .course-bottom-cta{padding:18px!important}
+}
+</style>
+
 </head>
 
 <body>
