@@ -2938,22 +2938,17 @@ body{background:radial-gradient(circle at 5% 0%,#eef2ff 0,transparent 28%),radia
             showScreen('dashboard');
         }
 
+        // Quiz uses CSS fullscreen styling instead of the browser Fullscreen API.
+        // This is intentional: on mobile/desktop, the native Fullscreen API consumes
+        // the first Back press just to exit fullscreen, forcing users to press Back twice.
+        // Keeping the quiz visually fullscreen avoids that navigation trap.
         function enterQuizFullscreen() {
-            const el = document.getElementById("quiz");
-            if (!el) return;
             document.body.classList.add("kbc-fullscreen-active");
-            if (document.fullscreenElement) return;
-            try {
-                const request = el.requestFullscreen || el.webkitRequestFullscreen;
-                if (request) {
-                    const result = request.call(el);
-                    if (result && typeof result.catch === "function") result.catch(() => {});
-                }
-            } catch (_) {}
         }
 
         function exitQuizFullscreen() {
             document.body.classList.remove("kbc-fullscreen-active");
+            // If the user entered native fullscreen manually, leave it cleanly.
             try {
                 if (document.fullscreenElement && document.exitFullscreen) {
                     const result = document.exitFullscreen();
@@ -2963,8 +2958,9 @@ body{background:radial-gradient(circle at 5% 0%,#eef2ff 0,transparent 28%),radia
         }
 
         document.addEventListener("fullscreenchange", () => {
-            if (!document.fullscreenElement && currentScreen === "quiz") {
-                document.body.classList.add("kbc-fullscreen-active");
+            // Do not trap navigation when native fullscreen is exited.
+            if (!document.fullscreenElement && currentScreen !== "quiz") {
+                document.body.classList.remove("kbc-fullscreen-active");
             }
         });
 
