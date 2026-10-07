@@ -18,13 +18,21 @@ router.get("/status", auth, async (req, res) => {
 
 router.post("/request", auth, async (req, res) => {
   const paymentReference = String(req.body?.paymentReference || "").trim();
+  const paymentScreenshot = String(req.body?.paymentScreenshot || "").trim();
+  const paymentScreenshotName = String(req.body?.paymentScreenshotName || "").trim().slice(0, 120);
   if (paymentReference.length < 3) return res.status(400).json({ success:false, message:"Please enter a valid payment reference / UTR." });
+  if (!paymentScreenshot || !/^data:image\/(jpeg|jpg|png|webp);base64,/i.test(paymentScreenshot)) {
+    return res.status(400).json({ success:false, message:"Please upload your book payment screenshot." });
+  }
+  if (paymentScreenshot.length > 2200000) {
+    return res.status(400).json({ success:false, message:"Book payment screenshot is too large. Please choose a smaller image." });
+  }
   const user = await User.findById(req.user.id);
   if (!user) return res.status(404).json({ success:false, message:"Student not found" });
   if (user.bookPurchase?.status === "approved") return res.json({ success:true, message:"Book access is already approved.", status:"approved" });
-  user.bookPurchase={status:"pending",price:BOOK_PRICE,paymentReference,requestedAt:new Date(),approvedAt:null,adminNote:"",access:false};
+  user.bookPurchase={status:"pending",price:BOOK_PRICE,paymentReference,paymentScreenshot,paymentScreenshotName,requestedAt:new Date(),approvedAt:null,adminNote:"",access:false};
   await user.save();
-  res.json({success:true,message:"Payment request sent to admin for verification.",status:"pending"});
+  res.json({success:true,message:"Book payment + screenshot sent to admin for verification.",status:"pending"});
 });
 
 router.post("/wallet-purchase", auth, async (req,res)=>{
@@ -37,7 +45,7 @@ router.post("/wallet-purchase", auth, async (req,res)=>{
     user.wallet=Math.round((balance-BOOK_PRICE)*100)/100;
     user.walletTransactions=user.walletTransactions||[];
     user.walletTransactions.push({time:new Date(),type:"DEBIT",amount:BOOK_PRICE,reason:"Book purchase — ₹499",adminId:"SYSTEM"});
-    user.bookPurchase={status:"approved",price:BOOK_PRICE,paymentReference:"WALLET-"+Date.now(),requestedAt:new Date(),approvedAt:new Date(),adminNote:"Purchased successfully using student wallet.",access:true};
+    user.bookPurchase={status:"approved",price:BOOK_PRICE,paymentReference:"WALLET-"+Date.now(),paymentScreenshot:"",paymentScreenshotName:"",requestedAt:new Date(),approvedAt:new Date(),adminNote:"Purchased successfully using student wallet.",access:true};
     await user.save();
     res.json({success:true,message:"₹499 deducted from wallet successfully. Book access is now unlocked.",status:"approved",wallet:user.wallet});
   } catch(err){ console.error("Wallet book purchase error:",err); res.status(500).json({success:false,message:"Unable to complete wallet purchase."}); }

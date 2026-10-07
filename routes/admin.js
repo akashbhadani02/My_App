@@ -2031,7 +2031,7 @@ router.delete("/book-purchase/:id", adminAuth, async (req, res) => {
         if (!user.bookPurchase || !["pending","approved","rejected"].includes(user.bookPurchase.status)) {
             return res.status(400).json({ success:false, message:"No book request found for this student." });
         }
-        user.bookPurchase = { status:"none", price:499, paymentReference:"", requestedAt:null, approvedAt:null, adminNote:"", access:false };
+        user.bookPurchase = { status:"none", price:499, paymentReference:"", paymentScreenshot:"", paymentScreenshotName:"", requestedAt:null, approvedAt:null, adminNote:"", access:false };
         await user.save();
         res.json({ success:true, message:"Student book request deleted successfully." });
     } catch (err) { res.status(500).json({ success:false, message:err.message }); }

@@ -3893,8 +3893,12 @@ function openAddonsCenter(){
     </div>
 
     <div class="book-wallet-note">💰 Wallet balance ₹499+ હોય તો payment વગર Wallet થી પણ book ખરીદી શકો છો.</div>
+    <div class="book-proof-note">📸 <b>Payment screenshot ફરજિયાત છે.</b> ₹499 payment કર્યા પછી UTR સાથે payment screenshot upload કરો. Admin screenshot + UTR verify કર્યા પછી book access મળશે.</div>
     <input id="bookPaymentReference" placeholder="Enter Payment Reference / UTR Number" autocomplete="off">
-    <div class="book-row"><button class="book-secondary" onclick="closeBookPurchase()">Close</button><button class="book-primary" id="bookWalletBtn" onclick="purchaseBookWithWallet()">💰 Buy with Wallet ₹499</button><button class="book-primary" id="bookRequestBtn" onclick="submitBookPurchase()">✅ Send UTR for Approval</button></div>
+    <label for="bookPaymentScreenshot" class="book-proof-label">📸 Book Payment Screenshot</label>
+    <input id="bookPaymentScreenshot" class="book-proof-input" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Book payment screenshot">
+    <div id="bookScreenshotPreview" class="book-screenshot-preview" style="display:none"></div>
+    <div class="book-row"><button class="book-secondary" onclick="closeBookPurchase()">Close</button><button class="book-primary" id="bookWalletBtn" onclick="purchaseBookWithWallet()">💰 Buy with Wallet ₹499</button><button class="book-primary" id="bookRequestBtn" onclick="submitBookPurchase()">✅ Send UTR + Screenshot</button></div>
     <div id="bookPurchaseStatus" class="book-status"></div>
   </div>
 </div>
@@ -3931,7 +3935,7 @@ function openAddonsCenter(){
 #bookPurchaseModal .book-payment-box{width:min(760px,100%);text-align:left;padding:22px;max-height:calc(100vh - 28px);overflow-y:auto;overflow-x:hidden;box-sizing:border-box;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:thin;}
 #bookPurchaseModal .book-payment-box::-webkit-scrollbar{width:7px}
 #bookPurchaseModal .book-payment-box::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:99px}
-.book-payment-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;border-bottom:1px solid #e9eaf2;padding-bottom:14px}.book-payment-badge{display:inline-block;font-size:10px;font-weight:900;letter-spacing:.12em;color:#6d28d9;background:#f3e8ff;padding:6px 9px;border-radius:999px;margin-bottom:7px}.book-payment-head h3{margin:0;font-size:22px}.book-payment-head p{margin:5px 0 0;color:#64748b;font-size:12px}.book-pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:15px 0}.book-qr-card,.book-upi-card{border:1px solid #e7e9f2;border-radius:18px;background:#fafaff;padding:15px;text-align:center}.book-pay-title{font-weight:900;color:#1e293b;margin-bottom:9px}.book-payment-qr{width:210px;max-width:75%;display:block;margin:0 auto 8px;border-radius:12px;background:#fff;padding:8px;box-shadow:0 8px 24px rgba(15,23,42,.12)}.book-pay-caption{font-size:11px;color:#64748b;line-height:1.5}.book-upi-btn{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;background:linear-gradient(135deg,#16a34a,#059669);color:#fff;text-decoration:none;font-weight:900;margin:10px 0 12px}.book-upi-id{display:flex;align-items:center;gap:7px;justify-content:center;flex-wrap:wrap;font-size:12px;color:#475569}.book-upi-id span{font-weight:700}.book-upi-id b{font-size:13px;color:#111827}.book-upi-id button{border:0;border-radius:8px;padding:5px 9px;background:#e0e7ff;color:#3730a3;font-weight:800;cursor:pointer}.book-wallet-note{background:#f5f3ff;color:#4c1d95;border:1px solid #e9d5ff;border-radius:12px;padding:10px 12px;font-size:12px;margin-bottom:10px}.book-payment-box #bookPaymentReference{margin:0}.book-payment-box .book-row{flex-wrap:wrap}.book-payment-box .book-row button{min-width:150px}.book-payment-box .book-status{background:#f8fafc;border-radius:12px;padding:9px 10px}
+.book-payment-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;border-bottom:1px solid #e9eaf2;padding-bottom:14px}.book-payment-badge{display:inline-block;font-size:10px;font-weight:900;letter-spacing:.12em;color:#6d28d9;background:#f3e8ff;padding:6px 9px;border-radius:999px;margin-bottom:7px}.book-payment-head h3{margin:0;font-size:22px}.book-payment-head p{margin:5px 0 0;color:#64748b;font-size:12px}.book-pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:15px 0}.book-qr-card,.book-upi-card{border:1px solid #e7e9f2;border-radius:18px;background:#fafaff;padding:15px;text-align:center}.book-pay-title{font-weight:900;color:#1e293b;margin-bottom:9px}.book-payment-qr{width:210px;max-width:75%;display:block;margin:0 auto 8px;border-radius:12px;background:#fff;padding:8px;box-shadow:0 8px 24px rgba(15,23,42,.12)}.book-pay-caption{font-size:11px;color:#64748b;line-height:1.5}.book-upi-btn{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;background:linear-gradient(135deg,#16a34a,#059669);color:#fff;text-decoration:none;font-weight:900;margin:10px 0 12px}.book-upi-id{display:flex;align-items:center;gap:7px;justify-content:center;flex-wrap:wrap;font-size:12px;color:#475569}.book-upi-id span{font-weight:700}.book-upi-id b{font-size:13px;color:#111827}.book-upi-id button{border:0;border-radius:8px;padding:5px 9px;background:#e0e7ff;color:#3730a3;font-weight:800;cursor:pointer}.book-wallet-note{background:#f5f3ff;color:#4c1d95;border:1px solid #e9d5ff;border-radius:12px;padding:10px 12px;font-size:12px;margin-bottom:10px}.book-proof-note{background:#fff7ed;color:#9a3412;border:1px solid #fed7aa;border-radius:12px;padding:11px 12px;font-size:12px;line-height:1.5;margin:10px 0}.book-proof-label{display:block;font-weight:900;color:#1e293b;font-size:13px;margin:10px 0 6px}.book-proof-input{width:100%;box-sizing:border-box;padding:10px;border:2px dashed #cbd5e1;border-radius:12px;background:#fff;color:#334155}.book-screenshot-preview{margin-top:9px;padding:9px;border-radius:12px;background:#f8fafc;border:1px solid #e2e8f0}.book-screenshot-preview img{display:block;max-width:220px;max-height:260px;width:auto;height:auto;border-radius:10px;border:1px solid #cbd5e1;box-shadow:0 5px 18px rgba(15,23,42,.12)}.book-payment-box #bookPaymentReference{margin:0}.book-payment-box .book-row{flex-wrap:wrap}.book-payment-box .book-row button{min-width:150px}.book-payment-box .book-status{background:#f8fafc;border-radius:12px;padding:9px 10px}
 @media(max-width:650px){#bookPurchaseModal{padding:7px;align-items:flex-start}#bookPurchaseModal .book-payment-box{padding:15px;max-height:calc(100vh - 14px);border-radius:18px}.book-payment-head{display:block}.book-price{margin:7px 0 0}.book-pay-grid{grid-template-columns:1fr}.book-payment-qr{width:190px}.book-payment-box .book-row button{width:100%;min-width:0}}
 </style>
 
@@ -4065,6 +4069,43 @@ window.addEventListener("resize",()=>{
   __bookResizeTimer=setTimeout(()=>renderBookPage(),120);
 });
 
+function setBookScreenshotPreview(dataUrl){
+  const box=document.getElementById("bookScreenshotPreview");
+  if(!box) return;
+  if(!dataUrl){box.style.display="none";box.innerHTML="";return;}
+  box.style.display="block";
+  const img=document.createElement("img"); img.src=dataUrl; img.alt="Book payment screenshot preview";
+  box.innerHTML=""; box.appendChild(img);
+  const note=document.createElement("div"); note.textContent="Screenshot selected"; note.style.cssText="font-size:12px;color:#64748b;margin-top:5px;font-weight:700"; box.appendChild(note);
+}
+function compressBookScreenshot(file){
+  return new Promise((resolve,reject)=>{
+    if(!file) return reject(new Error("Please upload the book payment screenshot."));
+    if(!/^image\/(jpeg|png|webp)$/i.test(file.type)) return reject(new Error("Please upload JPG, PNG or WEBP screenshot."));
+    const reader=new FileReader();
+    reader.onload=()=>{
+      const img=new Image();
+      img.onload=()=>{
+        const max=1200, scale=Math.min(1,max/Math.max(img.width,img.height));
+        const canvas=document.createElement("canvas");
+        canvas.width=Math.max(1,Math.round(img.width*scale)); canvas.height=Math.max(1,Math.round(img.height*scale));
+        const ctx=canvas.getContext("2d"); ctx.drawImage(img,0,0,canvas.width,canvas.height);
+        let quality=.78, data=canvas.toDataURL("image/jpeg",quality);
+        while(data.length>1800000 && quality>.45){quality-=.08;data=canvas.toDataURL("image/jpeg",quality);}
+        if(data.length>2200000) return reject(new Error("Screenshot is too large. Please choose a smaller image."));
+        resolve(data);
+      };
+      img.onerror=()=>reject(new Error("Could not read screenshot.")); img.src=reader.result;
+    };
+    reader.onerror=()=>reject(new Error("Could not read screenshot.")); reader.readAsDataURL(file);
+  });
+}
+const bookScreenshotInput=document.getElementById("bookPaymentScreenshot");
+if(bookScreenshotInput){bookScreenshotInput.addEventListener("change",async function(){
+  try{const data=await compressBookScreenshot(this.files?.[0]);this.dataset.compressed=data;setBookScreenshotPreview(data);}
+  catch(e){this.value="";delete this.dataset.compressed;setBookScreenshotPreview("");const st=document.getElementById("bookPurchaseStatus");if(st)st.textContent="❌ "+e.message;}
+});}
+
 async function purchaseBookWithWallet(){
   const status=document.getElementById("bookPurchaseStatus"), btn=document.getElementById("bookWalletBtn");
   if(!confirm("તમારા Wallet માંથી ₹499 deduct કરીને Book ખરીદવી છે?")) return;
@@ -4078,10 +4119,11 @@ async function purchaseBookWithWallet(){
 }
 
 async function submitBookPurchase(){
-  const ref=document.getElementById("bookPaymentReference").value.trim(), status=document.getElementById("bookPurchaseStatus"), btn=document.getElementById("bookRequestBtn");
+  const ref=document.getElementById("bookPaymentReference").value.trim(), status=document.getElementById("bookPurchaseStatus"), btn=document.getElementById("bookRequestBtn"), shot=document.getElementById("bookPaymentScreenshot"), screenshot=shot?.dataset?.compressed||"";
   if(ref.length<3){status.textContent="⚠️ Payment Reference / UTR enter કરો.";return}
+  if(!screenshot){status.textContent="⚠️ Book payment screenshot upload કરો.";shot?.focus();return}
   btn.disabled=true; btn.textContent="Sending...";
-  try{const d=await bookApi("/request",{method:"POST",body:JSON.stringify({paymentReference:ref})});status.textContent="✅ "+d.message;document.getElementById("bookPaymentReference").style.display="none";btn.style.display="none";}
+  try{const d=await bookApi("/request",{method:"POST",body:JSON.stringify({paymentReference:ref,paymentScreenshot:screenshot,paymentScreenshotName:shot?.files?.[0]?.name||"book-payment-screenshot.jpg"})});status.textContent="✅ "+d.message;document.getElementById("bookPaymentReference").style.display="none";if(shot)shot.style.display="none";btn.style.display="none";}
   catch(err){status.textContent="❌ "+err.message;btn.disabled=false;btn.textContent="Send for Admin Approval";}
 }
 </script>
@@ -4167,6 +4209,7 @@ async function submitBookPurchase(){
         throw new Error(data.message || 'Subscription status could not be loaded.');
       }
       const sub = data.subscription || {};
+      if(sub.demo?.active === true){ hideGate(); return true; }
       if(sub.status==='active' && sub.access===true){ hideGate(); return true; }
       if(sub.status==='pending'){
         if(input && sub.paymentReference) input.value=sub.paymentReference;
@@ -4175,7 +4218,7 @@ async function submitBookPurchase(){
         if(input && sub.paymentReference) input.value=sub.paymentReference;
         showGate('rejected','❌ Payment was not verified. Please pay again and submit the new UTR.');
       }else{
-        showGate('','💳 No active subscription found. Pay ₹200 and submit your UTR for verification.');
+        showGate('','💳 1 Day Free Demo has ended. To continue using the app, pay ₹200 and submit your UTR + payment screenshot for verification.');
       }
       return false;
     }catch(e){
