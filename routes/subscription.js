@@ -18,7 +18,8 @@ function statusPayload(user, request = null) {
             paymentScreenshot: request?.paymentScreenshot || '',
             requestedAt: user?.subscriptionRequestedAt || request?.submittedAt || null,
             confirmedAt: user?.subscriptionConfirmedAt || request?.confirmedAt || null,
-            adminNote: user?.subscriptionAdminNote || request?.adminNote || ''
+            adminNote: user?.subscriptionAdminNote || request?.adminNote || '',
+            demo: { active: user?.demoAccess === true && user?.demoExpiresAt && new Date(user.demoExpiresAt).getTime() > Date.now(), startedAt: user?.demoStartedAt || null, expiresAt: user?.demoExpiresAt || null }
         }
     };
 }
@@ -27,7 +28,7 @@ function statusPayload(user, request = null) {
 router.get('/status', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select(
-            'subscriptionStatus subscriptionAccess subscriptionAmount subscriptionPaymentReference subscriptionRequestedAt subscriptionConfirmedAt subscriptionAdminNote'
+            'subscriptionStatus subscriptionAccess subscriptionAmount subscriptionPaymentReference subscriptionRequestedAt subscriptionConfirmedAt subscriptionAdminNote demoAccess demoStartedAt demoExpiresAt'
         ).lean();
         if (!user) return res.status(404).json({ success: false, message: 'Student not found' });
         const request = await Subscription.findOne({ userId: user._id }).sort({ submittedAt: -1 }).lean();

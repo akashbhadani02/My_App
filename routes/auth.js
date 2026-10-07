@@ -59,18 +59,25 @@ router.post("/signup", async (req, res) => {
 
         const hash = await bcrypt.hash(password, 10);
 
+        const demoStartedAt = new Date();
+        const demoExpiresAt = new Date(demoStartedAt.getTime() + 24 * 60 * 60 * 1000);
         const newUser = new User({
             name,
             mobile,
             password: hash,
-            passwordEncrypted: encryptStudentPassword(password)
+            passwordEncrypted: encryptStudentPassword(password),
+            demoAccess: true,
+            demoStartedAt,
+            demoExpiresAt
         });
 
         await newUser.save();
 
         res.json({
             success: true,
-            message: "Signup Successful"
+            demo: true,
+            demoHours: 24,
+            message: "Signup Successful — 1 Day Free Demo activated."
         });
 
     } catch (err) {

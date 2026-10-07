@@ -64,6 +64,11 @@ const userSchema = new mongoose.Schema(
         subscriptionConfirmedBy: { type: mongoose.Schema.Types.ObjectId, ref: "Admin", default: null },
         subscriptionAdminNote: { type: String, default: "" },
 
+        // One-time 24-hour free demo access for newly registered students.
+        demoAccess: { type: Boolean, default: false },
+        demoStartedAt: { type: Date, default: null },
+        demoExpiresAt: { type: Date, default: null },
+
         // ₹499 Book purchase and admin approval
         bookPurchase: {
             status: { type: String, enum: ["none", "pending", "approved", "rejected"], default: "none" },

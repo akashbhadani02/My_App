@@ -9,7 +9,7 @@ const auth = require("../middleware/subscriptionAuth");
 const { registerViolation } = require("../services/antiCheat");
 
 const DAILY_REWARD_AMOUNT = 5;
-const QUIZ_CORRECT_REWARD = 0.20;
+const QUIZ_CORRECT_REWARD = 0.50;
 const QUIZ_WRONG_PENALTY = 0.30;
 // No daily spin limit. One spin is earned for every 100 answered questions.
 

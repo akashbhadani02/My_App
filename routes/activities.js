@@ -1587,7 +1587,7 @@ const ACTIVITIES = {
     ]
   },
   speaking: {
-    title: 'Speak & Earn', reward: 0.20, dailyLimit: 5,
+    title: 'Speak & Earn', reward: 0.50, dailyLimit: 5,
     questions: ['Introduce yourself in English.','Describe your daily routine.','Talk about your family.','What did you do yesterday?','What is your favorite hobby?','Describe your best friend.','Talk about your school or work.','What do you want to learn?']
   }
 };
