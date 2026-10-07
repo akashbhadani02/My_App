@@ -1740,6 +1740,45 @@ body{background:linear-gradient(135deg,#eef2ff 0%,#fff1f7 48%,#ecfeff 100%)!impo
 }
 </style>
 
+
+<style id="dashboard-complete-visibility-fix">
+/* COMPLETE DASHBOARD VISIBILITY FIX
+   The logged-in dashboard must show every section on desktop and mobile. */
+#dashboard.card{
+  display:block !important;
+  width:min(1180px,100%) !important;
+  max-width:1180px !important;
+  height:auto !important;
+  min-height:0 !important;
+  overflow:visible !important;
+}
+#dashboard > .ad-main{
+  display:block !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  height:auto !important;
+  max-height:none !important;
+  overflow:visible !important;
+  position:relative !important;
+}
+#dashboard > .ad-main > *{
+  display:block;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+#dashboard .ad-grid{display:grid !important;}
+#dashboard .ad-course-grid{display:grid !important;}
+#dashboard .ad-actions{display:grid !important;}
+#dashboard .ad-addon-grid{display:grid !important;}
+@media (max-width:780px){
+  #dashboard.card{width:100% !important;max-width:none !important;}
+  #dashboard > .ad-main{display:block !important;}
+  #dashboard .ad-grid{grid-template-columns:1fr !important;}
+  #dashboard .ad-course-grid{grid-template-columns:1fr !important;}
+  #dashboard .ad-actions{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
+}
+</style>
+
 </head>
 
 <body>
@@ -1762,7 +1801,7 @@ body{background:linear-gradient(135deg,#eef2ff 0%,#fff1f7 48%,#ecfeff 100%)!impo
 
 
 
-    <div id="dashboard" class="card" aria-hidden="true" style="visibility:hidden;">
+    <div id="dashboard" class="card" aria-hidden="true">
         <div class="dashboard-topbar">
             <div class="ad-topbar-brand"><img src="/icon-192.png" alt="Aducate Logo"><span>Aducate</span></div>
             <div class="topbar-right">
@@ -4188,6 +4227,42 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBlockRu
   window.refreshAducateModernDashboard=loadModern;
 })();
 </script>
+
+<script id="dashboard-complete-visibility-guard">
+(function(){
+  function showCompleteDashboard(){
+    const d=document.getElementById('dashboard');
+    if(!d) return;
+    const active = (typeof currentScreen==='undefined' || currentScreen==='dashboard');
+    if(!active) return;
+    // Do not override the notification/subscription modal itself.
+    const gate=document.getElementById('subscriptionGate');
+    const notif=document.getElementById('notificationRequiredOverlay');
+    const gateOpen = gate && gate.classList.contains('show');
+    const notifOpen = notif && getComputedStyle(notif).display !== 'none';
+    if(gateOpen || notifOpen) return;
+    d.classList.remove('hidden');
+    d.style.display='block';
+    d.style.visibility='visible';
+    d.style.opacity='1';
+    d.setAttribute('aria-hidden','false');
+    const main=d.querySelector(':scope > .ad-main');
+    if(main){
+      main.style.display='block';
+      main.style.visibility='visible';
+      main.style.opacity='1';
+      main.style.height='auto';
+      main.style.maxHeight='none';
+      main.style.overflow='visible';
+    }
+  }
+  window.addEventListener('DOMContentLoaded',()=>{showCompleteDashboard();setTimeout(showCompleteDashboard,300);setTimeout(showCompleteDashboard,1000);});
+  window.addEventListener('load',()=>{showCompleteDashboard();setTimeout(showCompleteDashboard,500);});
+  setInterval(showCompleteDashboard,1500);
+  window.showCompleteDashboard=showCompleteDashboard;
+})();
+</script>
+
 </body>
 
 </html>
