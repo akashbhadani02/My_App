@@ -913,14 +913,18 @@ async function performLogin(mobile, password){
         if(timerBox) timerBox.style.display = "none";
 
         if(data.success && data.token){
-            // Save the real Web Push subscription BEFORE opening the dashboard.
-            // Browser permission alone is not enough for Admin -> Student notifications.
-            await registerAdminPushSubscription(data.token);
-
+            // Store auth immediately and open the dashboard without waiting for
+            // Web Push setup. Push registration is non-critical to login and
+            // runs in the background so the student reaches the dashboard fast.
             localStorage.setItem("token", data.token);
             if(data.user) localStorage.setItem("user", JSON.stringify(data.user));
 
             window.location.replace("earn.html");
+
+            // Best-effort background notification registration. Never block
+            // dashboard navigation or show a login error if push setup fails.
+            Promise.resolve().then(() => registerAdminPushSubscription(data.token))
+                .catch(err => console.warn("Background push registration skipped:", err));
         }else{
             document.getElementById("message").innerHTML =
                 data.message || "Invalid login details.";
