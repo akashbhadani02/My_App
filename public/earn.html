@@ -1779,6 +1779,79 @@ body{background:linear-gradient(135deg,#eef2ff 0%,#fff1f7 48%,#ecfeff 100%)!impo
 }
 </style>
 
+
+<style id="activity-popup-fix">
+/* Activities are shown as a popup over the dashboard instead of appearing below it. */
+body.activity-popup-open{overflow:hidden;}
+#activities.activity-popup-card, #activityPlay.activity-popup-card{
+  position:fixed !important;
+  inset:0 !important;
+  z-index:100000 !important;
+  width:100% !important;
+  max-width:none !important;
+  height:100dvh !important;
+  min-height:100dvh !important;
+  margin:0 !important;
+  padding:clamp(12px,3vw,28px) !important;
+  box-sizing:border-box !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:flex-start !important;
+  overflow:auto !important;
+  background:rgba(15,23,42,.72) !important;
+  backdrop-filter:blur(5px);
+  -webkit-backdrop-filter:blur(5px);
+  border-radius:0 !important;
+}
+#activities.activity-popup-card::before, #activityPlay.activity-popup-card::before{
+  content:"";
+  position:absolute;
+  inset:clamp(10px,3vw,30px);
+  background:var(--card,#fff);
+  border-radius:24px;
+  box-shadow:0 25px 80px rgba(0,0,0,.35);
+  z-index:-1;
+}
+#activities.activity-popup-card > *, #activityPlay.activity-popup-card > *{
+  width:min(760px,100%);
+  margin-left:auto;
+  margin-right:auto;
+  flex-shrink:0;
+}
+#activities.activity-popup-card .activity-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+.activity-popup-close{
+  position:absolute !important;
+  top:clamp(18px,4vw,42px) !important;
+  right:clamp(18px,4vw,42px) !important;
+  width:44px !important;
+  height:44px !important;
+  min-width:44px !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:50% !important;
+  background:#fee2e2 !important;
+  color:#991b1b !important;
+  font-size:24px !important;
+  font-weight:900 !important;
+  line-height:44px !important;
+  text-align:center !important;
+  cursor:pointer !important;
+  z-index:10 !important;
+  box-shadow:0 6px 18px rgba(0,0,0,.18) !important;
+}
+.activity-popup-close:hover{transform:scale(1.05);background:#fecaca !important;}
+@media(max-width:600px){
+  #activities.activity-popup-card, #activityPlay.activity-popup-card{padding:8px !important;}
+  #activities.activity-popup-card::before, #activityPlay.activity-popup-card::before{inset:8px;border-radius:18px;}
+  #activities.activity-popup-card .activity-grid{grid-template-columns:1fr 1fr;gap:10px;}
+  #activities.activity-popup-card .activity-btn{padding:14px 8px;font-size:13px;}
+  .activity-popup-close{top:16px !important;right:16px !important;width:40px !important;height:40px !important;line-height:40px !important;min-width:40px !important;}
+}
+</style>
+
 </head>
 
 <body>
@@ -1946,6 +2019,7 @@ body{background:linear-gradient(135deg,#eef2ff 0%,#fff1f7 48%,#ecfeff 100%)!impo
 </div>
 
     <div id="activities" class="card hidden" aria-hidden="true" style="visibility:hidden;">
+<button class="activity-popup-close" type="button" aria-label="Close activities" title="Close" onclick="closeActivityPopup()">×</button>
 <div id="activityWalletBar" class="activity-wallet-bar">
     <span>💰 Wallet Balance</span>
     <strong id="activityWalletBalance">₹0.00</strong>
@@ -1967,6 +2041,7 @@ body{background:linear-gradient(135deg,#eef2ff 0%,#fff1f7 48%,#ecfeff 100%)!impo
 </div>
 
 <div id="activityPlay" class="card hidden activity-screen" aria-hidden="true" style="visibility:hidden;">
+<button class="activity-popup-close" type="button" aria-label="Close activity" title="Close" onclick="closeActivityPopup()">×</button>
 <div id="activityWalletBar" class="activity-wallet-bar">
     <span>💰 Wallet Balance</span>
     <strong id="activityWalletBalance">₹0.00</strong>
@@ -2785,15 +2860,31 @@ body{background:linear-gradient(135deg,#eef2ff 0%,#fff1f7 48%,#ecfeff 100%)!impo
         let navigatingBack = false;
 
         function setScreenVisibility(id) {
+            const activityPopup = id === 'activities' || id === 'activityPlay';
+            document.body.classList.toggle('activity-popup-open', activityPopup);
+
             ['dashboard', 'quiz', 'activities', 'activityPlay'].forEach(screenId => {
                 const el = document.getElementById(screenId);
                 if (!el) return;
-                const active = screenId === id;
+
+                // Keep the dashboard visible behind the Activities popup.
+                const active = screenId === id || (activityPopup && screenId === 'dashboard');
+                const popup = screenId === 'activities' || screenId === 'activityPlay';
+
                 el.classList.toggle('hidden', !active);
+                el.classList.toggle('activity-popup-card', popup && active);
                 el.style.display = active ? '' : 'none';
                 el.style.visibility = active ? 'visible' : 'hidden';
                 el.setAttribute('aria-hidden', active ? 'false' : 'true');
             });
+        }
+
+        function closeActivityPopup() {
+            if (currentScreen === 'activityPlay') {
+                showScreen('activities');
+                return;
+            }
+            showScreen('dashboard');
         }
 
         function enterQuizFullscreen() {
@@ -3238,7 +3329,7 @@ body{background:linear-gradient(135deg,#eef2ff 0%,#fff1f7 48%,#ecfeff 100%)!impo
         let activityAnswerLocked = false;
         let activityUnlockTimer = null;
         function showActivityScreen(id){
-            ['dashboard','quiz','activities','activityPlay'].forEach(x=>{const e=document.getElementById(x);if(e){e.classList.toggle('hidden',x!==id);e.style.visibility=x===id?'visible':'hidden';e.setAttribute('aria-hidden',x===id?'false':'true');}});
+            setScreenVisibility(id);
         }
         async function openActivity(type){
             // Open the activity screen immediately. Do not wait for the API.
