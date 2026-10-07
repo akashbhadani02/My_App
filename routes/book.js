@@ -1,13 +1,15 @@
 const express = require("express");
+const fs = require("fs");
+const path = require("path");
 const router = express.Router();
 const auth = require("../middleware/subscriptionAuth");
 const User = require("../models/User");
 
 const BOOK_PRICE = 499;
-// SINGLE SOURCE OF TRUTH: this is the only book the app can open.
-const BOOK_DRIVE_FILE_ID = "1Cfw39OlkXqbbXuEu4qPQRPBtzu69rZuA";
+// SINGLE SOURCE OF TRUTH: the purchased book is bundled with the app.
+// Keep this file OUTSIDE public/ so it cannot be opened without authentication.
+const BOOK_FILE = path.join(__dirname, "..", "book-assets", "book.pdf");
 const BOOK_TITLE = "Aducate English Book";
-
 router.get("/status", auth, async (req, res) => {
   const user = await User.findById(req.user.id).select("bookPurchase").lean();
   res.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
@@ -45,118 +47,20 @@ router.post("/wallet-purchase", auth, async (req,res)=>{
 router.get("/content", auth, async (req,res)=>{
   try {
     const user=await User.findById(req.user.id).select("bookPurchase.status bookPurchase.access").lean();
-    if(!user || user.bookPurchase?.status!=="approved" || user.bookPurchase?.access===false) {
+    if(!user || user.bookPurchase?.status!=="approved" || user.bookPurchase?.access!==true) {
       return res.status(403).json({success:false,message:"Book access is currently disabled by admin."});
     }
 
-    // Only this one Google Drive file is allowed. Try Google's public download
-    // endpoints in a safe order because Drive can return an HTML confirmation
-    // page instead of the PDF for some files/browsers.
-    const baseId = encodeURIComponent(BOOK_DRIVE_FILE_ID);
-    const candidates = [
-      `https://drive.usercontent.google.com/download?id=${baseId}&export=download&confirm=t`,
-      `https://drive.google.com/uc?export=download&id=${baseId}&confirm=t`,
-      `https://drive.google.com/uc?export=download&id=${baseId}`
-    ];
-
-    async function fetchDrivePdf(url) {
-      const headers={
-        Accept:"application/pdf,application/octet-stream;q=0.9,text/html;q=0.8,*/*;q=0.1",
-        "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/154 Safari/537.36"
-      };
-      if(req.headers.range) headers.Range=req.headers.range;
-
-      async function request(target, extraHeaders={}) {
-        return fetch(target,{
-          headers:{...headers,...extraHeaders},
-          redirect:"follow",
-          signal:AbortSignal.timeout(55000)
-        });
-      }
-
-      let upstream=await request(url);
-      if(!upstream.ok || !upstream.body) return null;
-
-      const contentType=(upstream.headers.get("content-type")||"").toLowerCase();
-      const reader=upstream.body.getReader();
-      const first=await reader.read();
-      const firstBuf=first.value ? Buffer.from(first.value) : Buffer.alloc(0);
-      const looksPdf=firstBuf.subarray(0,5).toString()==="%PDF-" || contentType.includes("application/pdf");
-      if(looksPdf) return {upstream,reader,firstBuf};
-
-      // Google Drive may return a small HTML confirmation page for large files.
-      // Extract its hidden download parameters and retry the real download.
-      let html=firstBuf.toString("utf8");
-      if(!first.done){
-        try {
-          const chunks=[];
-          let total=firstBuf.length;
-          while(total < 2 * 1024 * 1024){
-            const part=await reader.read();
-            if(part.done) break;
-            if(part.value){
-              const buf=Buffer.from(part.value);
-              const remaining=(2 * 1024 * 1024) - total;
-              const take=buf.subarray(0, remaining);
-              chunks.push(take);
-              total+=take.length;
-              if(take.length < buf.length) break;
-            }
-          }
-          if(chunks.length) html += Buffer.concat(chunks).toString("utf8");
-        } catch(e) {}
-      }
-      try { reader.releaseLock(); } catch(e) {}
-
-      const formMatch=html.match(/<form[^>]+action=["']([^"']+)["'][^>]*>/i);
-      const action=formMatch?.[1] || "https://drive.usercontent.google.com/download";
-      const params=new URLSearchParams();
-      const hiddenRe=/<input[^>]+type=["']hidden["'][^>]+>/gi;
-      for(const input of html.match(hiddenRe)||[]){
-        const name=input.match(/name=["']([^"']+)["']/i)?.[1];
-        const value=input.match(/value=["']([^"']*)["']/i)?.[1] ?? "";
-        if(name) params.set(name,value);
-      }
-      if(!params.has("id")) params.set("id",BOOK_DRIVE_FILE_ID);
-      if(!params.has("export")) params.set("export","download");
-      const confirm=html.match(/[?&]confirm=([0-9A-Za-z_-]+)/i);
-      if(confirm && !params.has("confirm")) params.set("confirm",confirm[1]);
-
-      if(!params.has("confirm") && !html.includes("download")) return null;
-
-      const cookies=(upstream.headers.get("set-cookie")||"").split(/,(?=[^;]+?=)/).map(v=>v.split(";")[0]).filter(Boolean).join("; ");
-      const finalUrl=action + (action.includes("?") ? "&" : "?") + params.toString();
-      const retry=await request(finalUrl,cookies?{"Cookie":cookies}:{});
-      if(!retry.ok || !retry.body) return null;
-
-      const retryType=(retry.headers.get("content-type")||"").toLowerCase();
-      const retryReader=retry.body.getReader();
-      const retryFirst=await retryReader.read();
-      const retryBuf=retryFirst.value ? Buffer.from(retryFirst.value) : Buffer.alloc(0);
-      const retryLooksPdf=retryBuf.subarray(0,5).toString()==="%PDF-" || retryType.includes("application/pdf");
-      if(!retryLooksPdf){
-        try { await retryReader.cancel(); } catch(e) {}
-        return null;
-      }
-      return {upstream:retry,reader:retryReader,firstBuf:retryBuf};
-    }
-    let result=null;
-    for(const url of candidates){
-      try {
-        result=await fetchDrivePdf(url);
-        if(result) break;
-      } catch(e) {
-        console.warn("Book source attempt failed:", e.message);
-      }
+    // The PDF is bundled privately with the app. It is never exposed through
+    // /public, and every request (including PDF.js range requests) passes auth.
+    const stat=await fs.promises.stat(BOOK_FILE).catch(()=>null);
+    if(!stat || !stat.isFile()) {
+      console.error("Purchased book file is missing:", BOOK_FILE);
+      return res.status(500).json({success:false,message:"Book PDF is not available on the server."});
     }
 
-    if(!result){
-      console.error("Book source did not return a PDF from Google Drive", BOOK_DRIVE_FILE_ID);
-      return res.status(502).json({success:false,message:"Book PDF could not be loaded from Google Drive. Please make sure this exact Drive file is set to Anyone with the link → Viewer."});
-    }
-
-    const {upstream,reader,firstBuf}=result;
-    res.status(upstream.status);
+    const total=stat.size;
+    const range=req.headers.range;
     res.set({
       "Content-Type":"application/pdf",
       "Content-Disposition":"inline; filename=aducate-english-book.pdf",
@@ -165,27 +69,35 @@ router.get("/content", auth, async (req,res)=>{
       "Expires":"0",
       "X-Content-Type-Options":"nosniff",
       "Referrer-Policy":"no-referrer",
-      "Accept-Ranges":upstream.headers.get("accept-ranges")||"bytes"
+      "Accept-Ranges":"bytes"
     });
-    for(const name of ["content-length","content-range","accept-ranges"]){
-      const value=upstream.headers.get(name); if(value) res.set(name,value);
+
+    if(!range){
+      res.status(200).set("Content-Length",String(total));
+      return fs.createReadStream(BOOK_FILE).pipe(res);
     }
 
-    if(firstBuf.length) res.write(firstBuf);
-    try {
-      while(true){
-        const {value,done}=await reader.read();
-        if(done) break;
-        if(value) res.write(Buffer.from(value));
-      }
-    } finally { try { reader.releaseLock(); } catch(e) {} }
-    res.end();
+    const match=/bytes=(\d*)-(\d*)/.exec(range);
+    if(!match) return res.status(416).set("Content-Range",`bytes */${total}`).end();
+
+    let start=match[1] ? Number(match[1]) : Math.max(0,total-(Number(match[2])||0));
+    let end=match[2] ? Number(match[2]) : total-1;
+    if(!Number.isSafeInteger(start) || !Number.isSafeInteger(end) || start<0 || end<start || start>=total){
+      return res.status(416).set("Content-Range",`bytes */${total}`).end();
+    }
+    end=Math.min(end,total-1);
+    const length=end-start+1;
+    res.status(206).set({
+      "Content-Length":String(length),
+      "Content-Range":`bytes ${start}-${end}/${total}`
+    });
+    return fs.createReadStream(BOOK_FILE,{start,end}).pipe(res);
   } catch(err){
     console.error("Book content error:",err);
-    if(!res.headersSent) res.status(502).json({success:false,message:"Unable to load the purchased book from Google Drive."}); else res.end();
+    if(!res.headersSent) return res.status(500).json({success:false,message:"Unable to load the purchased book."});
+    res.end();
   }
 });
-
 router.get("/info", auth, async (req,res)=>{
   const user=await User.findById(req.user.id).select("bookPurchase.status bookPurchase.access").lean();
   if(!user || user.bookPurchase?.status!=="approved" || user.bookPurchase?.access===false) return res.status(403).json({success:false,message:"Book access is not approved."});
