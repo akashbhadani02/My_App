@@ -3748,8 +3748,8 @@ function openAddonsCenter(){
       </div>
       <div class="book-upi-card">
         <div class="book-pay-title">📲 Pay with UPI</div>
-        <a class="book-upi-btn" href="upi://pay?pa=baa836610%40okaxis&pn=A%20Ba&am=499.00&cu=INR&tn=Aducate%20English%20Book">Open UPI App • Pay ₹499</a>
-        <div class="book-upi-id"><span>UPI ID</span><b id="bookUpiId">baa836610@okaxis</b><button type="button" onclick="copyBookUpi()">Copy</button></div>
+        <a class="book-upi-btn" href="upi://pay?pa=aducateenglish%40okaxis&pn=Aducate%20English&am=499.00&cu=INR&tn=Aducate%20English%20Book">Open UPI App • Pay ₹499</a>
+        <div class="book-upi-id"><span>UPI ID</span><b id="bookUpiId">aducateenglish@okaxis</b><button type="button" onclick="copyBookUpi()">Copy</button></div>
         <div class="book-pay-caption">After payment, enter your UTR / Transaction ID below.</div>
       </div>
     </div>
@@ -3806,7 +3806,7 @@ async function bookApi(path, options={}){
   return data;
 }
 async function copyBookUpi(){
-  const upi=document.getElementById('bookUpiId')?.textContent?.trim()||'baa836610@okaxis';
+  const upi=document.getElementById('bookUpiId')?.textContent?.trim()||'aducateenglish@okaxis';
   try{await navigator.clipboard.writeText(upi);document.getElementById('bookPurchaseStatus').textContent='✅ UPI ID copied: '+upi;}catch(e){document.getElementById('bookPurchaseStatus').textContent='UPI ID: '+upi;}
 }
 async function openBookPurchase(){
@@ -3969,8 +3969,8 @@ async function submitBookPurchase(){
     <div class="subscription-price">₹200</div>
     <p><b>Step 1:</b> નીચેનો QR scan કરીને ₹200 pay કરો.</p>
     <img class="subscription-qr" src="./payment-qr.jpeg" alt="₹200 payment QR code">
-    <a id="subscriptionUpiBtn" class="subscription-pay-btn" href="upi://pay?pa=baa836610%40okaxis&pn=A%20Ba&am=200.00&cu=INR&tn=English%20App%20Subscription">📲 Pay ₹200 via UPI</a>
-    <div style="font-size:13px;color:#475569;margin:2px 0 10px">UPI ID: <b>baa836610@okaxis</b> · Amount: <b>₹200</b></div>
+    <a id="subscriptionUpiBtn" class="subscription-pay-btn" href="upi://pay?pa=aducateenglish%40okaxis&pn=Aducate%20English&am=200.00&cu=INR&tn=English%20App%20Subscription">📲 Pay ₹200 via UPI</a>
+    <div style="font-size:13px;color:#475569;margin:2px 0 10px">UPI ID: <b>aducateenglish@okaxis</b> · Amount: <b>₹200</b></div>
     <p><b>Step 2:</b> Payment કર્યા પછી UTR / Transaction ID અને payment screenshot upload કરો.</p>
     <input id="subscriptionPaymentReference" class="subscription-input" type="text" maxlength="100" autocomplete="off" placeholder="Enter UTR / Transaction ID">
     <label for="subscriptionPaymentScreenshot" style="display:block;text-align:left;margin-top:10px;font-weight:900;color:#334155">📸 Payment Screenshot</label>
