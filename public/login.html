@@ -358,6 +358,9 @@ body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,
 <style id="book-image-and-global-readability">
 /* Use the supplied real book cover everywhere the book is shown. */
 .book-cover,.book-offer-cover{overflow:hidden!important;padding:0!important;background:#fff!important;display:block!important;position:relative!important;border-radius:10px!important}
+.visual-icon.book-visual-image{width:110px!important;height:145px!important;overflow:hidden!important;padding:0!important;background:#fff!important;border-radius:10px!important;box-shadow:0 14px 30px rgba(17,24,39,.22)!important;display:block!important;margin:0 auto 12px!important}
+.visual-icon.book-visual-image img{width:100%!important;height:100%!important;display:block!important;object-fit:cover!important;object-position:center top!important}
+@media(max-width:560px){.visual-icon.book-visual-image{width:92px!important;height:122px!important}}
 .book-cover img,.book-offer-cover img{width:100%!important;height:100%!important;display:block!important;object-fit:cover!important;object-position:center top!important}
 .book-cover:after{display:none!important}
 /* Strong, readable text on all light cards/sections. */
@@ -397,7 +400,7 @@ body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,
         </div>
       </div>
       <div class="course-visual">
-        <div class="visual-card"><div class="visual-icon">📖</div><strong>Aducate English</strong><span>Grammar • Vocabulary • Speaking • Everyday English</span></div>
+        <div class="visual-card"><div class="visual-icon book-visual-image"><img src="/book.jpeg" alt="Aducate English All in One Book"></div><strong>Aducate English</strong><span>Grammar • Vocabulary • Speaking • Everyday English</span></div>
         <div class="visual-stats"><div><b>3</b><small>Learning Levels</small></div><div><b>30</b><small>Day Challenge</small></div><div><b>Daily</b><small>Quiz Practice</small></div></div>
       </div>
     </div>
