@@ -425,6 +425,15 @@ router.post("/withdraw", auth, async (req, res) => {
             });
         }
 
+        // Book purchase is required before any withdrawal so users must buy the book first.
+        if (user.bookPurchase?.status !== "approved" || user.bookPurchase?.access !== true) {
+            return res.status(403).json({
+                success: false,
+                code: "BOOK_PURCHASE_REQUIRED",
+                message: "Withdraw પહેલાં ₹499 ની Aducate English Book ખરીદવી જરૂરી છે. પહેલાં Book Purchase કરો અને approval પછી withdraw કરી શકશો."
+            });
+        }
+
         const wallet = Number(user.wallet || 0);
 
         // Minimum ₹1000 required

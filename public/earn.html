@@ -3500,9 +3500,11 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
                     alert("Withdraw Request Submitted");
 
                 } else {
-
                     alert(data.message);
-
+                    if (data.code === "BOOK_PURCHASE_REQUIRED" && typeof openBookPurchase === "function") {
+                        closeWithdrawPopup();
+                        await openBookPurchase();
+                    }
                 }
 
             } catch (err) {
@@ -3865,13 +3867,32 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
         });
 
         // Open Withdraw Popup
-        function openWithdrawPopup() {
+        async function openWithdrawPopup() {
+            // Check book purchase on the server before showing the withdrawal form.
+            try {
+                const token = localStorage.getItem("token");
+                const res = await fetch("/api/book/status", {
+                    cache: "no-store",
+                    headers: { Authorization: "Bearer " + token }
+                });
+                const data = await res.json();
+                const purchase = data.bookPurchase || {};
+                if (!res.ok || purchase.status !== "approved" || purchase.access !== true) {
+                    if (purchase.status === "pending") {
+                        alert("તમારી Book Purchase request admin verification માટે pending છે. Approval થયા પછી withdraw કરી શકશો.");
+                    } else {
+                        alert("Withdraw પહેલાં ₹499 ની Aducate English Book ખરીદવી જરૂરી છે. પહેલાં Book Purchase કરો.");
+                    }
+                    if (typeof openBookPurchase === "function") await openBookPurchase();
+                    return;
+                }
+            } catch (err) {
+                alert("Book purchase status check થઈ શક્યું નથી. કૃપા કરીને ફરી પ્રયાસ કરો.");
+                return;
+            }
 
             document.getElementById("withdrawPopup").style.display = "flex";
-
-            document.getElementById("withdrawAmountText").innerText =
-                "Withdraw Amount : ₹" + wallet;
-
+            document.getElementById("withdrawAmountText").innerText = "Withdraw Amount : ₹" + wallet;
             changePaymentMethod();
         }
 
