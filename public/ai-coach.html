@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#4f46e5">
-<title>Free English Coach | Aducate</title>
+<title>Free English Grammar Coach | Aducate</title>
 <style>
 :root{color-scheme:light;--ink:#172033;--muted:#64748b;--brand:#4f46e5;--line:#e2e8f0}
 *{box-sizing:border-box}body{margin:0;background:linear-gradient(140deg,#eef2ff,#f8fafc 55%,#ecfeff);font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);min-height:100vh;padding:20px}
@@ -13,41 +13,114 @@ main{max-width:860px;margin:0 auto}.top{display:flex;align-items:center;justify-
 </head>
 <body>
 <main>
-  <div class="top"><a class="back" href="/earn.html">← Aducate પર પાછા જાઓ</a><span aria-label="Free English Coach">📘 Free English Coach</span></div>
+  <div class="top"><a class="back" href="/earn.html">← Aducate પર પાછા જાઓ</a><span aria-label="Free Grammar Coach">📘 Free Grammar Coach</span></div>
   <section class="hero">
-    <h1>તમારો Free English Coach</h1>
-    <p>અંગ્રેજીમાં લખો, સામાન્ય ભૂલો સુધારો અને વધુ natural English શીખો — કોઈ API key કે paid AIની જરૂર નથી.</p>
+    <h1>તમારો Free English Grammar Coach</h1>
+    <p>અંગ્રેજીમાં લખો, સામાન્ય grammar અને spelling ભૂલો તપાસો, અને ગુજરાતી સમજણ સાથે પ્રેક્ટિસ કરો.</p>
   </section>
   <section class="panel">
     <div class="grid">
       <div><label for="level">તમારું English level</label><select id="level"><option>Beginner</option><option>Elementary</option><option>Intermediate</option><option>Advanced</option></select></div>
       <div><label for="goal">આજની practice</label><select id="goal"><option>daily conversation</option><option>job interview</option><option>school or college</option><option>travel English</option><option>speaking confidently</option></select></div>
     </div>
-    <div style="margin-top:16px"><label for="message">અંગ્રેજીમાં તમારો જવાબ લખો</label><textarea id="message" maxlength="2500" placeholder="Example: Yesterday I go to market and buyed some fruits."></textarea><p class="hint">તમારા પોતાના વાક્યો લખો. આ free rule-based coach સામાન્ય ભૂલો સુધારવાનો પ્રયાસ કરે છે. તે દરેક ભૂલ ઓળખી શકતો નથી અને તમારા ઉચ્ચારણને સાંભળી શકતો નથી.</p></div>
-    <div class="actions"><button class="primary" id="send">✨ Get Free Feedback</button><button class="secondary" id="sample" type="button">Try sample sentence</button><button class="secondary" id="clear" type="button">Clear</button></div>
+    <div style="margin-top:16px"><label for="message">અંગ્રેજીમાં તમારો જવાબ લખો</label><textarea id="message" maxlength="2500" placeholder="Example: Yesterday I go to market and buyed some fruits."></textarea><p class="hint">તમારા વાક્યો લખો. આ checker કોઈ API કે અલગ server વગર તમારા browserમાં ચાલે છે. તે સામાન્ય ભૂલો શોધે છે; દરેક વાક્યની ભૂલ પકડવાની ખાતરી નથી.</p></div>
+    <div class="actions"><button class="primary" id="send">📘 Check Grammar</button><button class="secondary" id="sample" type="button">Try sample sentence</button><button class="secondary" id="clear" type="button">Clear</button></div>
     <div class="status" id="status" role="status" aria-live="polite"></div>
   </section>
   <section class="panel" id="answerPanel" hidden><h2 style="margin-top:0">તમારો feedback</h2><div id="answer" class="answer"></div></section>
-  <p class="foot">આ સંપૂર્ણપણે API વગર ચાલે છે. Feedback સામાન્ય નિયમો પર આધારિત છે, તેથી કેટલીક ભૂલો રહી શકે છે.</p>
+  <p class="foot">ફ્રી browser-based grammar checker · API key નહીં · પરિણામોમાં ભૂલ શક્ય છે અને દરેક વાક્ય સંપૂર્ણ રીતે તપાસી શકાતું નથી.</p>
 </main>
 <script>
 const $ = id => document.getElementById(id);
-const token = () => localStorage.getItem("token") || "";
-$("sample").addEventListener("click", () => {$("message").value = "Yesterday I go to market and buyed some fruits."; $("message").focus();});
-$("clear").addEventListener("click", () => {$("message").value=""; $("status").textContent=""; $("answerPanel").hidden=true;});
-$("send").addEventListener("click", async () => {
+const sampleText = "Yesterday I go to market and buyed some fruits.";
+$("sample").addEventListener("click", () => { $("message").value = sampleText; $("message").focus(); });
+$("clear").addEventListener("click", () => { $("message").value=""; $("status").textContent=""; $("status").classList.remove("error"); $("answerPanel").hidden=true; });
+
+// Browser-only, rule-based English checker. No API calls and no external server.
+function checkEnglish(input) {
+  let text = input.trim().replace(/\s+/g, " ");
+  const notes = [];
+  const apply = (pattern, replacement, explanation) => {
+    const next = text.replace(pattern, replacement);
+    if (next !== text) { text = next; if (!notes.includes(explanation)) notes.push(explanation); }
+  };
+  // Common fixed expressions and high-confidence grammar errors.
+  apply(/\bI am agree\b/gi, "I agree", "‘Agree’ ક્રિયાપદ છે, તેથી ‘I am agree’ નહીં, ‘I agree’ કહો.");
+  apply(/\bI am understand\b/gi, "I understand", "‘Understand’ ક્રિયાપદ છે: ‘I understand’ કહો.");
+  apply(/\bI am know\b/gi, "I know", "‘Know’ ક્રિયાપદ છે: ‘I know’ કહો.");
+  apply(/\bI am having\s+(?=(?:a|an|the|one|two|three)\b)/gi, "I have ", "માલિકી બતાવવા સામાન્ય રીતે ‘I have’ વાપરો.");
+  apply(/\bdiscuss about\b/gi, "discuss", "‘Discuss’ પછી સીધો વિષય આવે છે; ‘about’ની જરૂર નથી.");
+  apply(/\breturn back\b/gi, "return", "‘Return’માં પાછા જવાનો અર્થ પહેલેથી છે; ‘back’ સામાન્ય રીતે જરૂરી નથી.");
+  apply(/\bmore better\b/gi, "better", "‘Better’ પોતે જ comparative છે; ‘more better’ નહીં.");
+  apply(/\bmost easiest\b/gi, "easiest", "‘Easiest’ superlative છે; ‘most easiest’ નહીં.");
+  apply(/\b(one of the)\s+([a-z]+)\b/gi, (m,a,n) => a+" "+(n.endsWith("s")?n:n+"s"), "‘One of the’ પછી સામાન્ય રીતે plural noun આવે છે.");
+  apply(/\b(he|she|it)\s+don't\b/gi, "$1 doesn't", "He/She/It સાથે present simpleમાં ‘doesn't’ વાપરો.");
+  apply(/\b(I|you|we|they)\s+doesn't\b/gi, "$1 don't", "I/You/We/They સાથે ‘don't’ વાપરો.");
+  apply(/\b(he|she|it)\s+don't\s+have\b/gi, "$1 doesn't have", "He/She/It સાથે ‘doesn't have’ વાપરો.");
+  apply(/\b(he|she|it)\s+are\b/gi, "$1 is", "He/She/It સાથે ‘is’ વાપરો.");
+  apply(/\b(I)\s+is\b/gi, "$1 am", "‘I’ સાથે ‘am’ વાપરો.");
+  apply(/\b(you|we|they)\s+is\b/gi, "$1 are", "You/We/They સાથે ‘are’ વાપરો.");
+  apply(/\b(he|she|it)\s+have\b/gi, "$1 has", "He/She/It સાથે present simpleમાં ‘has’ વાપરો.");
+  apply(/\b(he|she|it)\s+go\b/gi, "$1 goes", "He/She/It સાથે present simpleમાં verbને સામાન્ય રીતે -s/-es મળે છે.");
+  apply(/\b(he|she|it)\s+do\b/gi, "$1 does", "He/She/It સાથે present simpleમાં ‘does’ વાપરો.");
+  apply(/\b(he|she|it)\s+watch\b/gi, "$1 watches", "He/She/It સાથે ‘watch’નું રૂપ ‘watches’ થાય છે.");
+  apply(/\b(he|she|it)\s+study\b/gi, "$1 studies", "He/She/It સાથે consonant + y હોય તો y બદલી -ies થાય છે.");
+  apply(/\b(he|she|it)\s+play\b/gi, "$1 plays", "He/She/It સાથે ‘play’નું રૂપ ‘plays’ થાય છે.");
+  apply(/\b(he|she|it)\s+like\b/gi, "$1 likes", "He/She/It સાથે present simpleમાં ‘likes’ વાપરો.");
+  apply(/\b(he|she|it)\s+want\b/gi, "$1 wants", "He/She/It સાથે present simpleમાં ‘wants’ વાપરો.");
+  apply(/\b(he|she|it)\s+need\b/gi, "$1 needs", "He/She/It સાથે present simpleમાં ‘needs’ વાપરો.");
+  apply(/\b(he|she|it)\s+eat\b/gi, "$1 eats", "He/She/It સાથે present simpleમાં ‘eats’ વાપરો.");
+  apply(/\b(he|she|it)\s+work\b/gi, "$1 works", "He/She/It સાથે present simpleમાં ‘works’ વાપરો.");
+  apply(/\b(he|she|it)\s+come\b/gi, "$1 comes", "He/She/It સાથે present simpleમાં ‘comes’ વાપરો.");
+  apply(/\b(he|she|it)\s+know\b/gi, "$1 knows", "He/She/It સાથે present simpleમાં ‘knows’ વાપરો.");
+  apply(/\b(he|she|it)\s+say\b/gi, "$1 says", "He/She/It સાથે present simpleમાં ‘says’ વાપરો.");
+  apply(/\b(he|she|it)\s+try\b/gi, "$1 tries", "He/She/It સાથે ‘try’નું રૂપ ‘tries’ થાય છે.");
+  apply(/\b(he|she|it)\s+teach\b/gi, "$1 teaches", "He/She/It સાથે ‘teach’નું રૂપ ‘teaches’ થાય છે.");
+  apply(/\b(he|she|it)\s+goes to home\b/gi, "$1 goes home", "‘Home’ પહેલાં સામાન્ય રીતે ‘to’ વપરાતું નથી.");
+  apply(/\b(go|went|come|came) to home\b/gi, "$1 home", "‘Home’ પહેલાં સામાન્ય રીતે ‘to’ વપરાતું નથી.");
+  apply(/\b(a)\s+([aeiou][a-z]*)\b/gi, "an $2", "સ્વરધ્વનિથી શરૂ થતા શબ્દ પહેલાં સામાન્ય રીતે ‘an’ આવે છે (કેટલાક અપવાદ છે).");
+  apply(/\ban\s+([bcdfghjklmnpqrstvwxyz][a-z]*)\b/gi, "a $1", "વ્યંજનધ્વનિથી શરૂ થતા શબ્દ પહેલાં સામાન્ય રીતે ‘a’ આવે છે (કેટલાક અપવાદ છે).");
+  apply(/\b(yesterday|last night|last week|last month|two days ago)\s+I\s+go\b/gi, "$1 I went", "ભૂતકાળ દર્શાવતા શબ્દ સાથે ‘go’નું past tense ‘went’ છે.");
+  apply(/\b(yesterday|last night|last week|last month|two days ago)\s+I\s+buyed\b/gi, "$1 I bought", "‘Buy’નું past tense ‘bought’ છે, ‘buyed’ નહીં.");
+  apply(/\bbuyed\b/gi, "bought", "‘Buy’નું past tense ‘bought’ છે, ‘buyed’ નહીં.");
+  apply(/\bgoed\b/gi, "went", "‘Go’નું past tense ‘went’ છે.");
+  apply(/\bcomed\b/gi, "came", "‘Come’નું past tense ‘came’ છે.");
+  apply(/\bI didn't went\b/gi, "I didn't go", "‘Didn't’ પછી verbનું base form આવે છે: ‘didn't go’.");
+  apply(/\b(didn't|did not)\s+(went|ate|saw|bought|came|had|made|took|gave|spoke|wrote)\b/gi, (m,aux,verb) => aux+" "+({went:"go",ate:"eat",saw:"see",bought:"buy",came:"come",had:"have",made:"make",took:"take",gave:"give",spoke:"speak",wrote:"write"}[verb.toLowerCase()]), "‘Didn't’ પછી past tense નહીં, verbનું base form વાપરો.");
+  apply(/\b(am|is|are)\s+go\b/gi, "$1 going", "હમણાં ચાલી રહેલી ક્રિયા માટે ‘am/is/are + verb-ing’ વાપરો.");
+  apply(/\b(am|is|are)\s+eat\b/gi, "$1 eating", "હમણાં ચાલી રહેલી ક્રિયા માટે ‘eating’ વાપરો.");
+  apply(/\b(am|is|are)\s+play\b/gi, "$1 playing", "હમણાં ચાલી રહેલી ક્રિયા માટે ‘playing’ વાપરો.");
+  apply(/\b(am|is|are)\s+work\b/gi, "$1 working", "હમણાં ચાલી રહેલી ક્રિયા માટે ‘working’ વાપરો.");
+  apply(/\b(am|is|are)\s+study\b/gi, "$1 studying", "હમણાં ચાલી રહેલી ક્રિયા માટે ‘studying’ વાપરો.");
+  apply(/\b(i)\b/g, "I", "અંગ્રેજીમાં ‘I’ હંમેશા capital લખાય છે.");
+  // Basic punctuation and spacing.
+  text = text.replace(/\s+([,.!?;:])/g, "$1").replace(/([,.!?;:])(?=\S)/g, "$1 ").replace(/\s{2,}/g," ").trim();
+  text = text.replace(/(^|[.!?]\s+)([a-z])/g, (m,p,c)=>p+c.toUpperCase());
+  if (text && !/[.!?]$/.test(text)) text += ".";
+  return { corrected:text, notes };
+}
+function makeFeedback(message) {
+  const result = checkEnglish(message);
+  const unchanged = result.corrected.toLowerCase() === message.trim().replace(/\s+/g," ").replace(/[.!?]$/,".").toLowerCase();
+  const lines = ["1. Corrected English", result.corrected, "", "2. Grammar feedback"];
+  if (result.notes.length) lines.push(...result.notes.slice(0,8).map((n,i)=>(i+1)+". "+n));
+  else lines.push("ચોક્કસ ભૂલ આ checkerના નિયમોમાં મળી નથી. વાક્ય યોગ્ય હોઈ શકે છે, પણ આ સંપૂર્ણ grammar checker નથી.");
+  lines.push("", "3. Practice tip", "સુધારેલું વાક્ય ઊંચે અવાજે 3 વાર બોલો. પછી એ જ grammar ruleથી પોતાનું નવું વાક્ય બનાવો.");
+  lines.push("", "4. Your next speaking question", "Can you write one more sentence about your day?");
+  return lines.join("\n");
+}
+$("send").addEventListener("click", () => {
   const message = $("message").value.trim();
+  $("status").classList.remove("error");
   if (!message) { $("status").textContent = "કૃપા કરીને પહેલાં અંગ્રેજીમાં એક કે વધુ વાક્યો લખો."; $("message").focus(); return; }
-  const accessToken = token();
-  if (!accessToken) { $("status").innerHTML = 'તમારે પહેલાં login કરવું પડશે. <a href="/login.html">Login કરો</a>.'; return; }
-  $("send").disabled = true; $("status").textContent = "તમારો જવાબ તપાસી રહ્યો છે…"; $("answerPanel").hidden = true;
+  if (message.length > 2500) { $("status").textContent = "કૃપા કરીને 2,500 charactersથી ટૂંકું લખો."; return; }
+  $("send").disabled = true; $("status").textContent = "તમારું વાક્ય browserમાં તપાસી રહ્યા છીએ…"; $("answerPanel").hidden = true;
   try {
-    const response = await fetch("/api/ai-coach", {method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+accessToken},body:JSON.stringify({message,level:$("level").value,goal:$("goal").value})});
-    const data = await response.json().catch(()=>({}));
-    if (response.status === 401) { $("status").textContent = "તમારું login session સમાપ્ત થયું છે. ફરીથી login કરો."; return; }
-    if (!response.ok || !data.success) throw new Error(data.message || "AI feedback મળી શક્યો નથી.");
-    $("answer").textContent = data.answer; $("answerPanel").hidden = false; $("status").textContent = "Feedback તૈયાર છે! હવે સુધારેલા વાક્યો બોલીને પ્રેક્ટિસ કરો.";
-  } catch (error) { $("status").textContent = error.message || "Network error. ફરી પ્રયાસ કરો."; $("status").classList.add("error"); }
+    const feedback = makeFeedback(message);
+    $("answer").textContent = feedback;
+    $("answerPanel").hidden = false;
+    $("status").textContent = "Grammar check પૂરું થયું. નોંધ: આ rule-based checker છે, સંપૂર્ણ AI નથી.";
+  } catch (e) { $("status").textContent = "વાક્ય તપાસી શકાયું નહીં. ફરી પ્રયાસ કરો."; $("status").classList.add("error"); }
   finally { $("send").disabled = false; }
 });
 </script>
