@@ -23,12 +23,12 @@ main{max-width:860px;margin:0 auto}.top{display:flex;align-items:center;justify-
       <div><label for="level">તમારું English level</label><select id="level"><option>Beginner</option><option>Elementary</option><option>Intermediate</option><option>Advanced</option></select></div>
       <div><label for="goal">આજની practice</label><select id="goal"><option>daily conversation</option><option>job interview</option><option>school or college</option><option>travel English</option><option>speaking confidently</option></select></div>
     </div>
-    <div style="margin-top:16px"><label for="message">અંગ્રેજીમાં તમારો જવાબ લખો</label><textarea id="message" maxlength="2500" placeholder="Example: Yesterday I go to market and buyed some fruits."></textarea><p class="hint">તમારા વાક્યો લખો. આ checker કોઈ API કે અલગ server વગર તમારા browserમાં ચાલે છે. તે સામાન્ય ભૂલો શોધે છે; દરેક વાક્યની ભૂલ પકડવાની ખાતરી નથી.</p></div>
+    <div style="margin-top:16px"><label for="message">અંગ્રેજીમાં તમારો જવાબ લખો</label><textarea id="message" maxlength="2500" placeholder="Example: Yesterday I go to market and buyed some fruits."></textarea><p class="hint">તમારા વાક્યો લખો. આ સામાન્ય ભૂલો શોધે છે પણ દરેક વાક્યની ભૂલ પકડવાની ખાતરી નથી.</p></div>
     <div class="actions"><button class="primary" id="send">📘 Check Grammar</button><button class="secondary" id="sample" type="button">Try sample sentence</button><button class="secondary" id="clear" type="button">Clear</button></div>
     <div class="status" id="status" role="status" aria-live="polite"></div>
   </section>
   <section class="panel" id="answerPanel" hidden><h2 style="margin-top:0">તમારો feedback</h2><div id="answer" class="answer"></div></section>
-  <p class="foot">ફ્રી browser-based grammar checker · API key નહીં · પરિણામોમાં ભૂલ શક્ય છે અને દરેક વાક્ય સંપૂર્ણ રીતે તપાસી શકાતું નથી.</p>
+  <p class="foot"></p>
 </main>
 <script>
 const $ = id => document.getElementById(id);
