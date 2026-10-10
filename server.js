@@ -16,6 +16,7 @@ const activityRoutes = require("./routes/activities");
 const bonusRoutes = require("./routes/bonus");
 const addonRoutes = require("./routes/addons");
 const bookRoutes = require("./routes/book");
+const aiCoachRoutes = require("./routes/aiCoach");
 const subscriptionRoutes = require("./routes/subscription");
 
 const app = express();
@@ -58,6 +59,7 @@ app.use("/api/activities", activityRoutes);
 app.use("/api/bonus", bonusRoutes);
 app.use("/api/addons", addonRoutes);
 app.use("/api/book", bookRoutes);
+app.use("/api/ai-coach", aiCoachRoutes);
 
 
 // Dynamic PWA manifest: uses the logo selected by the admin when available.

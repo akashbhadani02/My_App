@@ -39,9 +39,11 @@ Add these to **Production** (and Preview/Development if needed):
 - `VAPID_SUBJECT` = `mailto:your-real-email@example.com`
 - `ACCESS_PIN` = your admin/access PIN
 - `CREDENTIAL_ENCRYPTION_KEY` = 32-byte encryption key used by the app
+- `OPENAI_API_KEY` = secret key from OpenAI Platform (needed for AI English Coach)
+- `OPENAI_MODEL` = optional; defaults to `gpt-4.1-mini`
 
 Never put real values in GitHub.
-After changing environment variables, redeploy Production.
+After changing environment variables, redeploy Production. Never put real values in GitHub or browser-side JavaScript. The AI Coach page is `/ai-coach.html` and requires a logged-in student session. OpenAI API usage may incur charges.
 
 ## 4. MongoDB Atlas
 Allow the Vercel deployment to reach MongoDB Atlas. For a simple deployment, MongoDB Atlas Network Access can temporarily allow `0.0.0.0/0`; secure the database with a strong password and least-privilege database user.
