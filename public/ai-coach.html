@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#4f46e5">
-<title>AI English Coach | Aducate</title>
+<title>Free English Coach | Aducate</title>
 <style>
 :root{color-scheme:light;--ink:#172033;--muted:#64748b;--brand:#4f46e5;--line:#e2e8f0}
 *{box-sizing:border-box}body{margin:0;background:linear-gradient(140deg,#eef2ff,#f8fafc 55%,#ecfeff);font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);min-height:100vh;padding:20px}
@@ -13,22 +13,22 @@ main{max-width:860px;margin:0 auto}.top{display:flex;align-items:center;justify-
 </head>
 <body>
 <main>
-  <div class="top"><a class="back" href="/earn.html">← Aducate પર પાછા જાઓ</a><span aria-label="AI Coach">🤖 AI Coach</span></div>
+  <div class="top"><a class="back" href="/earn.html">← Aducate પર પાછા જાઓ</a><span aria-label="Free English Coach">📘 Free English Coach</span></div>
   <section class="hero">
-    <h1>તમારો AI English Coach</h1>
-    <p>અંગ્રેજીમાં લખો, સરળ feedback મેળવો, ભૂલો સમજો અને વધુ natural English શીખો.</p>
+    <h1>તમારો Free English Coach</h1>
+    <p>અંગ્રેજીમાં લખો, સામાન્ય ભૂલો સુધારો અને વધુ natural English શીખો — કોઈ API key કે paid AIની જરૂર નથી.</p>
   </section>
   <section class="panel">
     <div class="grid">
       <div><label for="level">તમારું English level</label><select id="level"><option>Beginner</option><option>Elementary</option><option>Intermediate</option><option>Advanced</option></select></div>
       <div><label for="goal">આજની practice</label><select id="goal"><option>daily conversation</option><option>job interview</option><option>school or college</option><option>travel English</option><option>speaking confidently</option></select></div>
     </div>
-    <div style="margin-top:16px"><label for="message">અંગ્રેજીમાં તમારો જવાબ લખો</label><textarea id="message" maxlength="2500" placeholder="Example: Yesterday I go to market and buyed some fruits."></textarea><p class="hint">તમારા પોતાના વાક્યો લખો. AI તેને સુધારશે અને કારણ સમજાવશે. અત્યારે આ text-based coach છે; તે તમારા ઉચ્ચારણને સાંભળી શકતો નથી.</p></div>
-    <div class="actions"><button class="primary" id="send">✨ Get AI Feedback</button><button class="secondary" id="sample" type="button">Try sample sentence</button><button class="secondary" id="clear" type="button">Clear</button></div>
+    <div style="margin-top:16px"><label for="message">અંગ્રેજીમાં તમારો જવાબ લખો</label><textarea id="message" maxlength="2500" placeholder="Example: Yesterday I go to market and buyed some fruits."></textarea><p class="hint">તમારા પોતાના વાક્યો લખો. આ free rule-based coach સામાન્ય ભૂલો સુધારવાનો પ્રયાસ કરે છે. તે દરેક ભૂલ ઓળખી શકતો નથી અને તમારા ઉચ્ચારણને સાંભળી શકતો નથી.</p></div>
+    <div class="actions"><button class="primary" id="send">✨ Get Free Feedback</button><button class="secondary" id="sample" type="button">Try sample sentence</button><button class="secondary" id="clear" type="button">Clear</button></div>
     <div class="status" id="status" role="status" aria-live="polite"></div>
   </section>
   <section class="panel" id="answerPanel" hidden><h2 style="margin-top:0">તમારો feedback</h2><div id="answer" class="answer"></div></section>
-  <p class="foot">AI feedbackમાં ભૂલ શક્ય છે. API key સુરક્ષિત server પર રાખવામાં આવે છે.</p>
+  <p class="foot">આ સંપૂર્ણપણે API વગર ચાલે છે. Feedback સામાન્ય નિયમો પર આધારિત છે, તેથી કેટલીક ભૂલો રહી શકે છે.</p>
 </main>
 <script>
 const $ = id => document.getElementById(id);
@@ -40,7 +40,7 @@ $("send").addEventListener("click", async () => {
   if (!message) { $("status").textContent = "કૃપા કરીને પહેલાં અંગ્રેજીમાં એક કે વધુ વાક્યો લખો."; $("message").focus(); return; }
   const accessToken = token();
   if (!accessToken) { $("status").innerHTML = 'તમારે પહેલાં login કરવું પડશે. <a href="/login.html">Login કરો</a>.'; return; }
-  $("send").disabled = true; $("status").textContent = "AI Coach તમારો જવાબ તપાસી રહ્યો છે…"; $("answerPanel").hidden = true;
+  $("send").disabled = true; $("status").textContent = "તમારો જવાબ તપાસી રહ્યો છે…"; $("answerPanel").hidden = true;
   try {
     const response = await fetch("/api/ai-coach", {method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+accessToken},body:JSON.stringify({message,level:$("level").value,goal:$("goal").value})});
     const data = await response.json().catch(()=>({}));
