@@ -3445,6 +3445,32 @@ async function viewSubscriptionScreenshot(id){
     const safeSrc=String(r.paymentScreenshot).replace(/"/g,'&quot;');
     w.document.open();
     w.document.write(`<!doctype html><html><head><title>Payment Screenshot</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh"><img src="${safeSrc}" style="max-width:96vw;max-height:96vh;object-fit:contain">
+<script id="admin-menu-extra-actions">
+(function(){
+  function moveAdminActions(){
+    const menu=document.querySelector('.admin-main-menu');
+    if(!menu) return;
+    ['addonAdminBtn','subscriptionAdminFab','bookAdminFab'].forEach(function(id){
+      const b=document.getElementById(id);
+      if(!b || b.dataset.menuMoved==='1') return;
+      b.dataset.menuMoved='1';
+      b.classList.remove('floating-hidden');
+      b.style.position='static'; b.style.right='auto'; b.style.bottom='auto'; b.style.transform='none'; b.style.opacity='1'; b.style.pointerEvents='auto';
+      b.style.display='inline-flex'; b.style.alignItems='center'; b.style.gap='4px'; b.style.whiteSpace='nowrap';
+      b.style.borderRadius='10px'; b.style.padding='10px 12px'; b.style.boxShadow='none'; b.style.fontWeight='800'; b.style.fontSize='14px';
+      b.style.flex='0 0 auto';
+      menu.appendChild(b);
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',moveAdminActions); else moveAdminActions();
+})();
+</script>
+<style id="admin-menu-extra-actions-style">
+.admin-main-menu #addonAdminBtn{background:linear-gradient(135deg,#6c5ce7,#06b6d4);color:#fff!important;border:0}
+.admin-main-menu #subscriptionAdminFab{background:linear-gradient(135deg,#16a34a,#2563eb);color:#fff!important;border:0}
+.admin-main-menu #bookAdminFab{background:#6d28d9;color:#fff!important;border:0}
+@media(max-width:800px){.admin-main-menu{overflow-x:auto;flex-wrap:nowrap}.admin-main-menu button{flex:0 0 auto;white-space:nowrap}}
+</style>
 </body></html>`);
     w.document.close();
   }catch(e){alert('❌ '+e.message)}
