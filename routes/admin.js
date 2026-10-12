@@ -2000,6 +2000,24 @@ router.put("/activity-rewards", adminAuth, async (req, res) => {
     } catch (e) { res.status(500).json({success:false,message:e.message}); }
 });
 
+// ================= QUESTION BANK PRIZE SETTINGS =================
+router.get("/question-prizes", adminAuth, async (req, res) => {
+    try {
+        const admin = await Admin.findOne().select("questionCorrectReward questionWrongPenalty").lean();
+        res.set("Cache-Control", "no-store");
+        res.json({ success:true, correct:Number.isFinite(Number(admin?.questionCorrectReward)) ? Number(admin.questionCorrectReward) : 0.50, wrong:Number.isFinite(Number(admin?.questionWrongPenalty)) ? Number(admin.questionWrongPenalty) : 0.30 });
+    } catch(e) { res.status(500).json({success:false,message:e.message}); }
+});
+router.put("/question-prizes", adminAuth, async (req, res) => {
+    try {
+        const correct=Number(req.body?.correct), wrong=Number(req.body?.wrong);
+        for (const [label,n] of [["correct",correct],["wrong",wrong]]) if(!Number.isFinite(n)||n<0||n>100000||Math.round(n*100)!==n*100) return res.status(400).json({success:false,message:`${label}: ₹0 થી ₹100000 વચ્ચે, વધુમાં વધુ 2 decimal સુધી આપો.`});
+        const admin=await Admin.findOne(); if(!admin) return res.status(404).json({success:false,message:"Admin settings not found."});
+        admin.questionCorrectReward=correct; admin.questionWrongPenalty=wrong; await admin.save();
+        res.json({success:true,correct,wrong,message:"Question Bank prizes saved."});
+    } catch(e) { res.status(500).json({success:false,message:e.message}); }
+});
+
 // ================= SPIN PRIZE SETTINGS =================
 router.get("/spin-prizes", adminAuth, async (req, res) => {
     try {

@@ -12,6 +12,9 @@ const adminSchema = new mongoose.Schema({
     spinPrizes: { type: [Number], default: [1,2,3,4,5,6,7,8,9,10] },
     // Admin-controlled rupee reward/deduction per correct/incorrect activity answer.
     activityRewards: { type: mongoose.Schema.Types.Mixed, default: {} },
+    // Admin-controlled main Question Bank rewards.
+    questionCorrectReward: { type: Number, default: 0.50 },
+    questionWrongPenalty: { type: Number, default: 0.30 },
     // Admin controlled app logo used in dashboard and PWA install icon
     appLogo: { type: String, default: "" }
 }, { timestamps: true });

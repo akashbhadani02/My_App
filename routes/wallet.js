@@ -94,9 +94,10 @@ router.post("/quiz", auth, async (req, res) => {
             });
         }
 
-        const amount = correct
-            ? QUIZ_CORRECT_REWARD
-            : -QUIZ_WRONG_PENALTY;
+        const adminSettings = await Admin.findOne().select("questionCorrectReward questionWrongPenalty").lean();
+        const correctReward = Number.isFinite(Number(adminSettings?.questionCorrectReward)) ? Number(adminSettings.questionCorrectReward) : QUIZ_CORRECT_REWARD;
+        const wrongPenalty = Number.isFinite(Number(adminSettings?.questionWrongPenalty)) ? Number(adminSettings.questionWrongPenalty) : QUIZ_WRONG_PENALTY;
+        const amount = correct ? correctReward : -wrongPenalty;
 
         const user = await User.findById(req.user.id);
 
@@ -217,8 +218,8 @@ router.post("/quiz", auth, async (req, res) => {
 
         // totalEarn = only actual positive earnings.
         if (correct) {
-            user.totalEarn = Number(user.totalEarn || 0) + QUIZ_CORRECT_REWARD;
-            user.quizScore = Number(user.quizScore || 0) + QUIZ_CORRECT_REWARD;
+            user.totalEarn = Number(user.totalEarn || 0) + correctReward;
+            user.quizScore = Number(user.quizScore || 0) + correctReward;
         }
 
         await user.save();
