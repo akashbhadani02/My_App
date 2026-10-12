@@ -427,6 +427,8 @@ input,select,textarea{width:100%;min-height:42px;padding:10px 12px;border:1px so
   <button data-admin-section="deleted" onclick="showAdminSection('deleted')">🗑️ Deleted Users</button>
   <button data-admin-section="command" onclick="showAdminSection('command')">🛡️ Command Center</button>
 <button data-admin-section="questions" onclick="showAdminSection('questions')">❓ Question Bank</button>
+  <button type="button" onclick="editActivityRewardSettings()">🧩 Quiz / Activity ₹ Settings</button>
+  <button type="button" onclick="editSpinPrizeSettings()">🎡 Spin Prize Settings</button>
   <button data-admin-section="admins" onclick="showAdminSection('admins')">👑 Admins</button>
 </div>
 
@@ -3472,13 +3474,9 @@ async function saveAppLogo(){
 async function removeAppLogo(){if(!confirm('Reset app logo to default?'))return;try{const token=localStorage.getItem('adminToken');const r=await fetch('/api/admin/app-logo',{method:'DELETE',headers:{'Authorization':'Bearer '+token}});if(!r.ok)throw new Error('Reset failed');loadAppLogo();alert('Logo reset successfully.');}catch(e){alert('❌ '+e.message)}}
 document.addEventListener('DOMContentLoaded',loadAppLogo);
 </script>
-<button id="spinPrizeAdminFab" type="button" onclick="editSpinPrizeSettings()">🎡 Spin Prize Settings</button>
-<style>#spinPrizeAdminFab{position:fixed;right:22px;bottom:82px;z-index:99998;border:0;border-radius:13px;padding:13px 17px;background:linear-gradient(135deg,#0f766e,#0d9488);color:#fff;font-weight:800;box-shadow:0 8px 24px #0f766e44;cursor:pointer}@media(max-width:700px){#spinPrizeAdminFab{right:10px;bottom:132px;padding:10px 12px;font-size:12px}}</style>
 <script>
 async function editSpinPrizeSettings(){try{const d=await bookAdminApi('/spin-prizes');const current=(d.prizes||[1,2,3,4,5,6,7,8,9,10]).join(', ');const answer=prompt('Spin ના દરેક possible prize amount (₹) comma થી અલગ લખો. ઉદાહરણ: 1, 2, 5, 10, 20\nઓછામાં ઓછા 2 અને વધુમાં વધુ 30 amount.',current);if(answer===null)return;const prizes=answer.split(',').map(v=>v.trim()).filter(Boolean).map(Number);if(prizes.length<2||prizes.length>30||prizes.some(n=>!Number.isFinite(n)||n<0||n>100000||Math.round(n*100)!==n*100)){alert('ખોટું input. ₹0 થી ₹100000 વચ્ચેના 2–30 amount દાખલ કરો; વધુમાં વધુ 2 decimal.');return;}if(!confirm('નવા Spin prizes save કરવા છે?\n₹'+prizes.join(', ₹')))return;const saved=await bookAdminApi('/spin-prizes',{method:'PUT',body:JSON.stringify({prizes})});alert('✅ '+(saved.message||'Spin prizes updated.'));}catch(e){alert('Spin prize settings: '+e.message)}}
 </script>
-<button id="activityRewardAdminFab" type="button" onclick="editActivityRewardSettings()">🧩 Quiz / Activity ₹ Settings</button>
-<style>#activityRewardAdminFab{position:fixed;right:22px;bottom:205px;z-index:99998;border:0;border-radius:13px;padding:13px 17px;background:linear-gradient(135deg,#4338ca,#6366f1);color:#fff;font-weight:800;box-shadow:0 8px 24px #4338ca44;cursor:pointer}@media(max-width:700px){#activityRewardAdminFab{right:10px;bottom:245px;padding:10px 12px;font-size:12px}}</style>
 <div id="activityRewardAdminModal" style="display:none;position:fixed;inset:0;z-index:999999;background:#0009;padding:18px;overflow:auto"><div style="max-width:620px;margin:5vh auto;background:#fff;color:#172033;border-radius:18px;padding:20px"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h2 style="margin:0">🧩 Quiz / Activity Prize Settings</h2><button onclick="document.getElementById('activityRewardAdminModal').style.display='none'">Close</button></div><p style="color:#475569">દરેક activity માટે સાચા જવાબે ઉમેરવાના રૂપિયા (+₹) અને ખોટા જવાબે કપવાના રૂપિયા (−₹) અલગથી સેટ કરો. Wallet શૂન્યથી નીચે નહીં જાય.</p><div id="activityRewardFields" style="display:grid;gap:10px;margin:16px 0"></div><button onclick="saveActivityRewardSettings()" style="background:#0f766e;color:#fff;border:0;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer">💾 Save All Activity Prices</button></div></div>
 <script>
 let activityRewardLabels={};
