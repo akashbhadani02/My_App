@@ -4881,7 +4881,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBlockRu
     if (icon) icon.textContent = opening ? '－' : '＋';
     button.firstChild.textContent = opening ? '💸 Wallet Transfer (5% ચાર્જ)' : '💸 Wallet Transfer (5% ચાર્જ)';
     if (opening) {
-      if (typeof window.loadWalletTransferHistory === 'function') window.loadWalletTransferHistory();
+      if (typeof window.loadWalletTransferHistory === 'function') window.loadWalletTransferHistory(); 
       panel.scrollIntoView({behavior:'smooth', block:'start'});
     }
   };
