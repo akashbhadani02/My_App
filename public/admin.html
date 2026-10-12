@@ -3443,38 +3443,6 @@ async function viewSubscriptionScreenshot(id){
     const safeSrc=String(r.paymentScreenshot).replace(/"/g,'&quot;');
     w.document.open();
     w.document.write(`<!doctype html><html><head><title>Payment Screenshot</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh"><img src="${safeSrc}" style="max-width:96vw;max-height:96vh;object-fit:contain">
-<style>
-#spinPrizeAdminFab{position:fixed;right:22px;bottom:82px;z-index:99998;border:0;border-radius:13px;padding:13px 17px;background:linear-gradient(135deg,#0f766e,#0d9488);color:#fff;font-weight:800;box-shadow:0 8px 24px #0f766e44;cursor:pointer}
-@media(max-width:700px){#spinPrizeAdminFab{right:10px;bottom:132px;padding:10px 12px;font-size:12px}}
-</style>
-<button id="activityRewardAdminFab" type="button" onclick="editActivityRewardSettings()">🧩 Quiz / Activity ₹ Settings</button>
-<div id="activityRewardAdminModal" style="display:none;position:fixed;inset:0;z-index:999999;background:#0009;padding:18px;overflow:auto"><div style="max-width:620px;margin:5vh auto;background:#fff;color:#172033;border-radius:18px;padding:20px"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h2 style="margin:0">🧩 Quiz / Activity Prize Settings</h2><button onclick="document.getElementById('activityRewardAdminModal').style.display='none'">Close</button></div><p style="color:#475569">દરેક activity માટે સાચા જવાબે ઉમેરવાના રૂપિયા (+₹) અને ખોટા જવાબે કપવાના રૂપિયા (−₹) અલગથી સેટ કરો. Wallet શૂન્યથી નીચે નહીં જાય.</p><div id="activityRewardFields" style="display:grid;gap:10px;margin:16px 0"></div><button onclick="saveActivityRewardSettings()" style="background:#0f766e;color:#fff;border:0;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer">💾 Save All Activity Prices</button></div></div>
-<style>#activityRewardAdminFab{position:fixed;right:22px;bottom:145px;z-index:99998;border:0;border-radius:13px;padding:13px 17px;background:linear-gradient(135deg,#4338ca,#6366f1);color:#fff;font-weight:800;box-shadow:0 8px 24px #4338ca44;cursor:pointer}@media(max-width:700px){#activityRewardAdminFab{right:10px;bottom:190px;padding:10px 12px;font-size:12px}}</style>
-<script>
-let activityRewardLabels={};
-async function editActivityRewardSettings(){try{const d=await bookAdminApi('/activity-rewards');activityRewardLabels=d.activities||{};document.getElementById('activityRewardFields').innerHTML=Object.entries(activityRewardLabels).map(([key,label])=>{const entry=d.rewards?.[key];const correct=Number(typeof entry==='object'&&entry!==null?entry.correct:entry||0);const wrong=Number(typeof entry==='object'&&entry!==null?entry.wrong:entry||0);return `<div style="border:1px solid #e2e8f0;border-radius:12px;padding:12px"><b style="display:block;margin-bottom:10px">${escBook(label)}</b><div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px"><label style="font-size:13px;color:#166534">સાચો જવાબ: +₹<input data-activity-correct="${key}" type="number" min="0" max="100000" step="0.01" value="${correct}" style="display:block;width:100%;box-sizing:border-box;margin-top:5px;padding:9px;border:1px solid #86efac;border-radius:8px" /></label><label style="font-size:13px;color:#b91c1c">ખોટો જવાબ: −₹<input data-activity-wrong="${key}" type="number" min="0" max="100000" step="0.01" value="${wrong}" style="display:block;width:100%;box-sizing:border-box;margin-top:5px;padding:9px;border:1px solid #fca5a5;border-radius:8px" /></label></div></div>`}).join('');document.getElementById('activityRewardAdminModal').style.display='block'}catch(e){alert('Activity reward settings: '+e.message)}}
-async function saveActivityRewardSettings(){const rewards={};document.querySelectorAll('[data-activity-correct]').forEach(el=>{const key=el.dataset.activityCorrect;const wrong=document.querySelector(`[data-activity-wrong="${key}"]`);rewards[key]={correct:Number(el.value),wrong:Number(wrong?.value)}});if(Object.values(rewards).some(v=>[v.correct,v.wrong].some(n=>!Number.isFinite(n)||n<0||n>100000||Math.round(n*100)!==n*100)))return alert('દરેક amount ₹0 થી ₹100000 વચ્ચે અને વધુમાં વધુ 2 decimal સુધી આપો.');if(!confirm('Quiz/Activity ના સાચા અને ખોટા જવાબ માટેની અલગ રકમ save કરવી છે?'))return;try{const d=await bookAdminApi('/activity-rewards',{method:'PUT',body:JSON.stringify({rewards})});alert('✅ '+(d.message||'Activity prices saved.'));document.getElementById('activityRewardAdminModal').style.display='none'}catch(e){alert('❌ '+e.message)}}
-</script>
-<button id="spinPrizeAdminFab" type="button" onclick="editSpinPrizeSettings()">🎡 Spin Prize Settings</button>
-<script>
-async function editSpinPrizeSettings(){
-  try{
-    const d=await bookAdminApi("/spin-prizes");
-    const current=(d.prizes||[1,2,3,4,5,6,7,8,9,10]).join(", ");
-    const answer=prompt("Spin ના દરેક possible prize amount (₹) comma થી અલગ લખો. ઉદાહરણ: 1, 2, 5, 10, 20\\nઓછામાં ઓછા 2 અને વધુમાં વધુ 30 amount.",current);
-    if(answer===null)return;
-    const prizes=answer.split(",").map(v=>v.trim()).filter(Boolean).map(Number);
-    if(prizes.length<2||prizes.length>30||prizes.some(n=>!Number.isFinite(n)||n<0||n>100000||Math.round(n*100)!==n*100)){
-      alert("ખોટું input. ₹0 થી ₹100000 વચ્ચેના 2–30 amount દાખલ કરો; વધુમાં વધુ 2 decimal.");
-      return;
-    }
-    if(!confirm("નવા Spin prizes save કરવા છે?\\n₹"+prizes.join(", ₹")))return;
-    const saved=await bookAdminApi("/spin-prizes",{method:"PUT",body:JSON.stringify({prizes})});
-    alert("✅ "+(saved.message||"Spin prizes updated."));
-  }catch(e){alert("Spin prize settings: "+e.message)}
-}
-</script>
-
 </body></html>`);
     w.document.close();
   }catch(e){alert('❌ '+e.message)}
@@ -3504,28 +3472,18 @@ async function saveAppLogo(){
 async function removeAppLogo(){if(!confirm('Reset app logo to default?'))return;try{const token=localStorage.getItem('adminToken');const r=await fetch('/api/admin/app-logo',{method:'DELETE',headers:{'Authorization':'Bearer '+token}});if(!r.ok)throw new Error('Reset failed');loadAppLogo();alert('Logo reset successfully.');}catch(e){alert('❌ '+e.message)}}
 document.addEventListener('DOMContentLoaded',loadAppLogo);
 </script>
-<style>
-#spinPrizeAdminFab{position:fixed;right:22px;bottom:82px;z-index:99998;border:0;border-radius:13px;padding:13px 17px;background:linear-gradient(135deg,#0f766e,#0d9488);color:#fff;font-weight:800;box-shadow:0 8px 24px #0f766e44;cursor:pointer}
-@media(max-width:700px){#spinPrizeAdminFab{right:10px;bottom:132px;padding:10px 12px;font-size:12px}}
-</style>
 <button id="spinPrizeAdminFab" type="button" onclick="editSpinPrizeSettings()">🎡 Spin Prize Settings</button>
+<style>#spinPrizeAdminFab{position:fixed;right:22px;bottom:82px;z-index:99998;border:0;border-radius:13px;padding:13px 17px;background:linear-gradient(135deg,#0f766e,#0d9488);color:#fff;font-weight:800;box-shadow:0 8px 24px #0f766e44;cursor:pointer}@media(max-width:700px){#spinPrizeAdminFab{right:10px;bottom:132px;padding:10px 12px;font-size:12px}}</style>
 <script>
-async function editSpinPrizeSettings(){
-  try{
-    const d=await bookAdminApi("/spin-prizes");
-    const current=(d.prizes||[1,2,3,4,5,6,7,8,9,10]).join(", ");
-    const answer=prompt("Spin ના દરેક possible prize amount (₹) comma થી અલગ લખો. ઉદાહરણ: 1, 2, 5, 10, 20\\nઓછામાં ઓછા 2 અને વધુમાં વધુ 30 amount.",current);
-    if(answer===null)return;
-    const prizes=answer.split(",").map(v=>v.trim()).filter(Boolean).map(Number);
-    if(prizes.length<2||prizes.length>30||prizes.some(n=>!Number.isFinite(n)||n<0||n>100000||Math.round(n*100)!==n*100)){
-      alert("ખોટું input. ₹0 થી ₹100000 વચ્ચેના 2–30 amount દાખલ કરો; વધુમાં વધુ 2 decimal.");
-      return;
-    }
-    if(!confirm("નવા Spin prizes save કરવા છે?\\n₹"+prizes.join(", ₹")))return;
-    const saved=await bookAdminApi("/spin-prizes",{method:"PUT",body:JSON.stringify({prizes})});
-    alert("✅ "+(saved.message||"Spin prizes updated."));
-  }catch(e){alert("Spin prize settings: "+e.message)}
-}
+async function editSpinPrizeSettings(){try{const d=await bookAdminApi('/spin-prizes');const current=(d.prizes||[1,2,3,4,5,6,7,8,9,10]).join(', ');const answer=prompt('Spin ના દરેક possible prize amount (₹) comma થી અલગ લખો. ઉદાહરણ: 1, 2, 5, 10, 20\nઓછામાં ઓછા 2 અને વધુમાં વધુ 30 amount.',current);if(answer===null)return;const prizes=answer.split(',').map(v=>v.trim()).filter(Boolean).map(Number);if(prizes.length<2||prizes.length>30||prizes.some(n=>!Number.isFinite(n)||n<0||n>100000||Math.round(n*100)!==n*100)){alert('ખોટું input. ₹0 થી ₹100000 વચ્ચેના 2–30 amount દાખલ કરો; વધુમાં વધુ 2 decimal.');return;}if(!confirm('નવા Spin prizes save કરવા છે?\n₹'+prizes.join(', ₹')))return;const saved=await bookAdminApi('/spin-prizes',{method:'PUT',body:JSON.stringify({prizes})});alert('✅ '+(saved.message||'Spin prizes updated.'));}catch(e){alert('Spin prize settings: '+e.message)}}
+</script>
+<button id="activityRewardAdminFab" type="button" onclick="editActivityRewardSettings()">🧩 Quiz / Activity ₹ Settings</button>
+<style>#activityRewardAdminFab{position:fixed;right:22px;bottom:205px;z-index:99998;border:0;border-radius:13px;padding:13px 17px;background:linear-gradient(135deg,#4338ca,#6366f1);color:#fff;font-weight:800;box-shadow:0 8px 24px #4338ca44;cursor:pointer}@media(max-width:700px){#activityRewardAdminFab{right:10px;bottom:245px;padding:10px 12px;font-size:12px}}</style>
+<div id="activityRewardAdminModal" style="display:none;position:fixed;inset:0;z-index:999999;background:#0009;padding:18px;overflow:auto"><div style="max-width:620px;margin:5vh auto;background:#fff;color:#172033;border-radius:18px;padding:20px"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h2 style="margin:0">🧩 Quiz / Activity Prize Settings</h2><button onclick="document.getElementById('activityRewardAdminModal').style.display='none'">Close</button></div><p style="color:#475569">દરેક activity માટે સાચા જવાબે ઉમેરવાના રૂપિયા (+₹) અને ખોટા જવાબે કપવાના રૂપિયા (−₹) અલગથી સેટ કરો. Wallet શૂન્યથી નીચે નહીં જાય.</p><div id="activityRewardFields" style="display:grid;gap:10px;margin:16px 0"></div><button onclick="saveActivityRewardSettings()" style="background:#0f766e;color:#fff;border:0;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer">💾 Save All Activity Prices</button></div></div>
+<script>
+let activityRewardLabels={};
+async function editActivityRewardSettings(){try{const d=await bookAdminApi('/activity-rewards');activityRewardLabels=d.activities||{};document.getElementById('activityRewardFields').innerHTML=Object.entries(activityRewardLabels).map(([key,label])=>{const entry=d.rewards?.[key];const correct=Number(typeof entry==='object'&&entry!==null?entry.correct:entry||0);const wrong=Number(typeof entry==='object'&&entry!==null?entry.wrong:entry||0);return `<div style="border:1px solid #e2e8f0;border-radius:12px;padding:12px"><b style="display:block;margin-bottom:10px">${escBook(label)}</b><div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px"><label style="font-size:13px;color:#166534">સાચો જવાબ: +₹<input data-activity-correct="${key}" type="number" min="0" max="100000" step="0.01" value="${correct}" style="display:block;width:100%;box-sizing:border-box;margin-top:5px;padding:9px;border:1px solid #86efac;border-radius:8px" /></label><label style="font-size:13px;color:#b91c1c">ખોટો જવાબ: −₹<input data-activity-wrong="${key}" type="number" min="0" max="100000" step="0.01" value="${wrong}" style="display:block;width:100%;box-sizing:border-box;margin-top:5px;padding:9px;border:1px solid #fca5a5;border-radius:8px" /></label></div></div>`}).join('');document.getElementById('activityRewardAdminModal').style.display='block'}catch(e){alert('Activity reward settings: '+e.message)}}
+async function saveActivityRewardSettings(){const rewards={};document.querySelectorAll('[data-activity-correct]').forEach(el=>{const key=el.dataset.activityCorrect;const wrong=document.querySelector(`[data-activity-wrong="${key}"]`);rewards[key]={correct:Number(el.value),wrong:Number(wrong?.value)}});if(Object.values(rewards).some(v=>[v.correct,v.wrong].some(n=>!Number.isFinite(n)||n<0||n>100000||Math.round(n*100)!==n*100)))return alert('દરેક amount ₹0 થી ₹100000 વચ્ચે અને વધુમાં વધુ 2 decimal સુધી આપો.');if(!confirm('Quiz/Activity ના સાચા અને ખોટા જવાબ માટેની અલગ રકમ save કરવી છે?'))return;try{const d=await bookAdminApi('/activity-rewards',{method:'PUT',body:JSON.stringify({rewards})});alert('✅ '+(d.message||'Activity prices saved.'));document.getElementById('activityRewardAdminModal').style.display='none'}catch(e){alert('❌ '+e.message)}}
 </script>
 
 </body>
