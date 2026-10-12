@@ -440,6 +440,28 @@ router.post("/withdraw", auth, async (req, res) => {
             });
         }
 
+        // Security rule: withdrawals are blocked for one hour after book purchase/approval.
+        // Enforced on the server so calling the API directly cannot bypass the wait.
+        const withdrawalCooldownMs = 60 * 60 * 1000;
+        let bookApprovedAt = user.bookPurchase.approvedAt;
+        if (!bookApprovedAt) {
+            // Legacy approved purchases without a timestamp start the waiting period now.
+            bookApprovedAt = new Date();
+            user.bookPurchase.approvedAt = bookApprovedAt;
+            await user.save();
+        }
+        const elapsedSinceApproval = Date.now() - new Date(bookApprovedAt).getTime();
+        const remainingCooldownMs = withdrawalCooldownMs - elapsedSinceApproval;
+        if (remainingCooldownMs > 0) {
+            const remainingMinutes = Math.ceil(remainingCooldownMs / 60000);
+            return res.status(403).json({
+                success: false,
+                code: "WITHDRAWAL_COOLDOWN",
+                remainingMs: remainingCooldownMs,
+                message: `Book purchase/approval પછી 1 કલાક પૂરો થયા બાદ જ withdraw કરી શકશો. હજી આશરે ${remainingMinutes} મિનિટ રાહ જુઓ.`
+            });
+        }
+
         const wallet = Number(user.wallet || 0);
 
         // Minimum ₹1000 required

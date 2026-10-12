@@ -8,6 +8,7 @@ const connectDB = require("./db");
 
 const authRoutes = require("./routes/auth");
 const walletRoutes = require("./routes/wallet");
+const walletTransferRoutes = require("./routes/walletTransfer");
 const profileRoutes = require("./routes/profile");
 const adminRoutes=require("./routes/admin");
 const questionRoutes = require("./routes/questions");
@@ -50,6 +51,7 @@ app.use("/api", async (req, res, next) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/subscription", subscriptionRoutes);
 app.use("/api/wallet", walletRoutes);
+app.use("/api/wallet/transfer", walletTransferRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/admin",adminRoutes);
 // app.use("/api/questions", questionRoutes.router);

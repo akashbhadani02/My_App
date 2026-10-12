@@ -65,12 +65,20 @@ router.get('/admin/overview',adminAuth,async(req,res)=>{
 });
 router.post('/admin/coupons',adminAuth,async(req,res)=>{
   try{
-    const code=String(req.body.code||'').trim().toUpperCase().replace(/\s+/g,'');
+    let code=String(req.body.code||'').trim().toUpperCase().replace(/\s+/g,'');
     const reward=Number(req.body.reward);
-    if(!/^[A-Z0-9_-]{3,30}$/.test(code)) return res.status(400).json({success:false,message:'Coupon code must be 3-30 letters/numbers.'});
-    if(!Number.isFinite(reward)||reward<=0||reward>100000) return res.status(400).json({success:false,message:'Enter a valid reward amount.'});
+    if(!Number.isFinite(reward)||reward<=0) return res.status(400).json({success:false,message:'Enter a valid positive reward amount.'});
+    if(code && !/^[A-Z0-9_-]{3,30}$/.test(code)) return res.status(400).json({success:false,message:'Coupon code must be 3-30 letters/numbers.'});
+    // If admin leaves the code blank, generate a unique code for any valid amount.
+    if(!code){
+      for(let i=0;i<10;i++){
+        const candidate='REWARD-'+require('crypto').randomBytes(5).toString('hex').toUpperCase();
+        if(!await Coupon.exists({code:candidate})){code=candidate;break;}
+      }
+      if(!code) return res.status(500).json({success:false,message:'Could not generate a unique coupon code. Please retry.'});
+    }
     const c=await Coupon.findOneAndUpdate({code},{$set:{reward,active:true}},{upsert:true,new:true,setDefaultsOnInsert:true});
-    res.json({success:true,coupon:c,message:'Coupon created and activated.'});
+    res.json({success:true,coupon:c,code:c.code,message:`Coupon created and activated: ${c.code}`});
   }catch(e){res.status(500).json({success:false,message:e.code===11000?'Coupon already exists.':e.message})}
 });
 router.delete('/admin/coupons/:id',adminAuth,async(req,res)=>{

@@ -1267,6 +1267,16 @@ body.kbc-fullscreen-active #quiz.kbc-quiz-screen{border-radius:0!important}
   .book-toolbar button{font-size:11px;}
 }
 
+/* Wallet transfer button: place close beneath total balance and remove excess whitespace */
+#dashboard .wallet-box{margin-bottom:6px!important;padding:16px 24px!important;min-height:0!important}
+#dashboard .wallet-val{margin-top:3px!important;line-height:1.15!important}
+#dashboard #walletTransferToggleBtn{display:block;width:calc(100% - 48px)!important;margin:6px 24px 8px!important;padding:12px 16px!important}
+#dashboard #walletTransferPanel{margin:6px 24px 16px!important}
+@media(max-width:420px){
+ #dashboard .wallet-box{margin:10px 0 6px!important;padding:15px 18px!important}
+ #dashboard #walletTransferToggleBtn{width:100%!important;margin:6px 0 8px!important}
+ #dashboard #walletTransferPanel{margin:6px 0 16px!important}
+}
 </style>
 
 <style id="earn-dashboard-view-style">
@@ -2261,6 +2271,22 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
             <span class="wallet-val">₹<span id="wallet">0.00</span></span>
         </div>
 
+        <button id="walletTransferToggleBtn" type="button" onclick="toggleWalletTransferPanel()" aria-expanded="false" aria-controls="walletTransferPanel" style="width:100%;margin:12px 0 4px;padding:13px 16px;border:0;border-radius:12px;background:#2563eb;color:#fff;font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(37,99,235,.18)">💸 Wallet Transfer (5% ચાર્જ) <span id="walletTransferToggleIcon">＋</span></button>
+
+        <section id="walletTransferPanel" class="ad-card" style="display:none;margin:12px 0 16px;padding:18px;border:1px solid var(--ad-border,#dbeafe);border-radius:18px">
+            <div class="ad-section-title"><h3>💸 Wallet Transfer</h3><span>ચાર્જ 5%</span></div>
+            <p style="font-size:13px;color:var(--ad-muted,#64748b);margin:0 0 12px">બીજા Aducate યુઝરને વૉલેટમાંથી રૂપિયા મોકલો. 5% ચાર્જ વધારામાં કપાશે.</p>
+            <label for="walletTransferMobile" style="display:block;font-size:13px;font-weight:700;margin:8px 0 5px">મેળવનારનો મોબાઇલ નંબર</label>
+            <input id="walletTransferMobile" type="tel" inputmode="numeric" maxlength="15" placeholder="મોબાઇલ નંબર" style="width:100%;box-sizing:border-box;padding:12px;border:1px solid #cbd5e1;border-radius:10px">
+            <label for="walletTransferAmount" style="display:block;font-size:13px;font-weight:700;margin:10px 0 5px">મોકલવાની રકમ (₹)</label>
+            <input id="walletTransferAmount" type="number" min="0.01" max="1000000" step="0.01" placeholder="જેમ કે 100" oninput="previewWalletTransfer()" style="width:100%;box-sizing:border-box;padding:12px;border:1px solid #cbd5e1;border-radius:10px">
+            <div id="walletTransferPreview" style="font-size:13px;line-height:1.8;background:#f8fafc;color:#334155;padding:10px 12px;border-radius:10px;margin:10px 0">રકમ દાખલ કરો; અહીં ચાર્જની ગણતરી દેખાશે.</div>
+            <button id="walletTransferSendBtn" type="button" onclick="sendWalletTransfer()" style="width:100%;padding:12px;border:0;border-radius:10px;background:#2563eb;color:#fff;font-weight:800;cursor:pointer">💸 રૂપિયા ટ્રાન્સફર કરો</button>
+            <div id="walletTransferMessage" role="status" style="font-size:13px;margin-top:8px"></div>
+            <div class="ad-section-title" style="margin-top:18px"><h3>📜 Transfer History</h3><button type="button" onclick="loadWalletTransferHistory()" style="border:0;background:transparent;color:#2563eb">Refresh</button></div>
+            <div id="walletTransferHistory" style="font-size:13px;color:var(--ad-muted,#64748b)">હિસ્ટરી લોડ થઈ રહી છે...</div>
+        </section>
+
         <div class="ad-main">
             <div class="ad-section-title"><h3>📈 Your Learning</h3><span id="adLevelText">Level 1</span></div>
             <div class="ad-card" style="margin-bottom:16px">
@@ -2326,13 +2352,14 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
             <!-- <button class="btn btn-quiz" onclick="showScreen('quiz')">📚 Quiz</button> -->
             <!-- <button class="btn btn-learning" type="button" onclick="showScreen('activities')">🎮 Learning</button> -->
 
-            <!-- <button id="spinBtn" class="btn btn-spin" onclick="spinWheel()" disabled>🔒 Spin Wheel — Complete 100 Questions</button> -->
+           <button id="spinBtn" class="btn btn-spin" onclick="spinWheel()" disabled>🔒 Spin Wheel — Complete 100 Questions</button>
 
             <button class="btn btn-learning" type="button" onclick="openBlockRules()">ℹ️ Student Guidelines</button>
             <button class="btn btn-reward" onclick="claimDailyReward()">🎁 Reward</button>
             <button class="btn btn-bonus" onclick="claimBonus()">⚡ ₹500 Bonus</button>
 
             <button id="withdrawBtn" class="btn btn-withdraw" onclick="openWithdrawPopup()" disabled>💰 Withdraw<span>(Min ₹1000)</span></button>
+            <div id="withdrawCooldownNotice" role="status" style="display:none;margin:8px 0 0;padding:10px 12px;border-radius:10px;background:#fff7ed;color:#9a3412;font-size:12px;line-height:1.5;text-align:center"></div>
 
             
 
@@ -3865,9 +3892,55 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
             }
         });
 
+        // Display the server-authoritative one-hour book purchase withdrawal cooldown.
+        let withdrawCooldownTicker = null;
+        async function refreshWithdrawCooldownNotice() {
+            const notice = document.getElementById("withdrawCooldownNotice");
+            if (!notice) return;
+            try {
+                const token = localStorage.getItem("token");
+                if (!token) return;
+                const res = await fetch("/api/book/status", { cache: "no-store", headers: { Authorization: "Bearer " + token } });
+                const data = await res.json();
+                const purchase = data.bookPurchase || {};
+                if (!res.ok || purchase.status !== "approved" || purchase.access !== true) {
+                    notice.style.display = "none";
+                    if (withdrawCooldownTicker) clearInterval(withdrawCooldownTicker);
+                    return;
+                }
+                const approvedAt = purchase.approvedAt ? new Date(purchase.approvedAt).getTime() : Date.now();
+                const endsAt = approvedAt + 60 * 60 * 1000;
+                const render = () => {
+                    const left = endsAt - Date.now();
+                    if (left <= 0) {
+                        notice.style.display = "block";
+                        notice.style.background = "#ecfdf5";
+                        notice.style.color = "#166534";
+                        notice.textContent = "✅ 1 કલાક પૂરો થયો. હવે તમે Withdrawal માટે અરજી કરી શકો છો.";
+                        if (withdrawCooldownTicker) clearInterval(withdrawCooldownTicker);
+                        withdrawCooldownTicker = null;
+                        return;
+                    }
+                    const totalSeconds = Math.ceil(left / 1000);
+                    const hours = Math.floor(totalSeconds / 3600);
+                    const minutes = Math.floor((totalSeconds % 3600) / 60);
+                    const seconds = totalSeconds % 60;
+                    notice.style.display = "block";
+                    notice.style.background = "#fff7ed";
+                    notice.style.color = "#9a3412";
+                    notice.textContent = `🔒 Book purchase પછી Withdrawal માટે રાહ જોવાનો સમય: ${hours} કલાક ${minutes} મિનિટ ${seconds} સેકન્ડ`;
+                };
+                render();
+                if (withdrawCooldownTicker) clearInterval(withdrawCooldownTicker);
+                if (endsAt > Date.now()) withdrawCooldownTicker = setInterval(render, 1000);
+            } catch (e) {
+                // Server-side withdrawal validation remains authoritative if notice cannot load.
+            }
+        }
+
         // Open Withdraw Popup
         async function openWithdrawPopup() {
-            // Check book purchase on the server before showing the withdrawal form.
+            // Check book purchase and cooldown on the server before showing the withdrawal form.
             try {
                 const token = localStorage.getItem("token");
                 const res = await fetch("/api/book/status", {
@@ -3883,6 +3956,14 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
                         alert("Withdraw પહેલાં ₹499 ની Aducate English Book ખરીદવી જરૂરી છે. પહેલાં Book Purchase કરો.");
                     }
                     if (typeof openBookPurchase === "function") await openBookPurchase();
+                    return;
+                }
+                const approvedAt = purchase.approvedAt ? new Date(purchase.approvedAt).getTime() : Date.now();
+                const remaining = (approvedAt + 60 * 60 * 1000) - Date.now();
+                if (remaining > 0) {
+                    const mins = Math.ceil(remaining / 60000);
+                    alert(`Book purchase/approval પછી 1 કલાક પૂરો થયા બાદ જ withdraw કરી શકશો. હજી આશરે ${mins} મિનિટ રાહ જુઓ.`);
+                    await refreshWithdrawCooldownNotice();
                     return;
                 }
             } catch (err) {
@@ -3911,8 +3992,9 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
             document.getElementById("bankSection").style.display =
                 method === "Bank" ? "block" : "none";
         }
-        // Refresh the authoritative wallet once the page UI is ready.
+        // Refresh the authoritative wallet and withdrawal cooldown once the page UI is ready.
         loadWallet();
+        refreshWithdrawCooldownNotice();
 
         async function claimBonus() {
     try {
@@ -4784,6 +4866,85 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBlockRu
 
 
 <a href="/ai-coach.html" aria-label="Open AI English Coach" style="position:fixed;right:18px;bottom:18px;z-index:9999;display:flex;align-items:center;gap:8px;padding:13px 17px;border-radius:999px;background:linear-gradient(135deg,#4338ca,#0891b2);color:#fff;text-decoration:none;font:700 14px system-ui,sans-serif;box-shadow:0 8px 24px #312e813d">🤖 AI English Coach</a>
+
+<script>
+(function(){
+  const money = n => (Math.round((Number(n) + Number.EPSILON) * 100) / 100).toFixed(2);
+  window.toggleWalletTransferPanel = function(){
+    const panel = document.getElementById('walletTransferPanel');
+    const button = document.getElementById('walletTransferToggleBtn');
+    const icon = document.getElementById('walletTransferToggleIcon');
+    if (!panel || !button) return;
+    const opening = panel.style.display === 'none' || !panel.style.display;
+    panel.style.display = opening ? 'block' : 'none';
+    button.setAttribute('aria-expanded', opening ? 'true' : 'false');
+    if (icon) icon.textContent = opening ? '－' : '＋';
+    button.firstChild.textContent = opening ? '💸 Wallet Transfer (5% ચાર્જ) ' : '💸 Wallet Transfer (5% ચાર્જ) ';
+    if (opening) {
+      if (typeof window.loadWalletTransferHistory === 'function') window.loadWalletTransferHistory();
+      panel.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  };
+
+  window.previewWalletTransfer = function(){
+    const raw = document.getElementById('walletTransferAmount')?.value;
+    const amount = Number(raw);
+    const box = document.getElementById('walletTransferPreview');
+    if (!box) return;
+    if (!raw || !Number.isFinite(amount) || amount <= 0) { box.textContent = 'રકમ દાખલ કરો; અહીં ચાર્જની ગણતરી દેખાશે.'; return; }
+    const fee = Math.round((amount * 0.05 + Number.EPSILON) * 100) / 100;
+    box.innerHTML = '<div>મેળવનારને મળશે: <b>₹' + money(amount) + '</b></div><div>ટ્રાન્સફર ચાર્જ (5%): <b>₹' + money(fee) + '</b></div><div>તમારા વૉલેટમાંથી કુલ કપાશે: <b>₹' + money(amount + fee) + '</b></div>';
+  };
+  window.sendWalletTransfer = async function(){
+    const mobileEl = document.getElementById('walletTransferMobile');
+    const amountEl = document.getElementById('walletTransferAmount');
+    const btn = document.getElementById('walletTransferSendBtn');
+    const msg = document.getElementById('walletTransferMessage');
+    const mobile = String(mobileEl.value || '').replace(/\D/g, '');
+    const amount = Math.round((Number(amountEl.value) + Number.EPSILON) * 100) / 100;
+    if (!/^\d{10,15}$/.test(mobile)) { msg.textContent = '❌ માન્ય મોબાઇલ નંબર દાખલ કરો.'; return; }
+    if (!Number.isFinite(amount) || amount <= 0 || amount > 1000000) { msg.textContent = '❌ માન્ય ટ્રાન્સફર રકમ દાખલ કરો.'; return; }
+    const fee = Math.round((amount * 0.05 + Number.EPSILON) * 100) / 100;
+    const total = Math.round((amount + fee + Number.EPSILON) * 100) / 100;
+    if (!confirm('મેળવનાર: ' + mobile + '\nમેળવનારને મળશે: ₹' + money(amount) + '\n5% ચાર્જ: ₹' + money(fee) + '\nકુલ કપાશે: ₹' + money(total) + '\n\nશું ટ્રાન્સફર કરવું છે?')) return;
+    const token = localStorage.getItem('token');
+    if (!token) { location.href = 'login.html'; return; }
+    btn.disabled = true; btn.textContent = 'ટ્રાન્સફર થઈ રહ્યું છે...'; msg.textContent = '';
+    try {
+      const pendingStorageKey = 'walletTransferPending_' + mobile + '_' + amount.toFixed(2);
+      let pending = null;
+      try { pending = JSON.parse(sessionStorage.getItem(pendingStorageKey) || 'null'); } catch (_) {}
+      const key = pending && pending.key ? pending.key : ((window.crypto && crypto.randomUUID) ? crypto.randomUUID() : ('transfer_' + Date.now() + '_' + Math.random().toString(36).slice(2)));
+      sessionStorage.setItem(pendingStorageKey, JSON.stringify({key, mobile, amount}));
+      const response = await fetch('/api/wallet/transfer/send', { method:'POST', headers:{'Content-Type':'application/json','Authorization':'Bearer '+token}, body:JSON.stringify({recipientMobile:mobile, amount, transferKey:key}) });
+      const data = await response.json();
+      if (!response.ok || !data.success) throw new Error(data.message || 'ટ્રાન્સફર નિષ્ફળ થયું.');
+      sessionStorage.removeItem(pendingStorageKey);
+      msg.textContent = '✅ ટ્રાન્સફર સફળ! ₹' + money(amount) + ' મોકલ્યા, ચાર્જ ₹' + money(fee) + '. કુલ કપાયા ₹' + money(total) + '.';
+      amountEl.value = ''; mobileEl.value = ''; previewWalletTransfer();
+      if (typeof loadWallet === 'function') await loadWallet();
+      await loadWalletTransferHistory();
+    } catch (err) { msg.textContent = '❌ ' + err.message; }
+    finally { btn.disabled = false; btn.textContent = '💸 રૂપિયા ટ્રાન્સફર કરો'; }
+  };
+  window.loadWalletTransferHistory = async function(){
+    const box = document.getElementById('walletTransferHistory'); if (!box) return;
+    const token = localStorage.getItem('token'); if (!token) { box.textContent = 'લૉગિન કરો.'; return; }
+    try {
+      const response = await fetch('/api/wallet/transfer/history', {headers:{'Authorization':'Bearer '+token,'Accept':'application/json'}, cache:'no-store'});
+      const data = await response.json(); if (!response.ok || !data.success) throw new Error(data.message || 'હિસ્ટરી લોડ થઈ નથી.');
+      if (!data.history.length) { box.textContent = 'હજુ કોઈ ટ્રાન્સફર નથી.'; return; }
+      box.innerHTML = data.history.map(item => {
+        const sent = item.type === 'sent';
+        const other = sent ? (item.recipientName || item.recipientMobile) : (item.senderName || item.senderMobile);
+        const date = new Date(item.createdAt).toLocaleString('en-IN');
+        return '<div style="padding:10px 0;border-bottom:1px solid #e2e8f0"><div style="display:flex;justify-content:space-between;gap:8px"><b>'+(sent?'📤 મોકલ્યા':'📥 મળ્યા')+' · '+String(other || 'યુઝર').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))+'</b><b style="color:'+(sent?'#b91c1c':'#15803d')+'">'+(sent?'-':'+')+'₹'+money(item.amount)+'</b></div><div>ચાર્જ: ₹'+money(item.fee)+' · '+(sent?'કુલ કપાયા ₹'+money(item.senderDebit):'તમને મળ્યા ₹'+money(item.recipientCredit))+'</div><small>'+date+' · '+item.status+'</small></div>';
+      }).join('');
+    } catch (err) { box.textContent = 'હિસ્ટરી લોડ કરવામાં સમસ્યા: ' + err.message; }
+  };
+  document.addEventListener('DOMContentLoaded', () => { loadWalletTransferHistory(); });
+})();
+</script>
 </body>
 
 </html>
