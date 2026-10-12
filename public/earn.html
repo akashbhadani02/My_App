@@ -2352,15 +2352,11 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
             <!-- <button class="btn btn-quiz" onclick="showScreen('quiz')">📚 Quiz</button> -->
             <!-- <button class="btn btn-learning" type="button" onclick="showScreen('activities')">🎮 Learning</button> -->
 
-<<<<<<< HEAD
-           <button id="spinBtn" class="btn btn-spin" onclick="spinWheel()" disabled>🔒 Spin Wheel — Complete 100 Questions</button>
-=======
-             <button id="spinBtn" class="btn btn-spin" onclick="spinWheel()" disabled>🔒 Spin Wheel — Complete 100 Questions</button>
->>>>>>> 1a39af90001adf8885b3102fb92db9e61659e9a5
+            <button id="spinBtn" class="btn btn" onclick="spinWheel()" disabled>🔒 Spin Wheel — Complete 100 Questions</button>
 
             <button class="btn btn-learning" type="button" onclick="openBlockRules()">ℹ️ Student Guidelines</button>
             <button class="btn btn-reward" onclick="claimDailyReward()">🎁 Reward</button>
-            <button class="btn btn-bonus" onclick="claimBonus()">⚡ ₹500 Bonus</button>
+            <!-- <button class="btn btn-bonus" onclick="claimBonus()">⚡ ₹500 Bonus</button> -->
 
             <button id="withdrawBtn" class="btn btn-withdraw" onclick="openWithdrawPopup()" disabled>💰 Withdraw<span>(Min ₹1000)</span></button>
             <div id="withdrawCooldownNotice" role="status" style="display:none;margin:8px 0 0;padding:10px 12px;border-radius:10px;background:#fff7ed;color:#9a3412;font-size:12px;line-height:1.5;text-align:center"></div>
@@ -4883,7 +4879,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBlockRu
     panel.style.display = opening ? 'block' : 'none';
     button.setAttribute('aria-expanded', opening ? 'true' : 'false');
     if (icon) icon.textContent = opening ? '－' : '＋';
-    button.firstChild.textContent = opening ? '💸 Wallet Transfer (5% ચાર્જ) ' : '💸 Wallet Transfer (5% ચાર્જ) ';
+    button.firstChild.textContent = opening ? '💸 Wallet Transfer (5% ચાર્જ)' : '💸 Wallet Transfer (5% ચાર્જ)';
     if (opening) {
       if (typeof window.loadWalletTransferHistory === 'function') window.loadWalletTransferHistory();
       panel.scrollIntoView({behavior:'smooth', block:'start'});
