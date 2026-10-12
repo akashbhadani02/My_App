@@ -3445,6 +3445,24 @@ async function viewSubscriptionScreenshot(id){
     const safeSrc=String(r.paymentScreenshot).replace(/"/g,'&quot;');
     w.document.open();
     w.document.write(`<!doctype html><html><head><title>Payment Screenshot</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh"><img src="${safeSrc}" style="max-width:96vw;max-height:96vh;object-fit:contain">
+
+</body></html>`);
+    w.document.close();
+  }catch(e){alert('❌ '+e.message)}
+}
+async function deleteSubscriptionRequest(id){
+  if(!confirm('Delete this subscription request? Student will remain without app access and the request/screenshot will be removed.'))return;
+  try{await subscriptionAdminApi('/admin/'+id,{method:'DELETE'});alert('🗑️ Subscription request deleted.');await updateSubscriptionPendingBadge();openSubscriptionAdmin();}
+  catch(e){alert('❌ '+e.message)}
+}
+async function setSubscriptionAccess(userId,access){
+  if(!confirm(access?'Give this student app access?':'Remove this student app access?'))return;
+  try{await subscriptionAdminApi('/admin/user/'+userId+'/access',{method:'PUT',body:JSON.stringify({access})});await updateSubscriptionPendingBadge();openSubscriptionAdmin();}
+  catch(e){alert('❌ '+e.message)}
+}
+updateSubscriptionPendingBadge();setInterval(updateSubscriptionPendingBadge,10000);
+</script>
+
 <script id="admin-menu-extra-actions">
 (function(){
   function moveAdminActions(){
@@ -3471,22 +3489,6 @@ async function viewSubscriptionScreenshot(id){
 .admin-main-menu #bookAdminFab{background:#6d28d9;color:#fff!important;border:0}
 @media(max-width:800px){.admin-main-menu{overflow-x:auto;flex-wrap:nowrap}.admin-main-menu button{flex:0 0 auto;white-space:nowrap}}
 </style>
-</body></html>`);
-    w.document.close();
-  }catch(e){alert('❌ '+e.message)}
-}
-async function deleteSubscriptionRequest(id){
-  if(!confirm('Delete this subscription request? Student will remain without app access and the request/screenshot will be removed.'))return;
-  try{await subscriptionAdminApi('/admin/'+id,{method:'DELETE'});alert('🗑️ Subscription request deleted.');await updateSubscriptionPendingBadge();openSubscriptionAdmin();}
-  catch(e){alert('❌ '+e.message)}
-}
-async function setSubscriptionAccess(userId,access){
-  if(!confirm(access?'Give this student app access?':'Remove this student app access?'))return;
-  try{await subscriptionAdminApi('/admin/user/'+userId+'/access',{method:'PUT',body:JSON.stringify({access})});await updateSubscriptionPendingBadge();openSubscriptionAdmin();}
-  catch(e){alert('❌ '+e.message)}
-}
-updateSubscriptionPendingBadge();setInterval(updateSubscriptionPendingBadge,10000);
-</script>
 
 <script>
 async function loadAppLogo(){
