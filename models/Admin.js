@@ -8,6 +8,10 @@ const adminSchema = new mongoose.Schema({
     userLoginLocked: { type: Boolean, default: false },
     // Global book visibility control. When true, no student can open the book.
     bookGloballyClosed: { type: Boolean, default: false },
+    // Admin-editable spin prize amounts (₹). Validated by admin API.
+    spinPrizes: { type: [Number], default: [1,2,3,4,5,6,7,8,9,10] },
+    // Admin-controlled rupee reward/deduction per correct/incorrect activity answer.
+    activityRewards: { type: mongoose.Schema.Types.Mixed, default: {} },
     // Admin controlled app logo used in dashboard and PWA install icon
     appLogo: { type: String, default: "" }
 }, { timestamps: true });

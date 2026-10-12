@@ -4,6 +4,7 @@ const crypto = require('crypto');
 const router = express.Router();
 const auth = require('../middleware/subscriptionAuth');
 const User = require('../models/User');
+const Admin = require('../models/Admin');
 const { registerViolation } = require('../services/antiCheat');
 
 const ACTIVITIES = {
@@ -1627,8 +1628,11 @@ router.get('/:type', auth, async (req,res)=>{
   const type=req.params.type; const activity=ACTIVITIES[type];
   if(!activity) return res.status(404).json({success:false,message:'Activity not found'});
   const user=await User.findById(req.user.id).select('activityLastQuestion');
+  const admin=await Admin.findOne().select('activityRewards').lean();
+  const configured=Number(admin?.activityRewards?.[type]);
+  const reward=Number.isFinite(configured) && configured>=0 ? configured : activity.reward;
   const items=pickRandomQuestions(type,activity,user);
-  res.json({success:true,type,title:activity.title,reward:activity.reward,dailyLimit:activity.dailyLimit,questions:items});
+  res.json({success:true,type,title:activity.title,reward,dailyLimit:activity.dailyLimit,questions:items});
 });
 
 router.post('/:type/tab-change', auth, async (req,res)=>{
@@ -1698,6 +1702,9 @@ router.post('/:type/submit', auth, async (req,res)=>{
     if(type==='speaking') correct=normalize(answer).split(' ').filter(Boolean).length>=4;
     else correct=normalize(answer)===normalize(expected);
     const user=await User.findById(req.user.id); if(!user) return res.status(404).json({success:false,message:'User not found'});
+    const admin=await Admin.findOne().select('activityRewards').lean();
+    const configuredReward=Number(admin?.activityRewards?.[type]);
+    const reward=Number.isFinite(configuredReward) && configuredReward>=0 ? configuredReward : activity.reward;
     const today=todayKey();
     if(!user.activityDate || user.activityDate!==today){ user.activityDate=today; user.activityCounts={}; }
     if(!user.activityCounts) user.activityCounts={};
@@ -1710,13 +1717,13 @@ router.post('/:type/submit', auth, async (req,res)=>{
     const earned=mapGet(user.activityEarn,type);
     const deducted=mapGet(user.activityDeduct,type);
     if(correct){
-      user.wallet=Number(user.wallet||0)+activity.reward;
-      user.totalEarn=Number(user.totalEarn||0)+activity.reward;
+      user.wallet=Number(user.wallet||0)+reward;
+      user.totalEarn=Number(user.totalEarn||0)+reward;
       mapSet(user.activityCorrect,type,correctCount+1);
-      mapSet(user.activityEarn,type,earned+activity.reward);
+      mapSet(user.activityEarn,type,earned+reward);
     }else{
-      const deduction=Math.min(Number(user.wallet||0),activity.reward);
-      user.wallet=Math.max(0, Number(user.wallet||0)-activity.reward);
+      const deduction=Math.min(Number(user.wallet||0),reward);
+      user.wallet=Math.max(0, Number(user.wallet||0)-reward);
       mapSet(user.activityWrong,type,wrongCount+1);
       mapSet(user.activityDeduct,type,deducted+deduction);
     }
@@ -1724,15 +1731,15 @@ router.post('/:type/submit', auth, async (req,res)=>{
     res.json({
       success:true,
       correct,
-      reward:correct?activity.reward:-activity.reward,
+      reward:correct?reward:-reward,
       wallet:Number(user.wallet||0),
       totalEarn:Number(user.totalEarn||0),
       used:count+1,
       remaining:Math.max(0,activity.dailyLimit-count-1),
       correctCount:correct?correctCount+1:correctCount,
       wrongCount:correct?wrongCount:wrongCount+1,
-      activityEarn:correct?earned+activity.reward:earned,
-      activityDeduct:correct?deducted:deducted+Math.min(Number(user.wallet||0)+activity.reward,activity.reward),
+      activityEarn:correct?earned+reward:earned,
+      activityDeduct:correct?deducted:deducted+Math.min(Number(user.wallet||0)+reward,reward),
       correctAnswer:expected
     });
   }catch(e){console.error(e);res.status(500).json({success:false,message:e.message});}

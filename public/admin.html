@@ -3360,7 +3360,7 @@ async function bookAdminApi(path,options={}){
  if(!r.ok||d.success===false)throw new Error(d.message||"Request failed");return d;
 }
 function escBook(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-async function openBookAdmin(){window.showAdminFloatingActions?.();document.getElementById("bookAdminModal").classList.add("show");const box=document.getElementById("bookAdminList");box.textContent="Loading...";try{const d=await bookAdminApi("/book-purchases");if(!d.users?.length){box.innerHTML="<p>No book purchases or requests yet.</p>";return}box.innerHTML=d.users.map(u=>{const b=u.bookPurchase||{};const hasAccess=b.access===true;const shot=b.paymentScreenshot||'';const shotHtml=shot?`<div style="margin-top:10px"><b>📸 Payment Screenshot</b><div style="margin-top:7px"><a href="${shot}" target="_blank" rel="noopener"><img src="${shot}" alt="Book payment screenshot" style="display:block;max-width:260px;max-height:300px;width:auto;height:auto;border-radius:12px;border:1px solid #cbd5e1;box-shadow:0 8px 22px rgba(15,23,42,.12);background:#fff"></a></div><small style="color:#64748b">${escBook(b.paymentScreenshotName||'payment-screenshot.jpg')}</small></div>`:'<div style="margin-top:8px;color:#b45309;font-weight:800">📸 No payment screenshot attached.</div>';return `<div class="book-admin-item"><b>${escBook(u.name)}</b> — ${escBook(u.mobile)}<br>Purchase Status: <b>${escBook(b.status)}</b> | Access: <b>${hasAccess?"✅ ACCESS":"🔒 NO ACCESS"}</b> | ₹${b.price||499}<br>UTR / Reference: <code>${escBook(b.paymentReference||"-")}</code><br><small>Requested: ${b.requestedAt?new Date(b.requestedAt).toLocaleString():"-"}</small>${b.adminNote?`<br><small>Note: ${escBook(b.adminNote)}</small>`:""}${shotHtml}<div class="book-admin-actions"><button class="approve-book" onclick="setBookAccess('${u._id}',true)">✅ Access</button><button class="reject-book" onclick="setBookAccess('${u._id}',false)">🔒 No Access</button><button class="delete-book-request" onclick="deleteBookRequest('${u._id}')">🗑️ Delete Request</button></div></div>`}).join("");}catch(e){box.textContent="❌ "+e.message}}
+async function openBookAdmin(){window.showAdminFloatingActions?.();document.getElementById("bookAdminModal").classList.add("show");const box=document.getElementById("bookAdminList");box.textContent="Loading...";try{const d=await bookAdminApi("/book-purchases");if(!d.users?.length){box.innerHTML="<p>No book purchases or requests yet.</p>";return}box.innerHTML=d.users.map(u=>{const b=u.bookPurchase||{};const hasAccess=b.access===true;const shot=b.paymentScreenshot||'';const shotHtml=shot?`<div style="margin-top:10px"><b>📸 Payment Screenshot</b><div style="margin-top:7px"><a href="${shot}" target="_blank" rel="noopener"><img src="${shot}" alt="Book payment screenshot" style="display:block;max-width:260px;max-height:300px;width:auto;height:auto;border-radius:12px;border:1px solid #cbd5e1;box-shadow:0 8px 22px rgba(15,23,42,.12);background:#fff"></a></div><small style="color:#64748b">${escBook(b.paymentScreenshotName||'payment-screenshot.jpg')}</small></div>`:'<div style="margin-top:8px;color:#b45309;font-weight:800">📸 No payment screenshot attached.</div>';return `<div class="book-admin-item"><b>${escBook(u.name)}</b> — ${escBook(u.mobile)}<br>Purchase Status: <b>${escBook(b.status)}</b> | Access: <b>${hasAccess?"✅ ACCESS":"🔒 NO ACCESS"}</b> | ₹${b.price||499}<br>Payment Method: <b>${escBook(b.paymentMethod||(String(b.paymentReference||"").startsWith("WALLET-")?"WALLET":"UPI / not recorded"))}</b><br>UTR / Reference: <code>${escBook(b.paymentReference||"-")}</code><br><small>Requested: ${b.requestedAt?new Date(b.requestedAt).toLocaleString():"-"}</small>${b.adminNote?`<br><small>Note: ${escBook(b.adminNote)}</small>`:""}${shotHtml}<div class="book-admin-actions"><button class="approve-book" onclick="setBookAccess('${u._id}',true)">✅ Access</button><button class="reject-book" onclick="setBookAccess('${u._id}',false)">🔒 No Access</button><button class="delete-book-request" onclick="deleteBookRequest('${u._id}')">🗑️ Delete Request</button></div></div>`}).join("");}catch(e){box.textContent="❌ "+e.message}}
 async function updateBookPaymentBadge(){try{const d=await bookAdminApi("/book-purchases");const n=(d.users||[]).filter(u=>u.bookPurchase?.status==="pending").length;const b=document.getElementById("bookPendingBadge");if(b){b.textContent=n;b.style.display=n?"inline-block":"none";}}catch(e){}}
 function closeBookAdmin(){document.getElementById("bookAdminModal").classList.remove("show")}
 updateBookPaymentBadge();setInterval(updateBookPaymentBadge,10000);
@@ -3442,7 +3442,40 @@ async function viewSubscriptionScreenshot(id){
     if(!w){alert('Please allow popups to view the screenshot.');return;}
     const safeSrc=String(r.paymentScreenshot).replace(/"/g,'&quot;');
     w.document.open();
-    w.document.write(`<!doctype html><html><head><title>Payment Screenshot</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh"><img src="${safeSrc}" style="max-width:96vw;max-height:96vh;object-fit:contain"></body></html>`);
+    w.document.write(`<!doctype html><html><head><title>Payment Screenshot</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh"><img src="${safeSrc}" style="max-width:96vw;max-height:96vh;object-fit:contain">
+<style>
+#spinPrizeAdminFab{position:fixed;right:22px;bottom:82px;z-index:99998;border:0;border-radius:13px;padding:13px 17px;background:linear-gradient(135deg,#0f766e,#0d9488);color:#fff;font-weight:800;box-shadow:0 8px 24px #0f766e44;cursor:pointer}
+@media(max-width:700px){#spinPrizeAdminFab{right:10px;bottom:132px;padding:10px 12px;font-size:12px}}
+</style>
+<button id="activityRewardAdminFab" type="button" onclick="editActivityRewardSettings()">🧩 Quiz / Activity ₹ Settings</button>
+<div id="activityRewardAdminModal" style="display:none;position:fixed;inset:0;z-index:999999;background:#0009;padding:18px;overflow:auto"><div style="max-width:620px;margin:5vh auto;background:#fff;color:#172033;border-radius:18px;padding:20px"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h2 style="margin:0">🧩 Quiz / Activity Prize Settings</h2><button onclick="document.getElementById('activityRewardAdminModal').style.display='none'">Close</button></div><p style="color:#475569">દરેક activity માટે અલગ ₹ amount સેટ કરો. સાચો જવાબ = એટલા રૂપિયા ઉમેરાશે; ખોટો જવાબ = એટલા રૂપિયા wallet માંથી કપાશે (wallet શૂન્યથી નીચે નહીં જાય).</p><div id="activityRewardFields" style="display:grid;gap:10px;margin:16px 0"></div><button onclick="saveActivityRewardSettings()" style="background:#0f766e;color:#fff;border:0;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer">💾 Save All Activity Prices</button></div></div>
+<style>#activityRewardAdminFab{position:fixed;right:22px;bottom:145px;z-index:99998;border:0;border-radius:13px;padding:13px 17px;background:linear-gradient(135deg,#4338ca,#6366f1);color:#fff;font-weight:800;box-shadow:0 8px 24px #4338ca44;cursor:pointer}@media(max-width:700px){#activityRewardAdminFab{right:10px;bottom:190px;padding:10px 12px;font-size:12px}}</style>
+<script>
+let activityRewardLabels={};
+async function editActivityRewardSettings(){try{const d=await bookAdminApi('/activity-rewards');activityRewardLabels=d.activities||{};document.getElementById('activityRewardFields').innerHTML=Object.entries(activityRewardLabels).map(([key,label])=>`<label style="display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #e2e8f0;border-radius:10px;padding:10px"><span><b>${escBook(label)}</b><br><small style="color:#64748b">Correct: +₹ amount · Wrong: −₹ amount</small></span><input data-activity-reward="${key}" type="number" min="0" max="100000" step="0.01" value="${Number(d.rewards?.[key]||0)}" style="width:115px;padding:9px;border:1px solid #cbd5e1;border-radius:8px" /></label>`).join('');document.getElementById('activityRewardAdminModal').style.display='block'}catch(e){alert('Activity reward settings: '+e.message)}}
+async function saveActivityRewardSettings(){const rewards={};document.querySelectorAll('[data-activity-reward]').forEach(el=>rewards[el.dataset.activityReward]=Number(el.value));if(Object.values(rewards).some(n=>!Number.isFinite(n)||n<0||n>100000||Math.round(n*100)!==n*100))return alert('દરેક amount ₹0 થી ₹100000 વચ્ચે અને વધુમાં વધુ 2 decimal સુધી આપો.');if(!confirm('આ બધા activity ના prize amounts save કરવા છે? સાચા જવાબે amount ઉમેરાશે અને ખોટા જવાબે એટલો amount કપાશે.'))return;try{const d=await bookAdminApi('/activity-rewards',{method:'PUT',body:JSON.stringify({rewards})});alert('✅ '+(d.message||'Activity prices saved.'));document.getElementById('activityRewardAdminModal').style.display='none'}catch(e){alert('❌ '+e.message)}}
+</script>
+<button id="spinPrizeAdminFab" type="button" onclick="editSpinPrizeSettings()">🎡 Spin Prize Settings</button>
+<script>
+async function editSpinPrizeSettings(){
+  try{
+    const d=await bookAdminApi("/spin-prizes");
+    const current=(d.prizes||[1,2,3,4,5,6,7,8,9,10]).join(", ");
+    const answer=prompt("Spin ના દરેક possible prize amount (₹) comma થી અલગ લખો. ઉદાહરણ: 1, 2, 5, 10, 20\\nઓછામાં ઓછા 2 અને વધુમાં વધુ 30 amount.",current);
+    if(answer===null)return;
+    const prizes=answer.split(",").map(v=>v.trim()).filter(Boolean).map(Number);
+    if(prizes.length<2||prizes.length>30||prizes.some(n=>!Number.isFinite(n)||n<0||n>100000||Math.round(n*100)!==n*100)){
+      alert("ખોટું input. ₹0 થી ₹100000 વચ્ચેના 2–30 amount દાખલ કરો; વધુમાં વધુ 2 decimal.");
+      return;
+    }
+    if(!confirm("નવા Spin prizes save કરવા છે?\\n₹"+prizes.join(", ₹")))return;
+    const saved=await bookAdminApi("/spin-prizes",{method:"PUT",body:JSON.stringify({prizes})});
+    alert("✅ "+(saved.message||"Spin prizes updated."));
+  }catch(e){alert("Spin prize settings: "+e.message)}
+}
+</script>
+
+</body></html>`);
     w.document.close();
   }catch(e){alert('❌ '+e.message)}
 }
@@ -3470,7 +3503,32 @@ async function saveAppLogo(){
 }
 async function removeAppLogo(){if(!confirm('Reset app logo to default?'))return;try{const token=localStorage.getItem('adminToken');const r=await fetch('/api/admin/app-logo',{method:'DELETE',headers:{'Authorization':'Bearer '+token}});if(!r.ok)throw new Error('Reset failed');loadAppLogo();alert('Logo reset successfully.');}catch(e){alert('❌ '+e.message)}}
 document.addEventListener('DOMContentLoaded',loadAppLogo);
-</script></body>
+</script>
+<style>
+#spinPrizeAdminFab{position:fixed;right:22px;bottom:82px;z-index:99998;border:0;border-radius:13px;padding:13px 17px;background:linear-gradient(135deg,#0f766e,#0d9488);color:#fff;font-weight:800;box-shadow:0 8px 24px #0f766e44;cursor:pointer}
+@media(max-width:700px){#spinPrizeAdminFab{right:10px;bottom:132px;padding:10px 12px;font-size:12px}}
+</style>
+<button id="spinPrizeAdminFab" type="button" onclick="editSpinPrizeSettings()">🎡 Spin Prize Settings</button>
+<script>
+async function editSpinPrizeSettings(){
+  try{
+    const d=await bookAdminApi("/spin-prizes");
+    const current=(d.prizes||[1,2,3,4,5,6,7,8,9,10]).join(", ");
+    const answer=prompt("Spin ના દરેક possible prize amount (₹) comma થી અલગ લખો. ઉદાહરણ: 1, 2, 5, 10, 20\\nઓછામાં ઓછા 2 અને વધુમાં વધુ 30 amount.",current);
+    if(answer===null)return;
+    const prizes=answer.split(",").map(v=>v.trim()).filter(Boolean).map(Number);
+    if(prizes.length<2||prizes.length>30||prizes.some(n=>!Number.isFinite(n)||n<0||n>100000||Math.round(n*100)!==n*100)){
+      alert("ખોટું input. ₹0 થી ₹100000 વચ્ચેના 2–30 amount દાખલ કરો; વધુમાં વધુ 2 decimal.");
+      return;
+    }
+    if(!confirm("નવા Spin prizes save કરવા છે?\\n₹"+prizes.join(", ₹")))return;
+    const saved=await bookAdminApi("/spin-prizes",{method:"PUT",body:JSON.stringify({prizes})});
+    alert("✅ "+(saved.message||"Spin prizes updated."));
+  }catch(e){alert("Spin prize settings: "+e.message)}
+}
+</script>
+
+</body>
 
 </html><style id="command-center-mobile-card-fix">
 /* Command Center compact card layout */

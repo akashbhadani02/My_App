@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const User = require("../models/User");
+const Admin = require("../models/Admin");
 const Question = require("../models/Question");
 const LifelineUsage = require("../models/LifelineUsage");
 const QuizAnswerHistory = require("../models/QuizAnswerHistory");
@@ -378,7 +379,11 @@ router.post("/spin", auth, async (req, res) => {
         // There is no daily spin limit: after each spin the current
         // 100-question cycle starts again from 0.
 //************************************************************* */
-        const prize = Math.floor(Math.random() * 10) + 1;
+        const adminSettings = await Admin.findOne().select("spinPrizes").lean();
+        const prizeOptions = Array.isArray(adminSettings?.spinPrizes) && adminSettings.spinPrizes.length >= 2
+            ? adminSettings.spinPrizes.map(Number).filter(n => Number.isFinite(n) && n >= 0)
+            : [1,2,3,4,5,6,7,8,9,10];
+        const prize = prizeOptions[Math.floor(Math.random() * prizeOptions.length)];
 //************************************************************* */
         user.spinCount = Number(user.spinCount || 0) + 1;
         user.lastSpinDate = today;

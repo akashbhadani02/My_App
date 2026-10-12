@@ -1954,6 +1954,60 @@ router.put("/book-global-status", adminAuth, async (req, res) => {
     } catch (err) { res.status(500).json({ success:false, message:err.message }); }
 });
 
+
+// ================= ACTIVITY QUIZ REWARD SETTINGS =================
+const ACTIVITY_REWARD_DEFAULTS = { arrange:0.10, correction:0.15, translate:0.15, word:0.05, fill:0.10, listening:0.15, reading:0.15, speaking:0.50 };
+router.get("/activity-rewards", adminAuth, async (req, res) => {
+    try {
+        const admin = await Admin.findOne().select("activityRewards").lean();
+        const saved = admin?.activityRewards && typeof admin.activityRewards === "object" ? admin.activityRewards : {};
+        const rewards = Object.fromEntries(Object.entries(ACTIVITY_REWARD_DEFAULTS).map(([k,v]) => [k, Number.isFinite(Number(saved[k])) ? Number(saved[k]) : v]));
+        res.json({ success:true, rewards, activities: { arrange:"Arrange Sentence", correction:"Fix the Sentence", translate:"Translate to English", word:"Word Builder", fill:"Fill in the Blank", listening:"Listen & Type", reading:"Reading Challenge", speaking:"Speak & Earn" } });
+    } catch (e) { res.status(500).json({success:false,message:e.message}); }
+});
+router.put("/activity-rewards", adminAuth, async (req, res) => {
+    try {
+        const raw = req.body?.rewards;
+        if (!raw || typeof raw !== "object" || Array.isArray(raw)) return res.status(400).json({success:false,message:"દરેક activity નો prize amount આપો."});
+        const rewards = {};
+        for (const [key, fallback] of Object.entries(ACTIVITY_REWARD_DEFAULTS)) {
+            const n = Number(raw[key]);
+            if (!Number.isFinite(n) || n < 0 || n > 100000 || Math.round(n*100)!==n*100) return res.status(400).json({success:false,message:`${key}: ₹0 થી ₹100000 વચ્ચેનો amount, વધુમાં વધુ 2 decimal સુધી આપો.`});
+            rewards[key] = n;
+        }
+        let admin = await Admin.findOne();
+        if (!admin) return res.status(404).json({success:false,message:"Admin settings not found."});
+        admin.activityRewards = rewards; await admin.save();
+        res.json({success:true,rewards,message:"Activity quiz rewards saved."});
+    } catch (e) { res.status(500).json({success:false,message:e.message}); }
+});
+
+// ================= SPIN PRIZE SETTINGS =================
+router.get("/spin-prizes", adminAuth, async (req, res) => {
+    try {
+        const admin = await Admin.findOne().select("spinPrizes").lean();
+        res.set("Cache-Control", "no-store");
+        res.json({ success: true, prizes: Array.isArray(admin?.spinPrizes) && admin.spinPrizes.length ? admin.spinPrizes : [1,2,3,4,5,6,7,8,9,10] });
+    } catch (err) { res.status(500).json({ success:false, message:err.message }); }
+});
+router.put("/spin-prizes", adminAuth, async (req, res) => {
+    try {
+        const raw = req.body?.prizes;
+        if (!Array.isArray(raw) || raw.length < 2 || raw.length > 30) {
+            return res.status(400).json({ success:false, message:"2 થી 30 prize amounts આપો." });
+        }
+        const prizes = raw.map(Number);
+        if (prizes.some(n => !Number.isFinite(n) || n < 0 || n > 100000 || Math.round(n*100)!==n*100)) {
+            return res.status(400).json({ success:false, message:"દરેક prize ₹0 થી ₹100000 વચ્ચે અને વધુમાં વધુ 2 decimal સુધી હોવો જોઈએ." });
+        }
+        let admin = await Admin.findOne();
+        if (!admin) return res.status(404).json({ success:false, message:"Admin record not found" });
+        admin.spinPrizes = prizes;
+        await admin.save();
+        res.json({ success:true, prizes:admin.spinPrizes, message:"Spin prizes updated." });
+    } catch (err) { res.status(500).json({ success:false, message:err.message }); }
+});
+
 // ================= BOOK PURCHASE MANAGEMENT =================
 router.get("/book-purchases", adminAuth, async (req, res) => {
     try {
@@ -2031,7 +2085,7 @@ router.delete("/book-purchase/:id", adminAuth, async (req, res) => {
         if (!user.bookPurchase || !["pending","approved","rejected"].includes(user.bookPurchase.status)) {
             return res.status(400).json({ success:false, message:"No book request found for this student." });
         }
-        user.bookPurchase = { status:"none", price:499, paymentReference:"", paymentScreenshot:"", paymentScreenshotName:"", requestedAt:null, approvedAt:null, adminNote:"", access:false };
+        user.bookPurchase = { status:"none", price:499, paymentReference:"", paymentMethod:"", paymentScreenshot:"", paymentScreenshotName:"", requestedAt:null, approvedAt:null, adminNote:"", access:false };
         await user.save();
         res.json({ success:true, message:"Student book request deleted successfully." });
     } catch (err) { res.status(500).json({ success:false, message:err.message }); }

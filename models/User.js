@@ -74,6 +74,7 @@ const userSchema = new mongoose.Schema(
             status: { type: String, enum: ["none", "pending", "approved", "rejected"], default: "none" },
             price: { type: Number, default: 499 },
             paymentReference: { type: String, default: "" },
+            paymentMethod: { type: String, enum: ["UPI", "WALLET", ""], default: "" },
             paymentScreenshot: { type: String, default: "" },
             paymentScreenshotName: { type: String, default: "" },
             requestedAt: { type: Date, default: null },
