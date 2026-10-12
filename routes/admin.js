@@ -1957,28 +1957,46 @@ router.put("/book-global-status", adminAuth, async (req, res) => {
 
 // ================= ACTIVITY QUIZ REWARD SETTINGS =================
 const ACTIVITY_REWARD_DEFAULTS = { arrange:0.10, correction:0.15, translate:0.15, word:0.05, fill:0.10, listening:0.15, reading:0.15, speaking:0.50 };
+const ACTIVITY_LABELS = { arrange:"Arrange Sentence", correction:"Fix the Sentence", translate:"Translate to English", word:"Word Builder", fill:"Fill in the Blank", listening:"Listen & Type", reading:"Reading Challenge", speaking:"Speak & Earn" };
+function normalizeActivityReward(saved, key, fallback) {
+    const value = saved?.[key];
+    // Backward compatibility: older settings stored a single numeric reward.
+    if (value && typeof value === "object") {
+        const correct = Number(value.correct);
+        const wrong = Number(value.wrong);
+        return { correct: Number.isFinite(correct) && correct >= 0 ? correct : fallback, wrong: Number.isFinite(wrong) && wrong >= 0 ? wrong : fallback };
+    }
+    const old = Number(value);
+    const amount = value !== undefined && Number.isFinite(old) && old >= 0 ? old : fallback;
+    return { correct: amount, wrong: amount };
+}
 router.get("/activity-rewards", adminAuth, async (req, res) => {
     try {
         const admin = await Admin.findOne().select("activityRewards").lean();
         const saved = admin?.activityRewards && typeof admin.activityRewards === "object" ? admin.activityRewards : {};
-        const rewards = Object.fromEntries(Object.entries(ACTIVITY_REWARD_DEFAULTS).map(([k,v]) => [k, Number.isFinite(Number(saved[k])) ? Number(saved[k]) : v]));
-        res.json({ success:true, rewards, activities: { arrange:"Arrange Sentence", correction:"Fix the Sentence", translate:"Translate to English", word:"Word Builder", fill:"Fill in the Blank", listening:"Listen & Type", reading:"Reading Challenge", speaking:"Speak & Earn" } });
+        const rewards = Object.fromEntries(Object.entries(ACTIVITY_REWARD_DEFAULTS).map(([k,v]) => [k, normalizeActivityReward(saved, k, v)]));
+        res.set("Cache-Control", "no-store");
+        res.json({ success:true, rewards, activities: ACTIVITY_LABELS });
     } catch (e) { res.status(500).json({success:false,message:e.message}); }
 });
 router.put("/activity-rewards", adminAuth, async (req, res) => {
     try {
         const raw = req.body?.rewards;
-        if (!raw || typeof raw !== "object" || Array.isArray(raw)) return res.status(400).json({success:false,message:"દરેક activity નો prize amount આપો."});
+        if (!raw || typeof raw !== "object" || Array.isArray(raw)) return res.status(400).json({success:false,message:"દરેક activity માટે સાચા અને ખોટા જવાબની રકમ આપો."});
         const rewards = {};
         for (const [key, fallback] of Object.entries(ACTIVITY_REWARD_DEFAULTS)) {
-            const n = Number(raw[key]);
-            if (!Number.isFinite(n) || n < 0 || n > 100000 || Math.round(n*100)!==n*100) return res.status(400).json({success:false,message:`${key}: ₹0 થી ₹100000 વચ્ચેનો amount, વધુમાં વધુ 2 decimal સુધી આપો.`});
-            rewards[key] = n;
+            const entry = raw[key];
+            const correct = Number(typeof entry === "object" && entry !== null ? entry.correct : entry);
+            const wrong = Number(typeof entry === "object" && entry !== null ? entry.wrong : entry);
+            for (const [kind, n] of [["correct", correct], ["wrong", wrong]]) {
+                if (!Number.isFinite(n) || n < 0 || n > 100000 || Math.round(n*100)!==n*100) return res.status(400).json({success:false,message:`${key} (${kind}): ₹0 થી ₹100000 વચ્ચેનો amount, વધુમાં વધુ 2 decimal સુધી આપો.`});
+            }
+            rewards[key] = { correct, wrong };
         }
         let admin = await Admin.findOne();
         if (!admin) return res.status(404).json({success:false,message:"Admin settings not found."});
         admin.activityRewards = rewards; await admin.save();
-        res.json({success:true,rewards,message:"Activity quiz rewards saved."});
+        res.json({success:true,rewards,message:"Correct and wrong answer activity prizes saved."});
     } catch (e) { res.status(500).json({success:false,message:e.message}); }
 });
 

@@ -1629,7 +1629,8 @@ router.get('/:type', auth, async (req,res)=>{
   if(!activity) return res.status(404).json({success:false,message:'Activity not found'});
   const user=await User.findById(req.user.id).select('activityLastQuestion');
   const admin=await Admin.findOne().select('activityRewards').lean();
-  const configured=Number(admin?.activityRewards?.[type]);
+  const configuredEntry=admin?.activityRewards?.[type];
+  const configured=Number(configuredEntry && typeof configuredEntry==='object' ? configuredEntry.correct : configuredEntry);
   const reward=Number.isFinite(configured) && configured>=0 ? configured : activity.reward;
   const items=pickRandomQuestions(type,activity,user);
   res.json({success:true,type,title:activity.title,reward,dailyLimit:activity.dailyLimit,questions:items});
@@ -1703,8 +1704,10 @@ router.post('/:type/submit', auth, async (req,res)=>{
     else correct=normalize(answer)===normalize(expected);
     const user=await User.findById(req.user.id); if(!user) return res.status(404).json({success:false,message:'User not found'});
     const admin=await Admin.findOne().select('activityRewards').lean();
-    const configuredReward=Number(admin?.activityRewards?.[type]);
-    const reward=Number.isFinite(configuredReward) && configuredReward>=0 ? configuredReward : activity.reward;
+    const configuredEntry=admin?.activityRewards?.[type];
+    const configuredCorrect=Number(configuredEntry && typeof configuredEntry==='object' ? configuredEntry.correct : configuredEntry);
+    const configuredWrong=Number(configuredEntry && typeof configuredEntry==='object' ? configuredEntry.wrong : configuredEntry);
+    const reward=Number.isFinite(correct ? configuredCorrect : configuredWrong) && (correct ? configuredCorrect : configuredWrong)>=0 ? (correct ? configuredCorrect : configuredWrong) : activity.reward;
     const today=todayKey();
     if(!user.activityDate || user.activityDate!==today){ user.activityDate=today; user.activityCounts={}; }
     if(!user.activityCounts) user.activityCounts={};
