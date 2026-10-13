@@ -4312,13 +4312,15 @@ function openAddonsCenter(){
       </div>
     </div>
 
-    <div class="book-wallet-note">💰 Wallet balance ₹499+ હોય તો payment વગર Wallet થી પણ book ખરીદી શકો છો.</div>
+    <!-- <div class="book-wallet-note">💰 Wallet balance ₹499+ હોય તો payment વગર Wallet થી પણ book ખરીદી શકો છો.</div> -->
     <div class="book-proof-note">📸 <b>Payment screenshot ફરજિયાત છે.</b> ₹499 payment કર્યા પછી UTR સાથે payment screenshot upload કરો. Admin screenshot + UTR verify કર્યા પછી book access મળશે.</div>
     <input id="bookPaymentReference" placeholder="Enter Payment Reference / UTR Number" autocomplete="off">
     <label for="bookPaymentScreenshot" class="book-proof-label">📸 Book Payment Screenshot</label>
     <input id="bookPaymentScreenshot" class="book-proof-input" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Book payment screenshot">
     <div id="bookScreenshotPreview" class="book-screenshot-preview" style="display:none"></div>
-    <div class="book-row"><button class="book-secondary" onclick="closeBookPurchase()">Close</button><button class="book-primary" id="bookWalletBtn" onclick="purchaseBookWithWallet()">💰 Buy with Wallet ₹499</button><button class="book-primary" id="bookRequestBtn" onclick="submitBookPurchase()">✅ Send UTR + Screenshot</button></div>
+    <div class="book-row"><button class="book-secondary" onclick="closeBookPurchase()">Close</button>
+        <!-- <button class="book-primary" id="bookWalletBtn" onclick="purchaseBookWithWallet()">💰 Buy with Wallet ₹499</button> -->
+        <button class="book-primary" id="bookRequestBtn" onclick="submitBookPurchase()">✅ Send UTR + Screenshot</button></div>
     <div id="bookPurchaseStatus" class="book-status"></div>
   </div>
 </div>
