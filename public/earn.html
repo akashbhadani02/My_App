@@ -4375,11 +4375,17 @@ async function copyBookUpi(){
 }
 async function openBookPurchase(){
   const modal=document.getElementById("bookPurchaseModal"), status=document.getElementById("bookPurchaseStatus"), btn=document.getElementById("bookRequestBtn"), input=document.getElementById("bookPaymentReference"), walletBtn=document.getElementById("bookWalletBtn");
-  modal.classList.add("show"); status.textContent="Checking access..."; input.style.display="block"; btn.style.display="block"; walletBtn.style.display="block";
+  modal.classList.add("show"); status.textContent="Checking access..."; input.style.display="block"; btn.style.display="block"; if(walletBtn) walletBtn.style.display="block";
   try{
     const d=await bookApi("/status"); const b=d.bookPurchase||{};
-    if(b.status==="approved"){ modal.classList.remove("show"); openBookReader(); return; }
-    if(b.status==="pending"){status.textContent="⏳ Payment verification pending. Admin permission મળ્યા પછી book open થશે."; input.style.display="none"; btn.style.display="none"; walletBtn.style.display="none";}
+    if(b.status==="approved" && b.access===true){ modal.classList.remove("show"); await openBookReader(); return; }
+    else if(b.status==="approved" && b.access!==true){
+      // Keep admin access controls private: show no access-disabled message to the student.
+      modal.classList.remove("show");
+      status.textContent="";
+      return;
+    }
+    else if(b.status==="pending"){status.textContent="⏳ Payment verification pending. Admin permission મળ્યા પછી book open થશે."; input.style.display="none"; btn.style.display="none"; if(walletBtn) walletBtn.style.display="none";}
     else if(b.status==="rejected"){status.textContent="❌ Previous request rejected. Correct payment reference enter કરીને ફરી request મોકલો.";}
     else status.textContent="QR scan કરો અથવા UPI buttonથી ₹499 pay કરો. પછી UTR / Transaction ID enter કરીને approval માટે મોકલો.";
   }catch(err){status.textContent="❌ "+err.message;}
