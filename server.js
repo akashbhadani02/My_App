@@ -90,6 +90,13 @@ app.use((req,res,next)=>{
     }
     next();
 });
+// Dedicated admin entry URL: https://www.aducate.online/admin
+// Keep the admin login separate from the student-facing pages.
+app.get(["/admin", "/admin/"], (req, res) => {
+    res.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+    res.redirect(302, "/admin-login.html");
+});
+
 app.use(express.static(path.join(__dirname, "public"), { etag:false, lastModified:false, maxAge:0 }));
 
 app.get("/", (req,res)=>{
