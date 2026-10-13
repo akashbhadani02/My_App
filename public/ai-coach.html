@@ -1,6 +1,18 @@
 <!doctype html>
 <html lang="gu">
 <head>
+<style id="AI_COACH_AUTH_HIDE">html{visibility:hidden}</style>
+<script>
+(function(){
+  if (!(localStorage.getItem('token') || '').trim()) {
+    window.location.replace('/login.html');
+  } else {
+    document.documentElement.style.visibility = 'visible';
+    document.getElementById('AI_COACH_AUTH_HIDE')?.remove();
+  }
+})();
+</script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#4f46e5">
