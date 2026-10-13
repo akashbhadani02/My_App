@@ -2050,7 +2050,7 @@ router.get("/book-purchases", adminAuth, async (req, res) => {
         const users = await User.find({
             isDeleted: { $ne: true },
             "bookPurchase.status": { $in: ["pending", "approved", "rejected"] }
-        }).select("name mobile bookPurchase").sort({ "bookPurchase.requestedAt": -1 }).lean();
+        }).select("name mobile bookPurchase bookWatermarkRemoved subscriptionStatus subscriptionAccess").sort({ "bookPurchase.requestedAt": -1 }).lean();
         res.set("Cache-Control", "no-store");
         res.json({ success: true, users });
     } catch (err) {
@@ -2112,6 +2112,22 @@ router.put("/book-purchase/:id/access", adminAuth, async (req, res) => {
     } catch (err) { res.status(500).json({ success:false, message:err.message }); }
 });
 
+
+// Admin: remove or restore the book demo/suspended watermark for one student.
+router.put("/user/:id/book-watermark", adminAuth, async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) return res.status(404).json({ success:false, message:"Student not found" });
+        // Watermarks are opt-in per account and may contain admin-authored text.
+        if (typeof req.body?.enabled === "boolean") user.customWatermarkEnabled = req.body.enabled;
+        if (typeof req.body?.text === "string") user.customWatermarkText = req.body.text.trim().slice(0, 160);
+        // Backward compatibility for older admin clients.
+        if (typeof req.body?.removed === "boolean") user.customWatermarkEnabled = !req.body.removed;
+        await user.save();
+        res.set("Cache-Control", "no-store");
+        res.json({ success:true, enabled:user.customWatermarkEnabled, text:user.customWatermarkText, message:user.customWatermarkEnabled ? "Custom watermark enabled for this student." : "Watermark disabled for this student." });
+    } catch (err) { res.status(500).json({ success:false, message:err.message }); }
+});
 
 // Admin: delete a student's book purchase/request record
 router.delete("/book-purchase/:id", adminAuth, async (req, res) => {

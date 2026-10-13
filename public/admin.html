@@ -1061,11 +1061,33 @@ input,select,textarea{width:100%;min-height:42px;padding:10px 12px;border:1px so
                         <button onclick="showActivityStats('${user._id}')" class="purple" title="English Learning Activity">📚 Activity</button>
                         <button onclick="showUserCredentials('${user._id}')" class="blue" title="View ID / Change Password">🔐 ID / Password</button>
                         ${user.subscriptionAccess === true ? `<button onclick="setStudentAppAccess('${user._id}',false)" class="red" title="Remove App Access">🔒 Remove Access</button>` : `<button onclick="setStudentAppAccess('${user._id}',true)" class="green" title="Give App Access">🔓 Give Access</button>`}
+                        ${user.customWatermarkEnabled === true ? `<button onclick="setBookWatermark('${user._id}',true)" class="green" title="Edit this user's watermark">✏️ Edit Watermark</button><button onclick="setBookWatermark('${user._id}',false)" class="red" title="Disable watermark for this user">🚫 Remove Watermark</button>` : `<button onclick="setBookWatermark('${user._id}',true)" class="green" title="Set a custom watermark for this user">🏷️ Set Watermark</button>`}
                         <button onclick="deleteUser('${user._id}')" class="red" title="Delete User">⛔ Delete</button>
                         ${user.isBlocked ? `<button onclick="unblockUser('${user._id}')" class="green" title="Unblock User">🟢 Unblock</button>` : ''}
                     </div>
                 </article>`;
             }).join('');
+        }
+
+        async function setBookWatermark(userId, enabled, existingText = "") {
+            let text = "";
+            if (enabled) {
+                text = window.prompt("Enter the watermark text to show ONLY on this user's account (max 160 characters):", existingText || "SUSPENDED • DEMO MODE");
+                if (text === null) return;
+                text = text.trim().slice(0, 160);
+                if (!text) { alert("Please enter watermark text."); return; }
+            } else if (!confirm("Remove/disable the watermark for this user only? Other users will not be affected.")) return;
+            try {
+                const res = await fetch('/api/admin/user/' + encodeURIComponent(userId) + '/book-watermark', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + (localStorage.getItem('adminToken') || '') },
+                    body: JSON.stringify({ enabled, text })
+                });
+                const data = await res.json().catch(() => ({}));
+                if (!res.ok || data.success === false) throw new Error(data.message || 'Unable to update watermark.');
+                if (typeof loadUsers === 'function') await loadUsers();
+                else location.reload();
+            } catch (err) { alert(err.message || 'Unable to update watermark.'); }
         }
 
         async function setStudentAppAccess(userId, access) {

@@ -2,7 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const router = express.Router();
-const auth = require("../middleware/subscriptionAuth");
+const auth = require("../middleware/bookAuth");
 const User = require("../models/User");
 
 const BOOK_PRICE = 499;
@@ -11,7 +11,7 @@ const BOOK_PRICE = 499;
 const BOOK_FILE = path.join(__dirname, "..", "book-assets", "book.pdf");
 const BOOK_TITLE = "Aducate English Book";
 router.get("/status", auth, async (req, res) => {
-  const user = await User.findById(req.user.id).select("bookPurchase");
+  const user = await User.findById(req.user.id).select("bookPurchase subscriptionStatus subscriptionAccess bookWatermarkRemoved");
   // Backfill a timestamp for older approved purchases that predate the cooldown feature.
   // Their one-hour wait starts when this migration is first observed.
   if (user?.bookPurchase?.status === "approved" && user.bookPurchase.access === true && !user.bookPurchase.approvedAt) {
@@ -19,7 +19,7 @@ router.get("/status", auth, async (req, res) => {
     await user.save();
   }
   res.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
-  res.json({ success: true, bookPurchase: user?.bookPurchase || { status: "none", price: BOOK_PRICE } });
+  res.json({ success: true, bookPurchase: user?.bookPurchase || { status: "none", price: BOOK_PRICE }, watermarkRequired: !!user && !(user.subscriptionAccess === true && user.subscriptionStatus === "active") && user.bookWatermarkRemoved !== true });
 });
 
 router.post("/request", auth, async (req, res) => {

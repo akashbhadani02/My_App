@@ -69,6 +69,12 @@ const userSchema = new mongoose.Schema(
         demoStartedAt: { type: Date, default: null },
         demoExpiresAt: { type: Date, default: null },
 
+        // Admin can manually remove the demo/suspended watermark for this student.
+        bookWatermarkRemoved: { type: Boolean, default: false },
+        // Per-account custom watermark explicitly controlled by admin. Disabled by default.
+        customWatermarkEnabled: { type: Boolean, default: false },
+        customWatermarkText: { type: String, default: "", maxlength: 160 },
+
         // ₹499 Book purchase and admin approval
         bookPurchase: {
             status: { type: String, enum: ["none", "pending", "approved", "rejected"], default: "none" },

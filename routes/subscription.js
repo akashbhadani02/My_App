@@ -13,6 +13,10 @@ function statusPayload(user, request = null) {
         subscription: {
             status: user?.subscriptionStatus || 'inactive',
             access: user?.subscriptionAccess === true,
+            watermarkRemoved: user?.bookWatermarkRemoved === true,
+            watermarkEnabled: user?.customWatermarkEnabled === true,
+            watermarkText: user?.customWatermarkText || '',
+            bookPurchased: user?.bookPurchase?.status === 'approved' && user?.bookPurchase?.access === true,
             amount: SUBSCRIPTION_PRICE,
             paymentReference: user?.subscriptionPaymentReference || request?.paymentReference || '',
             paymentScreenshot: request?.paymentScreenshot || '',
@@ -28,7 +32,7 @@ function statusPayload(user, request = null) {
 router.get('/status', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select(
-            'subscriptionStatus subscriptionAccess subscriptionAmount subscriptionPaymentReference subscriptionRequestedAt subscriptionConfirmedAt subscriptionAdminNote demoAccess demoStartedAt demoExpiresAt'
+            'subscriptionStatus subscriptionAccess subscriptionAmount subscriptionPaymentReference subscriptionRequestedAt subscriptionConfirmedAt subscriptionAdminNote demoAccess demoStartedAt demoExpiresAt bookWatermarkRemoved customWatermarkEnabled customWatermarkText bookPurchase.status bookPurchase.access'
         ).lean();
         if (!user) return res.status(404).json({ success: false, message: 'Student not found' });
         const request = await Subscription.findOne({ userId: user._id }).sort({ submittedAt: -1 }).lean();
