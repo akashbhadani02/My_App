@@ -1,7 +1,7 @@
 {
-  "name": "Aducate English",
-  "short_name": "Aducate English",
-  "description": "Aducate English learning, practice and progress app",
+  "name": "Aducate",
+  "short_name": "Aducate",
+  "description": "Aducate - English learning app",
   "start_url": "/login.html",
   "scope": "/",
   "display": "standalone",
@@ -9,8 +9,8 @@
     "standalone",
     "fullscreen"
   ],
-  "background_color": "#FFFFFF",
-  "theme_color": "#092A5E",
+  "background_color": "#ffffff",
+  "theme_color": "#506ef0",
   "orientation": "portrait-primary",
   "icons": [
     {
