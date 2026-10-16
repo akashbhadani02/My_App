@@ -11,7 +11,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aducate.app</title>
+    <title>Aducate English | Learning Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         /* =====================================
@@ -1790,76 +1790,14 @@ body{background:linear-gradient(135deg,#eef2ff 0%,#fff1f7 48%,#ecfeff 100%)!impo
 </style>
 
 
-<style id="activity-popup-fix">
-/* Activities are shown as a popup over the dashboard instead of appearing below it. */
-body.activity-popup-open{overflow:hidden;}
-#activities.activity-popup-card, #activityPlay.activity-popup-card{
-  position:fixed !important;
-  inset:0 !important;
-  z-index:100000 !important;
-  width:100% !important;
-  max-width:none !important;
-  height:100dvh !important;
-  min-height:100dvh !important;
-  margin:0 !important;
-  padding:clamp(12px,3vw,28px) !important;
-  box-sizing:border-box !important;
-  display:flex !important;
-  flex-direction:column !important;
-  justify-content:flex-start !important;
-  overflow:auto !important;
-  background:rgba(15,23,42,.72) !important;
-  backdrop-filter:blur(5px);
-  -webkit-backdrop-filter:blur(5px);
-  border-radius:0 !important;
-}
-#activities.activity-popup-card::before, #activityPlay.activity-popup-card::before{
-  content:"";
-  position:absolute;
-  inset:clamp(10px,3vw,30px);
-  background:var(--card,#fff);
-  border-radius:24px;
-  box-shadow:0 25px 80px rgba(0,0,0,.35);
-  z-index:-1;
-}
-#activities.activity-popup-card > *, #activityPlay.activity-popup-card > *{
-  width:min(760px,100%);
-  margin-left:auto;
-  margin-right:auto;
-  flex-shrink:0;
-}
-#activities.activity-popup-card .activity-grid{
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:14px;
-}
-.activity-popup-close{
-  position:absolute !important;
-  top:clamp(18px,4vw,42px) !important;
-  right:clamp(18px,4vw,42px) !important;
-  width:44px !important;
-  height:44px !important;
-  min-width:44px !important;
-  padding:0 !important;
-  border:0 !important;
-  border-radius:50% !important;
-  background:#fee2e2 !important;
-  color:#991b1b !important;
-  font-size:24px !important;
-  font-weight:900 !important;
-  line-height:44px !important;
-  text-align:center !important;
-  cursor:pointer !important;
-  z-index:10 !important;
-  box-shadow:0 6px 18px rgba(0,0,0,.18) !important;
-}
-.activity-popup-close:hover{transform:scale(1.05);background:#fecaca !important;}
-@media(max-width:600px){
-  #activities.activity-popup-card, #activityPlay.activity-popup-card{padding:8px !important;}
-  #activities.activity-popup-card::before, #activityPlay.activity-popup-card::before{inset:8px;border-radius:18px;}
-  #activities.activity-popup-card .activity-grid{grid-template-columns:1fr 1fr;gap:10px;}
-  #activities.activity-popup-card .activity-btn{padding:14px 8px;font-size:13px;}
-  .activity-popup-close{top:16px !important;right:16px !important;width:40px !important;height:40px !important;line-height:40px !important;min-width:40px !important;}
-}
+<style id="activity-inline-layout-fix">
+/* Activities and activity games are normal app pages, never popups. */
+body.activity-popup-open{overflow:auto!important;}
+#activities.activity-popup-card,#activityPlay.activity-popup-card{position:relative!important;inset:auto!important;z-index:auto!important;width:100%!important;max-width:none!important;height:auto!important;min-height:0!important;margin:0!important;padding:clamp(16px,2.5vw,28px)!important;display:block!important;overflow:visible!important;background:transparent!important;backdrop-filter:none!important;border-radius:0!important;box-shadow:none!important;}
+#activities.activity-popup-card::before,#activityPlay.activity-popup-card::before{display:none!important;content:none!important;}
+#activities.activity-popup-card>*,#activityPlay.activity-popup-card>*{width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important;}
+.activity-popup-close{display:none!important;}
+@media(max-width:600px){#activities.activity-popup-card,#activityPlay.activity-popup-card{padding:14px!important;}#activities.activity-popup-card .activity-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}}
 </style>
 
 
@@ -2231,6 +2169,142 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
 }
 </style>
 
+<style id="earn-project-full-ui">
+
+/* Aducate — considered, human-crafted UI system */
+:root {
+  --ui-paper: #f7f6f2;
+  --ui-surface: #ffffff;
+  --ui-surface-soft: #f1f2ed;
+  --ui-ink: #202b27;
+  --ui-muted: #6b756f;
+  --ui-line: #dfe4dc;
+  --ui-green: #245c49;
+  --ui-green-hover: #194735;
+  --ui-green-soft: #e8f0eb;
+  --ui-amber: #b66b3e;
+  --ui-amber-soft: #f8eee6;
+  --ui-radius: 14px;
+  --ui-radius-sm: 9px;
+  --ui-shadow: 0 8px 24px rgba(34, 49, 40, .055);
+  color-scheme: light;
+}
+html { scroll-behavior: smooth; }
+body {
+  color: var(--ui-ink);
+  background: var(--ui-paper);
+  font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+button, input, select, textarea { font: inherit; }
+button, .btn, a[role="button"], input[type="submit"], input[type="button"] {
+  transition: background-color .16s ease, border-color .16s ease, color .16s ease,
+              box-shadow .16s ease, transform .16s ease;
+}
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid rgba(36, 92, 73, .22);
+  outline-offset: 2px;
+}
+img { max-width: 100%; }
+.card, .panel, .info-card, .wallet-card, .earn-card, .activity-btn, .ad-card,
+.ap2-card, .login-box, .login-panel, .login-card, .auth-card, .main-card,
+.content-card, .settings-card, .question-card, .quiz-card, .subscription-card,
+.stat-card, .dashboard-card, .profile-card {
+  border-color: var(--ui-line);
+  box-shadow: var(--ui-shadow);
+}
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+select, textarea {
+  min-height: 44px;
+  border: 1px solid #d5ddd5;
+  border-radius: var(--ui-radius-sm);
+  background: #fff;
+  color: var(--ui-ink);
+  padding: 10px 12px;
+  max-width: 100%;
+}
+textarea { min-height: 110px; resize: vertical; }
+button, .btn, input[type="submit"], input[type="button"] {
+  min-height: 42px;
+  border-radius: 10px;
+  font-weight: 650;
+  letter-spacing: .005em;
+}
+button:hover, .btn:hover, input[type="submit"]:hover, input[type="button"]:hover {
+  transform: translateY(-1px);
+}
+button:active, .btn:active { transform: translateY(0); }
+table { border-collapse: separate; border-spacing: 0; }
+th { font-weight: 650; }
+::selection { background: #d8e7dc; color: #203d30; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+
+
+body { background: #f7f6f2 !important; color: #202b27 !important; padding: 0 !important; }
+.dashboard-topbar { background: #fff !important; border: 1px solid #e0e4dc !important; border-radius: 14px !important; box-shadow: 0 3px 12px rgba(32,43,39,.035) !important; }
+.ad-topbar, .ad-topbar-brand, .kbc-brand { color: #202b27 !important; }
+.ad-main { width: min(1160px, calc(100% - 36px)) !important; margin: 24px auto 48px !important; }
+.ad-welcome { border-radius: 18px !important; background: #e9eee8 !important; border: 1px solid #dce5dc !important; color: #20352b !important; box-shadow: none !important; }
+.ad-welcome h1, .ad-welcome h2 { letter-spacing: -.03em; }
+.ad-card, .ad-action, .ad-course, .wallet-box, .card { border: 1px solid #e0e4dc !important; border-radius: 14px !important; background: #fff !important; box-shadow: 0 5px 18px rgba(32,43,39,.045) !important; }
+.ad-card { padding: 20px !important; }
+.ad-card:hover, .ad-action:hover, .ad-course:hover { border-color: #bdcfc1 !important; }
+.ad-grid, .activity-grid, .ad-course-grid { gap: 14px !important; }
+.ad-action { text-align: left; min-height: 118px; padding: 18px !important; }
+.ad-action-title { color: #202b27 !important; font-weight: 700; }
+.ad-action-sub { color: #6b756f !important; }
+.ad-stats { gap: 12px !important; }
+.wallet-box { background: #245c49 !important; color: #fff !important; border: 0 !important; }
+.wallet-box .wallet-val, .wallet-box h2, .wallet-box h3 { color: #fff !important; }
+.btn, button, .activity-btn, .book-btn { border-radius: 10px !important; }
+.btn-quiz, .btn-learning, .btn-primary, .book-primary { background: #245c49 !important; color: #fff !important; border-color: #245c49 !important; }
+.btn-quiz:hover, .btn-learning:hover, .btn-primary:hover, .book-primary:hover { background: #194735 !important; }
+.btn-spin, .btn-bonus { background: #f8eee6 !important; color: #8c4d2a !important; border: 1px solid #ead5c4 !important; }
+.btn-profile, .btn-reward, .btn-withdraw, .telegram-btn, .book-secondary { background: #fff !important; color: #245c49 !important; border: 1px solid #cbd8ce !important; }
+.icon-btn { width: 42px !important; height: 42px !important; background: #f1f2ed !important; border: 1px solid #dfe4dc !important; color: #245c49 !important; }
+.kbc-quiz-screen { background: #f7f6f2 !important; }
+.kbc-shell { border: 1px solid #dfe4dc !important; border-radius: 18px !important; box-shadow: var(--ui-shadow) !important; }
+.kbc-topbar { background: #fff !important; border-bottom: 1px solid #e0e4dc !important; }
+.kbc-lifeline { border-radius: 10px !important; }
+.option-btn { border: 1px solid #dfe4dc !important; border-radius: 11px !important; background: #fff !important; color: #202b27 !important; }
+.option-btn:hover { border-color: #8cab98 !important; background: #f4f8f4 !important; }
+.book-modal .book-box, .withdraw-box { border-radius: 18px !important; border: 1px solid #dfe4dc !important; }
+img { height: auto; }
+@media (max-width: 720px) {
+ .ad-main { width: calc(100% - 22px) !important; margin: 14px auto 28px !important; }
+ .ad-card { padding: 15px !important; }
+ .ad-grid, .activity-grid, .ad-course-grid { grid-template-columns: 1fr !important; }
+ .dashboard-topbar { border-radius: 11px !important; }
+}
+
+/* Shared reference-inspired colorful system */
+:root {
+ --brand-navy:#0b2940; --brand-green:#079568; --brand-blue:#2878e7;
+ --brand-purple:#7b4de0; --brand-orange:#f28a2e; --brand-cyan:#16a8b8;
+}
+.ad-topbar, .dashboard-topbar, .profile-brand, .admin-main-menu { position:relative; }
+a { color:var(--brand-green); }
+a:hover { color:#066b4b; }
+button:disabled, .btn:disabled { opacity:.55; cursor:not-allowed; transform:none !important; }
+img { object-fit:contain; }
+@media(max-width:520px) {
+ input:not([type=checkbox]):not([type=radio]), select, textarea { font-size:16px; }
+}
+</style>
+<style id="earn-reference-global-theme">
+:root{--ref-navy:#0b2940;--ref-green:#079568;--ref-blue:#2878e7;--ref-purple:#7b4de0;--ref-orange:#f28a2e;--ref-cyan:#16a8b8;--ref-paper:#f4f8fc;--ref-line:#e1eaf2;--ref-ink:#142b45}
+html{scroll-behavior:smooth}body{background:var(--ref-paper)!important;color:var(--ref-ink)}
+header, .topbar, .navbar, .nav-bar, .sidebar, aside, .side-nav, .sidebar-nav, .admin-sidebar, .menu-sidebar{border-color:var(--ref-line)}
+.card,.panel,.info-card,.wallet-card,.earn-card,.activity-btn,.ad-card,.ap2-card,.login-box,.login-panel,.login-card,.auth-card,.main-card,.content-card,.settings-card,.question-card,.quiz-card,.subscription-card,.stat-card,.dashboard-card,.profile-card,.feature-card,.activity-card,.transaction-card{border:1px solid var(--ref-line)!important;border-radius:15px!important;box-shadow:0 8px 24px rgba(11,41,64,.075)!important}
+button,.btn,input[type=submit],input[type=button]{border-radius:10px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #07956845;outline-offset:2px}
+input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{border-radius:10px;max-width:100%}
+/* Keep existing application structure and make its surfaces consistent with the reference. */
+
+@media(max-width:520px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px!important}}
+</style>
 </head>
 
 <body>
@@ -2255,7 +2329,7 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
 
     <div id="dashboard" class="card" aria-hidden="true">
         <div class="dashboard-topbar">
-            <div class="ad-topbar-brand"><img src="/icon-192.png" alt="Aducate Logo"><span>Aducate</span></div>
+            <div class="ad-topbar-brand"><img src="/icon-192.png" alt="Aducate Logo"><span>Aducate English</span></div>
             <div class="topbar-right">
                 <button id="themeBtn" class="icon-btn" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle theme">🌙</button>
                 <button class="icon-btn" onclick="location.href='profile.html'" aria-label="Profile" title="Profile">👤</button>
@@ -2413,7 +2487,7 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
 </div>
 
     <div id="activities" class="card hidden" aria-hidden="true" style="visibility:hidden;">
-<button class="activity-popup-close" type="button" aria-label="Close activities" title="Close" onclick="closeActivityPopup()">×</button>
+
 <div id="activityWalletBar" class="activity-wallet-bar">
     <span>💰 Wallet Balance</span>
     <strong id="activityWalletBalance">₹0.00</strong>
@@ -2435,7 +2509,7 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
 </div>
 
 <div id="activityPlay" class="card hidden activity-screen" aria-hidden="true" style="visibility:hidden;">
-<button class="activity-popup-close" type="button" aria-label="Close activity" title="Close" onclick="closeActivityPopup()">×</button>
+
 <div id="activityWalletBar" class="activity-wallet-bar">
     <span>💰 Wallet Balance</span>
     <strong id="activityWalletBalance">₹0.00</strong>
@@ -2452,7 +2526,7 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
     <div class="kbc-shell">
         <div>
             <div class="kbc-topbar">
-                <div class="kbc-brand"><span class="kbc-orb"><img src="/icon-192.png" alt="Aducate Logo"></span><span>Aducate Quiz Master</span></div>
+                <div class="kbc-brand"><span class="kbc-orb"><img src="/icon-192.png" alt="Aducate Logo"></span><span>Aducate English Quiz</span></div>
                 <div class="kbc-balance">Wallet ₹<span id="quizWallet">0.00</span></div>
             </div>
 
@@ -3254,19 +3328,13 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
         let navigatingBack = false;
 
         function setScreenVisibility(id) {
-            const activityPopup = id === 'activities' || id === 'activityPlay';
-            document.body.classList.toggle('activity-popup-open', activityPopup);
-
+            document.body.classList.remove('activity-popup-open');
             ['dashboard', 'quiz', 'activities', 'activityPlay'].forEach(screenId => {
                 const el = document.getElementById(screenId);
                 if (!el) return;
-
-                // Keep the dashboard visible behind the Activities popup.
-                const active = screenId === id || (activityPopup && screenId === 'dashboard');
-                const popup = screenId === 'activities' || screenId === 'activityPlay';
-
+                const active = screenId === id;
                 el.classList.toggle('hidden', !active);
-                el.classList.toggle('activity-popup-card', popup && active);
+                el.classList.remove('activity-popup-card');
                 el.style.display = active ? '' : 'none';
                 el.style.visibility = active ? 'visible' : 'hidden';
                 el.setAttribute('aria-hidden', active ? 'false' : 'true');
@@ -3318,6 +3386,7 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
 
             currentScreen = id;
             setScreenVisibility(id);
+            document.querySelectorAll('.reference-sidebar .reference-nav[data-go]').forEach(function(nav){const go=nav.dataset.go;nav.classList.toggle('active', (go===id) || (go==='activities' && (id==='activities'||id==='activityPlay')) || (go==='dashboard' && id==='dashboard'));});
             if (id === 'quiz') enterQuizFullscreen();
             else exitQuizFullscreen();
 
@@ -4976,6 +5045,61 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBlockRu
 })();
 </script>
 <script src="/global-watermark.js" defer></script>
+<script id="reference-theme-layout">
+(function(){
+  function mountReferenceLayout(){
+    const dashboard=document.getElementById('dashboard');
+    if(!dashboard || dashboard.dataset.referenceLayout==='1') return;
+    dashboard.dataset.referenceLayout='1';
+    const main=document.createElement('div'); main.className='reference-main';
+    while(dashboard.firstChild) main.appendChild(dashboard.firstChild);
+    const sidebar=document.createElement('aside'); sidebar.className='reference-sidebar';
+    sidebar.innerHTML='<div class="reference-brand"><img src="/icon-192.png" alt=""><span>Aducate English</span></div><div class="reference-nav-label">LEARNING</div><button class="reference-nav active" data-go="dashboard">▦ <span>Dashboard</span></button><button class="reference-nav" data-go="quiz">▣ <span>Quiz</span></button><button class="reference-nav" data-go="activities">🎮 <span>Activities</span></button><button class="reference-nav" data-go="wallet">▤ <span>Wallet</span></button><button class="reference-nav" data-go="profile">♙ <span>Profile</span></button><button class="reference-nav" data-go="coach">✧ <span>AI Coach</span></button><div class="reference-sidebar-spacer"></div><button class="reference-nav" data-go="logout">↪ <span>Logout</span></button>';
+    sidebar.addEventListener('click',function(e){const b=e.target.closest('button[data-go]');if(!b)return;const go=b.dataset.go;sidebar.querySelectorAll('.reference-nav').forEach(x=>x.classList.toggle('active',x===b));if(go==='dashboard'){showScreen('dashboard');window.scrollTo({top:0,behavior:'smooth'});}else if(go==='quiz'){showScreen('quiz');}else if(go==='activities'){showScreen('activities');}else if(go==='wallet'){showScreen('dashboard');setTimeout(()=>{const panel=document.getElementById('walletTransferPanel');if(panel&&panel.style.display==='none'&&typeof toggleWalletTransferPanel==='function')toggleWalletTransferPanel();const target=panel||document.getElementById('walletTransferToggleBtn')||dashboard.querySelector('.wallet-box');if(target)target.scrollIntoView({behavior:'smooth',block:'start'});},80);}else if(go==='profile')location.href='profile.html';else if(go==='coach')location.href='ai-coach.html';else if(go==='logout'){try{localStorage.removeItem('token');localStorage.removeItem('authToken');}catch(_){} location.href='login.html';}});
+    dashboard.append(sidebar,main); dashboard.classList.add('reference-dashboard');
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mountReferenceLayout,{once:true});else mountReferenceLayout();
+})();
+</script>
+
+<style id="reference-image-theme">
+:root{--ref-navy:#09283d;--ref-navy2:#123b53;--ref-green:#07966b;--ref-blue:#287be7;--ref-purple:#8050e6;--ref-orange:#f58b31;--ref-cyan:#18a9b9;--ref-bg:#f3f7fb;--ref-ink:#102b45;--ref-muted:#657b91;--ref-line:#e0eaf2;--ref-shadow:0 8px 24px rgba(13,42,66,.08)}
+body{background:var(--ref-bg)!important;color:var(--ref-ink)!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important}
+#dashboard.reference-dashboard{display:grid!important;grid-template-columns:180px minmax(0,1fr)!important;align-items:stretch!important;gap:0!important;width:min(1500px,calc(100% - 32px))!important;max-width:1500px!important;min-height:calc(100vh - 32px)!important;margin:16px auto!important;padding:0!important;overflow:hidden!important;border:1px solid #e1eaf2!important;border-radius:18px!important;background:#fff!important;box-shadow:var(--ref-shadow)!important}
+.reference-sidebar{display:flex;flex-direction:column;gap:7px;padding:18px 12px;background:linear-gradient(180deg,var(--ref-navy),#061d2e);color:#fff;min-width:0}
+.reference-brand{display:flex;align-items:center;gap:8px;padding:0 7px 22px;font-size:22px;font-weight:850;color:#fff}.reference-brand img{width:28px;height:28px;object-fit:contain;border-radius:50%}.reference-nav-label{padding:0 9px 7px;color:#9eb8cb;font-size:10px;font-weight:800;letter-spacing:.12em}.reference-nav{display:flex;align-items:center;gap:10px;width:100%;min-height:40px;padding:10px 11px;border:0!important;border-radius:9px!important;background:transparent!important;color:#e4eff7!important;text-align:left;font-size:12px;font-weight:650!important;box-shadow:none!important;transform:none!important}.reference-nav span{white-space:nowrap}.reference-nav:hover,.reference-nav.active{background:linear-gradient(100deg,#13a77a,#078b65)!important;color:white!important}.reference-sidebar-spacer{flex:1;min-height:22px}
+.reference-main{min-width:0;padding:20px 22px 24px;background:radial-gradient(ellipse at 90% 0%,#e7f7fb 0,transparent 32%),#f8fbfe}
+.reference-main .dashboard-topbar{margin-bottom:18px}.reference-main .ad-topbar-brand{display:flex;align-items:center;gap:9px;font-size:21px;font-weight:850;color:var(--ref-navy)}.reference-main .ad-topbar-brand img{width:30px;height:30px}.reference-main .topbar-right{gap:8px}.reference-main .icon-btn{width:40px;height:40px;border-radius:12px;background:#fff;border:1px solid var(--ref-line);box-shadow:0 3px 10px #09283d0b;font-size:19px}
+.reference-main #dashboard h2{text-align:left!important;font-size:clamp(23px,2vw,30px)!important;line-height:1.2!important;color:var(--ref-ink)!important;background:none!important;-webkit-text-fill-color:currentColor!important;margin:6px 0 4px!important}.reference-main .ad-welcome{margin:0 0 18px;color:var(--ref-muted);font-size:13px}
+.reference-main .wallet-box{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 22px!important;margin:0 0 16px!important;border-radius:13px!important;background:linear-gradient(110deg,#099a70,#057c61)!important;color:white!important;box-shadow:0 7px 18px #07956824}.reference-main .wallet-box small,.reference-main .wallet-box .wallet-val{color:white!important}.reference-main .wallet-val{font-size:30px!important;font-weight:850!important}
+.reference-main .ad-section-title{border:0!important;background:transparent!important;padding:6px 2px 10px!important;margin:10px 0 4px!important}.reference-main .ad-section-title h3{font-size:16px!important;font-weight:800!important;color:var(--ref-ink)!important}.reference-main .ad-card,.reference-main .ad-stat,.reference-main .ad-action,.reference-main .ad-course,.reference-main .ad-addon-card{border:1px solid var(--ref-line)!important;border-radius:13px!important;box-shadow:0 4px 15px rgba(13,42,66,.045)!important;background:#fff!important}.reference-main .ad-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.reference-main .ad-stat{padding:15px!important}.reference-main .ad-stat:nth-child(4n+1){background:linear-gradient(135deg,#e7f2ff,#fff)!important}.reference-main .ad-stat:nth-child(4n+2){background:linear-gradient(135deg,#e5fff3,#fff)!important}.reference-main .ad-stat:nth-child(4n+3){background:linear-gradient(135deg,#f1eaff,#fff)!important}.reference-main .ad-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.reference-main .ad-action{min-height:95px!important;color:var(--ref-ink)!important;font-weight:750!important}.reference-main .ad-action:nth-child(4n+1) .ico{color:var(--ref-green)}.reference-main .ad-action:nth-child(4n+2) .ico{color:var(--ref-blue)}.reference-main .ad-action:nth-child(4n+3) .ico{color:var(--ref-purple)}.reference-main .ad-action:nth-child(4n+4) .ico{color:var(--ref-orange)}.reference-main .ad-addon-grid,.reference-main .ad-course-grid{gap:12px!important}.reference-main .ad-addon-card{color:var(--ref-ink)!important}.reference-main .ad-progress{background:#e6edf5!important;border-radius:99px}.reference-main .ad-progress i{background:linear-gradient(90deg,var(--ref-green),#35c79a)!important}
+#quiz.card,#activities.card,#activityPlay.card{width:min(1120px,calc(100% - 32px))!important;max-width:1120px!important;margin:16px auto!important;border:1px solid var(--ref-line)!important;border-radius:18px!important;background:#fff!important;box-shadow:var(--ref-shadow)!important;padding:24px!important}
+button,.btn{transition:transform .16s,box-shadow .16s!important}button:hover,.btn:hover{box-shadow:0 6px 15px rgba(13,42,66,.12)!important}input:not([type=checkbox]):not([type=radio]),select,textarea{border-radius:10px!important;border-color:#d7e3ed!important}
+@media(max-width:800px){#dashboard.reference-dashboard{grid-template-columns:1fr!important;width:calc(100% - 16px)!important;min-height:0!important;margin:8px auto!important}.reference-sidebar{flex-direction:row;align-items:center;overflow-x:auto;padding:10px;gap:5px}.reference-brand{padding:0 8px;flex:0 0 auto;font-size:18px}.reference-nav-label,.reference-sidebar-spacer{display:none}.reference-nav{width:auto;flex:0 0 auto;min-width:40px;justify-content:center;padding:9px}.reference-nav span{display:none}.reference-main{padding:14px}.reference-main .ad-actions{grid-template-columns:repeat(2,minmax(0,1fr))}.reference-main .ad-stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:480px){.reference-main .ad-stats{grid-template-columns:1fr 1fr}.reference-main .wallet-val{font-size:25px!important}.reference-main .ad-course-grid{grid-template-columns:1fr!important}#quiz.card,#activities.card,#activityPlay.card{padding:14px!important;width:calc(100% - 16px)!important;margin:8px auto!important}}
+</style>
+
+<style id="activity-screen-visibility-fix">
+/* Keep only the selected app screen visible. The dashboard grid uses display!important,
+   so its hidden state must also be enforced with !important. */
+#dashboard.reference-dashboard[aria-hidden="true"],
+#dashboard[aria-hidden="true"],
+#quiz[aria-hidden="true"],
+#activities[aria-hidden="true"],
+#activityPlay[aria-hidden="true"] {
+  display: none !important;
+}
+#dashboard.reference-dashboard[aria-hidden="false"] { display: grid !important; }
+</style>
+
+<style id="earn-responsive-screen-polish">
+#dashboard,#quiz,#activities,#activityPlay{box-sizing:border-box;width:100%;max-width:100%;}
+#dashboard img,#quiz img,#activities img,#activityPlay img{max-width:100%;height:auto;}
+@media(max-width:720px){#dashboard,#quiz,#activities,#activityPlay{padding-left:12px!important;padding-right:12px!important;}#dashboard .activity-grid,#activities .activity-grid,#activityPlay .activity-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}}
+@media(max-width:420px){#dashboard .activity-grid,#activities .activity-grid,#activityPlay .activity-grid{grid-template-columns:1fr;}}
+</style>
+
+
 </body>
 
 </html>
@@ -5042,3 +5166,124 @@ button{font-weight:700!important}
  .ad-addon-card,.ad-course{padding:14px!important}
 }
 </style>
+
+<style id="earn-unified-color-theme-v1">
+:root{--app-primary:#3157d5;--app-primary-dark:#2443ad;--app-primary-soft:#edf2ff;--app-accent:#0f9f8f;--app-bg:#f4f7fc;--app-surface:#fff;--app-ink:#17243b;--app-muted:#63718a;--app-border:#e0e7f1;--app-shadow:0 10px 28px rgba(31,52,95,.08)}
+html{background:var(--app-bg)}
+body{background:var(--app-bg)!important;color:var(--app-ink)!important}
+/* One consistent brand palette across screens */
+.card,.panel,.profile-card,.section-card,.container-card,.login-panel,.coach-container,.chat-container,.feature{background:var(--app-surface)!important;border-color:var(--app-border)!important;box-shadow:var(--app-shadow)!important}
+button,.btn-primary,.primary,.btn-green,.telegram-btn,.ad-book-buy{background:linear-gradient(135deg,var(--app-primary),var(--app-primary-dark))!important;color:#fff!important;border-color:transparent!important}
+a{accent-color:var(--app-primary)}
+input,select,textarea{border-color:#d5deed!important;color:var(--app-ink)!important}
+input:focus,select:focus,textarea:focus{outline:2px solid #b9c9ff!important;outline-offset:1px!important}
+/* Dashboard */
+body:has(#dashboard) {background:var(--app-bg)!important}
+#dashboard h2{background:linear-gradient(90deg,#2443ad,#3157d5)!important;background-clip:text!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;animation:none!important}
+.wallet-box{background:linear-gradient(125deg,#2443ad 0%,#3157d5 65%,#4778ed 100%)!important;box-shadow:0 12px 26px rgba(49,87,213,.22)!important}
+.ad-section-title,.ad-section-title:nth-of-type(n){background:var(--app-primary-soft)!important;border-left-color:var(--app-primary)!important}
+.ad-section-title h3{color:#2443ad!important}
+.ad-action,.ad-action:nth-child(n),.ad-course,.ad-course:nth-child(n),.ad-stat,.ad-stat:nth-child(n){background:#fff!important;border-color:var(--app-border)!important}
+.ad-action:before,.ad-action:nth-child(n):before{background:var(--app-primary)!important}
+.ad-action span,.ad-action strong,.ad-action div,.ad-course h4,.ad-course strong,.ad-course b,.ad-stat b{color:var(--app-ink)!important}
+.ad-stat{border-top:3px solid #cbd7ff!important}
+.ad-addon-card:after{background:radial-gradient(circle,#dce5ff,transparent 68%)!important}
+.ad-book-card{background:#f8faff!important;border-color:#d5def5!important}
+#dashboard a{color:var(--app-primary)!important}
+/* Landing page */
+.topbar{background:#fff!important;border-color:var(--app-border)!important}
+.brand,.hero h1,.section-head h2{color:var(--app-ink)!important}
+.hero h1 span{color:var(--app-primary)!important}
+.hero-art{background:linear-gradient(145deg,#e9efff,#e9f8f6)!important}
+.feature-icon.green,.feature-icon.blue,.feature-icon.purple,.feature-icon.orange{background:var(--app-primary-soft)!important;color:var(--app-primary)!important}
+.cta{background:linear-gradient(120deg,#2443ad,#3157d5)!important;color:#fff!important}
+/* Profile and coach: same blue brand, neutral surfaces */
+.profile-card,.profile-panel,.profile-section{background:#fff!important;border-color:var(--app-border)!important}
+.reference-image-theme-coach{color:var(--app-ink)!important}
+body:has(.coach-container),body:has(.chat-container){background:var(--app-bg)!important}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+
+
+<style id="aducate-english-professional-theme-v2">
+:root{--app-primary:#1769E8;--app-primary-dark:#0E4DB8;--app-primary-soft:#EAF2FF;--app-navy:#092A5E;--app-navy-deep:#061C3F;--app-bg:#F3F7FC;--app-surface:#FFFFFF;--app-ink:#12264A;--app-muted:#6B7D98;--app-border:#DFE8F5;--app-shadow:0 10px 28px rgba(9,42,94,.085);--app-green:#10A77A;--app-purple:#8053E8;--app-orange:#F59A32;--app-cyan:#20AFC2}
+html{background:var(--app-bg)!important;color-scheme:light}
+body{background:var(--app-bg)!important;color:var(--app-ink)!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important}
+body:has(#dashboard),body:has(.login-box),body:has(.login-shell),body:has(.profile-brand),body:has(.coach-container),body:has(.chat-container){background:var(--app-bg)!important}
+.card,.panel,.profile-card,.section-card,.container-card,.login-panel,.coach-container,.chat-container,.feature,.ad-card,.ad-stat,.ad-action,.ad-course,.activity-card,.transaction-card,.question-card,.quiz-card,.settings-card,.stat-card,.dashboard-card,.subscription-card{border-color:var(--app-border)!important;box-shadow:var(--app-shadow)!important}
+input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{border-color:#D6E2F3!important;color:var(--app-ink)!important;background:#fff!important;border-radius:10px!important}
+input:focus,select:focus,textarea:focus{outline:2px solid #9CC2FF!important;outline-offset:1px!important}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #1769E855!important;outline-offset:2px!important}
+.btn-green,.btn-primary,.primary,.cta,.telegram-btn,.ad-book-buy,.login-btn,.course-hero-actions button:first-child,.reference-main .wallet-transfer-btn{background:linear-gradient(135deg,#1769E8,#0E4DB8)!important;color:#fff!important;border-color:transparent!important;box-shadow:0 7px 18px rgba(23,105,232,.18)!important}
+.btn-light,.course-secondary{background:#EDF4FF!important;color:#123D80!important;border:1px solid #D7E5FC!important}
+.topbar{background:rgba(255,255,255,.97)!important;border-color:var(--app-border)!important;box-shadow:0 3px 16px rgba(9,42,94,.035)!important}
+.brand{color:var(--app-navy)!important;gap:10px!important;font-size:clamp(18px,2vw,25px)!important}
+.brand-logo-img{width:40px!important;height:40px!important;display:block!important;object-fit:cover!important;border-radius:50%!important;background:#fff!important;box-shadow:0 3px 10px rgba(9,42,94,.1)!important}
+.hero{background:radial-gradient(ellipse at 85% 15%,#DCEBFF 0,transparent 35%),linear-gradient(135deg,#FFFFFF,#EFF5FF)!important}
+.hero h1,.section-head h2{color:var(--app-navy)!important}.hero h1 span{color:var(--app-primary)!important}
+.hero-art{background:linear-gradient(145deg,#D8E8FF,#EDF5FF)!important;box-shadow:0 18px 42px rgba(9,42,94,.14)!important}
+.eyebrow{background:#EAF2FF!important;color:#1758BA!important}.cta{background:linear-gradient(115deg,#092A5E,#1769E8)!important;color:#fff!important}.cta p{color:#E5EEFF!important}
+.feature-icon.green,.feature-icon.blue,.feature-icon.purple,.feature-icon.orange{background:#EAF2FF!important;color:#1769E8!important}
+/* Main learning dashboard */
+#dashboard.reference-dashboard{background:#fff!important;border-color:var(--app-border)!important;box-shadow:var(--app-shadow)!important}
+.reference-sidebar{background:linear-gradient(180deg,#092A5E 0%,#061C3F 100%)!important;color:#fff!important}
+.reference-brand{color:#fff!important;font-size:clamp(15px,1.5vw,20px)!important;letter-spacing:-.2px}
+.reference-brand img{background:#fff!important;border-radius:50%!important}
+.reference-nav{background:transparent!important;color:#DFEAFF!important}
+.reference-nav:hover,.reference-nav.active{background:linear-gradient(105deg,#247DF0,#1760D5)!important;color:#fff!important;box-shadow:0 5px 12px rgba(23,105,232,.2)!important}
+.reference-main{background:radial-gradient(ellipse at 92% 0%,#E6F0FF 0,transparent 33%),#F5F8FD!important}
+.reference-main .ad-topbar-brand{color:var(--app-navy)!important}
+.reference-main .dashboard-topbar{background:transparent!important;border-color:var(--app-border)!important}
+.reference-main .dashboard-topbar .icon-btn{background:#fff!important;color:var(--app-navy)!important;border:1px solid var(--app-border)!important}
+.reference-main #dashboard h2,#dashboard h2{color:var(--app-navy)!important;background:none!important;-webkit-text-fill-color:currentColor!important}
+.reference-main .ad-welcome{color:var(--app-muted)!important}
+.reference-main .wallet-box,#dashboard .wallet-box,.wallet-box{background:linear-gradient(110deg,#1769E8 0%,#0E4DB8 65%,#2D86F5 100%)!important;color:#fff!important;box-shadow:0 12px 26px rgba(23,105,232,.20)!important}
+.wallet-box,.wallet-box *{color:#fff!important}
+.ad-section-title,.ad-section-title:nth-of-type(n){background:#EAF2FF!important;border-left-color:#1769E8!important}
+.ad-section-title h3{color:#092A5E!important}
+.ad-action,.ad-action:nth-child(n),.ad-course,.ad-course:nth-child(n),.ad-stat,.ad-stat:nth-child(n){background:#fff!important;border:1px solid var(--app-border)!important;box-shadow:0 5px 14px rgba(9,42,94,.045)!important;color:var(--app-ink)!important}
+.ad-action:before,.ad-action:nth-child(n):before{background:#1769E8!important}
+.ad-action:nth-child(2):before{background:#10A77A!important}.ad-action:nth-child(3):before{background:#8053E8!important}.ad-action:nth-child(4):before{background:#F59A32!important}
+.ad-action span,.ad-action strong,.ad-action div,.ad-course h4,.ad-course strong,.ad-course b,.ad-stat b{color:var(--app-ink)!important}
+.ad-stat{border-top:3px solid #1769E8!important}.ad-stat:nth-child(2){border-top-color:#10A77A!important}.ad-stat:nth-child(3){border-top-color:#8053E8!important}.ad-stat:nth-child(4){border-top-color:#F59A32!important}
+.ad-addon-card:after{background:radial-gradient(circle,#DCEBFF,transparent 68%)!important}
+.ad-book-card{background:#F8FAFF!important;border-color:#D6E4FA!important}.ad-book-price{color:#0E4DB8!important}
+#dashboard a{color:#1769E8!important}
+/* Forms, quizzes, wallet, profile, coach and administration */
+.course-hero{background:linear-gradient(135deg,#092A5E,#1769E8)!important;color:#fff!important}
+.course-hero h1,.course-hero p,.course-brand,.course-badge{color:#fff!important}
+.course-brand img,.brand-pill img,.login-logo img,.logo img{background:#fff!important}
+.brand-pill{background:#EAF2FF!important;border-color:#C8DAFA!important;color:#092A5E!important}
+.course-hero-actions button,.login-shell button[type=submit],.login-shell button:not(.course-secondary){background:linear-gradient(135deg,#1769E8,#0E4DB8)!important;color:#fff!important}
+.login-logo{background:#fff!important;border-color:#D8E5F6!important;box-shadow:0 10px 25px rgba(9,42,94,.14)!important}
+.login-shell h1,.login-shell h2,.login-box h2{color:#092A5E!important}
+.login-box,.login-shell>.container{border-color:var(--app-border)!important;box-shadow:var(--app-shadow)!important}
+.admin-brand-name{margin:-2px 0 16px;text-align:center;font-size:17px;font-weight:850;letter-spacing:.2px;color:#092A5E}
+.admin-brand-name-inline{display:block;color:#092A5E;font-size:15px;line-height:1.4}
+.profile-brand{gap:12px!important}.profile-brand img{background:#fff!important;border:1px solid var(--app-border)!important;box-shadow:0 4px 12px rgba(9,42,94,.08)!important}
+.profile-brand-copy>strong{display:block;color:#092A5E;font-size:14px;margin-bottom:3px}.profile-brand-copy h2{margin-top:0!important}
+.coach-hero,.coach-container,.chat-container{border-color:var(--app-border)!important}
+.coach-hero{background:linear-gradient(115deg,#EAF2FF,#fff)!important}
+.coach-hero h1,.coach-container h1,.coach-container h2{color:#092A5E!important}
+.reference-image-theme-coach{color:var(--app-ink)!important}
+@media(max-width:720px){.reference-main{padding:14px!important}.reference-brand{font-size:15px!important}.reference-nav{padding:9px 8px!important}.brand-logo-img{width:36px!important;height:36px!important}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Finish button and interactive-card colors without changing behavior. */
+.btn:not(.btn-light):not(.book-secondary),a.btn:not(.btn-light),.btn-quiz,.btn-learning,.btn-primary,.btn-profile,.btn-reward,.btn-withdraw,.book-btn,.book-primary,.subscription-submit,.subscription-pay-btn,.ad-addon-submit,.activity-action,.login-btn,.admin-users-btn.active,.ap2-btn:not(.ap2-green):not(.ap2-red):not(.ap2-danger){background:linear-gradient(135deg,#1769E8,#0E4DB8)!important;color:#fff!important;border-color:transparent!important;box-shadow:0 6px 15px rgba(23,105,232,.14)!important}
+.btn-spin,.btn-bonus,.btn-light,.book-secondary,.course-secondary{background:#EAF2FF!important;color:#123D80!important;border:1px solid #D3E3FC!important;box-shadow:none!important}
+.icon-btn{background:#fff!important;color:#092A5E!important;border:1px solid #DFE8F5!important;box-shadow:0 3px 10px rgba(9,42,94,.06)!important}
+.activity-btn{background:#fff!important;color:#12264A!important;border:1px solid #DFE8F5!important;border-top:3px solid #1769E8!important;box-shadow:0 6px 18px rgba(9,42,94,.07)!important}
+.activity-btn.a2{border-top-color:#20AFC2!important}.activity-btn.a3{border-top-color:#F59A32!important}.activity-btn.a4{border-top-color:#10A77A!important}.activity-btn.a5{border-top-color:#8053E8!important}.activity-btn.a6{border-top-color:#F59A32!important}.activity-btn.a7{border-top-color:#10A77A!important}.activity-btn.a8{border-top-color:#20AFC2!important}
+.activity-btn small{color:#6B7D98!important;opacity:1!important}
+.activity-title{color:#092A5E!important}.activity-question{color:#12264A!important}
+.activity-option{background:#fff!important;border-color:#D6E2F3!important;color:#12264A!important}.activity-option:hover,.option-btn:hover{background:#EAF2FF!important;border-color:#1769E8!important;color:#092A5E!important}
+.word-chip{background:#EAF2FF!important;color:#123D80!important}.answer-box{background:#F6F9FF!important;border-color:#9DBDF4!important;color:#12264A!important}
+.kbc-quiz-screen{background:#F3F7FC!important;color:#12264A!important}.kbc-shell{background:#fff!important;border-color:#DFE8F5!important;box-shadow:0 12px 35px rgba(9,42,94,.10)!important}.kbc-topbar{background:#092A5E!important;color:#fff!important;border-bottom-color:#17477F!important}.kbc-topbar *{color:inherit!important}.kbc-question-wrap{color:#12264A!important}.kbc-question-title{color:#092A5E!important}.kbc-question-no{background:#EAF2FF!important;color:#1758BA!important}.kbc-lifeline{background:#F7FAFF!important;border-color:#D6E2F3!important;color:#123D80!important}.kbc-lifeline span{color:#5977A5!important}.kbc-lifeline:hover{border-color:#1769E8!important;box-shadow:0 0 16px rgba(23,105,232,.16)!important}.option-btn{background:#fff!important;border-color:#D6E2F3!important;color:#12264A!important}.kbc-balance{color:#0E4DB8!important}
+.admin-users-btn{border-radius:10px!important}.admin-users-btn.active{background:linear-gradient(135deg,#1769E8,#0E4DB8)!important;color:#fff!important}
+.profile-panel button,.profile-section button,.profile-card button{background:linear-gradient(135deg,#1769E8,#0E4DB8)!important;color:#fff!important}
+.coach-container button,.chat-container button,.coach-hero button{background:linear-gradient(135deg,#1769E8,#0E4DB8)!important;color:#fff!important;border-color:transparent!important}
+.course-brand span{letter-spacing:.6px!important}.admin-brand-name-inline{letter-spacing:.1px!important}
+
+</style>
+

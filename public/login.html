@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Aducate - Login</title>
+<title>Aducate English — Login</title>
 
 <style>
 
@@ -609,12 +609,195 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
 }
 </style>
 
+<style id="earn-project-full-ui">
+
+/* Aducate — considered, human-crafted UI system */
+:root {
+  --ui-paper: #f7f6f2;
+  --ui-surface: #ffffff;
+  --ui-surface-soft: #f1f2ed;
+  --ui-ink: #202b27;
+  --ui-muted: #6b756f;
+  --ui-line: #dfe4dc;
+  --ui-green: #245c49;
+  --ui-green-hover: #194735;
+  --ui-green-soft: #e8f0eb;
+  --ui-amber: #b66b3e;
+  --ui-amber-soft: #f8eee6;
+  --ui-radius: 14px;
+  --ui-radius-sm: 9px;
+  --ui-shadow: 0 8px 24px rgba(34, 49, 40, .055);
+  color-scheme: light;
+}
+html { scroll-behavior: smooth; }
+body {
+  color: var(--ui-ink);
+  background: var(--ui-paper);
+  font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+button, input, select, textarea { font: inherit; }
+button, .btn, a[role="button"], input[type="submit"], input[type="button"] {
+  transition: background-color .16s ease, border-color .16s ease, color .16s ease,
+              box-shadow .16s ease, transform .16s ease;
+}
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid rgba(36, 92, 73, .22);
+  outline-offset: 2px;
+}
+img { max-width: 100%; }
+.card, .panel, .info-card, .wallet-card, .earn-card, .activity-btn, .ad-card,
+.ap2-card, .login-box, .login-panel, .login-card, .auth-card, .main-card,
+.content-card, .settings-card, .question-card, .quiz-card, .subscription-card,
+.stat-card, .dashboard-card, .profile-card {
+  border-color: var(--ui-line);
+  box-shadow: var(--ui-shadow);
+}
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+select, textarea {
+  min-height: 44px;
+  border: 1px solid #d5ddd5;
+  border-radius: var(--ui-radius-sm);
+  background: #fff;
+  color: var(--ui-ink);
+  padding: 10px 12px;
+  max-width: 100%;
+}
+textarea { min-height: 110px; resize: vertical; }
+button, .btn, input[type="submit"], input[type="button"] {
+  min-height: 42px;
+  border-radius: 10px;
+  font-weight: 650;
+  letter-spacing: .005em;
+}
+button:hover, .btn:hover, input[type="submit"]:hover, input[type="button"]:hover {
+  transform: translateY(-1px);
+}
+button:active, .btn:active { transform: translateY(0); }
+table { border-collapse: separate; border-spacing: 0; }
+th { font-weight: 650; }
+::selection { background: #d8e7dc; color: #203d30; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+
+
+body { min-height: 100vh; background: #f7f6f2 !important; color: #202b27; }
+.course-overview { width: min(1120px, calc(100% - 40px)); padding: 26px 0 42px; }
+.course-hero { background: #e9eee8 !important; border: 1px solid #dce5dc; border-radius: 22px !important; box-shadow: none !important; color: #20352b !important; overflow: hidden; }
+.course-brand { gap: 12px; }
+.course-brand img, .login-logo img { object-fit: contain; }
+.course-hero-grid { gap: 28px; align-items: center; }
+.course-hero h1, .course-hero h2, .course-section h2 { letter-spacing: -.035em; line-height: 1.12; }
+.course-hero h1 { font-size: clamp(2.1rem, 4vw, 3.5rem); max-width: 700px; }
+.course-badge { border: 1px solid #cbd8cc; background: rgba(255,255,255,.65) !important; color: #245c49 !important; }
+.course-visual .visual-card { background: #fffdf8 !important; border: 1px solid #dfe4dc; border-radius: 16px !important; box-shadow: 0 12px 30px rgba(32,43,39,.07) !important; }
+.course-section { padding-top: 42px; }
+.section-heading { margin-bottom: 18px; }
+.module-grid { gap: 14px; }
+.module-card { border: 1px solid #dfe4dc !important; border-radius: 13px !important; background: #fff !important; box-shadow: none !important; }
+.module-card:hover { border-color: #a8bcae !important; transform: translateY(-2px); }
+.module-number { color: #245c49 !important; }
+.course-path-section, .course-extra { border-color: #dfe4dc !important; }
+.login-shell { gap: 22px; margin-top: 26px; align-items: stretch; }
+.login-info, .login-panel { min-width: 0; border-radius: 18px !important; }
+.login-info { background: #e9eee8 !important; border: 1px solid #dce5dc; }
+.login-panel { background: #fff !important; border: 1px solid #dfe4dc; box-shadow: 0 12px 32px rgba(32,43,39,.06) !important; }
+.login-logo { margin-bottom: 16px; }
+.login-logo img { width: 58px !important; height: 58px !important; border-radius: 14px !important; }
+.login-subtitle, .muted, .description { color: #6b756f !important; }
+.feature-list { gap: 10px; }
+.login-panel button, .login-panel .btn, .login-panel input[type="submit"] { width: 100%; }
+.book-preview, .book-offer { border: 1px solid #e0e4dc !important; border-radius: 14px !important; box-shadow: none !important; }
+.book-cover, .book-offer-cover, .book-visual-image { border-radius: 10px !important; object-fit: cover; }
+.book-offer { background: #f8f6ef !important; }
+.start-login-note, .free-demo-banner { border-radius: 12px !important; }
+button, .btn, .login-btn { min-height: 46px; }
+@media (max-width: 760px) {
+ .course-overview { width: min(100% - 24px, 620px); padding-top: 12px; }
+ .course-hero { border-radius: 16px !important; }
+ .course-hero-grid, .login-shell { grid-template-columns: 1fr !important; display: grid !important; }
+ .login-shell { gap: 14px; }
+ .course-section { padding-top: 28px; }
+ .module-grid { grid-template-columns: 1fr !important; }
+}
+
+/* Shared reference-inspired colorful system */
+:root {
+ --brand-navy:#0b2940; --brand-green:#079568; --brand-blue:#2878e7;
+ --brand-purple:#7b4de0; --brand-orange:#f28a2e; --brand-cyan:#16a8b8;
+}
+.ad-topbar, .dashboard-topbar, .profile-brand, .admin-main-menu { position:relative; }
+a { color:var(--brand-green); }
+a:hover { color:#066b4b; }
+button:disabled, .btn:disabled { opacity:.55; cursor:not-allowed; transform:none !important; }
+img { object-fit:contain; }
+@media(max-width:520px) {
+ input:not([type=checkbox]):not([type=radio]), select, textarea { font-size:16px; }
+}
+</style>
+<style id="earn-reference-global-theme">
+:root{--ref-navy:#0b2940;--ref-green:#079568;--ref-blue:#2878e7;--ref-purple:#7b4de0;--ref-orange:#f28a2e;--ref-cyan:#16a8b8;--ref-paper:#f4f8fc;--ref-line:#e1eaf2;--ref-ink:#142b45}
+html{scroll-behavior:smooth}body{background:var(--ref-paper)!important;color:var(--ref-ink)}
+header, .topbar, .navbar, .nav-bar, .sidebar, aside, .side-nav, .sidebar-nav, .admin-sidebar, .menu-sidebar{border-color:var(--ref-line)}
+.card,.panel,.info-card,.wallet-card,.earn-card,.activity-btn,.ad-card,.ap2-card,.login-box,.login-panel,.login-card,.auth-card,.main-card,.content-card,.settings-card,.question-card,.quiz-card,.subscription-card,.stat-card,.dashboard-card,.profile-card,.feature-card,.activity-card,.transaction-card{border:1px solid var(--ref-line)!important;border-radius:15px!important;box-shadow:0 8px 24px rgba(11,41,64,.075)!important}
+button,.btn,input[type=submit],input[type=button]{border-radius:10px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #07956845;outline-offset:2px}
+input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{border-radius:10px;max-width:100%}
+/* Keep existing application structure and make its surfaces consistent with the reference. */
+
+@media(max-width:520px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px!important}}
+</style>
+
+<style id="aducate-official-logo-login-side-white">
+/* Official Aducate English Classes logo and high-contrast login side panel. */
+#loginShell .login-info {
+  background: linear-gradient(145deg, #092A5E 0%, #0E4DB8 56%, #1769E8 100%) !important;
+  color: #FFFFFF !important;
+}
+#loginShell .login-info h1,
+#loginShell .login-info p,
+#loginShell .login-info small,
+#loginShell .login-info .brand-pill,
+#loginShell .login-info .brand-pill span,
+#loginShell .login-info .book-copy strong,
+#loginShell .login-info .book-copy span,
+#loginShell .login-info .feature-list div {
+  color: #FFFFFF !important;
+}
+#loginShell .login-info .brand-pill {
+  background: rgba(255,255,255,.12) !important;
+  border: 1px solid rgba(255,255,255,.28) !important;
+}
+#loginShell .login-info .brand-pill img {
+  width: 34px !important; height: 34px !important; min-width: 34px !important; min-height: 34px !important;
+  object-fit: contain !important; border-radius: 50% !important; background: #FFFFFF !important; padding: 0 !important;
+  border: 1px solid #D9A900 !important;
+}
+#loginShell .login-info .book-price-tag {
+  color: #FFFFFF !important;
+  background: rgba(255,255,255,.14) !important;
+  border: 1px solid rgba(255,255,255,.28) !important;
+}
+#loginShell .login-info .feature-list div {
+  background: rgba(255,255,255,.10) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+}
+#loginShell .login-logo {
+  background: #FFFFFF !important;
+  border: 2px solid #D8A900 !important;
+}
+#loginShell .login-logo img {
+  width: 100% !important; height: 100% !important; object-fit: contain !important;
+  border-radius: 50% !important;
+}
+</style>
 </head>
 
 <body>
 <div id="courseOverview" class="course-overview">
   <header class="course-hero">
-    <div class="course-brand"><img src="/aducate-logo.png" alt="Aducate Logo"><span>ADUCATE • ENGLISH LEARNING</span></div>
+    <div class="course-brand"><img src="/aducate-logo.png" alt="Aducate Logo"><span>ADUCATE ENGLISH</span></div>
     <div class="course-hero-grid">
       <div>
         <div class="course-badge">🎓 COMPLETE ENGLISH LEARNING PROGRAM</div>
@@ -689,7 +872,7 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
 <div class="login-shell" id="loginShell" style="display:none">
   <section class="login-info">
     <div>
-      <div class="brand-pill"><img src="/aducate-logo.png" alt="Aducate Logo"> <span>ADUCATE • ENGLISH LEARNING</span></div>
+      <div class="brand-pill"><img src="/aducate-logo.png" alt="Aducate Logo"> <span>ADUCATE ENGLISH</span></div>
       <h1>Learn English.<br>Speak with confidence.</h1>
       <p class="lead">Interactive lessons, daily practice, quizzes and a complete English book — all in one place.</p>
       <div class="book-preview">
@@ -708,7 +891,7 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
 
     <div class="login-logo"><img src="/aducate-logo.png" alt="Aducate Logo"></div>
     <h2>
-        Welcome to Aducate
+        Welcome to Aducate English
     </h2>
 
         
@@ -1224,6 +1407,47 @@ async function performLogin(mobile, password){
 })();
 </script>
 <script src="/global-watermark.js" defer></script>
+<style id="reference-image-theme-login">
+:root{--ref-navy:#09283d;--ref-green:#07966b;--ref-blue:#287be7;--ref-bg:#f3f7fb;--ref-ink:#102b45;--ref-line:#e0eaf2}
+body{background:var(--ref-bg)!important;color:var(--ref-ink)!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important}.course-hero{background:linear-gradient(135deg,#07536b,#078b80)!important;color:#fff!important;border:0!important;box-shadow:0 12px 30px rgba(9,40,61,.12)!important}.course-hero h1,.course-hero h2,.course-hero p,.course-brand,.course-hero .course-badge{color:#fff!important}.course-badge{background:#ffffff20!important;border-color:#ffffff45!important}.course-hero-actions button,.login-panel button,.login-panel .btn{background:linear-gradient(100deg,#07966b,#087a5c)!important;color:#fff!important;border-radius:10px!important}.course-visual .visual-card,.module-card,.login-panel,.login-info{border-radius:15px!important;border-color:var(--ref-line)!important;box-shadow:0 8px 24px rgba(13,42,66,.07)!important}.module-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}.module-card:nth-child(6n+1){background:linear-gradient(135deg,#e4fff2,#fff)!important}.module-card:nth-child(6n+2){background:linear-gradient(135deg,#e8f2ff,#fff)!important}.module-card:nth-child(6n+3){background:linear-gradient(135deg,#f1eaff,#fff)!important}.module-card:nth-child(6n+4){background:linear-gradient(135deg,#fff0e4,#fff)!important}.module-card:nth-child(6n+5){background:linear-gradient(135deg,#e4fbfd,#fff)!important}@media(max-width:760px){.module-grid{grid-template-columns:1fr!important}}
+</style>
+<style id="earn-unified-color-theme-v1">
+:root{--app-primary:#3157d5;--app-primary-dark:#2443ad;--app-primary-soft:#edf2ff;--app-accent:#0f9f8f;--app-bg:#f4f7fc;--app-surface:#fff;--app-ink:#17243b;--app-muted:#63718a;--app-border:#e0e7f1;--app-shadow:0 10px 28px rgba(31,52,95,.08)}
+html{background:var(--app-bg)}
+body{background:var(--app-bg)!important;color:var(--app-ink)!important}
+/* One consistent brand palette across screens */
+.card,.panel,.profile-card,.section-card,.container-card,.login-panel,.coach-container,.chat-container,.feature{background:var(--app-surface)!important;border-color:var(--app-border)!important;box-shadow:var(--app-shadow)!important}
+button,.btn-primary,.primary,.btn-green,.telegram-btn,.ad-book-buy{background:linear-gradient(135deg,var(--app-primary),var(--app-primary-dark))!important;color:#fff!important;border-color:transparent!important}
+a{accent-color:var(--app-primary)}
+input,select,textarea{border-color:#d5deed!important;color:var(--app-ink)!important}
+input:focus,select:focus,textarea:focus{outline:2px solid #b9c9ff!important;outline-offset:1px!important}
+/* Dashboard */
+body:has(#dashboard) {background:var(--app-bg)!important}
+#dashboard h2{background:linear-gradient(90deg,#2443ad,#3157d5)!important;background-clip:text!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;animation:none!important}
+.wallet-box{background:linear-gradient(125deg,#2443ad 0%,#3157d5 65%,#4778ed 100%)!important;box-shadow:0 12px 26px rgba(49,87,213,.22)!important}
+.ad-section-title,.ad-section-title:nth-of-type(n){background:var(--app-primary-soft)!important;border-left-color:var(--app-primary)!important}
+.ad-section-title h3{color:#2443ad!important}
+.ad-action,.ad-action:nth-child(n),.ad-course,.ad-course:nth-child(n),.ad-stat,.ad-stat:nth-child(n){background:#fff!important;border-color:var(--app-border)!important}
+.ad-action:before,.ad-action:nth-child(n):before{background:var(--app-primary)!important}
+.ad-action span,.ad-action strong,.ad-action div,.ad-course h4,.ad-course strong,.ad-course b,.ad-stat b{color:var(--app-ink)!important}
+.ad-stat{border-top:3px solid #cbd7ff!important}
+.ad-addon-card:after{background:radial-gradient(circle,#dce5ff,transparent 68%)!important}
+.ad-book-card{background:#f8faff!important;border-color:#d5def5!important}
+#dashboard a{color:var(--app-primary)!important}
+/* Landing page */
+.topbar{background:#fff!important;border-color:var(--app-border)!important}
+.brand,.hero h1,.section-head h2{color:var(--app-ink)!important}
+.hero h1 span{color:var(--app-primary)!important}
+.hero-art{background:linear-gradient(145deg,#e9efff,#e9f8f6)!important}
+.feature-icon.green,.feature-icon.blue,.feature-icon.purple,.feature-icon.orange{background:var(--app-primary-soft)!important;color:var(--app-primary)!important}
+.cta{background:linear-gradient(120deg,#2443ad,#3157d5)!important;color:#fff!important}
+/* Profile and coach: same blue brand, neutral surfaces */
+.profile-card,.profile-panel,.profile-section{background:#fff!important;border-color:var(--app-border)!important}
+.reference-image-theme-coach{color:var(--app-ink)!important}
+body:has(.coach-container),body:has(.chat-container){background:var(--app-bg)!important}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+
 </body>
 </html><style id="vibrant-readable-login-v3">
 :root{--ink:#172033;--muted:#526078}
@@ -1262,3 +1486,87 @@ body{background:radial-gradient(circle at 8% 8%,#e0e7ff 0,transparent 27%),radia
  .login-shell button{min-height:46px!important}
 }
 </style>
+
+
+<style id="aducate-english-professional-theme-v2">
+:root{--app-primary:#1769E8;--app-primary-dark:#0E4DB8;--app-primary-soft:#EAF2FF;--app-navy:#092A5E;--app-navy-deep:#061C3F;--app-bg:#F3F7FC;--app-surface:#FFFFFF;--app-ink:#12264A;--app-muted:#6B7D98;--app-border:#DFE8F5;--app-shadow:0 10px 28px rgba(9,42,94,.085);--app-green:#10A77A;--app-purple:#8053E8;--app-orange:#F59A32;--app-cyan:#20AFC2}
+html{background:var(--app-bg)!important;color-scheme:light}
+body{background:var(--app-bg)!important;color:var(--app-ink)!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important}
+body:has(#dashboard),body:has(.login-box),body:has(.login-shell),body:has(.profile-brand),body:has(.coach-container),body:has(.chat-container){background:var(--app-bg)!important}
+.card,.panel,.profile-card,.section-card,.container-card,.login-panel,.coach-container,.chat-container,.feature,.ad-card,.ad-stat,.ad-action,.ad-course,.activity-card,.transaction-card,.question-card,.quiz-card,.settings-card,.stat-card,.dashboard-card,.subscription-card{border-color:var(--app-border)!important;box-shadow:var(--app-shadow)!important}
+input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{border-color:#D6E2F3!important;color:var(--app-ink)!important;background:#fff!important;border-radius:10px!important}
+input:focus,select:focus,textarea:focus{outline:2px solid #9CC2FF!important;outline-offset:1px!important}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #1769E855!important;outline-offset:2px!important}
+.btn-green,.btn-primary,.primary,.cta,.telegram-btn,.ad-book-buy,.login-btn,.course-hero-actions button:first-child,.reference-main .wallet-transfer-btn{background:linear-gradient(135deg,#1769E8,#0E4DB8)!important;color:#fff!important;border-color:transparent!important;box-shadow:0 7px 18px rgba(23,105,232,.18)!important}
+.btn-light,.course-secondary{background:#EDF4FF!important;color:#123D80!important;border:1px solid #D7E5FC!important}
+.topbar{background:rgba(255,255,255,.97)!important;border-color:var(--app-border)!important;box-shadow:0 3px 16px rgba(9,42,94,.035)!important}
+.brand{color:var(--app-navy)!important;gap:10px!important;font-size:clamp(18px,2vw,25px)!important}
+.brand-logo-img{width:40px!important;height:40px!important;display:block!important;object-fit:cover!important;border-radius:50%!important;background:#fff!important;box-shadow:0 3px 10px rgba(9,42,94,.1)!important}
+.hero{background:radial-gradient(ellipse at 85% 15%,#DCEBFF 0,transparent 35%),linear-gradient(135deg,#FFFFFF,#EFF5FF)!important}
+.hero h1,.section-head h2{color:var(--app-navy)!important}.hero h1 span{color:var(--app-primary)!important}
+.hero-art{background:linear-gradient(145deg,#D8E8FF,#EDF5FF)!important;box-shadow:0 18px 42px rgba(9,42,94,.14)!important}
+.eyebrow{background:#EAF2FF!important;color:#1758BA!important}.cta{background:linear-gradient(115deg,#092A5E,#1769E8)!important;color:#fff!important}.cta p{color:#E5EEFF!important}
+.feature-icon.green,.feature-icon.blue,.feature-icon.purple,.feature-icon.orange{background:#EAF2FF!important;color:#1769E8!important}
+/* Main learning dashboard */
+#dashboard.reference-dashboard{background:#fff!important;border-color:var(--app-border)!important;box-shadow:var(--app-shadow)!important}
+.reference-sidebar{background:linear-gradient(180deg,#092A5E 0%,#061C3F 100%)!important;color:#fff!important}
+.reference-brand{color:#fff!important;font-size:clamp(15px,1.5vw,20px)!important;letter-spacing:-.2px}
+.reference-brand img{background:#fff!important;border-radius:50%!important}
+.reference-nav{background:transparent!important;color:#DFEAFF!important}
+.reference-nav:hover,.reference-nav.active{background:linear-gradient(105deg,#247DF0,#1760D5)!important;color:#fff!important;box-shadow:0 5px 12px rgba(23,105,232,.2)!important}
+.reference-main{background:radial-gradient(ellipse at 92% 0%,#E6F0FF 0,transparent 33%),#F5F8FD!important}
+.reference-main .ad-topbar-brand{color:var(--app-navy)!important}
+.reference-main .dashboard-topbar{background:transparent!important;border-color:var(--app-border)!important}
+.reference-main .dashboard-topbar .icon-btn{background:#fff!important;color:var(--app-navy)!important;border:1px solid var(--app-border)!important}
+.reference-main #dashboard h2,#dashboard h2{color:var(--app-navy)!important;background:none!important;-webkit-text-fill-color:currentColor!important}
+.reference-main .ad-welcome{color:var(--app-muted)!important}
+.reference-main .wallet-box,#dashboard .wallet-box,.wallet-box{background:linear-gradient(110deg,#1769E8 0%,#0E4DB8 65%,#2D86F5 100%)!important;color:#fff!important;box-shadow:0 12px 26px rgba(23,105,232,.20)!important}
+.wallet-box,.wallet-box *{color:#fff!important}
+.ad-section-title,.ad-section-title:nth-of-type(n){background:#EAF2FF!important;border-left-color:#1769E8!important}
+.ad-section-title h3{color:#092A5E!important}
+.ad-action,.ad-action:nth-child(n),.ad-course,.ad-course:nth-child(n),.ad-stat,.ad-stat:nth-child(n){background:#fff!important;border:1px solid var(--app-border)!important;box-shadow:0 5px 14px rgba(9,42,94,.045)!important;color:var(--app-ink)!important}
+.ad-action:before,.ad-action:nth-child(n):before{background:#1769E8!important}
+.ad-action:nth-child(2):before{background:#10A77A!important}.ad-action:nth-child(3):before{background:#8053E8!important}.ad-action:nth-child(4):before{background:#F59A32!important}
+.ad-action span,.ad-action strong,.ad-action div,.ad-course h4,.ad-course strong,.ad-course b,.ad-stat b{color:var(--app-ink)!important}
+.ad-stat{border-top:3px solid #1769E8!important}.ad-stat:nth-child(2){border-top-color:#10A77A!important}.ad-stat:nth-child(3){border-top-color:#8053E8!important}.ad-stat:nth-child(4){border-top-color:#F59A32!important}
+.ad-addon-card:after{background:radial-gradient(circle,#DCEBFF,transparent 68%)!important}
+.ad-book-card{background:#F8FAFF!important;border-color:#D6E4FA!important}.ad-book-price{color:#0E4DB8!important}
+#dashboard a{color:#1769E8!important}
+/* Forms, quizzes, wallet, profile, coach and administration */
+.course-hero{background:linear-gradient(135deg,#092A5E,#1769E8)!important;color:#fff!important}
+.course-hero h1,.course-hero p,.course-brand,.course-badge{color:#fff!important}
+.course-brand img,.brand-pill img,.login-logo img,.logo img{background:#fff!important}
+.brand-pill{background:#EAF2FF!important;border-color:#C8DAFA!important;color:#092A5E!important}
+.course-hero-actions button,.login-shell button[type=submit],.login-shell button:not(.course-secondary){background:linear-gradient(135deg,#1769E8,#0E4DB8)!important;color:#fff!important}
+.login-logo{background:#fff!important;border-color:#D8E5F6!important;box-shadow:0 10px 25px rgba(9,42,94,.14)!important}
+.login-shell h1,.login-shell h2,.login-box h2{color:#092A5E!important}
+.login-box,.login-shell>.container{border-color:var(--app-border)!important;box-shadow:var(--app-shadow)!important}
+.admin-brand-name{margin:-2px 0 16px;text-align:center;font-size:17px;font-weight:850;letter-spacing:.2px;color:#092A5E}
+.admin-brand-name-inline{display:block;color:#092A5E;font-size:15px;line-height:1.4}
+.profile-brand{gap:12px!important}.profile-brand img{background:#fff!important;border:1px solid var(--app-border)!important;box-shadow:0 4px 12px rgba(9,42,94,.08)!important}
+.profile-brand-copy>strong{display:block;color:#092A5E;font-size:14px;margin-bottom:3px}.profile-brand-copy h2{margin-top:0!important}
+.coach-hero,.coach-container,.chat-container{border-color:var(--app-border)!important}
+.coach-hero{background:linear-gradient(115deg,#EAF2FF,#fff)!important}
+.coach-hero h1,.coach-container h1,.coach-container h2{color:#092A5E!important}
+.reference-image-theme-coach{color:var(--app-ink)!important}
+@media(max-width:720px){.reference-main{padding:14px!important}.reference-brand{font-size:15px!important}.reference-nav{padding:9px 8px!important}.brand-logo-img{width:36px!important;height:36px!important}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Finish button and interactive-card colors without changing behavior. */
+.btn:not(.btn-light):not(.book-secondary),a.btn:not(.btn-light),.btn-quiz,.btn-learning,.btn-primary,.btn-profile,.btn-reward,.btn-withdraw,.book-btn,.book-primary,.subscription-submit,.subscription-pay-btn,.ad-addon-submit,.activity-action,.login-btn,.admin-users-btn.active,.ap2-btn:not(.ap2-green):not(.ap2-red):not(.ap2-danger){background:linear-gradient(135deg,#1769E8,#0E4DB8)!important;color:#fff!important;border-color:transparent!important;box-shadow:0 6px 15px rgba(23,105,232,.14)!important}
+.btn-spin,.btn-bonus,.btn-light,.book-secondary,.course-secondary{background:#EAF2FF!important;color:#123D80!important;border:1px solid #D3E3FC!important;box-shadow:none!important}
+.icon-btn{background:#fff!important;color:#092A5E!important;border:1px solid #DFE8F5!important;box-shadow:0 3px 10px rgba(9,42,94,.06)!important}
+.activity-btn{background:#fff!important;color:#12264A!important;border:1px solid #DFE8F5!important;border-top:3px solid #1769E8!important;box-shadow:0 6px 18px rgba(9,42,94,.07)!important}
+.activity-btn.a2{border-top-color:#20AFC2!important}.activity-btn.a3{border-top-color:#F59A32!important}.activity-btn.a4{border-top-color:#10A77A!important}.activity-btn.a5{border-top-color:#8053E8!important}.activity-btn.a6{border-top-color:#F59A32!important}.activity-btn.a7{border-top-color:#10A77A!important}.activity-btn.a8{border-top-color:#20AFC2!important}
+.activity-btn small{color:#6B7D98!important;opacity:1!important}
+.activity-title{color:#092A5E!important}.activity-question{color:#12264A!important}
+.activity-option{background:#fff!important;border-color:#D6E2F3!important;color:#12264A!important}.activity-option:hover,.option-btn:hover{background:#EAF2FF!important;border-color:#1769E8!important;color:#092A5E!important}
+.word-chip{background:#EAF2FF!important;color:#123D80!important}.answer-box{background:#F6F9FF!important;border-color:#9DBDF4!important;color:#12264A!important}
+.kbc-quiz-screen{background:#F3F7FC!important;color:#12264A!important}.kbc-shell{background:#fff!important;border-color:#DFE8F5!important;box-shadow:0 12px 35px rgba(9,42,94,.10)!important}.kbc-topbar{background:#092A5E!important;color:#fff!important;border-bottom-color:#17477F!important}.kbc-topbar *{color:inherit!important}.kbc-question-wrap{color:#12264A!important}.kbc-question-title{color:#092A5E!important}.kbc-question-no{background:#EAF2FF!important;color:#1758BA!important}.kbc-lifeline{background:#F7FAFF!important;border-color:#D6E2F3!important;color:#123D80!important}.kbc-lifeline span{color:#5977A5!important}.kbc-lifeline:hover{border-color:#1769E8!important;box-shadow:0 0 16px rgba(23,105,232,.16)!important}.option-btn{background:#fff!important;border-color:#D6E2F3!important;color:#12264A!important}.kbc-balance{color:#0E4DB8!important}
+.admin-users-btn{border-radius:10px!important}.admin-users-btn.active{background:linear-gradient(135deg,#1769E8,#0E4DB8)!important;color:#fff!important}
+.profile-panel button,.profile-section button,.profile-card button{background:linear-gradient(135deg,#1769E8,#0E4DB8)!important;color:#fff!important}
+.coach-container button,.chat-container button,.coach-hero button{background:linear-gradient(135deg,#1769E8,#0E4DB8)!important;color:#fff!important;border-color:transparent!important}
+.course-brand span{letter-spacing:.6px!important}.admin-brand-name-inline{letter-spacing:.1px!important}
+
+</style>
+

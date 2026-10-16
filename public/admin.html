@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="/icon-192.png">
 
 
-    <title>Admin Panel</title>
+    <title>Aducate English | Admin Panel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
 
@@ -399,12 +399,138 @@ input,select,textarea{width:100%;min-height:42px;padding:10px 12px;border:1px so
 @media(max-width:700px){#ap2Modal .student-summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}#ap2Modal .student-data-cards{grid-template-columns:1fr!important}}
 @media(max-width:430px){#ap2Modal .student-summary-grid{grid-template-columns:1fr!important}.student-view-header{align-items:flex-start!important}}
 </style>
+<style id="earn-project-full-ui">
+
+/* Aducate — considered, human-crafted UI system */
+:root {
+  --ui-paper: #f7f6f2;
+  --ui-surface: #ffffff;
+  --ui-surface-soft: #f1f2ed;
+  --ui-ink: #202b27;
+  --ui-muted: #6b756f;
+  --ui-line: #dfe4dc;
+  --ui-green: #245c49;
+  --ui-green-hover: #194735;
+  --ui-green-soft: #e8f0eb;
+  --ui-amber: #b66b3e;
+  --ui-amber-soft: #f8eee6;
+  --ui-radius: 14px;
+  --ui-radius-sm: 9px;
+  --ui-shadow: 0 8px 24px rgba(34, 49, 40, .055);
+  color-scheme: light;
+}
+html { scroll-behavior: smooth; }
+body {
+  color: var(--ui-ink);
+  background: var(--ui-paper);
+  font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+button, input, select, textarea { font: inherit; }
+button, .btn, a[role="button"], input[type="submit"], input[type="button"] {
+  transition: background-color .16s ease, border-color .16s ease, color .16s ease,
+              box-shadow .16s ease, transform .16s ease;
+}
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid rgba(36, 92, 73, .22);
+  outline-offset: 2px;
+}
+img { max-width: 100%; }
+.card, .panel, .info-card, .wallet-card, .earn-card, .activity-btn, .ad-card,
+.ap2-card, .login-box, .login-panel, .login-card, .auth-card, .main-card,
+.content-card, .settings-card, .question-card, .quiz-card, .subscription-card,
+.stat-card, .dashboard-card, .profile-card {
+  border-color: var(--ui-line);
+  box-shadow: var(--ui-shadow);
+}
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+select, textarea {
+  min-height: 44px;
+  border: 1px solid #d5ddd5;
+  border-radius: var(--ui-radius-sm);
+  background: #fff;
+  color: var(--ui-ink);
+  padding: 10px 12px;
+  max-width: 100%;
+}
+textarea { min-height: 110px; resize: vertical; }
+button, .btn, input[type="submit"], input[type="button"] {
+  min-height: 42px;
+  border-radius: 10px;
+  font-weight: 650;
+  letter-spacing: .005em;
+}
+button:hover, .btn:hover, input[type="submit"]:hover, input[type="button"]:hover {
+  transform: translateY(-1px);
+}
+button:active, .btn:active { transform: translateY(0); }
+table { border-collapse: separate; border-spacing: 0; }
+th { font-weight: 650; }
+::selection { background: #d8e7dc; color: #203d30; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+
+
+:root { --bg:#f7f6f2 !important; --surface:#fff !important; --surface2:#f1f2ed !important; --text:#202b27 !important; --muted:#6b756f !important; --border:#dfe4dc !important; --primary:#245c49 !important; --primary2:#194735 !important; --primary-soft:#e8f0eb !important; }
+body { background: #f7f6f2 !important; color: #202b27 !important; }
+.admin-main-menu { background: #fff !important; border: 1px solid #dfe4dc !important; border-radius: 14px !important; box-shadow: 0 3px 12px rgba(32,43,39,.035) !important; }
+.admin-main-menu button, .admin-main-menu .btn { border-radius: 9px !important; }
+.admin-main-menu .active { background: #e8f0eb !important; color: #245c49 !important; }
+.cards { gap: 14px !important; }
+.card, .ap2-card, .panel, .section { border: 1px solid #dfe4dc !important; border-radius: 13px !important; background: #fff !important; box-shadow: 0 4px 16px rgba(32,43,39,.04) !important; }
+.ap2-pane { background: transparent !important; }
+.ap2-tabs { border-bottom: 1px solid #dfe4dc !important; gap: 6px !important; }
+.ap2-tabs button, .ap2-btn { border-radius: 8px !important; }
+.ap2-btn, .btn { min-height: 38px; }
+button.btn-success, .btn-success { background: #245c49 !important; border-color: #245c49 !important; color: #fff !important; }
+button.btn-danger, .btn-danger { background: #fff !important; border-color: #e5b8b2 !important; color: #a33f36 !important; }
+button.btn-warning, .btn-warning { background: #fbf0df !important; border-color: #ead2a8 !important; color: #815a18 !important; }
+.table-wrap, .ap2-tablewrap { border: 1px solid #e0e4dc !important; border-radius: 11px !important; overflow-x: auto !important; background: #fff !important; }
+table { min-width: 620px; }
+th { background: #f1f2ed !important; color: #46534a !important; }
+td, th { border-color: #e7ebe4 !important; padding: 11px 12px !important; }
+input:not([type=checkbox]), select, textarea { border-radius: 8px !important; }
+.ap2-modal, .modal-overlay { backdrop-filter: blur(3px); }
+.ap2-box, .modal-content, .modal-box { border-radius: 16px !important; border: 1px solid #dfe4dc !important; box-shadow: 0 18px 60px rgba(20,35,27,.16) !important; }
+.badge, .pill, .chip { border-radius: 7px !important; }
+@media (max-width: 700px) {
+ .cards, .ap2-grid { grid-template-columns: 1fr !important; }
+ .ap2-card { padding: 14px !important; }
+}
+
+/* Shared reference-inspired colorful system */
+:root {
+ --brand-navy:#0b2940; --brand-green:#079568; --brand-blue:#2878e7;
+ --brand-purple:#7b4de0; --brand-orange:#f28a2e; --brand-cyan:#16a8b8;
+}
+.ad-topbar, .dashboard-topbar, .profile-brand, .admin-main-menu { position:relative; }
+a { color:var(--brand-green); }
+a:hover { color:#066b4b; }
+button:disabled, .btn:disabled { opacity:.55; cursor:not-allowed; transform:none !important; }
+img { object-fit:contain; }
+@media(max-width:520px) {
+ input:not([type=checkbox]):not([type=radio]), select, textarea { font-size:16px; }
+}
+</style>
+<style id="earn-reference-global-theme">
+:root{--ref-navy:#0b2940;--ref-green:#079568;--ref-blue:#2878e7;--ref-purple:#7b4de0;--ref-orange:#f28a2e;--ref-cyan:#16a8b8;--ref-paper:#f4f8fc;--ref-line:#e1eaf2;--ref-ink:#142b45}
+html{scroll-behavior:smooth}body{background:var(--ref-paper)!important;color:var(--ref-ink)}
+header, .topbar, .navbar, .nav-bar, .sidebar, aside, .side-nav, .sidebar-nav, .admin-sidebar, .menu-sidebar{border-color:var(--ref-line)}
+.card,.panel,.info-card,.wallet-card,.earn-card,.activity-btn,.ad-card,.ap2-card,.login-box,.login-panel,.login-card,.auth-card,.main-card,.content-card,.settings-card,.question-card,.quiz-card,.subscription-card,.stat-card,.dashboard-card,.profile-card,.feature-card,.activity-card,.transaction-card{border:1px solid var(--ref-line)!important;border-radius:15px!important;box-shadow:0 8px 24px rgba(11,41,64,.075)!important}
+button,.btn,input[type=submit],input[type=button]{border-radius:10px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #07956845;outline-offset:2px}
+input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{border-radius:10px;max-width:100%}
+/* Keep existing application structure and make its surfaces consistent with the reference. */
+
+@media(max-width:520px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px!important}}
+</style>
 </head>
 
 <body>
 
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-        <div style="display:flex;align-items:center;gap:12px"><img id="adminAppLogo" src="/icon-192.png" alt="App Logo" style="width:52px;height:52px;border-radius:14px;object-fit:cover;border:2px solid #506ef0"><h2 style="margin:0">Admin Dashboard</h2></div>
+        <div style="display:flex;align-items:center;gap:12px"><img id="adminAppLogo" src="/icon-192.png" alt="Aducate English logo" style="width:52px;height:52px;border-radius:14px;object-fit:cover;border:2px solid #1769e8"><div><strong class="admin-brand-name-inline">Aducate English</strong><h2 style="margin:0">Admin Dashboard</h2></div></div>
 
         <div style="display:flex;gap:8px;align-items:center;">
             <button id="logoutAllUsersBtn" onclick="forceLogoutAllUsers()" style="background:#2563eb;color:white;border:none;padding:10px 18px;border-radius:6px;cursor:pointer;">
@@ -3467,152 +3593,10 @@ async function viewSubscriptionScreenshot(id){
     if(!w){alert('Please allow popups to view the screenshot.');return;}
     const safeSrc=String(r.paymentScreenshot).replace(/"/g,'&quot;');
     w.document.open();
-    w.document.write(`<!doctype html><html><head><title>Payment Screenshot</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh"><img src="${safeSrc}" style="max-width:96vw;max-height:96vh;object-fit:contain">
-
-</body></html>`);
+    w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Payment Screenshot</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh"><img src="${safeSrc}" alt="Payment screenshot" style="max-width:96vw;max-height:96vh;object-fit:contain"></body></html>`);
     w.document.close();
-  }catch(e){alert('❌ '+e.message)}
+  }catch(e){alert('Could not open screenshot: '+e.message);}
 }
-async function deleteSubscriptionRequest(id){
-  if(!confirm('Delete this subscription request? Student will remain without app access and the request/screenshot will be removed.'))return;
-  try{await subscriptionAdminApi('/admin/'+id,{method:'DELETE'});alert('🗑️ Subscription request deleted.');await updateSubscriptionPendingBadge();openSubscriptionAdmin();}
-  catch(e){alert('❌ '+e.message)}
-}
-async function setSubscriptionAccess(userId,access){
-  if(!confirm(access?'Give this student app access?':'Remove this student app access?'))return;
-  try{await subscriptionAdminApi('/admin/user/'+userId+'/access',{method:'PUT',body:JSON.stringify({access})});await updateSubscriptionPendingBadge();openSubscriptionAdmin();}
-  catch(e){alert('❌ '+e.message)}
-}
-updateSubscriptionPendingBadge();setInterval(updateSubscriptionPendingBadge,10000);
-</script>
-
-<script id="admin-menu-extra-actions">
-(function(){
-  function moveAdminActions(){
-    const menu=document.querySelector('.admin-main-menu');
-    if(!menu) return;
-    ['addonAdminBtn','subscriptionAdminFab','bookAdminFab'].forEach(function(id){
-      const b=document.getElementById(id);
-      if(!b || b.dataset.menuMoved==='1') return;
-      b.dataset.menuMoved='1';
-      b.classList.remove('floating-hidden');
-      b.style.position='static'; b.style.right='auto'; b.style.bottom='auto'; b.style.transform='none'; b.style.opacity='1'; b.style.pointerEvents='auto';
-      b.style.display='inline-flex'; b.style.alignItems='center'; b.style.gap='4px'; b.style.whiteSpace='nowrap';
-      b.style.borderRadius='10px'; b.style.padding='10px 12px'; b.style.boxShadow='none'; b.style.fontWeight='800'; b.style.fontSize='14px';
-      b.style.flex='0 0 auto';
-      menu.appendChild(b);
-    });
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',moveAdminActions); else moveAdminActions();
-})();
-</script>
-<style id="admin-menu-extra-actions-style">
-.admin-main-menu #addonAdminBtn{background:linear-gradient(135deg,#6c5ce7,#06b6d4);color:#fff!important;border:0}
-.admin-main-menu #subscriptionAdminFab{background:linear-gradient(135deg,#16a34a,#2563eb);color:#fff!important;border:0}
-.admin-main-menu #bookAdminFab{background:#6d28d9;color:#fff!important;border:0}
-@media(max-width:800px){.admin-main-menu{overflow-x:auto;flex-wrap:nowrap}.admin-main-menu button{flex:0 0 auto;white-space:nowrap}}
-</style>
-
-<script>
-async function loadAppLogo(){
- try{const r=await fetch('/api/admin/app-logo?_='+Date.now());const d=await r.json();const logo=d.logo||'/icon-192.png';['adminAppLogo','appLogoPreview'].forEach(id=>{const e=document.getElementById(id);if(e)e.src=logo;});}catch(e){}
-}
-async function saveAppLogo(){
- const input=document.getElementById('appLogoInput'), file=input?.files?.[0];
- if(!file) return alert('Please select a logo image first.');
- const reader=new FileReader(); reader.onload=async()=>{try{const token=localStorage.getItem('adminToken');const r=await fetch('/api/admin/app-logo',{method:'PUT',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({logo:reader.result})});const d=await r.json();if(!r.ok)throw new Error(d.message||'Save failed');['adminAppLogo','appLogoPreview'].forEach(id=>{const e=document.getElementById(id);if(e)e.src=d.logo;});alert('✅ App logo saved! New installations will use this logo.');}catch(e){alert('❌ '+e.message)}}; reader.readAsDataURL(file);
-}
-async function removeAppLogo(){if(!confirm('Reset app logo to default?'))return;try{const token=localStorage.getItem('adminToken');const r=await fetch('/api/admin/app-logo',{method:'DELETE',headers:{'Authorization':'Bearer '+token}});if(!r.ok)throw new Error('Reset failed');loadAppLogo();alert('Logo reset successfully.');}catch(e){alert('❌ '+e.message)}}
-document.addEventListener('DOMContentLoaded',loadAppLogo);
-</script>
-<script>
-async function editSpinPrizeSettings(){try{const d=await bookAdminApi('/spin-prizes');const current=(d.prizes||[1,2,3,4,5,6,7,8,9,10]).join(', ');const answer=prompt('Spin ના દરેક possible prize amount (₹) comma થી અલગ લખો. ઉદાહરણ: 1, 2, 5, 10, 20\nઓછામાં ઓછા 2 અને વધુમાં વધુ 30 amount.',current);if(answer===null)return;const prizes=answer.split(',').map(v=>v.trim()).filter(Boolean).map(Number);if(prizes.length<2||prizes.length>30||prizes.some(n=>!Number.isFinite(n)||n<0||n>100000||Math.round(n*100)!==n*100)){alert('ખોટું input. ₹0 થી ₹100000 વચ્ચેના 2–30 amount દાખલ કરો; વધુમાં વધુ 2 decimal.');return;}if(!confirm('નવા Spin prizes save કરવા છે?\n₹'+prizes.join(', ₹')))return;const saved=await bookAdminApi('/spin-prizes',{method:'PUT',body:JSON.stringify({prizes})});alert('✅ '+(saved.message||'Spin prizes updated.'));}catch(e){alert('Spin prize settings: '+e.message)}}
-</script>
-<div id="questionPrizeAdminModal" style="display:none;position:fixed;inset:0;z-index:1000000;background:#0009;padding:18px;overflow:auto"><div style="max-width:560px;margin:8vh auto;background:#fff;color:#172033;border-radius:18px;padding:20px"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h2 style="margin:0">❓ Question Bank Prize Settings</h2><button onclick="document.getElementById('questionPrizeAdminModal').style.display='none'">Close</button></div><p style="color:#475569">મુખ્ય Quiz / Question Bank માં પૂછાતા દરેક પ્રશ્ન માટે સાચા જવાબે મળતા રૂપિયા અને ખોટા જવાબે કપાતા રૂપિયા અલગ સેટ કરો.</p><div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px"><label>સાચો જવાબ: +₹<input id="questionCorrectPrize" type="number" min="0" max="100000" step="0.01" style="display:block;width:100%;box-sizing:border-box;padding:10px;margin-top:5px"></label><label>ખોટો જવાબ: −₹<input id="questionWrongPrize" type="number" min="0" max="100000" step="0.01" style="display:block;width:100%;box-sizing:border-box;padding:10px;margin-top:5px"></label></div><button onclick="saveQuestionPrizeSettings()" style="margin-top:16px;background:#2563eb;color:#fff;border:0;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer">💾 Save Question Prizes</button></div></div>
-<script>
-async function editQuestionPrizeSettings(){try{const d=await bookAdminApi('/question-prizes');document.getElementById('questionCorrectPrize').value=d.correct;document.getElementById('questionWrongPrize').value=d.wrong;document.getElementById('questionPrizeAdminModal').style.display='block'}catch(e){alert('Question prize settings: '+e.message)}}
-async function saveQuestionPrizeSettings(){const correct=Number(document.getElementById('questionCorrectPrize').value),wrong=Number(document.getElementById('questionWrongPrize').value);if([correct,wrong].some(n=>!Number.isFinite(n)||n<0||n>100000||Math.round(n*100)!==n*100))return alert('₹0 થી ₹100000 વચ્ચે અને વધુમાં વધુ 2 decimal સુધી amount આપો.');if(!confirm(`Question Bank prize save કરવી?\nસાચો: +₹${correct}\nખોટો: -₹${wrong}`))return;try{const d=await bookAdminApi('/question-prizes',{method:'PUT',body:JSON.stringify({correct,wrong})});alert('✅ '+(d.message||'Question prizes saved.'));document.getElementById('questionPrizeAdminModal').style.display='none'}catch(e){alert('❌ '+e.message)}}
-</script>
-<div id="activityRewardAdminModal" style="display:none;position:fixed;inset:0;z-index:999999;background:#0009;padding:18px;overflow:auto"><div style="max-width:620px;margin:5vh auto;background:#fff;color:#172033;border-radius:18px;padding:20px"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h2 style="margin:0">🧩 Quiz / Activity Prize Settings</h2><button onclick="document.getElementById('activityRewardAdminModal').style.display='none'">Close</button></div><p style="color:#475569">દરેક activity માટે સાચા જવાબે ઉમેરવાના રૂપિયા (+₹) અને ખોટા જવાબે કપવાના રૂપિયા (−₹) અલગથી સેટ કરો. Wallet શૂન્યથી નીચે નહીં જાય.</p><div id="activityRewardFields" style="display:grid;gap:10px;margin:16px 0"></div><button onclick="saveActivityRewardSettings()" style="background:#0f766e;color:#fff;border:0;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer">💾 Save All Activity Prices</button></div></div>
-<script>
-let activityRewardLabels={};
-async function editActivityRewardSettings(){try{const d=await bookAdminApi('/activity-rewards');activityRewardLabels=d.activities||{};document.getElementById('activityRewardFields').innerHTML=Object.entries(activityRewardLabels).map(([key,label])=>{const entry=d.rewards?.[key];const correct=Number(typeof entry==='object'&&entry!==null?entry.correct:entry||0);const wrong=Number(typeof entry==='object'&&entry!==null?entry.wrong:entry||0);return `<div style="border:1px solid #e2e8f0;border-radius:12px;padding:12px"><b style="display:block;margin-bottom:10px">${escBook(label)}</b><div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px"><label style="font-size:13px;color:#166534">સાચો જવાબ: +₹<input data-activity-correct="${key}" type="number" min="0" max="100000" step="0.01" value="${correct}" style="display:block;width:100%;box-sizing:border-box;margin-top:5px;padding:9px;border:1px solid #86efac;border-radius:8px" /></label><label style="font-size:13px;color:#b91c1c">ખોટો જવાબ: −₹<input data-activity-wrong="${key}" type="number" min="0" max="100000" step="0.01" value="${wrong}" style="display:block;width:100%;box-sizing:border-box;margin-top:5px;padding:9px;border:1px solid #fca5a5;border-radius:8px" /></label></div></div>`}).join('');document.getElementById('activityRewardAdminModal').style.display='block'}catch(e){alert('Activity reward settings: '+e.message)}}
-async function saveActivityRewardSettings(){const rewards={};document.querySelectorAll('[data-activity-correct]').forEach(el=>{const key=el.dataset.activityCorrect;const wrong=document.querySelector(`[data-activity-wrong="${key}"]`);rewards[key]={correct:Number(el.value),wrong:Number(wrong?.value)}});if(Object.values(rewards).some(v=>[v.correct,v.wrong].some(n=>!Number.isFinite(n)||n<0||n>100000||Math.round(n*100)!==n*100)))return alert('દરેક amount ₹0 થી ₹100000 વચ્ચે અને વધુમાં વધુ 2 decimal સુધી આપો.');if(!confirm('Quiz/Activity ના સાચા અને ખોટા જવાબ માટેની અલગ રકમ save કરવી છે?'))return;try{const d=await bookAdminApi('/activity-rewards',{method:'PUT',body:JSON.stringify({rewards})});alert('✅ '+(d.message||'Activity prices saved.'));document.getElementById('activityRewardAdminModal').style.display='none'}catch(e){alert('❌ '+e.message)}}
-</script>
-
-</body>
-
-</html><style id="command-center-mobile-card-fix">
-/* Command Center compact card layout */
-.ap2-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
-.ap2-tabs button{min-width:0;width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px;padding:10px 8px}
-.ap2-flex{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.ap2-tablewrap{overflow:visible}
-.ap2-table{width:100%;table-layout:fixed}
-.ap2-table th,.ap2-table td{word-break:break-word;overflow-wrap:anywhere}
-.ap2-table td:last-child{white-space:normal}
-.ap2-table td button{max-width:100%;white-space:nowrap;font-size:12px;padding:7px 8px}
-@media(max-width:800px){
-  .adminProV2 .ap2-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
-  .adminProV2 .ap2-card{padding:8px 5px;border-radius:10px;min-height:58px}
-  .adminProV2 .ap2-lbl{font-size:9px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .adminProV2 .ap2-val{font-size:15px;line-height:1.1;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .adminProV2 .ap2-tabs{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
-  .adminProV2 .ap2-tabs button{font-size:9px;line-height:1.1;padding:7px 3px;border-radius:8px;min-height:34px}
-  .adminProV2 .ap2-pane{padding:9px;margin-top:8px;border-radius:10px}
-  .adminProV2 .ap2-pane h3{font-size:13px;margin:4px 0 8px}
-  .adminProV2 .ap2-flex{gap:5px}
-  .adminProV2 .ap2-input{min-width:0;flex:1 1 100%;font-size:11px;padding:8px}
-  .adminProV2 .ap2-flex .ap2-btn{font-size:9px;padding:7px 8px}
-  /* Every Command Center table row becomes a compact 4-column card. */
-  .adminProV2 .ap2-table{border-collapse:separate;border-spacing:0 6px;table-layout:auto}
-  .adminProV2 .ap2-table thead{display:none}
-  .adminProV2 .ap2-table tbody{display:block}
-  .adminProV2 .ap2-table tbody tr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px;box-shadow:0 3px 10px rgba(15,23,42,.07);margin-bottom:6px}
-  .adminProV2 .ap2-table tbody td{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:6px 5px;border:1px solid var(--border);border-radius:7px;background:var(--surface)!important;color:var(--text)!important;font-size:9px;line-height:1.15;overflow:hidden}
-  .adminProV2 .ap2-table tbody td::before{content:attr(data-label);display:block;font-size:7px;font-weight:800;color:var(--muted);text-transform:uppercase;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .adminProV2 .ap2-table tbody td:empty{display:none}
-  .adminProV2 .ap2-table tbody td:last-child{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:stretch;gap:4px}
-  .adminProV2 .ap2-table tbody td:last-child::before{display:none}
-  .adminProV2 .ap2-table tbody td button{font-size:8px;padding:5px 3px;max-width:100%;width:100%;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .adminProV2 .ap2-table tbody td a{font-size:8px;word-break:break-all}
-  .adminProV2 .ap2-table tbody td strong{font-size:9px}
-  .adminProV2 .ap2-table tbody td small{font-size:7px}
-  .adminProV2 .ap2-head{gap:6px;flex-wrap:wrap}
-  .adminProV2 .ap2-head h2{font-size:17px}
-  .adminProV2 .ap2-head .ap2-flex{width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
-  .adminProV2 .ap2-head .ap2-flex button{font-size:9px;padding:7px 3px}
-}
-@media(max-width:520px){
-  body{padding:8px}
-  .adminProV2 .ap2-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
-  .adminProV2 .ap2-card{padding:6px 3px;min-height:50px}
-  .adminProV2 .ap2-lbl{font-size:7px}
-  .adminProV2 .ap2-val{font-size:12px}
-  .adminProV2 .ap2-tabs{grid-template-columns:repeat(4,minmax(0,1fr));gap:3px}
-  .adminProV2 .ap2-tabs button{font-size:7px;padding:6px 2px;min-height:30px}
-  .adminProV2 .ap2-table tbody tr{gap:3px;padding:4px}
-  .adminProV2 .ap2-table tbody td{padding:5px 3px;font-size:7px;border-radius:6px}
-  .adminProV2 .ap2-table tbody td::before{font-size:6px}
-  .adminProV2 .ap2-table tbody td button{font-size:7px;padding:4px 2px;width:100%;min-width:0}
-  .adminProV2 .ap2-table tbody td:last-child{gap:3px;padding:4px;grid-template-columns:repeat(4,minmax(0,1fr))}
-}
-</style>
-<script id="command-center-card-labels-fix">
-(function(){
-  function addLabels(){
-    document.querySelectorAll('.adminProV2 .ap2-table').forEach(function(table){
-      var heads=[].slice.call(table.querySelectorAll('thead th')).map(function(th){return th.textContent.trim()});
-      table.querySelectorAll('tbody tr').forEach(function(row){
-        [].slice.call(row.children).forEach(function(td,i){
-          if(td.tagName==='TD' && heads[i]) td.setAttribute('data-label',heads[i]);
-        });
-      });
-    });
-  }
-  addLabels();
-  new MutationObserver(addLabels).observe(document.body,{childList:true,subtree:true});
-})();
 </script>
 <style id="mobile-lifeline-users-v8">
 /* v8: Mobile Lifeline rows become readable cards; no question clipping. */
@@ -3684,3 +3668,162 @@ h1,h2,h3,h4,strong,b,label,th{color:#172033!important}p,small,.muted,td{color:#5
 button{border-radius:11px!important;font-weight:700!important}
 input,select,textarea{color:#172033!important;background:#fff!important;border:1.5px solid #d7deea!important;border-radius:10px!important}
 </style>
+
+
+<style id="aducate-english-professional-theme-v2">
+:root{--app-primary:#1769E8;--app-primary-dark:#0E4DB8;--app-primary-soft:#EAF2FF;--app-navy:#092A5E;--app-navy-deep:#061C3F;--app-bg:#F3F7FC;--app-surface:#FFFFFF;--app-ink:#12264A;--app-muted:#6B7D98;--app-border:#DFE8F5;--app-shadow:0 10px 28px rgba(9,42,94,.085);--app-green:#10A77A;--app-purple:#8053E8;--app-orange:#F59A32;--app-cyan:#20AFC2}
+html{background:var(--app-bg)!important;color-scheme:light}
+body{background:var(--app-bg)!important;color:var(--app-ink)!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important}
+body:has(#dashboard),body:has(.login-box),body:has(.login-shell),body:has(.profile-brand),body:has(.coach-container),body:has(.chat-container){background:var(--app-bg)!important}
+.card,.panel,.profile-card,.section-card,.container-card,.login-panel,.coach-container,.chat-container,.feature,.ad-card,.ad-stat,.ad-action,.ad-course,.activity-card,.transaction-card,.question-card,.quiz-card,.settings-card,.stat-card,.dashboard-card,.subscription-card{border-color:var(--app-border)!important;box-shadow:var(--app-shadow)!important}
+input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{border-color:#D6E2F3!important;color:var(--app-ink)!important;background:#fff!important;border-radius:10px!important}
+input:focus,select:focus,textarea:focus{outline:2px solid #9CC2FF!important;outline-offset:1px!important}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #1769E855!important;outline-offset:2px!important}
+.btn-green,.btn-primary,.primary,.cta,.telegram-btn,.ad-book-buy,.login-btn,.course-hero-actions button:first-child,.reference-main .wallet-transfer-btn{background:linear-gradient(135deg,#1769E8,#0E4DB8)!important;color:#fff!important;border-color:transparent!important;box-shadow:0 7px 18px rgba(23,105,232,.18)!important}
+.btn-light,.course-secondary{background:#EDF4FF!important;color:#123D80!important;border:1px solid #D7E5FC!important}
+.topbar{background:rgba(255,255,255,.97)!important;border-color:var(--app-border)!important;box-shadow:0 3px 16px rgba(9,42,94,.035)!important}
+.brand{color:var(--app-navy)!important;gap:10px!important;font-size:clamp(18px,2vw,25px)!important}
+.brand-logo-img{width:40px!important;height:40px!important;display:block!important;object-fit:cover!important;border-radius:50%!important;background:#fff!important;box-shadow:0 3px 10px rgba(9,42,94,.1)!important}
+.hero{background:radial-gradient(ellipse at 85% 15%,#DCEBFF 0,transparent 35%),linear-gradient(135deg,#FFFFFF,#EFF5FF)!important}
+.hero h1,.section-head h2{color:var(--app-navy)!important}.hero h1 span{color:var(--app-primary)!important}
+.hero-art{background:linear-gradient(145deg,#D8E8FF,#EDF5FF)!important;box-shadow:0 18px 42px rgba(9,42,94,.14)!important}
+.eyebrow{background:#EAF2FF!important;color:#1758BA!important}.cta{background:linear-gradient(115deg,#092A5E,#1769E8)!important;color:#fff!important}.cta p{color:#E5EEFF!important}
+.feature-icon.green,.feature-icon.blue,.feature-icon.purple,.feature-icon.orange{background:#EAF2FF!important;color:#1769E8!important}
+/* Main learning dashboard */
+#dashboard.reference-dashboard{background:#fff!important;border-color:var(--app-border)!important;box-shadow:var(--app-shadow)!important}
+.reference-sidebar{background:linear-gradient(180deg,#092A5E 0%,#061C3F 100%)!important;color:#fff!important}
+.reference-brand{color:#fff!important;font-size:clamp(15px,1.5vw,20px)!important;letter-spacing:-.2px}
+.reference-brand img{background:#fff!important;border-radius:50%!important}
+.reference-nav{background:transparent!important;color:#DFEAFF!important}
+.reference-nav:hover,.reference-nav.active{background:linear-gradient(105deg,#247DF0,#1760D5)!important;color:#fff!important;box-shadow:0 5px 12px rgba(23,105,232,.2)!important}
+.reference-main{background:radial-gradient(ellipse at 92% 0%,#E6F0FF 0,transparent 33%),#F5F8FD!important}
+.reference-main .ad-topbar-brand{color:var(--app-navy)!important}
+.reference-main .dashboard-topbar{background:transparent!important;border-color:var(--app-border)!important}
+.reference-main .dashboard-topbar .icon-btn{background:#fff!important;color:var(--app-navy)!important;border:1px solid var(--app-border)!important}
+.reference-main #dashboard h2,#dashboard h2{color:var(--app-navy)!important;background:none!important;-webkit-text-fill-color:currentColor!important}
+.reference-main .ad-welcome{color:var(--app-muted)!important}
+.reference-main .wallet-box,#dashboard .wallet-box,.wallet-box{background:linear-gradient(110deg,#1769E8 0%,#0E4DB8 65%,#2D86F5 100%)!important;color:#fff!important;box-shadow:0 12px 26px rgba(23,105,232,.20)!important}
+.wallet-box,.wallet-box *{color:#fff!important}
+.ad-section-title,.ad-section-title:nth-of-type(n){background:#EAF2FF!important;border-left-color:#1769E8!important}
+.ad-section-title h3{color:#092A5E!important}
+.ad-action,.ad-action:nth-child(n),.ad-course,.ad-course:nth-child(n),.ad-stat,.ad-stat:nth-child(n){background:#fff!important;border:1px solid var(--app-border)!important;box-shadow:0 5px 14px rgba(9,42,94,.045)!important;color:var(--app-ink)!important}
+.ad-action:before,.ad-action:nth-child(n):before{background:#1769E8!important}
+.ad-action:nth-child(2):before{background:#10A77A!important}.ad-action:nth-child(3):before{background:#8053E8!important}.ad-action:nth-child(4):before{background:#F59A32!important}
+.ad-action span,.ad-action strong,.ad-action div,.ad-course h4,.ad-course strong,.ad-course b,.ad-stat b{color:var(--app-ink)!important}
+.ad-stat{border-top:3px solid #1769E8!important}.ad-stat:nth-child(2){border-top-color:#10A77A!important}.ad-stat:nth-child(3){border-top-color:#8053E8!important}.ad-stat:nth-child(4){border-top-color:#F59A32!important}
+.ad-addon-card:after{background:radial-gradient(circle,#DCEBFF,transparent 68%)!important}
+.ad-book-card{background:#F8FAFF!important;border-color:#D6E4FA!important}.ad-book-price{color:#0E4DB8!important}
+#dashboard a{color:#1769E8!important}
+/* Forms, quizzes, wallet, profile, coach and administration */
+.course-hero{background:linear-gradient(135deg,#092A5E,#1769E8)!important;color:#fff!important}
+.course-hero h1,.course-hero p,.course-brand,.course-badge{color:#fff!important}
+.course-brand img,.brand-pill img,.login-logo img,.logo img{background:#fff!important}
+.brand-pill{background:#EAF2FF!important;border-color:#C8DAFA!important;color:#092A5E!important}
+.course-hero-actions button,.login-shell button[type=submit],.login-shell button:not(.course-secondary){background:linear-gradient(135deg,#1769E8,#0E4DB8)!important;color:#fff!important}
+.login-logo{background:#fff!important;border-color:#D8E5F6!important;box-shadow:0 10px 25px rgba(9,42,94,.14)!important}
+.login-shell h1,.login-shell h2,.login-box h2{color:#092A5E!important}
+.login-box,.login-shell>.container{border-color:var(--app-border)!important;box-shadow:var(--app-shadow)!important}
+.admin-brand-name{margin:-2px 0 16px;text-align:center;font-size:17px;font-weight:850;letter-spacing:.2px;color:#092A5E}
+.admin-brand-name-inline{display:block;color:#092A5E;font-size:15px;line-height:1.4}
+.profile-brand{gap:12px!important}.profile-brand img{background:#fff!important;border:1px solid var(--app-border)!important;box-shadow:0 4px 12px rgba(9,42,94,.08)!important}
+.profile-brand-copy>strong{display:block;color:#092A5E;font-size:14px;margin-bottom:3px}.profile-brand-copy h2{margin-top:0!important}
+.coach-hero,.coach-container,.chat-container{border-color:var(--app-border)!important}
+.coach-hero{background:linear-gradient(115deg,#EAF2FF,#fff)!important}
+.coach-hero h1,.coach-container h1,.coach-container h2{color:#092A5E!important}
+.reference-image-theme-coach{color:var(--app-ink)!important}
+@media(max-width:720px){.reference-main{padding:14px!important}.reference-brand{font-size:15px!important}.reference-nav{padding:9px 8px!important}.brand-logo-img{width:36px!important;height:36px!important}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Finish button and interactive-card colors without changing behavior. */
+.btn:not(.btn-light):not(.book-secondary),a.btn:not(.btn-light),.btn-quiz,.btn-learning,.btn-primary,.btn-profile,.btn-reward,.btn-withdraw,.book-btn,.book-primary,.subscription-submit,.subscription-pay-btn,.ad-addon-submit,.activity-action,.login-btn,.admin-users-btn.active,.ap2-btn:not(.ap2-green):not(.ap2-red):not(.ap2-danger){background:linear-gradient(135deg,#1769E8,#0E4DB8)!important;color:#fff!important;border-color:transparent!important;box-shadow:0 6px 15px rgba(23,105,232,.14)!important}
+.btn-spin,.btn-bonus,.btn-light,.book-secondary,.course-secondary{background:#EAF2FF!important;color:#123D80!important;border:1px solid #D3E3FC!important;box-shadow:none!important}
+.icon-btn{background:#fff!important;color:#092A5E!important;border:1px solid #DFE8F5!important;box-shadow:0 3px 10px rgba(9,42,94,.06)!important}
+.activity-btn{background:#fff!important;color:#12264A!important;border:1px solid #DFE8F5!important;border-top:3px solid #1769E8!important;box-shadow:0 6px 18px rgba(9,42,94,.07)!important}
+.activity-btn.a2{border-top-color:#20AFC2!important}.activity-btn.a3{border-top-color:#F59A32!important}.activity-btn.a4{border-top-color:#10A77A!important}.activity-btn.a5{border-top-color:#8053E8!important}.activity-btn.a6{border-top-color:#F59A32!important}.activity-btn.a7{border-top-color:#10A77A!important}.activity-btn.a8{border-top-color:#20AFC2!important}
+.activity-btn small{color:#6B7D98!important;opacity:1!important}
+.activity-title{color:#092A5E!important}.activity-question{color:#12264A!important}
+.activity-option{background:#fff!important;border-color:#D6E2F3!important;color:#12264A!important}.activity-option:hover,.option-btn:hover{background:#EAF2FF!important;border-color:#1769E8!important;color:#092A5E!important}
+.word-chip{background:#EAF2FF!important;color:#123D80!important}.answer-box{background:#F6F9FF!important;border-color:#9DBDF4!important;color:#12264A!important}
+.kbc-quiz-screen{background:#F3F7FC!important;color:#12264A!important}.kbc-shell{background:#fff!important;border-color:#DFE8F5!important;box-shadow:0 12px 35px rgba(9,42,94,.10)!important}.kbc-topbar{background:#092A5E!important;color:#fff!important;border-bottom-color:#17477F!important}.kbc-topbar *{color:inherit!important}.kbc-question-wrap{color:#12264A!important}.kbc-question-title{color:#092A5E!important}.kbc-question-no{background:#EAF2FF!important;color:#1758BA!important}.kbc-lifeline{background:#F7FAFF!important;border-color:#D6E2F3!important;color:#123D80!important}.kbc-lifeline span{color:#5977A5!important}.kbc-lifeline:hover{border-color:#1769E8!important;box-shadow:0 0 16px rgba(23,105,232,.16)!important}.option-btn{background:#fff!important;border-color:#D6E2F3!important;color:#12264A!important}.kbc-balance{color:#0E4DB8!important}
+.admin-users-btn{border-radius:10px!important}.admin-users-btn.active{background:linear-gradient(135deg,#1769E8,#0E4DB8)!important;color:#fff!important}
+.profile-panel button,.profile-section button,.profile-card button{background:linear-gradient(135deg,#1769E8,#0E4DB8)!important;color:#fff!important}
+.coach-container button,.chat-container button,.coach-hero button{background:linear-gradient(135deg,#1769E8,#0E4DB8)!important;color:#fff!important;border-color:transparent!important}
+.course-brand span{letter-spacing:.6px!important}.admin-brand-name-inline{letter-spacing:.1px!important}
+
+</style>
+
+<style id="command-center-mobile-card-fix">
+/* Command Center compact card layout */
+.ap2-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.ap2-tabs button{min-width:0;width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px;padding:10px 8px}
+.ap2-flex{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ap2-tablewrap{overflow:visible}
+.ap2-table{width:100%;table-layout:fixed}
+.ap2-table th,.ap2-table td{word-break:break-word;overflow-wrap:anywhere}
+.ap2-table td:last-child{white-space:normal}
+.ap2-table td button{max-width:100%;white-space:nowrap;font-size:12px;padding:7px 8px}
+@media(max-width:800px){
+  .adminProV2 .ap2-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+  .adminProV2 .ap2-card{padding:8px 5px;border-radius:10px;min-height:58px}
+  .adminProV2 .ap2-lbl{font-size:9px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .adminProV2 .ap2-val{font-size:15px;line-height:1.1;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .adminProV2 .ap2-tabs{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+  .adminProV2 .ap2-tabs button{font-size:9px;line-height:1.1;padding:7px 3px;border-radius:8px;min-height:34px}
+  .adminProV2 .ap2-pane{padding:9px;margin-top:8px;border-radius:10px}
+  .adminProV2 .ap2-pane h3{font-size:13px;margin:4px 0 8px}
+  .adminProV2 .ap2-flex{gap:5px}
+  .adminProV2 .ap2-input{min-width:0;flex:1 1 100%;font-size:11px;padding:8px}
+  .adminProV2 .ap2-flex .ap2-btn{font-size:9px;padding:7px 8px}
+  /* Every Command Center table row becomes a compact 4-column card. */
+  .adminProV2 .ap2-table{border-collapse:separate;border-spacing:0 6px;table-layout:auto}
+  .adminProV2 .ap2-table thead{display:none}
+  .adminProV2 .ap2-table tbody{display:block}
+  .adminProV2 .ap2-table tbody tr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px;box-shadow:0 3px 10px rgba(15,23,42,.07);margin-bottom:6px}
+  .adminProV2 .ap2-table tbody td{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:6px 5px;border:1px solid var(--border);border-radius:7px;background:var(--surface)!important;color:var(--text)!important;font-size:9px;line-height:1.15;overflow:hidden}
+  .adminProV2 .ap2-table tbody td::before{content:attr(data-label);display:block;font-size:7px;font-weight:800;color:var(--muted);text-transform:uppercase;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .adminProV2 .ap2-table tbody td:empty{display:none}
+  .adminProV2 .ap2-table tbody td:last-child{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:stretch;gap:4px}
+  .adminProV2 .ap2-table tbody td:last-child::before{display:none}
+  .adminProV2 .ap2-table tbody td button{font-size:8px;padding:5px 3px;max-width:100%;width:100%;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .adminProV2 .ap2-table tbody td a{font-size:8px;word-break:break-all}
+  .adminProV2 .ap2-table tbody td strong{font-size:9px}
+  .adminProV2 .ap2-table tbody td small{font-size:7px}
+  .adminProV2 .ap2-head{gap:6px;flex-wrap:wrap}
+  .adminProV2 .ap2-head h2{font-size:17px}
+  .adminProV2 .ap2-head .ap2-flex{width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+  .adminProV2 .ap2-head .ap2-flex button{font-size:9px;padding:7px 3px}
+}
+@media(max-width:520px){
+  body{padding:8px}
+  .adminProV2 .ap2-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+  .adminProV2 .ap2-card{padding:6px 3px;min-height:50px}
+  .adminProV2 .ap2-lbl{font-size:7px}
+  .adminProV2 .ap2-val{font-size:12px}
+  .adminProV2 .ap2-tabs{grid-template-columns:repeat(4,minmax(0,1fr));gap:3px}
+  .adminProV2 .ap2-tabs button{font-size:7px;padding:6px 2px;min-height:30px}
+  .adminProV2 .ap2-table tbody tr{gap:3px;padding:4px}
+  .adminProV2 .ap2-table tbody td{padding:5px 3px;font-size:7px;border-radius:6px}
+  .adminProV2 .ap2-table tbody td::before{font-size:6px}
+  .adminProV2 .ap2-table tbody td button{font-size:7px;padding:4px 2px;width:100%;min-width:0}
+  .adminProV2 .ap2-table tbody td:last-child{gap:3px;padding:4px;grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+</style>
+<script id="command-center-card-labels-fix">
+(function(){
+  function addLabels(){
+    document.querySelectorAll('.adminProV2 .ap2-table').forEach(function(table){
+      var heads=[].slice.call(table.querySelectorAll('thead th')).map(function(th){return th.textContent.trim()});
+      table.querySelectorAll('tbody tr').forEach(function(row){
+        [].slice.call(row.children).forEach(function(td,i){
+          if(td.tagName==='TD' && heads[i]) td.setAttribute('data-label',heads[i]);
+        });
+      });
+    });
+  }
+  addLabels();
+  new MutationObserver(addLabels).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
+
+</body>
+</html>
