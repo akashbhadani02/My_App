@@ -46,23 +46,63 @@ router.post("/signup", async (req, res) => {
 
     try {
 
-        const { name, mobile, password } = req.body;
+        const rawName = typeof req.body.name === "string" ? req.body.name.trim().replace(/\s+/g, " ") : "";
+        const rawMobile = typeof req.body.mobile === "string" || typeof req.body.mobile === "number"
+            ? String(req.body.mobile).trim() : "";
+        const password = typeof req.body.password === "string" ? req.body.password : "";
 
-        const user = await User.findOne({ mobile });
-
-        if (user) {
+        // Validate each field on the server; browser-only validation can be bypassed.
+        if (!rawName || rawName.length < 2 || rawName.length > 60 ||
+            !/^[\p{L}][\p{L}\p{M} .'-]*$/u.test(rawName)) {
             return res.status(400).json({
                 success: false,
-                message: "Mobile already registered"
+                message: "યોગ્ય નામ લખો. નામમાં માત્ર અક્ષરો અને જરૂરી space, dot, apostrophe અથવા hyphen વાપરો."
             });
         }
 
+        // Indian mobile numbers: exactly 10 digits, starting from 6-9.
+        const mobile = rawMobile.replace(/[\s-]/g, "");
+        if (!/^[6-9]\d{9}$/.test(mobile)) {
+            return res.status(400).json({
+                success: false,
+                message: "યોગ્ય 10 અંકનો ભારતીય મોબાઇલ નંબર નાખો."
+            });
+        }
+
+        if (password.length < 8 || password.length > 128) {
+            return res.status(400).json({
+                success: false,
+                message: "પાસવર્ડ ઓછામાં ઓછા 8 અક્ષરનો હોવો જોઈએ."
+            });
+        }
+
+        const nameKey = rawName.toLocaleLowerCase("en").replace(/\s+/g, " ");
+        const [mobileUser, nameUser] = await Promise.all([
+            User.findOne({ mobile }),
+            User.findOne({ $or: [{ nameKey }, { name: { $regex: "^" + rawName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "$", $options: "i" } }] }).select("_id").lean()
+        ]);
+
+        if (mobileUser) {
+            return res.status(400).json({
+                success: false,
+                message: "આ મોબાઇલ નંબર પહેલેથી રજીસ્ટર છે. બીજો મોબાઇલ નંબર વાપરો."
+            });
+        }
+        if (nameUser) {
+            return res.status(400).json({
+                success: false,
+                message: "આ નામ પહેલેથી રજીસ્ટર છે. કૃપા કરીને અલગ નામ વાપરો."
+            });
+        }
+
+        const name = rawName;
         const hash = await bcrypt.hash(password, 10);
 
         const demoStartedAt = new Date();
         const demoExpiresAt = new Date(demoStartedAt.getTime() + 24 * 60 * 60 * 1000);
         const newUser = new User({
             name,
+            nameKey,
             mobile,
             password: hash,
             passwordEncrypted: encryptStudentPassword(password),
@@ -81,12 +121,20 @@ router.post("/signup", async (req, res) => {
         });
 
     } catch (err) {
-
+        if (err && err.code === 11000) {
+            const field = Object.keys(err.keyPattern || {})[0];
+            return res.status(400).json({
+                success: false,
+                message: field === "nameKey"
+                    ? "આ નામ પહેલેથી રજીસ્ટર છે. કૃપા કરીને અલગ નામ વાપરો."
+                    : "આ મોબાઇલ નંબર પહેલેથી રજીસ્ટર છે."
+            });
+        }
+        console.error("Signup error:", err.message);
         res.status(500).json({
             success: false,
-            message: err.message
+            message: "રજીસ્ટ્રેશન થઈ શક્યું નથી. ફરી પ્રયાસ કરો."
         });
-
     }
 
 });

@@ -8,11 +8,20 @@ const userSchema = new mongoose.Schema(
             trim: true,
         },
 
+        // Normalized name key prevents case/spacing variants for new registrations.
+        nameKey: {
+            type: String,
+            unique: true,
+            sparse: true,
+            trim: true,
+        },
+
         mobile: {
             type: String,
             required: true,
             unique: true,
             trim: true,
+            match: /^[6-9]\\d{9}$/,
         },
 
         password: {
