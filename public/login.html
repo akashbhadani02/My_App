@@ -734,11 +734,12 @@ Don't have an account?
 
 <div id="signupForm">
 
-<input type="text" id="signupName" placeholder="Full Name" autocomplete="name" maxlength="60" required>
+<input type="text" id="signupName" placeholder="Full Name" autocomplete="name" minlength="2" maxlength="60" required>
 
 <input type="tel" id="signupMobile" placeholder="10-digit Mobile Number" inputmode="numeric" autocomplete="tel-national" maxlength="10" pattern="[6-9][0-9]{9}" required>
 
 <input type="password" id="signupPassword" placeholder="Password (minimum 8 characters)" autocomplete="new-password" minlength="8" maxlength="128" required>
+<div style="font-size:12px;color:#475569;margin:0 0 10px">OTP અથવા Email verificationની જરૂર નથી. સુરક્ષા માટે યોગ્ય માહિતી નાખો.</div>
 
 <button onclick="signup()">🎁 Create Account & Start 1-Day Free Demo</button>
 
@@ -849,65 +850,25 @@ document.getElementById("message").innerHTML="";
 }
 
 async function signup(){
-
-const name=document.getElementById("signupName").value.trim().replace(/\s+/g, " ");
-const mobile=document.getElementById("signupMobile").value.trim();
-const password=document.getElementById("signupPassword").value;
-const message=document.getElementById("message");
-
-if(!/^[\p{L}][\p{L}\p{M} .'-]{10,59}$/u.test(name)){
-    message.textContent="ERROR1";
-    return;
+    const name=document.getElementById("signupName").value.trim().replace(/\s+/g, " ");
+    const mobile=document.getElementById("signupMobile").value.trim();
+    const password=document.getElementById("signupPassword").value;
+    const message=document.getElementById("message");
+    if(!/^[\p{L}][\p{L}\p{M} .'-]{1,59}$/u.test(name)){ message.textContent="યોગ્ય નામ લખો (2 થી 60 અક્ષર)."; return; }
+    if(!/^[6-9]\d{9}$/.test(mobile)){ message.textContent="યોગ્ય 10 અંકનો ભારતીય મોબાઇલ નંબર નાખો."; return; }
+    if(password.length<8 || password.length>128){ message.textContent="પાસવર્ડ ઓછામાં ઓછા 8 અક્ષરનો હોવો જોઈએ."; return; }
+    message.textContent="રજીસ્ટ્રેશન થઈ રહ્યું છે...";
+    try {
+        const res=await fetch(API+"/signup",{ method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({name,mobile,password}) });
+        const data=await res.json();
+        if(data.success){
+            message.textContent="✅ " + data.message;
+            document.getElementById("signupName").value="";
+            document.getElementById("signupMobile").value="";
+            document.getElementById("signupPassword").value="";
+        } else message.textContent="❌ " + (data.message || "રજીસ્ટ્રેશન થઈ શક્યું નથી.");
+    } catch(error){ message.textContent="❌ નેટવર્ક સમસ્યા. ફરી પ્રયાસ કરો."; }
 }
-if(!/^[6-9]\d{9}$/.test(mobile)){
-    message.textContent="ERROR2";
-    return;
-}
-if(password.length<8){
-    message.textContent="ERROR3";
-    return;
-}
-message.textContent="રજીસ્ટ્રેશન થઈ રહ્યું છે...";
-
-try {
-const res=await fetch(API+"/signup",{
-
-method:"POST",
-
-headers:{
-
-"Content-Type":"application/json"
-
-},
-
-body:JSON.stringify({
-
-name,
-
-mobile,
-
-password
-
-})
-
-});
-
-const data=await res.json();
-
-document.getElementById("message").innerHTML=data.message;
-
-if(data.success){
-    message.textContent = "🎉 " + (data.message || "1 Day Free Demo activated. Login to start.");
-    showLogin();
-} else {
-    message.textContent = "❌ " + (data.message || "રજીસ્ટ્રેશન થઈ શક્યું નથી.");
-}
-} catch (error) {
-    message.textContent = "❌ નેટવર્ક સમસ્યા. ફરી પ્રયાસ કરો.";
-}
-
-}
-
 showCourseOverview();
 
 async function requestNotificationPermissionBeforeLogin(){
