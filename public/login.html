@@ -856,15 +856,15 @@ const password=document.getElementById("signupPassword").value;
 const message=document.getElementById("message");
 
 if(!/^[\p{L}][\p{L}\p{M} .'-]{10,59}$/u.test(name)){
-    message.textContent="ERROR";
+    message.textContent="ERROR1";
     return;
 }
 if(!/^[6-9]\d{9}$/.test(mobile)){
-    message.textContent="ERROR";
+    message.textContent="ERROR2";
     return;
 }
 if(password.length<8){
-    message.textContent="ERROR";
+    message.textContent="ERROR3";
     return;
 }
 message.textContent="રજીસ્ટ્રેશન થઈ રહ્યું છે...";
