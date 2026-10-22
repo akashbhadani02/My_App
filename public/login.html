@@ -856,15 +856,15 @@ const password=document.getElementById("signupPassword").value;
 const message=document.getElementById("message");
 
 if(!/^[\p{L}][\p{L}\p{M} .'-]{1,59}$/u.test(name)){
-    message.textContent="યોગ્ય નામ લખો (2 થી 60 અક્ષર).";
+    message.textContent="ERROR";
     return;
 }
 if(!/^[6-9]\d{9}$/.test(mobile)){
-    message.textContent="યોગ્ય 10 અંકનો ભારતીય મોબાઇલ નંબર નાખો.";
+    message.textContent="ERROR";
     return;
 }
 if(password.length<8){
-    message.textContent="પાસવર્ડ ઓછામાં ઓછા 8 અક્ષરનો હોવો જોઈએ.";
+    message.textContent="ERROR";
     return;
 }
 message.textContent="રજીસ્ટ્રેશન થઈ રહ્યું છે...";
