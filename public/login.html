@@ -855,7 +855,7 @@ const mobile=document.getElementById("signupMobile").value.trim();
 const password=document.getElementById("signupPassword").value;
 const message=document.getElementById("message");
 
-if(!/^[\p{L}][\p{L}\p{M} .'-]{1,59}$/u.test(name)){
+if(!/^[\p{L}][\p{L}\p{M} .'-]{10,59}$/u.test(name)){
     message.textContent="ERROR";
     return;
 }
