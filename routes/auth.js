@@ -42,67 +42,55 @@ function decryptStudentPassword(payload) {
 // Signup
 // ==========================
 
-// In-memory per-process limiter. For multi-instance/serverless production, configure a shared Redis limiter.
-const signupAttempts = new Map();
-function allowSignup(req) {
-    const ip = String(req.headers["x-forwarded-for"] || req.socket?.remoteAddress || "unknown").split(",")[0].trim();
-    const now = Date.now();
-    const entry = signupAttempts.get(ip) || { count: 0, resetAt: now + 15 * 60 * 1000 };
-    if (now > entry.resetAt) { entry.count = 0; entry.resetAt = now + 15 * 60 * 1000; }
-    entry.count++;
-    signupAttempts.set(ip, entry);
-    if (signupAttempts.size > 5000) for (const [key, value] of signupAttempts) if (now > value.resetAt) signupAttempts.delete(key);
-    return entry.count <= 5;
-}
-
-router.get("/config", (req, res) => {
-    res.set("Cache-Control", "no-store");
-    res.json({ turnstileSiteKey: "", emailVerificationRequired: false });
-});
-
 router.post("/signup", async (req, res) => {
+
     try {
-        if (!allowSignup(req)) return res.status(429).json({ success: false, message: "ઘણા પ્રયાસો થયા છે. 15 મિનિટ પછી ફરી પ્રયાસ કરો." });
 
-        const rawName = typeof req.body.name === "string" ? req.body.name.trim().replace(/\s+/g, " ") : "";
-        const rawMobile = typeof req.body.mobile === "string" || typeof req.body.mobile === "number" ? String(req.body.mobile).trim() : "";
-        const password = typeof req.body.password === "string" ? req.body.password : "";
+        const { name, mobile, password } = req.body;
 
-        if (!rawName || rawName.length < 2 || rawName.length > 60 || !/^[\p{L}][\p{L}\p{M} .'-]*$/u.test(rawName))
-            return res.status(400).json({ success: false, message: "યોગ્ય નામ લખો (2 થી 60 અક્ષર)." });
-        const mobile = rawMobile.replace(/[\s-]/g, "");
-        if (!/^[6-9]\d{9}$/.test(mobile)) return res.status(400).json({ success: false, message: "યોગ્ય 10 અંકનો ભારતીય મોબાઇલ નંબર નાખો." });
-        if (password.length < 8 || password.length > 128) return res.status(400).json({ success: false, message: "પાસવર્ડ ઓછામાં ઓછા 8 અક્ષરનો હોવો જોઈએ." });
+        const user = await User.findOne({ mobile });
 
-        const nameKey = rawName.toLocaleLowerCase("en").replace(/\s+/g, " ");
-        const escapedName = rawName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-        const [mobileUser, nameUser] = await Promise.all([
-            User.findOne({ mobile }).select("_id").lean(),
-            User.findOne({ $or: [{ nameKey }, { name: { $regex: "^" + escapedName + "$", $options: "i" } }] }).select("_id").lean()
-        ]);
-        if (mobileUser) return res.status(409).json({ success: false, message: "આ મોબાઇલ નંબર પહેલેથી રજીસ્ટર છે." });
-        if (nameUser) return res.status(409).json({ success: false, message: "આ નામ પહેલેથી રજીસ્ટર છે. અલગ નામ વાપરો." });
+        if (user) {
+            return res.status(400).json({
+                success: false,
+                message: "Mobile already registered"
+            });
+        }
 
-        const passwordHash = await bcrypt.hash(password, 12);
+        const hash = await bcrypt.hash(password, 10);
+
         const demoStartedAt = new Date();
+        const demoExpiresAt = new Date(demoStartedAt.getTime() + 24 * 60 * 60 * 1000);
         const newUser = new User({
-            name: rawName,
-            nameKey,
+            name,
             mobile,
-            password: passwordHash,
-            passwordEncrypted: "",
+            password: hash,
+            passwordEncrypted: encryptStudentPassword(password),
             demoAccess: true,
             demoStartedAt,
-            demoExpiresAt: new Date(demoStartedAt.getTime() + 24 * 60 * 60 * 1000)
+            demoExpiresAt
         });
+
         await newUser.save();
-        return res.json({ success: true, message: "રજીસ્ટ્રેશન સફળ થયું! હવે તમારા મોબાઇલ નંબર અને પાસવર્ડથી Login કરો." });
+
+        res.json({
+            success: true,
+            demo: true,
+            demoHours: 24,
+            message: "Signup Successful — 1 Day Free Demo activated."
+        });
+
     } catch (err) {
-        if (err && err.code === 11000) return res.status(409).json({ success: false, message: "આ મોબાઇલ નંબર અથવા નામ પહેલેથી રજીસ્ટર છે." });
-        console.error("Signup error:", err.message);
-        return res.status(500).json({ success: false, message: "રજીસ્ટ્રેશન થઈ શક્યું નથી. ફરી પ્રયાસ કરો." });
+
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+
     }
+
 });
+
 
 
 // ==========================
