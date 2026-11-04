@@ -3691,3 +3691,25 @@ h1,h2,h3,h4,strong,b,label,th{color:#172033!important}p,small,.muted,td{color:#5
 button{border-radius:11px!important;font-weight:700!important}
 input,select,textarea{color:#172033!important;background:#fff!important;border:1.5px solid #d7deea!important;border-radius:10px!important}
 </style>
+
+<style id="admin-order-buttons-layout">
+#adminOrderButtons{position:fixed;right:18px;bottom:18px;z-index:9998;display:flex;align-items:center;justify-content:flex-end;gap:8px;max-width:calc(100vw - 24px)}
+#adminOrderButtons #tabletAdminFab,#adminOrderButtons #bookAdminFab{position:static!important;right:auto!important;bottom:auto!important;z-index:auto!important;white-space:nowrap;max-width:100%;font-size:clamp(11px,2.5vw,14px);padding:11px 13px!important;border-radius:12px!important}
+@media(max-width:420px){#adminOrderButtons{right:10px;bottom:12px;left:10px;justify-content:center}#adminOrderButtons #tabletAdminFab,#adminOrderButtons #bookAdminFab{padding:10px 9px!important;font-size:11px}}
+</style>
+<script id="admin-order-buttons-layout-js">
+(function(){
+  function placeAdminOrderButtons(){
+    const tablet=document.getElementById('tabletAdminFab');
+    const book=document.getElementById('bookAdminFab');
+    if(!tablet||!book||document.getElementById('adminOrderButtons'))return;
+    const bar=document.createElement('div');
+    bar.id='adminOrderButtons';
+    book.parentNode.insertBefore(bar,book);
+    bar.appendChild(tablet);
+    bar.appendChild(book);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',placeAdminOrderButtons);
+  else placeAdminOrderButtons();
+})();
+</script>
