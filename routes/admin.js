@@ -2044,6 +2044,20 @@ router.put("/spin-prizes", adminAuth, async (req, res) => {
     } catch (err) { res.status(500).json({ success:false, message:err.message }); }
 });
 
+// ================= PHYSICAL TABLET ORDERS =================
+router.get("/tablet-purchases", adminAuth, async (req,res)=>{
+  try{const users=await User.find({isDeleted:{$ne:true},"tabletPurchase.status":{$in:["pending","approved","rejected"]}}).select("name mobile tabletPurchase").sort({"tabletPurchase.requestedAt":-1}).lean();res.set("Cache-Control","no-store");res.json({success:true,users});}
+  catch(err){res.status(500).json({success:false,message:err.message});}
+});
+router.put("/tablet-purchase/:id/approve", adminAuth, async (req,res)=>{
+  try{const user=await User.findById(req.params.id);if(!user)return res.status(404).json({success:false,message:"Student not found"});if(!user.tabletPurchase||user.tabletPurchase.status!=="pending")return res.status(400).json({success:false,message:"No pending tablet order."});user.tabletPurchase.status="approved";user.tabletPurchase.price=4999;user.tabletPurchase.approvedAt=new Date();user.tabletPurchase.adminNote=String(req.body?.adminNote||"Order verified and approved. Arrange dispatch.").trim();await user.save();res.json({success:true,message:"Tablet order approved."});}
+  catch(err){res.status(500).json({success:false,message:err.message});}
+});
+router.put("/tablet-purchase/:id/reject", adminAuth, async (req,res)=>{
+  try{const user=await User.findById(req.params.id);if(!user)return res.status(404).json({success:false,message:"Student not found"});if(user.tabletPurchase?.paymentMethod==="WALLET")return res.status(400).json({success:false,message:"Wallet-paid order cannot be rejected here. Refund the wallet amount manually before changing its status."});user.tabletPurchase.status="rejected";user.tabletPurchase.adminNote=String(req.body?.adminNote||"Payment could not be verified.").trim();await user.save();res.json({success:true,message:"Tablet order rejected."});}
+  catch(err){res.status(500).json({success:false,message:err.message});}
+});
+
 // ================= BOOK PURCHASE MANAGEMENT =================
 router.get("/book-purchases", adminAuth, async (req, res) => {
     try {

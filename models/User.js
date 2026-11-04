@@ -89,6 +89,20 @@ const userSchema = new mongoose.Schema(
             access: { type: Boolean, default: false }
         },
 
+        // Physical Android tablet order — fixed price ₹4,999
+        tabletPurchase: {
+            status: { type: String, enum: ["none", "pending", "approved", "rejected"], default: "none" },
+            price: { type: Number, default: 4999 },
+            paymentReference: { type: String, default: "" },
+            paymentMethod: { type: String, enum: ["UPI", "WALLET", ""], default: "" },
+            paymentScreenshot: { type: String, default: "" },
+            paymentScreenshotName: { type: String, default: "" },
+            shippingAddress: { type: String, default: "", maxlength: 1000 },
+            requestedAt: { type: Date, default: null },
+            approvedAt: { type: Date, default: null },
+            adminNote: { type: String, default: "" }
+        },
+
         quizScore: {
             type: Number,
             default: 0,
