@@ -2050,8 +2050,35 @@ router.get("/tablet-purchases", adminAuth, async (req,res)=>{
   catch(err){res.status(500).json({success:false,message:err.message});}
 });
 router.put("/tablet-purchase/:id/approve", adminAuth, async (req,res)=>{
-  try{const user=await User.findById(req.params.id);if(!user)return res.status(404).json({success:false,message:"Student not found"});if(!user.tabletPurchase||user.tabletPurchase.status!=="pending")return res.status(400).json({success:false,message:"No pending tablet order."});user.tabletPurchase.status="approved";user.tabletPurchase.price=4999;user.tabletPurchase.approvedAt=new Date();user.tabletPurchase.adminNote=String(req.body?.adminNote||"Order verified and approved. Arrange dispatch.").trim();await user.save();res.json({success:true,message:"Tablet order approved."});}
-  catch(err){res.status(500).json({success:false,message:err.message});}
+  try{
+    const rawDate=String(req.body?.finalDeliveryDate||"").trim();
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(rawDate)) return res.status(400).json({success:false,message:"Please provide the final delivery date (YYYY-MM-DD)."});
+    const deliveryDate=new Date(rawDate+"T12:00:00.000Z");
+    if(Number.isNaN(deliveryDate.getTime()) || deliveryDate.toISOString().slice(0,10)!==rawDate) return res.status(400).json({success:false,message:"Invalid final delivery date."});
+    const user=await User.findById(req.params.id);
+    if(!user)return res.status(404).json({success:false,message:"Student not found"});
+    if(!user.tabletPurchase||user.tabletPurchase.status!=="pending")return res.status(400).json({success:false,message:"No pending tablet order."});
+    user.tabletPurchase.status="approved";user.tabletPurchase.price=4999;user.tabletPurchase.approvedAt=new Date();user.tabletPurchase.finalDeliveryDate=deliveryDate;
+    user.tabletPurchase.adminNote=String(req.body?.adminNote||"Order verified and approved.").trim();
+    await user.save();res.json({success:true,message:"Tablet order approved with final delivery date.",finalDeliveryDate:rawDate});
+  }catch(err){res.status(500).json({success:false,message:err.message});}
+});
+router.delete("/tablet-purchase/:id", adminAuth, async (req,res)=>{
+  try{
+    const user=await User.findById(req.params.id);
+    if(!user)return res.status(404).json({success:false,message:"Student not found"});
+    const order=user.tabletPurchase;
+    if(!order || !["pending","approved","rejected"].includes(order.status)) return res.status(404).json({success:false,message:"Tablet request not found."});
+    // Wallet-funded requests are refunded when the admin deletes the order.
+    if(order.paymentMethod==="WALLET"){
+      const refund=Number(order.price||4999);
+      user.wallet=Math.round((Number(user.wallet||0)+refund)*100)/100;
+      user.walletTransactions=user.walletTransactions||[];
+      user.walletTransactions.push({time:new Date(),type:"CREDIT",amount:refund,reason:"Tablet order deleted by admin — wallet refund",adminId:"SYSTEM"});
+    }
+    user.tabletPurchase={status:"none",price:4999,paymentReference:"",paymentMethod:"",paymentScreenshot:"",paymentScreenshotName:"",shippingAddress:"",requestedAt:null,approvedAt:null,finalDeliveryDate:null,adminNote:""};
+    await user.save();res.json({success:true,message:order.paymentMethod==="WALLET"?"Tablet request deleted and wallet payment refunded.":"Tablet request deleted."});
+  }catch(err){res.status(500).json({success:false,message:err.message});}
 });
 router.put("/tablet-purchase/:id/reject", adminAuth, async (req,res)=>{
   try{const user=await User.findById(req.params.id);if(!user)return res.status(404).json({success:false,message:"Student not found"});if(user.tabletPurchase?.paymentMethod==="WALLET")return res.status(400).json({success:false,message:"Wallet-paid order cannot be rejected here. Refund the wallet amount manually before changing its status."});user.tabletPurchase.status="rejected";user.tabletPurchase.adminNote=String(req.body?.adminNote||"Payment could not be verified.").trim();await user.save();res.json({success:true,message:"Tablet order rejected."});}

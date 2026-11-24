@@ -100,6 +100,7 @@ const userSchema = new mongoose.Schema(
             shippingAddress: { type: String, default: "", maxlength: 1000 },
             requestedAt: { type: Date, default: null },
             approvedAt: { type: Date, default: null },
+            finalDeliveryDate: { type: Date, default: null },
             adminNote: { type: String, default: "" }
         },
 
