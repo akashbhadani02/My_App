@@ -2076,7 +2076,7 @@ router.delete("/tablet-purchase/:id", adminAuth, async (req,res)=>{
       user.walletTransactions=user.walletTransactions||[];
       user.walletTransactions.push({time:new Date(),type:"CREDIT",amount:refund,reason:"Tablet order deleted by admin — wallet refund",adminId:"SYSTEM"});
     }
-    user.tabletPurchase={status:"none",price:4999,paymentReference:"",paymentMethod:"",paymentScreenshot:"",paymentScreenshotName:"",shippingAddress:"",requestedAt:null,approvedAt:null,finalDeliveryDate:null,adminNote:""};
+    user.tabletPurchase={status:"none",price:4999,paymentReference:"",paymentMethod:"",paymentScreenshot:"",paymentScreenshotName:"",studentPhoto:"",shippingAddress:"",requestedAt:null,approvedAt:null,finalDeliveryDate:null,adminNote:""};
     await user.save();res.json({success:true,message:order.paymentMethod==="WALLET"?"Tablet request deleted and wallet payment refunded.":"Tablet request deleted."});
   }catch(err){res.status(500).json({success:false,message:err.message});}
 });
