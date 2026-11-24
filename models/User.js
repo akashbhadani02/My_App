@@ -98,6 +98,7 @@ const userSchema = new mongoose.Schema(
             paymentScreenshot: { type: String, default: "" },
             paymentScreenshotName: { type: String, default: "" },
             studentPhoto: { type: String, default: "" },
+            studentMarksheet: { type: String, default: "" },
             shippingAddress: { type: String, default: "", maxlength: 1000 },
             requestedAt: { type: Date, default: null },
             approvedAt: { type: Date, default: null },
