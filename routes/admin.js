@@ -2063,6 +2063,22 @@ router.put("/tablet-purchase/:id/approve", adminAuth, async (req,res)=>{
     await user.save();res.json({success:true,message:"Tablet order approved with final delivery date.",finalDeliveryDate:rawDate});
   }catch(err){res.status(500).json({success:false,message:err.message});}
 });
+router.put("/tablet-purchase/:id/cancel", adminAuth, async (req,res)=>{
+  try{
+    const user=await User.findById(req.params.id);
+    if(!user)return res.status(404).json({success:false,message:"Student not found"});
+    const order=user.tabletPurchase;
+    if(!order || !["pending","approved"].includes(order.status))return res.status(400).json({success:false,message:"Only pending or approved orders can be cancelled."});
+    if(order.paymentMethod==="WALLET" && order.status!=="cancelled"){
+      const refund=Number(order.price||4999);
+      user.wallet=Math.round((Number(user.wallet||0)+refund)*100)/100;
+      user.walletTransactions=user.walletTransactions||[];
+      user.walletTransactions.push({time:new Date(),type:"CREDIT",amount:refund,reason:"Tablet order cancelled by admin — wallet refund",adminId:"SYSTEM"});
+    }
+    order.status="cancelled"; order.cancelledAt=new Date(); order.adminNote=String(req.body?.adminNote||"Order cancelled by admin.").trim();
+    await user.save();res.json({success:true,message:order.paymentMethod==="WALLET"?"Order cancelled and wallet payment refunded.":"Order cancelled. UPI refund must be handled separately."});
+  }catch(err){res.status(500).json({success:false,message:err.message});}
+});
 router.delete("/tablet-purchase/:id", adminAuth, async (req,res)=>{
   try{
     const user=await User.findById(req.params.id);
