@@ -17,35 +17,42 @@ router.post('/referral/apply',auth,async(req,res)=>{try{const u=await me(req.use
 router.post('/coupon',auth,async(req,res)=>{
   try{
     const u=await me(req.user.id);
-    const c=String(req.body.code||'').trim().toUpperCase();
+    const c=String(req.body.code||'').trim().toUpperCase().replace(/\s+/g,'');
     if(!c) return res.status(400).json({success:false,message:'Coupon code required.'});
-    // Coupons are single-use globally. Once successfully redeemed, they are
-    // removed from the admin list so only still-available coupons remain.
-    const coupon=await Coupon.findOneAndDelete({code:c,active:true});
-    if(!coupon) return res.status(400).json({success:false,message:'Invalid or already used coupon.'});
-    if((u.couponsUsed||[]).includes(c)) {
-      // This should normally be impossible because the coupon is deleted on
-      // first use, but restore it safely if an old user record contains it.
-      await Coupon.create({code:c,reward:coupon.reward,active:true}).catch(()=>{});
-      return res.status(400).json({success:false,message:'Coupon already used.'});
-    }
+
+    // The same active coupon is available to every student, but each account
+    // can redeem a particular code only once. The coupon stays active until
+    // it is never auto-deleted: only the admin's manual DELETE action removes it.
+    const coupon=await Coupon.findOne({code:c,active:true}).lean();
+    if(!coupon) return res.status(400).json({success:false,message:'Invalid or expired coupon code.'});
+    // A single-user coupon can only be redeemed by the student selected by admin.
+    if(coupon.scope==='single' && String(coupon.targetUser||'')!==String(u._id))
+      return res.status(403).json({success:false,message:'This coupon is reserved for another student.'});
     const reward=Number(coupon.reward||0);
-    if(!Number.isFinite(reward)||reward<=0){
-      await Coupon.create({code:c,reward:coupon.reward,active:true}).catch(()=>{});
+    if(!Number.isFinite(reward)||reward<=0)
       return res.status(400).json({success:false,message:'Invalid coupon reward.'});
+
+    // Atomic account update prevents the same student redeeming a code twice.
+    const updated=await User.findOneAndUpdate(
+      {_id:u._id,couponsUsed:{$ne:c}},
+      {$inc:{wallet:reward,totalEarn:reward},$addToSet:{couponsUsed:c}},
+      {new:true}
+    );
+    if(!updated) return res.status(400).json({success:false,message:'You have already used this coupon code.'});
+
+    if(coupon.scope==='single') {
+      // A single-user coupon is one-time only: remove it after successful redemption.
+      await Coupon.deleteOne({_id:coupon._id,scope:'single'});
+    } else {
+      // ALL USERS coupons must remain active after every redemption. Never delete them here;
+      // only the admin's explicit manual DELETE action may remove an all-users coupon.
+      // Record each student for the admin's long-press redemption history.
+      await Coupon.updateOne(
+        {_id:coupon._id,active:true,'redeemedBy.user':{$ne:u._id}},
+        {$push:{redeemedBy:{user:u._id,redeemedAt:new Date()}}}
+      );
     }
-    try {
-      u.couponsUsed=Array.isArray(u.couponsUsed)?u.couponsUsed:[];
-      u.couponsUsed.push(c);
-      u.wallet=Number(u.wallet||0)+reward;
-      u.totalEarn=Number(u.totalEarn||0)+reward;
-      await u.save();
-    } catch(saveErr) {
-      // Never consume a coupon if the student's wallet update fails.
-      await Coupon.create({code:c,reward,active:true}).catch(()=>{});
-      throw saveErr;
-    }
-    res.json({success:true,reward,wallet:u.wallet,message:`Coupon ${c} applied successfully. ₹${reward} added.`});
+    res.json({success:true,reward,wallet:updated.wallet,message:`Coupon ${c} applied successfully. ₹${reward} added.`});
   }catch(e){res.status(500).json({success:false,message:e.message})}
 });
 
@@ -57,9 +64,19 @@ router.get('/admin/overview',adminAuth,async(req,res)=>{
   try{
     const users=await User.find({isDeleted:false}).select('name email mobile wallet totalEarn referralCode referredBy referralCount referralReward streak longestStreak badges level experience dailyChallengeProgress dailyChallengeClaimed dailyChallengeDate supportTickets couponsUsed');
     const tickets=users.flatMap(u=>(u.supportTickets||[]).map(t=>({userId:u._id,userName:u.name,email:u.email,mobile:u.mobile,ticket:t})));
-    // Only active, still-unused coupons are visible to admin. Redeemed coupons
-    // are deleted automatically by the student redemption endpoint.
-    const coupons=await Coupon.find({active:true}).sort({createdAt:-1}).lean();
+    // Show every active coupon, including all-users redemption history.
+    const couponRows=await Coupon.find({active:true})
+      .populate('targetUser','name mobile email')
+      .populate('redeemedBy.user','name email mobile')
+      .sort({updatedAt:-1,createdAt:-1}).lean();
+    // Merge stored redemption records with legacy User.couponsUsed data so
+    // older redemptions are also visible in the admin long-press history.
+    const coupons=couponRows.map(c=>{
+      const byId=new Map();
+      (c.redeemedBy||[]).forEach(r=>{if(r.user?._id)byId.set(String(r.user._id),r)});
+      users.forEach(u=>{if((u.couponsUsed||[]).includes(c.code)&&!byId.has(String(u._id)))byId.set(String(u._id),{user:{_id:u._id,name:u.name,email:u.email,mobile:u.mobile},redeemedAt:null})});
+      return {...c,redeemedBy:[...byId.values()]};
+    });
     res.json({success:true,analytics:{students:users.length,totalEarn:users.reduce((a,u)=>a+(u.totalEarn||0),0),referrals:users.reduce((a,u)=>a+(u.referralCount||0),0),openTickets:tickets.filter(x=>x.ticket.status!=='Resolved').length,activeCoupons:coupons.length},students:users,tickets,coupons});
   }catch(e){res.status(500).json({success:false,message:e.message})}
 });
@@ -67,22 +84,34 @@ router.post('/admin/coupons',adminAuth,async(req,res)=>{
   try{
     let code=String(req.body.code||'').trim().toUpperCase().replace(/\s+/g,'');
     const reward=Number(req.body.reward);
+    const scope=String(req.body.scope||'all').toLowerCase();
+    const targetUserId=String(req.body.targetUserId||'').trim();
     if(!Number.isFinite(reward)||reward<=0) return res.status(400).json({success:false,message:'Enter a valid positive reward amount.'});
+    if(!['all','single'].includes(scope)) return res.status(400).json({success:false,message:'Choose All Users or Single User.'});
+    if(scope==='single'&&!targetUserId) return res.status(400).json({success:false,message:'Select the student for this single-user coupon.'});
     if(code && !/^[A-Z0-9_-]{3,30}$/.test(code)) return res.status(400).json({success:false,message:'Coupon code must be 3-30 letters/numbers.'});
+    let targetUser=null;
+    if(scope==='single') {
+      targetUser=await User.findOne({_id:targetUserId,isDeleted:false}).select('_id name');
+      if(!targetUser) return res.status(404).json({success:false,message:'Selected student was not found.'});
+    }
     // If admin leaves the code blank, generate a unique code for any valid amount.
     if(!code){
       for(let i=0;i<10;i++){
-        const candidate='REWARD-'+require('crypto').randomBytes(5).toString('hex').toUpperCase();
+        const candidate=require('crypto').randomBytes(5).toString('hex').toUpperCase();
         if(!await Coupon.exists({code:candidate})){code=candidate;break;}
       }
       if(!code) return res.status(500).json({success:false,message:'Could not generate a unique coupon code. Please retry.'});
     }
-    const c=await Coupon.findOneAndUpdate({code},{$set:{reward,active:true}},{upsert:true,new:true,setDefaultsOnInsert:true});
-    res.json({success:true,coupon:c,code:c.code,message:`Coupon created and activated: ${c.code}`});
+    // Multiple coupons may remain active at the same time.
+    const c=await Coupon.findOneAndUpdate({code},{$set:{reward,scope,targetUser:scope==='single'?targetUser._id:null,active:true}},{upsert:true,new:true,setDefaultsOnInsert:true}).populate('targetUser','name mobile email');
+    const audience=scope==='single'?`only for ${targetUser.name}`:'for all students';
+    res.json({success:true,coupon:c,code:c.code,message:`Coupon activated ${audience}: ${c.code}. Other active coupons remain available.`});
   }catch(e){res.status(500).json({success:false,message:e.code===11000?'Coupon already exists.':e.message})}
 });
 router.delete('/admin/coupons/:id',adminAuth,async(req,res)=>{
-  try{const c=await Coupon.findByIdAndDelete(req.params.id);if(!c)return res.status(404).json({success:false,message:'Coupon not found'});res.json({success:true,message:'Coupon deleted.'})}
+  // This is the only path that deletes an ALL USERS coupon: explicit admin action.
+  try{const c=await Coupon.findByIdAndDelete(req.params.id);if(!c)return res.status(404).json({success:false,message:'Coupon not found'});res.json({success:true,message:'Coupon deleted manually by admin.'})}
   catch(e){res.status(500).json({success:false,message:e.message})}
 });
 router.post('/admin/coupons/:id/toggle',adminAuth,async(req,res)=>{try{const c=await Coupon.findById(req.params.id);if(!c)return res.status(404).json({success:false,message:'Coupon not found'});c.active=!c.active;await c.save();res.json({success:true,coupon:c})}catch(e){res.status(500).json({success:false,message:e.message})}});
