@@ -2063,6 +2063,33 @@ router.put("/tablet-purchase/:id/approve", adminAuth, async (req,res)=>{
     await user.save();res.json({success:true,message:"Tablet order approved with final delivery date.",finalDeliveryDate:rawDate});
   }catch(err){res.status(500).json({success:false,message:err.message});}
 });
+router.put("/tablet-purchase/:id/delivery", adminAuth, async (req,res)=>{
+  try{
+    const user=await User.findById(req.params.id);
+    if(!user)return res.status(404).json({success:false,message:"Student not found"});
+    const order=user.tabletPurchase;
+    if(!order || !["approved"].includes(order.status))return res.status(400).json({success:false,message:"Only approved tablet orders can be updated."});
+    const step=Number(req.body?.step);
+    const stages=["Order Approved","Processing","In Transit","Out for Delivery","Delivered"];
+    if(!Number.isInteger(step) || step<1 || step>5)return res.status(400).json({success:false,message:"Select a valid delivery step."});
+    const note=String(req.body?.note||"").trim().slice(0,500);
+    const reason=String(req.body?.reason||"").trim().slice(0,500);
+    const failed=Boolean(req.body?.failed);
+    if(failed && reason.length<3)return res.status(400).json({success:false,message:"Please enter the reason for delivery failure."});
+    if(failed && step===5)return res.status(400).json({success:false,message:"A delivered order cannot be marked as failed."});
+    const now=new Date();
+    order.deliveryStep=step;
+    order.deliveryStatus=failed?"Delivery Failed":stages[step-1];
+    order.deliveryNote=note;
+    order.deliveryReason=failed?reason:"";
+    order.deliveryUpdatedAt=now;
+    order.deliveryUpdates=order.deliveryUpdates||[];
+    order.deliveryUpdates.push({step,status:order.deliveryStatus,note,reason:failed?reason:"",updatedAt:now});
+    await user.save();
+    res.json({success:true,message:"Delivery status updated. Student can now see this update.",deliveryStatus:order.deliveryStatus});
+  }catch(err){res.status(500).json({success:false,message:err.message});}
+});
+
 router.put("/tablet-purchase/:id/cancel", adminAuth, async (req,res)=>{
   try{
     const user=await User.findById(req.params.id);

@@ -9,6 +9,11 @@ router.get("/status", auth, async (req,res)=>{
   const tabletPurchase={...(user?.tabletPurchase||{status:"none",price:TABLET_PRICE})};
   delete tabletPurchase.studentPhoto; // Student sees status/date only; uploaded documents are admin-only.
   delete tabletPurchase.studentMarksheet;
+  // Older approved orders are automatically shown at the first delivery stage.
+  if(tabletPurchase.status === "approved" && !Number(tabletPurchase.deliveryStep)) {
+    tabletPurchase.deliveryStep = 1;
+    tabletPurchase.deliveryStatus = tabletPurchase.deliveryStatus || "Order Approved";
+  }
   res.json({success:true,tabletPurchase,wallet:Number(user?.wallet||0),price:TABLET_PRICE});
 });
 router.post("/request", auth, async (req,res)=>{

@@ -103,7 +103,13 @@ const userSchema = new mongoose.Schema(
             requestedAt: { type: Date, default: null },
             approvedAt: { type: Date, default: null },
             finalDeliveryDate: { type: Date, default: null },
-            adminNote: { type: String, default: "" }
+            adminNote: { type: String, default: "" },
+            deliveryStep: { type: Number, min: 0, max: 5, default: 0 },
+            deliveryStatus: { type: String, enum: ["Order Approved", "Processing", "In Transit", "Out for Delivery", "Delivered", "Delivery Failed"], default: "Order Approved" },
+            deliveryNote: { type: String, default: "", maxlength: 500 },
+            deliveryReason: { type: String, default: "", maxlength: 500 },
+            deliveryUpdatedAt: { type: Date, default: null },
+            deliveryUpdates: [{ step: Number, status: String, note: String, reason: String, updatedAt: { type: Date, default: Date.now } }]
         },
 
         quizScore: {
