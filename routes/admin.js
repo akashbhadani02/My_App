@@ -237,7 +237,7 @@ router.post("/enable-all-users", adminAuth, async (req, res) => {
         const admin = await Admin.findByIdAndUpdate(
             req.admin.id,
             { userLoginLocked: false },
-            { new: true }
+            { returnDocument: 'after' }
         );
         if (!admin) return res.status(401).json({ success: false, message: "Admin Not Found" });
         return res.json({
@@ -340,14 +340,14 @@ function todayKey() {
 // LIVE STUDENT PRESENCE (lightweight)
 // ===========================
 // This endpoint is intentionally separate from /users so the admin can poll
-// presence every second without repeatedly loading all wallet/activity data.
+// presence every five seconds without repeatedly loading all wallet/activity data.
 router.get("/presence", adminAuth, async (req, res) => {
     try {
         res.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
         res.set("Pragma", "no-cache");
         res.set("Expires", "0");
 
-        const ONLINE_TIMEOUT = 7000;
+        const ONLINE_TIMEOUT = 45000;
         const now = Date.now();
         const users = await User.find({ isDeleted: { $ne: true } })
             .select("name lastSeen isBlocked")
@@ -396,7 +396,7 @@ router.get("/users", adminAuth, async (req, res) => {
                 const difference =
                     currentTime - lastSeenTime;
 
-                const ONLINE_TIMEOUT = 7000; // Offline after 3 seconds without heartbeat
+                const ONLINE_TIMEOUT = 45000; // Offline after 45 seconds without heartbeat
 
                 if (difference <= ONLINE_TIMEOUT) {
                     online = true;
@@ -600,7 +600,7 @@ router.put("/total-earn/:id", adminAuth, async (req, res) => {
         const user = await User.findByIdAndUpdate(
             req.params.id,
             { totalEarn },
-            { new: true }
+            { returnDocument: 'after' }
         );
 
         if (!user) {
@@ -1948,7 +1948,7 @@ router.get("/book-global-status", adminAuth, async (req, res) => {
 router.put("/book-global-status", adminAuth, async (req, res) => {
     try {
         const closed = !!req.body?.bookGloballyClosed;
-        const admin = await Admin.findOneAndUpdate({}, { $set: { bookGloballyClosed: closed } }, { new:true });
+        const admin = await Admin.findOneAndUpdate({}, { $set: { bookGloballyClosed: closed } }, { returnDocument: 'after' });
         if (!admin) return res.status(404).json({ success:false, message:"Admin account not found" });
         res.json({ success:true, bookGloballyClosed: !!admin.bookGloballyClosed, message: closed ? "Book closed for all students." : "Book opened for approved students." });
     } catch (err) { res.status(500).json({ success:false, message:err.message }); }

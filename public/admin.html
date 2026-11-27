@@ -2678,7 +2678,7 @@ ${w.status === "Approved" ? `
             }
         }
 
-        let livePresenceTimer = setInterval(refreshLivePresence, 1000);
+        let livePresenceTimer = setInterval(refreshLivePresence, 5000);
 
         //==========================
         // Initial Load
@@ -2695,8 +2695,8 @@ ${w.status === "Approved" ? `
         //==========================
         // LIVE ADMIN REFRESH
         //==========================
-        // Presence is lightweight and runs every 1 second. Full admin data is
-        // refreshed every 5 seconds so MongoDB/API load cannot delay student
+        // Presence is lightweight and runs every 5 seconds. Full admin data is
+        // refreshed every 20 seconds so MongoDB/API load cannot delay student
         // heartbeats. The Online/Offline status itself never waits for this loop.
         // Instant student-block alerts for Admin. Polls the dedicated lightweight
         // endpoint so a new block is surfaced without waiting for manual refresh.
@@ -2738,7 +2738,7 @@ ${w.status === "Approved" ? `
             }
         }
         checkStudentBlockAlerts();
-        setInterval(checkStudentBlockAlerts, 2000);
+        setInterval(checkStudentBlockAlerts, 15000);
 
         let adminDataRefreshBusy = false;
         async function refreshAdminDataLive() {
@@ -2755,7 +2755,7 @@ ${w.status === "Approved" ? `
                 adminDataRefreshBusy = false;
             }
         }
-        setInterval(refreshAdminDataLive, 5000);
+        setInterval(refreshAdminDataLive, 20000);
 
         async function permanentlyDeleteAllQuestions() {
             const firstConfirm = confirm(

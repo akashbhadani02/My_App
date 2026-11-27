@@ -36,7 +36,7 @@ router.post('/coupon',auth,async(req,res)=>{
     const updated=await User.findOneAndUpdate(
       {_id:u._id,couponsUsed:{$ne:c}},
       {$inc:{wallet:reward,totalEarn:reward},$addToSet:{couponsUsed:c}},
-      {new:true}
+      {returnDocument: 'after'}
     );
     if(!updated) return res.status(400).json({success:false,message:'You have already used this coupon code.'});
 
@@ -104,7 +104,7 @@ router.post('/admin/coupons',adminAuth,async(req,res)=>{
       if(!code) return res.status(500).json({success:false,message:'Could not generate a unique coupon code. Please retry.'});
     }
     // Multiple coupons may remain active at the same time.
-    const c=await Coupon.findOneAndUpdate({code},{$set:{reward,scope,targetUser:scope==='single'?targetUser._id:null,active:true}},{upsert:true,new:true,setDefaultsOnInsert:true}).populate('targetUser','name mobile email');
+    const c=await Coupon.findOneAndUpdate({code},{$set:{reward,scope,targetUser:scope==='single'?targetUser._id:null,active:true}},{upsert:true,returnDocument: 'after',setDefaultsOnInsert:true}).populate('targetUser','name mobile email');
     const audience=scope==='single'?`only for ${targetUser.name}`:'for all students';
     res.json({success:true,coupon:c,code:c.code,message:`Coupon activated ${audience}: ${c.code}. Other active coupons remain available.`});
   }catch(e){res.status(500).json({success:false,message:e.code===11000?'Coupon already exists.':e.message})}

@@ -2763,7 +2763,7 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
         // ===============================
         // STUDENT ONLINE PRESENCE
         // Active tab = Online. Hidden tab = Offline.
-        // Heartbeat about every 1 second; server timeout = 7 seconds.
+        // Heartbeat about every 15 seconds; server presence timeout = 45 seconds.
         // ===============================
 
         let presenceTimer = null;
@@ -2789,7 +2789,7 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
             // Allow normal Mongo/network/serverless latency. Keep the request alive
             // long enough so normal Vercel/Render cold starts do not cause
             // false Offline states.
-            const timeout = setTimeout(() => presenceAbort.abort(), 5000);
+            const timeout = setTimeout(() => presenceAbort.abort(), 12000);
 
             try {
                 const res = await fetch("/api/auth/heartbeat", {
@@ -2815,7 +2815,7 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
                     return;
                 }
             } catch (error) {
-                // A single missed heartbeat is okay. The next 1-second heartbeat retries.
+                // Missed heartbeat is tolerated; the next 15-second cycle retries.
             } finally {
                 clearTimeout(timeout);
                 presenceAbort = null;
@@ -2838,7 +2838,7 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
             if (!token || document.hidden) return;
             stopPresence();
             sendPresenceHeartbeat();
-            presenceTimer = setInterval(sendPresenceHeartbeat, 1000);
+            presenceTimer = setInterval(sendPresenceHeartbeat, 15000);
         }
 
         document.addEventListener("visibilitychange", () => {

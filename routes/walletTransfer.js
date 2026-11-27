@@ -42,7 +42,7 @@ router.post('/send', auth, async (req, res) => {
         const sender = await User.findOneAndUpdate(
           { _id: senderId, wallet: { $gte: senderDebit }, isDeleted: { $ne: true }, isBlocked: { $ne: true } },
           { $inc: { wallet: -senderDebit } },
-          { new: true, session, projection: { name: 1, mobile: 1, wallet: 1 } }
+          { returnDocument: 'after', session, projection: { name: 1, mobile: 1, wallet: 1 } }
         );
         if (!sender) {
           const exists = await User.exists({ _id: senderId }).session(session);
