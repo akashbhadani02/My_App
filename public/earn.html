@@ -1642,7 +1642,11 @@ body{background:radial-gradient(circle at 10% 0%,#dfe7ff 0,transparent 30%),radi
 </style>
 
 <style id="aducate-book-dashboard-style">
-.ad-book-card{background:linear-gradient(135deg,#ffffff,#f5f3ff)!important;border:1px solid #e9ddff!important}.ad-book-cover{width:72px;height:98px;border-radius:7px;background:#fff;box-shadow:0 10px 22px rgba(76,29,149,.16);display:block;overflow:hidden;padding:0!important;flex:0 0 auto}.ad-book-cover img{width:100%;height:100%;display:block;object-fit:cover;object-position:center top}.ad-book-price{font-size:22px;font-weight:900;color:#6d28d9}.ad-book-buy{border:0;border-radius:12px;padding:11px 16px;background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;font-weight:800;cursor:pointer;box-shadow:0 8px 18px rgba(109,40,217,.2)}.ad-book-buy:hover{transform:translateY(-1px)}
+.ad-book-card{background:linear-gradient(135deg,#ffffff,#f5f3ff)!important;border:1px solid #e9ddff!important}
+/* Shared Book / Tablet / Laptop product-card visual */
+#dashboard .ad-product-image{background:#fff!important;border:1px solid #e5e7eb!important;box-shadow:0 10px 22px rgba(76,29,149,.12)!important;padding:4px!important;}
+#dashboard .ad-product-image img{object-fit:contain!important;object-position:center!important;background:#fff!important;}
+.ad-book-cover{width:72px;height:98px;border-radius:7px;background:#fff;box-shadow:0 10px 22px rgba(76,29,149,.16);display:block;overflow:hidden;padding:0!important;flex:0 0 auto}.ad-book-cover img{width:100%;height:100%;display:block;object-fit:cover;object-position:center top}.ad-book-price{font-size:22px;font-weight:900;color:#6d28d9}.ad-book-buy{border:0;border-radius:12px;padding:11px 16px;background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;font-weight:800;cursor:pointer;box-shadow:0 8px 18px rgba(109,40,217,.2)}.ad-book-buy:hover{transform:translateY(-1px)}
 </style>
 
 <style id="aducate-logo-dashboard-style">
@@ -2328,9 +2332,26 @@ body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
                 </div>
             </div>
 
-            <div class="ad-card" style="margin-bottom:18px;padding:18px;border:1px solid #c7d2fe;background:linear-gradient(135deg,#f8fafc,#eef2ff);border-radius:18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
-              <img src="./tablet-aducate.png" alt="Aducate Spoken English tablet" loading="lazy" style="width:150px;height:110px;object-fit:cover;border-radius:14px;flex:0 0 auto;">
-              <div style="flex:1;min-width:180px;"><h3 style="margin:0 0 6px;">📱 Android Tablet</h3><div style="font-size:23px;font-weight:900;color:#4338ca;">₹4,999</div><p style="margin:6px 0 10px;color:var(--ad-muted);font-size:12px;line-height:1.6;">Physical Android tablet delivered to your address. Pay securely using your Wallet or UPI. UPI orders are verified by Admin before dispatch.</p><button type="button" class="ad-book-buy" onclick="openTabletPurchase()">🛒 Purchase Tablet</button></div>
+            <div class="ad-card ad-book-card" style="margin-bottom:18px;position:relative;overflow:hidden;">
+              <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                <div class="ad-book-cover ad-product-image"><img src="./tablet-aducate.png" alt="Aducate Tablet" loading="lazy"></div>
+                <div style="flex:1;min-width:210px;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;"><h3 style="margin:0">📱 Aducate Tablet</h3><span class="ad-book-price">₹4,999</span></div>
+                  <p style="color:var(--ad-muted);font-size:12px;margin:6px 0 12px;line-height:1.6">Physical Android tablet delivered to your address. Pay securely using your Wallet or UPI. UPI orders are verified by Admin before dispatch.</p>
+                  <button type="button" class="ad-book-buy" onclick="openTabletPurchase()">🛒 Purchase Tablet</button>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="ad-card ad-book-card" style="margin-bottom:18px;position:relative;overflow:hidden;">
+              <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                <div class="ad-book-cover ad-product-image"><img src="./laptop-aducate.jpg" alt="Aducate Laptop" loading="lazy"></div>
+                <div style="flex:1;min-width:210px;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;"><h3 style="margin:0">💻 Aducate Laptop</h3></div>
+                  <span style="display:inline-block;padding:6px 12px;border-radius:999px;background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;font-size:12px;font-weight:800;letter-spacing:.5px;">COMING SOON</span>
+                </div>
+              </div>
             </div>
 
             <div class="ad-grid">
@@ -5110,5 +5131,13 @@ button{font-weight:700!important}
  .ad-stat{padding:12px 9px!important}
  .ad-stat b{font-size:18px!important}
  .ad-addon-card,.ad-course{padding:14px!important}
+}
+</style>
+
+<style>
+/* Show the entire Book, Tablet, and Laptop product images without cropping. */
+#dashboard .ad-product-image img {
+  object-fit: contain !important;
+  object-position: center center !important;
 }
 </style>
