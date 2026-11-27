@@ -1,7 +1,0 @@
-Coupon Management Update
-
-Admin can now activate one coupon in either mode:
-1. ALL USERS: every student may redeem the active coupon once.
-2. SINGLE USER: only the selected student may redeem the active coupon once.
-
-The active coupon card displays ALL USERS or SINGLE USER below the code. For a single-user coupon, the selected student's name is displayed as well. Activating a new coupon invalidates the previous active coupon. Coupon rewards continue to be credited to the student's wallet.
