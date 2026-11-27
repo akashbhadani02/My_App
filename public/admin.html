@@ -399,6 +399,16 @@ input,select,textarea{width:100%;min-height:42px;padding:10px 12px;border:1px so
 @media(max-width:700px){#ap2Modal .student-summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}#ap2Modal .student-data-cards{grid-template-columns:1fr!important}}
 @media(max-width:430px){#ap2Modal .student-summary-grid{grid-template-columns:1fr!important}.student-view-header{align-items:flex-start!important}}
 </style>
+
+<style id="live-online-user-card-fix">
+.admin-user-card.is-online{border-color:#86efac!important;background:#f0fdf4!important;box-shadow:0 0 0 2px rgba(34,197,94,.12),var(--shadow)!important}
+.admin-user-card.is-online .admin-user-status{background:#dcfce7!important;color:#166534!important;border:1px solid #86efac!important}
+.admin-user-card.is-online .admin-status-dot{background:#22c55e!important;box-shadow:0 0 0 4px #bbf7d0!important}
+.admin-user-card.is-offline .admin-user-status{background:#fee2e2!important;color:#991b1b!important;border:1px solid #fca5a5!important}
+.admin-user-card.is-offline .admin-status-dot{background:#ef4444!important;box-shadow:0 0 0 4px #fecaca!important}
+.admin-night .admin-user-card.is-online{background:#102b1e!important;border-color:#22c55e!important}
+</style>
+
 </head>
 
 <body>
@@ -2607,6 +2617,30 @@ ${w.status === "Approved" ? `
             if (onlineCounter) onlineCounter.textContent = onlineCount;
             const dashboardOnline = document.getElementById("onlineUsersCount");
             if (dashboardOnline) dashboardOnline.textContent = onlineCount;
+
+            // Keep the main Users cards in sync with the lightweight live-presence feed.
+            document.querySelectorAll(".admin-user-card[data-user-id]").forEach(card => {
+                const u = byId.get(String(card.dataset.userId));
+                if (!u) return;
+                const lastSeenMs = u.lastSeen ? new Date(u.lastSeen).getTime() : 0;
+                const isOnline = lastSeenMs > 0 && (now - lastSeenMs) <= 7000;
+                card.classList.toggle("is-online", isOnline);
+                card.classList.toggle("is-offline", !isOnline);
+                const status = card.querySelector(".admin-user-status");
+                if (status) {
+                    status.textContent = isOnline ? "ONLINE" : "OFFLINE";
+                    status.style.background = isOnline ? "#dcfce7" : "#fee2e2";
+                    status.style.color = isOnline ? "#166534" : "#991b1b";
+                    status.style.borderColor = isOnline ? "#86efac" : "#fca5a5";
+                }
+                const dot = card.querySelector(".admin-status-dot");
+                if (dot) {
+                    dot.style.background = isOnline ? "#22c55e" : "#ef4444";
+                    dot.style.boxShadow = isOnline ? "0 0 0 3px #bbf7d0" : "0 0 0 3px #fecaca";
+                }
+                const lastSeen = card.querySelector(".admin-user-lastseen");
+                if (lastSeen) lastSeen.innerHTML = isOnline ? "🟢 Active now" : "🔴 " + formatLastSeen(u.lastSeen);
+            });
 
             document.querySelectorAll("#userTable tr[data-user-id]").forEach(row => {
                 const u = byId.get(String(row.dataset.userId));
