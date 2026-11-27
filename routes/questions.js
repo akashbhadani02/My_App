@@ -383,7 +383,7 @@ router.put("/admin/:id", adminAuth, async (req, res) => {
                 options: cleanOptions,
                 correct: correctIndex
             },
-            { returnDocument: 'after', runValidators: true }
+            { new: true, runValidators: true }
         );
 
         if (!question) {
@@ -430,7 +430,7 @@ router.delete("/admin/permanent-all", adminAuth, async (req, res) => {
         await QuestionBankState.findOneAndUpdate(
             {},
             { $set: { initialized: true } },
-            { upsert: true, returnDocument: 'after' }
+            { upsert: true, new: true }
         );
 
         return res.json({
@@ -471,7 +471,7 @@ router.delete("/admin/:id", adminAuth, async (req, res) => {
         const question = await Question.findOneAndUpdate(
             { _id: req.params.id, isDeleted: { $ne: true } },
             { $set: { isDeleted: true, deletedAt: new Date() } },
-            { returnDocument: 'after' }
+            { new: true }
         );
         if (!question) {
             return res.status(404).json({ success: false, message: "Question Not Found" });
@@ -502,7 +502,7 @@ router.put("/admin/recycle-bin/:id/restore", adminAuth, async (req, res) => {
         const question = await Question.findOneAndUpdate(
             { _id: req.params.id, isDeleted: true },
             { $set: { isDeleted: false, deletedAt: null } },
-            { returnDocument: 'after' }
+            { new: true }
         );
         if (!question) {
             return res.status(404).json({ success: false, message: "Deleted question not found" });

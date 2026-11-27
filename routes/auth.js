@@ -265,7 +265,7 @@ router.post("/heartbeat", async (req, res) => {
         await User.findOneAndUpdate(
             { _id: decoded.id },
             { $set: { isOnline: true, lastSeen: new Date(), presenceId } },
-            {}
+            { new: false }
         );
 
         res.json({ success: true });
@@ -293,7 +293,7 @@ router.post("/offline", async (req, res) => {
         await User.findOneAndUpdate(
             { _id: decoded.id, presenceId },
             { $set: { isOnline: false } },
-            {}
+            { new: false }
         );
 
         res.json({ success: true });

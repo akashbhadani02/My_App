@@ -237,7 +237,7 @@ router.post("/enable-all-users", adminAuth, async (req, res) => {
         const admin = await Admin.findByIdAndUpdate(
             req.admin.id,
             { userLoginLocked: false },
-            { returnDocument: 'after' }
+            { new: true }
         );
         if (!admin) return res.status(401).json({ success: false, message: "Admin Not Found" });
         return res.json({
@@ -259,50 +259,32 @@ router.get("/dashboard", adminAuth, async (req, res) => {
     try {
 
         await ensureQuestionsSeeded();
-        const users = await User.find({ isDeleted: { $ne: true } });
+        // Aggregate lightweight dashboard totals in MongoDB rather than loading every
+        // full student document (which may contain base64 payment/student images).
+        const [totals] = await User.aggregate([
+            { $match: { isDeleted: { $ne: true } } },
+            { $group: {
+                _id: null,
+                totalUsers: { $sum: 1 },
+                totalWallet: { $sum: { $ifNull: ["$wallet", 0] } },
+                totalEarn: { $sum: { $ifNull: ["$totalEarn", 0] } },
+                totalQuestionsAnswered: { $sum: { $ifNull: ["$totalQuestionsAnswered", 0] } }
+            } }
+        ]);
+        // Only retrieve the small withdrawal-status arrays for the pending count.
+        const withdrawalUsers = await User.find({ isDeleted: { $ne: true } }).select("withdrawRequests.status").lean();
+        const pendingWithdraw = withdrawalUsers.reduce((sum, user) => sum + (user.withdrawRequests || []).filter(w => String(w.status || "Pending").toLowerCase() === "pending").length, 0);
         const questionBankTotal = await Question.countDocuments();
-
-        let totalWallet = 0;
-        let totalEarn = 0;
-        let totalQuestionsAnswered = 0;
-        let pendingWithdraw = 0;
-
-        users.forEach(user => {
-
-            totalWallet += user.wallet || 0;
-            totalEarn += user.totalEarn || 0;
-            totalQuestionsAnswered += Number(user.totalQuestionsAnswered || 0);
-
-            if (user.withdrawRequests) {
-
-                user.withdrawRequests.forEach(w => {
-
-                    if (String(w.status || "Pending").toLowerCase() === "pending") {
-                        pendingWithdraw++;
-                    }
-
-                });
-
-            }
-
-        });
+        const stats = totals || { totalUsers: 0, totalWallet: 0, totalEarn: 0, totalQuestionsAnswered: 0 };
 
         res.json({
-
             success: true,
-
-            totalUsers: users.length,
-
-            totalWallet,
-
-            totalEarn,
-
-            totalQuestionsAnswered,
-
+            totalUsers: stats.totalUsers || 0,
+            totalWallet: stats.totalWallet || 0,
+            totalEarn: stats.totalEarn || 0,
+            totalQuestionsAnswered: stats.totalQuestionsAnswered || 0,
             questionBankTotal,
-
             pendingWithdraw
-
         });
 
     } catch (err) {
@@ -340,14 +322,14 @@ function todayKey() {
 // LIVE STUDENT PRESENCE (lightweight)
 // ===========================
 // This endpoint is intentionally separate from /users so the admin can poll
-// presence every five seconds without repeatedly loading all wallet/activity data.
+// presence every second without repeatedly loading all wallet/activity data.
 router.get("/presence", adminAuth, async (req, res) => {
     try {
         res.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
         res.set("Pragma", "no-cache");
         res.set("Expires", "0");
 
-        const ONLINE_TIMEOUT = 45000;
+        const ONLINE_TIMEOUT = 7000;
         const now = Date.now();
         const users = await User.find({ isDeleted: { $ne: true } })
             .select("name lastSeen isBlocked")
@@ -379,7 +361,9 @@ router.get("/users", adminAuth, async (req, res) => {
         res.set("Pragma", "no-cache");
         res.set("Expires", "0");
 
-        const users = await User.find({ isDeleted: { $ne: true } }).select("-password");
+        const users = await User.find({ isDeleted: { $ne: true } })
+            .select("-password -bookPurchase.paymentScreenshot -tabletPurchase.paymentScreenshot -tabletPurchase.studentPhoto -tabletPurchase.studentMarksheet -subscriptionPaymentScreenshot")
+            .lean();
 
         const currentTime = Date.now();
 
@@ -396,7 +380,7 @@ router.get("/users", adminAuth, async (req, res) => {
                 const difference =
                     currentTime - lastSeenTime;
 
-                const ONLINE_TIMEOUT = 45000; // Offline after 45 seconds without heartbeat
+                const ONLINE_TIMEOUT = 7000; // Offline after 3 seconds without heartbeat
 
                 if (difference <= ONLINE_TIMEOUT) {
                     online = true;
@@ -404,7 +388,7 @@ router.get("/users", adminAuth, async (req, res) => {
 
             }
 
-            const userData = user.toObject();
+            const userData = (user && typeof user.toObject === "function") ? user.toObject() : user;
             const today = todayKey();
 
             // If the student has not answered anything today,
@@ -600,7 +584,7 @@ router.put("/total-earn/:id", adminAuth, async (req, res) => {
         const user = await User.findByIdAndUpdate(
             req.params.id,
             { totalEarn },
-            { returnDocument: 'after' }
+            { new: true }
         );
 
         if (!user) {
@@ -1948,7 +1932,7 @@ router.get("/book-global-status", adminAuth, async (req, res) => {
 router.put("/book-global-status", adminAuth, async (req, res) => {
     try {
         const closed = !!req.body?.bookGloballyClosed;
-        const admin = await Admin.findOneAndUpdate({}, { $set: { bookGloballyClosed: closed } }, { returnDocument: 'after' });
+        const admin = await Admin.findOneAndUpdate({}, { $set: { bookGloballyClosed: closed } }, { new:true });
         if (!admin) return res.status(404).json({ success:false, message:"Admin account not found" });
         res.json({ success:true, bookGloballyClosed: !!admin.bookGloballyClosed, message: closed ? "Book closed for all students." : "Book opened for approved students." });
     } catch (err) { res.status(500).json({ success:false, message:err.message }); }
@@ -2046,7 +2030,11 @@ router.put("/spin-prizes", adminAuth, async (req, res) => {
 
 // ================= PHYSICAL TABLET ORDERS =================
 router.get("/tablet-purchases", adminAuth, async (req,res)=>{
-  try{const users=await User.find({isDeleted:{$ne:true},"tabletPurchase.status":{$in:["pending","approved","rejected"]}}).select("name mobile tabletPurchase").sort({"tabletPurchase.requestedAt":-1}).lean();res.set("Cache-Control","no-store");res.json({success:true,users});}
+  try{const users=await User.find({isDeleted:{$ne:true},"tabletPurchase.status":{$in:["pending","approved","rejected"]}}).select("name mobile tabletPurchase.status tabletPurchase.price tabletPurchase.paymentReference tabletPurchase.paymentMethod tabletPurchase.paymentScreenshotName tabletPurchase.shippingAddress tabletPurchase.requestedAt tabletPurchase.approvedAt tabletPurchase.finalDeliveryDate tabletPurchase.adminNote tabletPurchase.access tabletPurchase.deliveryStep tabletPurchase.deliveryStatus tabletPurchase.deliveryNote tabletPurchase.deliveryReason tabletPurchase.deliveryUpdatedAt tabletPurchase.deliveryUpdates").sort({"tabletPurchase.requestedAt":-1}).lean();res.set("Cache-Control","no-store");res.json({success:true,users});}
+  catch(err){res.status(500).json({success:false,message:err.message});}
+});
+router.get("/tablet-purchase/:id/document", adminAuth, async (req,res)=>{
+  try{const type=String(req.query.type||"");const fields={paymentScreenshot:"tabletPurchase.paymentScreenshot",studentPhoto:"tabletPurchase.studentPhoto",studentMarksheet:"tabletPurchase.studentMarksheet"};if(!fields[type])return res.status(400).json({success:false,message:"Invalid document type."});const user=await User.findById(req.params.id).select(fields[type]).lean();if(!user)return res.status(404).json({success:false,message:"Student not found."});const value=type==="paymentScreenshot"?user.tabletPurchase?.paymentScreenshot:type==="studentPhoto"?user.tabletPurchase?.studentPhoto:user.tabletPurchase?.studentMarksheet;if(!value)return res.status(404).json({success:false,message:"Document not found."});res.set("Cache-Control","no-store");res.json({success:true,document:value});}
   catch(err){res.status(500).json({success:false,message:err.message});}
 });
 router.put("/tablet-purchase/:id/approve", adminAuth, async (req,res)=>{
@@ -2129,12 +2117,16 @@ router.put("/tablet-purchase/:id/reject", adminAuth, async (req,res)=>{
 });
 
 // ================= BOOK PURCHASE MANAGEMENT =================
+router.get("/book-purchase/:id/payment-proof", adminAuth, async (req,res)=>{
+    try{const user=await User.findById(req.params.id).select("bookPurchase.paymentScreenshot").lean();if(!user)return res.status(404).json({success:false,message:"Student not found."});const value=user.bookPurchase?.paymentScreenshot;if(!value)return res.status(404).json({success:false,message:"Payment screenshot not found."});res.set("Cache-Control","no-store");res.json({success:true,document:value});}
+    catch(err){res.status(500).json({success:false,message:err.message});}
+});
 router.get("/book-purchases", adminAuth, async (req, res) => {
     try {
         const users = await User.find({
             isDeleted: { $ne: true },
             "bookPurchase.status": { $in: ["pending", "approved", "rejected"] }
-        }).select("name mobile bookPurchase bookWatermarkRemoved subscriptionStatus subscriptionAccess").sort({ "bookPurchase.requestedAt": -1 }).lean();
+        }).select("name mobile bookPurchase.status bookPurchase.price bookPurchase.paymentReference bookPurchase.paymentMethod bookPurchase.paymentScreenshotName bookPurchase.requestedAt bookPurchase.approvedAt bookPurchase.adminNote bookPurchase.access bookWatermarkRemoved subscriptionStatus subscriptionAccess").sort({ "bookPurchase.requestedAt": -1 }).lean();
         res.set("Cache-Control", "no-store");
         res.json({ success: true, users });
     } catch (err) {

@@ -156,6 +156,7 @@ router.post('/request', auth, async (req, res) => {
 router.get('/admin/requests', adminAuth, async (req, res) => {
     try {
         const requests = await Subscription.find({})
+            .select('-paymentScreenshot')
             .populate('userId', 'name mobile isDeleted subscriptionStatus subscriptionAccess')
             .sort({ submittedAt: -1 })
             .lean();
@@ -165,6 +166,31 @@ router.get('/admin/requests', adminAuth, async (req, res) => {
         return res.status(500).json({ success: false, message: err.message });
     }
 });
+
+// Fetch payment screenshot only on-demand after an admin opens proof.
+router.get('/admin/:id/payment-proof', adminAuth, async (req, res) => {
+    try {
+        const request = await Subscription.findById(req.params.id).select('paymentScreenshot').lean();
+        if (!request) return res.status(404).json({ success: false, message: 'Subscription request not found.' });
+        if (!request.paymentScreenshot) return res.status(404).json({ success: false, message: 'Payment screenshot not found.' });
+        res.set('Cache-Control', 'no-store');
+        return res.json({ success: true, document: request.paymentScreenshot });
+    } catch (err) { return res.status(500).json({ success: false, message: err.message }); }
+});
+
+// Retrieve a single screenshot only when requested by the admin UI.
+router.get('/admin/:id/payment-proof', adminAuth, async (req, res) => {
+    try {
+        const request = await Subscription.findById(req.params.id).select('paymentScreenshot').lean();
+        if (!request) return res.status(404).json({ success: false, message: 'Subscription request not found.' });
+        if (!request.paymentScreenshot) return res.status(404).json({ success: false, message: 'Payment screenshot not found.' });
+        res.set('Cache-Control', 'no-store');
+        return res.json({ success: true, document: request.paymentScreenshot });
+    } catch (err) {
+        return res.status(500).json({ success: false, message: err.message });
+    }
+});
+
 
 // Admin: confirm ₹200 payment and grant app access.
 router.put('/admin/:id/confirm', adminAuth, async (req, res) => {
