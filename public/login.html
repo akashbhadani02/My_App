@@ -765,22 +765,7 @@ Already have an account?
 </div>
 </div>
 
-<div id="notificationModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:99999;align-items:center;justify-content:center;padding:20px;">
-  <div style="width:100%;max-width:390px;background:#fff;border-radius:22px;padding:26px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3);">
-    <div style="font-size:48px;margin-bottom:8px;">🔔</div>
-    <h3 style="margin-bottom:10px;color:#222;">Admin Notifications Enable કરો</h3>
-    <p style="font-size:14px;line-height:1.6;color:#666;margin-bottom:20px;">
-      Admin તરફથી આવતી મહત્વની notifications મેળવવા માટે Notifications <b>Allow</b> કરવી જરૂરી છે.
-    </p>
-    <button id="notificationAllowBtn" onclick="allowNotificationsAndContinue()" style="width:100%;padding:13px;border:0;border-radius:12px;background:#2563eb;color:#fff;font-size:16px;font-weight:700;cursor:pointer;">
-      🔔 Allow Notifications
-    </button>
-    <button onclick="denyNotificationsAndReturn()" style="width:100%;padding:11px;border:0;background:transparent;color:#777;font-size:14px;cursor:pointer;margin-top:6px;">
-      Cancel / Deny
-    </button>
-    <div id="notificationModalMsg" style="font-size:13px;color:#dc2626;margin-top:10px;"></div>
-  </div>
-</div>
+
 
 <script>
 
@@ -891,114 +876,16 @@ if(data.success){
 
 showCourseOverview();
 
-async function requestNotificationPermissionBeforeLogin(){
-
-    if ("Notification" in window && Notification.permission === "granted") {
-        return true;
-    }
-
-    if (!("Notification" in window)) {
-        document.getElementById("message").innerHTML =
-            "❌ આ browser notifications support કરતું નથી.";
-        return false;
-    }
-
-    if (!window.isSecureContext) {
-        document.getElementById("message").innerHTML =
-            "❌ Notifications માટે HTTPS જરૂરી છે.";
-        return false;
-    }
-
-    if (Notification.permission === "denied") {
-        document.getElementById("message").innerHTML =
-            "❌ Notifications Block છે. Browser site settings માં Notifications → Allow કરો અને ફરી Login કરો.";
-        return false;
-    }
-
-    document.getElementById("notificationModal").style.display = "flex";
-    document.getElementById("notificationModalMsg").innerHTML = "";
-    return false;
-}
-
-async function allowNotificationsAndContinue(){
-
-    const btn = document.getElementById("notificationAllowBtn");
-    const msg = document.getElementById("notificationModalMsg");
-
-    btn.disabled = true;
-    btn.innerText = "Please wait...";
-    msg.innerHTML = "";
-
-    try {
-        const permission = await Notification.requestPermission();
-
-        if (permission === "granted") {
-            document.getElementById("notificationModal").style.display = "none";
-
-            // Continue the exact login that was waiting for permission.
-            if (pendingLogin) {
-                const credentials = pendingLogin;
-                pendingLogin = null;
-                await performLogin(credentials.mobile, credentials.password);
-            }
-        } else {
-            // Deny = do not login. User must press Login again.
-            pendingLogin = null;
-            document.getElementById("notificationModal").style.display = "none";
-            document.getElementById("loginMobile").value = "";
-            document.getElementById("loginPassword").value = "";
-            document.getElementById("message").innerHTML =
-                "⚠️ Notifications Allow કર્યા વગર Login થઈ શકશે નહીં. ફરી Login કરો.";
-        }
-    } catch (error) {
-        console.error("Notification permission error:", error);
-        pendingLogin = null;
-        document.getElementById("notificationModal").style.display = "none";
-        document.getElementById("message").innerHTML =
-            "❌ Notification permission મળી નથી. ફરી Login કરો.";
-    } finally {
-        btn.disabled = false;
-        btn.innerText = "🔔 Allow Notifications";
-    }
-}
-
-function denyNotificationsAndReturn(){
-    pendingLogin = null;
-    document.getElementById("notificationModal").style.display = "none";
-    document.getElementById("loginMobile").value = "";
-    document.getElementById("loginPassword").value = "";
-    document.getElementById("message").innerHTML =
-        "⚠️ Notifications Allow કર્યા વગર Login થઈ શકશે નહીં. ફરી Login કરો.";
-}
-
-
 async function login(){
-
     const mobile = document.getElementById("loginMobile").value.trim();
     const password = document.getElementById("loginPassword").value;
-
     if(!mobile || !password){
-        document.getElementById("message").innerHTML =
-            "Mobile Number અને Password નાખો.";
+        document.getElementById("message").innerHTML = "Mobile Number અને Password નાખો.";
         return;
     }
-
-    // If already granted, login directly. Otherwise show the permission popup.
-    if ("Notification" in window && Notification.permission === "granted") {
-        await performLogin(mobile, password);
-        return;
-    }
-
-    if ("Notification" in window && Notification.permission === "denied") {
-        document.getElementById("message").innerHTML =
-            "❌ Notifications Block છે. Browser site settings માં Notifications → Allow કરો અને ફરી Login કરો.";
-        return;
-    }
-
-    pendingLogin = { mobile, password };
-    await requestNotificationPermissionBeforeLogin();
+    // No blocking notification prompt; login works without notification permission.
+    await performLogin(mobile, password);
 }
-
 
 function loginBase64ToUint8Array(base64String){
     const padding = "=".repeat((4 - base64String.length % 4) % 4);

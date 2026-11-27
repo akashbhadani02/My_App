@@ -2051,6 +2051,27 @@ router.put("/tablet-purchase/:id/approve", adminAuth, async (req,res)=>{
     await user.save();res.json({success:true,message:"Tablet order approved with final delivery date.",finalDeliveryDate:rawDate});
   }catch(err){res.status(500).json({success:false,message:err.message});}
 });
+router.put("/tablet-purchase/:id/delivery-date", adminAuth, async (req,res)=>{
+  try{
+    const rawDate=String(req.body?.finalDeliveryDate||"").trim();
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(rawDate)) return res.status(400).json({success:false,message:"Please provide the delivery date (YYYY-MM-DD)."});
+    const deliveryDate=new Date(rawDate+"T12:00:00.000Z");
+    if(Number.isNaN(deliveryDate.getTime()) || deliveryDate.toISOString().slice(0,10)!==rawDate) return res.status(400).json({success:false,message:"Invalid delivery date."});
+    const user=await User.findById(req.params.id);
+    if(!user)return res.status(404).json({success:false,message:"Student not found"});
+    const order=user.tabletPurchase;
+    if(!order || order.status!=="approved")return res.status(400).json({success:false,message:"Only approved tablet orders can have their delivery date changed."});
+    const oldDate=order.finalDeliveryDate ? new Date(order.finalDeliveryDate).toISOString().slice(0,10) : "Not set";
+    if(oldDate===rawDate)return res.json({success:true,message:"Delivery date is unchanged.",finalDeliveryDate:rawDate});
+    order.finalDeliveryDate=deliveryDate;
+    const now=new Date();
+    order.deliveryUpdates=order.deliveryUpdates||[];
+    order.deliveryUpdates.push({step:Number(order.deliveryStep||1),status:String(order.deliveryStatus||"Order Approved"),note:`Expected delivery date changed from ${oldDate} to ${rawDate}.`,reason:"",updatedAt:now});
+    order.deliveryUpdatedAt=now;
+    await user.save();
+    res.json({success:true,message:"Expected delivery date updated. Student can see the new date.",finalDeliveryDate:rawDate});
+  }catch(err){res.status(500).json({success:false,message:err.message});}
+});
 router.put("/tablet-purchase/:id/delivery", adminAuth, async (req,res)=>{
   try{
     const user=await User.findById(req.params.id);
